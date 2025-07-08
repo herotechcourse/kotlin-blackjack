@@ -7,14 +7,14 @@ class Hold(hold: Set<Card>) {
     val cards: Set<Card>
         get() = _cards.toSet()
 
-    fun moveCard(to: Hold) {
+    fun moveCard(to: Player) {
         val target = _cards.first()
         _cards.remove(target)
-        to.add(target)
+        to.hand.addCard(target)
     }
 
-    private fun add(card: Card) {
-        _hold.add(card)
+    fun add(card: Card) {
+        _cards.add(card)
     }
 
     operator fun plus(other: Hold): Hold {
