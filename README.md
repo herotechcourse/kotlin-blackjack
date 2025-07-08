@@ -2,9 +2,10 @@
 
 ## input
 
-- [ ] prompt user for players names
-- [ ] players name parsing
-- [ ] Prompt for user action (y/n)
+- [x] prompt user for players names
+- [x] players name parsing
+- [x] Prompt for user decision (y/n)
+- [x] decision parsing 
 
 ## Player
 
