@@ -1,1 +1,44 @@
 # kotlin-blackjack
+
+## input
+
+- [ ] prompt user for players names
+- [ ] players name parsing
+- [ ] Prompt for user action (y/n)
+
+## Player
+
+- [ ] Draw a cards
+
+## Dealer
+
+- [ ] Shuffle the deck
+- [ ] Start the game by dealing 2 cards for Players and dealer
+- [ ] Deal card when a player requests for a card
+- [ ] Decide to draw cards or not
+    - score <= 16
+    - score >= 17
+    - score = 21
+    - score > 21
+
+## Deck
+
+- [ ] Create 52 cards
+- [ ] Shuffle cards
+- [ ] Pop card from deck
+
+## Hand
+
+- [ ] Add card to a hand
+- [ ] Calculate scores on hand
+
+## Game
+
+- [ ] Calculate Results
+
+## output
+
+- [ ] display initial cards in hand
+- [ ] display dealers draw action
+- [ ] display all players hands with total score
+- [ ] display final result 
