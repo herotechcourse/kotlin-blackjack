@@ -1,8 +1,8 @@
 package blackjack
 
-enum class Suit {
-    SPADE(),
-    HEART(),
-    CLUB(),
-    DIAMOND(),
+enum class Suit(symbol: String) {
+    SPADE("♠"),
+    HEART("♥"),
+    CLUB("♣"),
+    DIAMOND("♦"),
 }
