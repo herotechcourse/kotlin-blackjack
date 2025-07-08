@@ -3,16 +3,16 @@
 ## Features
 
 ### Data class `Card`
-- [] has `Rank`
-- [] has `Suit`
+- [x] has `Rank`
+- [x] has `Suit`
 
 #### enum class `Rank`
-- [] includes names: "ACE"(1), "TWO", "THREE", ... "TEN", "JACK", "QUEEN", "KING"(13)
-- [] includes values: 1-13
+- [x] includes names: "ACE"(1), "TWO", "THREE", ... "TEN", "JACK", "QUEEN", "KING"(13)
+- [x] includes values: 1-13
 
 #### enum class `Suit`
-- [] includes names: "SPADE", "HEART", "CLUB", "DIAMOND"
-``
+- [x] includes names: "SPADE", "HEART", "CLUB", "DIAMOND"
+
 ### Deck
 
 ### 
