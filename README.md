@@ -14,25 +14,27 @@
 - 
 ## Features
 - [ ] Validate input name of players
-- [ ]
 
-## Features
-
-### Card : data class
+### Card
 - [x] implement simple card class
-- [ ] value: 1 to 11
-- [ ] Face cards (King, Queen, Jack) are each worth 10
-- [ ] type: Ace, , Number
-- [ ] symbol: enum class { hearts, spades , clubs, diamonds }
-  - [ ] toString(): return symbol character
-- 
-### Type enum
-- [ ] isAce = false -> true  -> eval value to 11
+  - [x] has index
+  - [x] has symbol : enum class { hearts, spades , clubs, diamonds }
+- [ ] toString(): return symbol character
 
-### Cards : data class  -> Hand, CardDeck  
-- [ ] mutable <data structure>
-- [ ] HashSet<Card>
-- [ ] .size
-- 
+### Hold
+- [x] implement Hold, wrapper class, Set<Card>
+- [x] provide all unique elements
+
+### CardDeck
+- [x] cardDeck can hit cards to players
+- [x] implement CardDeck, wrapper class, Hold and Set<Card * 52> 
+- [x] add shuffle logic when initialed
+
+### Player / Person
+- [x] implement class
+
 ### todo
-- [ ] implement 
+- [ ] Face cards (King, Queen, Jack) are each worth 10
+
+### idea
+- isAce = false -> true  -> eval value to 11
