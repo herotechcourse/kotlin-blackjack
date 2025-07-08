@@ -1,12 +1,12 @@
 package blackjack
 
-data class CardDeck(val cards: Cards) {
+data class CardDeck(private val hold: Hold) {
     constructor() : this(initPokerCards()) {
     }
 
     companion object {
-        private fun initPokerCards(): Cards {
-            return Cards(listOfCardDeck().shuffled().toSet())
+        private fun initPokerCards(): Hold {
+            return Hold(listOfCardDeck().shuffled().toSet())
         }
 
         private fun listOfCardsWith(symbol: Symbol): List<Card> {
