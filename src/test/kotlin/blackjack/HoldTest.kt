@@ -3,11 +3,11 @@ package blackjack
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class CardsTest {
+class HoldTest {
     @Test
     fun `should be able to move a card`() {
-        val cards =
-            Cards(
+        val hold =
+            Hold(
                 setOf(
                     Card(Symbol.HEART, 1),
                     Card(Symbol.HEART, 2),
@@ -15,17 +15,17 @@ class CardsTest {
                     Card(Symbol.HEART, 4),
                 ),
             )
-        val hand = Cards()
-        val card = cards.hold.first()
-        cards.move(hand)
+        val hand = Hold()
+        val card = hold.cards.first()
+        hold.moveCard(hand)
 
-        assertThat(hand.hold.last()).isEqualTo(card)
+        assertThat(hand.cards.last()).isEqualTo(card)
     }
 
     @Test
     fun `should be able to move a card and remove that card from the cardDesk`() {
-        val cards =
-            Cards(
+        val hold =
+            Hold(
                 setOf(
                     Card(Symbol.HEART, 1),
                     Card(Symbol.HEART, 2),
@@ -33,15 +33,15 @@ class CardsTest {
                     Card(Symbol.HEART, 4),
                 ),
             )
-        val hand = Cards()
-        cards.move(hand)
-        assertThat(cards.hold).hasSize(3)
+        val hand = Hold()
+        hold.moveCard(hand)
+        assertThat(hold.cards).hasSize(3)
     }
 
     @Test
     fun `order of cards in two cardDesks is different`() {
-        val cardDesk1 = CardDeck().cards.hold.toList()
-        val cardDesk2 = CardDeck().cards.hold.toList()
+        val cardDesk1 = CardDeck().getCards()
+        val cardDesk2 = CardDeck().getCards()
 
         assertThat(cardDesk1).isNotEqualTo(cardDesk2)
     }
