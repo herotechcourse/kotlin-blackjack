@@ -21,9 +21,16 @@ class CardGeneratorTest {
         assertEquals(Card("A♥"), card)
     }
 
-
     @Test
     fun `generateCards() - create a deck of cards`() {
+        val card = CardGenerator.generateCard(CardGenerator.suits[0])
+        val cards = CardGenerator.generateCards()
+        assertTrue { cards.contains(card) }
+    }
 
+    @Test
+    fun `generateCards() - cards do not have duplicates`() {
+        val cards = CardGenerator.generateCards()
+        assertTrue { cards.toSet().size == cards.size }
     }
 }

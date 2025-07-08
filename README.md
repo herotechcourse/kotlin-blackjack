@@ -16,4 +16,4 @@ CardGenerator
 - [x] generateSuits method create list of cards in String form by combining digit part and figure part
 - [x] generateCard method create card with combination of 'A 1 2 ... 10 J Q K' * ♥, ♣, ♠, ♦ 
   - ex. A♥, 4♣, 9♠, 6♦
-- [ ] generateCards method create 52 unique cards
+- [x] generateCards method create 52 unique cards

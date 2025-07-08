@@ -23,7 +23,11 @@ object CardGenerator {
         return value
     }
 
-    fun generateCards() {
-
+    fun generateCards(): List<Card> {
+        val cards =
+            suits.map { suit ->
+                generateCard(suit)
+            }
+        return cards
     }
 }
