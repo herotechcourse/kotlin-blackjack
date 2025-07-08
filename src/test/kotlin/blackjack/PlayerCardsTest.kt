@@ -27,4 +27,46 @@ class PlayerCardsTest {
         cards.forEach { it -> playerCards.addCard(it) }
         assertEquals(15, playerCards.score)
     }
+
+    @Test
+    fun `should return 13 - Ace's rank is converted to 1 if score greater than 21`() {
+        val cards =
+            listOf(
+                Card(Rank.TWO, Suit.SPADE),
+                Card(Rank.ACE, Suit.HEART),
+                Card(Rank.KING, Suit.HEART),
+            )
+        val playerCards = PlayerCards()
+        cards.forEach { it -> playerCards.addCard(it) }
+        assertEquals(13, playerCards.score)
+    }
+
+    @Test
+    fun `should return 12 - both Ace's rank is converted to 1 if score greater than 21`() {
+        val cards =
+            listOf(
+                Card(Rank.ACE, Suit.SPADE),
+                Card(Rank.ACE, Suit.HEART),
+                Card(Rank.KING, Suit.HEART),
+            )
+        val playerCards = PlayerCards()
+        cards.forEach { it -> playerCards.addCard(it) }
+        assertEquals(12, playerCards.score)
+    }
+
+    @Test
+    fun `should return 22 - each Ace rank is converted to 1 if score greater than 21`() {
+        val cards =
+            listOf(
+                Card(Rank.NINE, Suit.SPADE),
+                Card(Rank.NINE, Suit.HEART),
+                Card(Rank.ACE, Suit.HEART),
+                Card(Rank.ACE, Suit.SPADE),
+                Card(Rank.ACE, Suit.CLUB),
+                Card(Rank.ACE, Suit.DIAMOND),
+            )
+        val playerCards = PlayerCards()
+        cards.forEach { it -> playerCards.addCard(it) }
+        assertEquals(22, playerCards.score)
+    }
 }
