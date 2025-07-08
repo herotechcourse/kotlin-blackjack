@@ -7,7 +7,7 @@ class CardTest {
     @Test
     fun `throw if card is illegal`() {
         assertThrows<IllegalArgumentException> {
-            Card()
+            Card(Symbol.SPADES, 14)
         }
     }
 }
