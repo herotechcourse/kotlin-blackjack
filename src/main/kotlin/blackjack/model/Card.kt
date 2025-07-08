@@ -1,4 +1,5 @@
 package blackjack.model
 
-@JvmInline
-value class Card(val name: String)
+data class Card(val name: String) {
+    val digit = name.substring(0, name.length - 1)
+}
