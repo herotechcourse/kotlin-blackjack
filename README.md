@@ -24,9 +24,9 @@
 
 ## Deck
 
-- [ ] Create 52 cards
-- [ ] Shuffle cards
-- [ ] Pop card from deck
+- [x] Create 52 cards
+- [x] Shuffle cards
+- [x] Pop card from deck
 
 ## Hand
 
