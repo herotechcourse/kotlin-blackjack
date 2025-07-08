@@ -18,10 +18,9 @@
 - [x] Considers Ace as the value of 1 if the total score is going above 21
 
 ### value class `Person`
-- [] contains value `name`
-  - [] should not be empty
-  - [] its length should be at least of length 2
-  - [] can't be 'Dealer' which is already reserved for it
+- [x] contains value `name`
+  - [x] should not be empty
+  - [x] can't be 'Dealer' which is already reserved for it (Case Insensitive)
 
 ### class `Player`
 - [] contains class `Person`
@@ -31,3 +30,17 @@
 ### class `Deck`
 - [] contains function `generateCards()`
 - [] contains function `shuffle()`
+- [] contains function `Draw()`
+
+### class `Statistic`
+- [] will use List<Player> as parameter
+
+### class `Controller`
+- [] has function `startRound()`
+- [] has function `playerTakesTurn()`
+  - [] has function `askDrawOrNot()` : until score is greater than 21 or user says 'n'
+
+### view : class `InputView`, `OutputView`
+
+
+### class `Application`
