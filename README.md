@@ -7,7 +7,10 @@
 Card
 - [x] Card class hold string value
 
-
+### View 
+InputView
+- [x] "Enter the names of the players (comma-separated):"
+- [x] "Would {name} like to draw another card? (y for yes, n for no)"
 
 ### Utils
 
