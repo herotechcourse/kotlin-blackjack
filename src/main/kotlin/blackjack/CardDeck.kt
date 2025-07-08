@@ -23,4 +23,10 @@ data class CardDeck(private val hold: Hold) {
                 .plus(listOfCardsWith(Symbol.DIAMONDS))
         }
     }
+
+    fun numberOfCards(): Int {
+        return hold.cards.size
+    }
+
+    fun getCards() = hold.cards.toList()
 }
