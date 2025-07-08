@@ -7,6 +7,6 @@ class CardDeckTest {
     @Test
     fun `CardDeck has 52 cards`() {
         val cardDeck = CardDeck()
-        assertThat(cardDeck.cards.hold).hasSize(52)
+        assertThat(cardDeck.numberOfCards()).isEqualTo(52)
     }
 }
