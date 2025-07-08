@@ -19,9 +19,10 @@
 ## Features
 
 ### Card : data class
+- [x] implement simple card class
 - [ ] value: 1 to 11
 - [ ] Face cards (King, Queen, Jack) are each worth 10
-- [ ] type: Ace, King, Queen, Jack, Number
+- [ ] type: Ace, , Number
 - [ ] symbol: enum class { hearts, spades , clubs, diamonds }
   - [ ] toString(): return symbol character
 - 
