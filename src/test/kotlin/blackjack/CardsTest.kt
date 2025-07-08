@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test
 
 class CardsTest {
     @Test
-    fun `test`() {
+    fun `should be able to move a card`() {
         val cards =
             Cards(
-                hashSetOf(
+                setOf(
                     Card(Symbol.HEART, 1),
                     Card(Symbol.HEART, 2),
                     Card(Symbol.HEART, 3),
