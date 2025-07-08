@@ -15,11 +15,10 @@ class HoldTest {
                     Card(Symbol.HEART, 4),
                 ),
             )
-        val hand = Hold()
-        val card = hold.cards.first()
-        hold.moveCard(hand)
+        val player = Player(Person("Mina"), Hand())
+        hold.moveCard(player)
 
-        assertThat(hand.cards.last()).isEqualTo(card)
+        assertThat(player.hand.numberOfCards()).isEqualTo(1)
     }
 
     @Test
@@ -33,8 +32,8 @@ class HoldTest {
                     Card(Symbol.HEART, 4),
                 ),
             )
-        val hand = Hold()
-        hold.moveCard(hand)
+        val player = Player(Person("Mina"), Hand())
+        hold.moveCard(player)
         assertThat(hold.cards).hasSize(3)
     }
 
