@@ -1,10 +1,8 @@
 package blackjack.model
 
-class Player(
-    private val person: Person,
-    private val hand: Hand,
-) {
-    constructor(name: String) : this(Person(name), Hand())
+class Player(name: String) {
+    private val person = Person(name)
+    private val hand = Hand()
 
     fun addCard(card: Card) = hand.addCard(card)
 
