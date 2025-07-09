@@ -5,7 +5,7 @@
 ### Data class `Card`
 - [x] has `Rank`
 - [x] has `Suit`
-- [] method `toString()`
+- [x] method `toString()`
 
 #### enum class `Rank`
 - [x] includes names: "ACE"(1), "TWO", "THREE", ... "TEN", "JACK", "QUEEN", "KING"(13)
