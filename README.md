@@ -10,17 +10,24 @@
 - Card 
 - [x] Visibility of the card implemented by flipCard() 
 - [x] Determine the value of each card
-- [x] Create Emus class - Ranks
+- [x] Create Enum class - Ranks
 - [x] Create Class - Card
-
 - [x] Create Enum class - Suits
+
 - Deck
 - [x] prepare deck
 - [x] shuffle cards
 
-- Member interface - drawCard(), update status
-- [ ] Dealer - assign win and lose counter, 
-- [ ] Players 
+- Participant interface 
+- [x] drawCard()
+- [x] update status
+
+- Dealer
+- [x] use Participant interface
+- [x] implement additional methods to draw card
+
+- Player
+- [x] use Participant interface
 
 - Game 
 - [ ] Initialize Game
