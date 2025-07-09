@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 class HandTest {
     @Test
-    fun hasPoints() {
+    fun calculatePoints() {
         val player = Player("doggo")
         val listOfCards =
             listOf(
@@ -15,7 +15,7 @@ class HandTest {
                 Card(Suit.DIAMONDS, 4),
             )
         listOfCards.forEach { player.addCard(it) }
-        assertThat(player.hasPoint()).isEqualTo(17)
+        assertThat(player.calculatePoints()).isEqualTo(17)
     }
 
     @Test
@@ -27,7 +27,7 @@ class HandTest {
                 Card(Suit.DIAMONDS, 11),
             )
         listOfCards.forEach { player.addCard(it) }
-        assertThat(player.hasPoint()).isEqualTo(21)
+        assertThat(player.calculatePoints()).isEqualTo(21)
     }
 
     @Test
@@ -41,7 +41,7 @@ class HandTest {
                 Card(Suit.DIAMONDS, 11),
             )
         listOfCards.forEach { player.addCard(it) }
-        assertThat(player.hasPoint()).isEqualTo(13)
+        assertThat(player.calculatePoints()).isEqualTo(13)
     }
 
     @Test
@@ -55,6 +55,6 @@ class HandTest {
                 Card(Suit.DIAMONDS, 7),
             )
         listOfCards.forEach { player.addCard(it) }
-        assertThat(player.hasPoint()).isEqualTo(20)
+        assertThat(player.calculatePoints()).isEqualTo(20)
     }
 }

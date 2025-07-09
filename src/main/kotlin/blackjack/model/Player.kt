@@ -8,5 +8,9 @@ class Player(name: String) {
 
     fun numberInHand() = hand.numberOfCards()
 
-    fun hasPoint() = hand.hasPoints()
+    fun calculatePoints() = hand.calculatePoints()
+
+    val name = person.name
+
+    val cards = hand.cards
 }

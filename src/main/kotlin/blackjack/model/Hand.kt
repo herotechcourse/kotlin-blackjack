@@ -3,11 +3,13 @@ package blackjack.model
 class Hand() {
     private val hold: Hold = Hold(setOf())
 
+    val cards = hold.cards
+
     fun numberOfCards() = hold.cards.size
 
     fun addCard(card: Card) = this.hold.add(card)
 
-    fun hasPoints(): Int {
+    fun calculatePoints(): Int {
         val countOfAce = hold.cards.filter { it.index == 1 }.size
         var sum =
             hold.cards.sumOf {
