@@ -13,8 +13,8 @@
 
 ## Dealer
 
-- [ ] Start the game by dealing 2 cards for Players and dealer
-- [ ] Deal card when a player requests for a card
+- [x] Start the game by dealing 2 cards for Players and dealer
+- [x] Deal card when a player requests for a card
 - [x] Decide to draw cards or not
     - score <= 16
     - score >= 17
@@ -32,8 +32,10 @@
 - [x] Add card to a hand
 - [x] Calculate scores on hand
 
-## Game
+## GameController
 
+- [x] initialize game
+- [x] run game
 - [ ] Calculate Results
 
 ## output
