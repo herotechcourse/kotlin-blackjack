@@ -1,6 +1,8 @@
 package blackjack.model
 
 class Player(
-    val person: Person,
+    private val person: Person,
     val hand: Hand,
-)
+) {
+    constructor(name: String) : this(Person(name), Hand())
+}
