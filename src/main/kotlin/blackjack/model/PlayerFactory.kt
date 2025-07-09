@@ -1,7 +1,9 @@
 package blackjack.model
 
 object PlayerFactory {
-    fun with(names: List<String>): List<Player> {
-        return names.map { Player(it) }
-    }
+    fun with(names: List<String>) = names.map { Player(it) }
+
+    fun createDealer() = Player(DEALER)
+
+    const val DEALER = "Dealer"
 }

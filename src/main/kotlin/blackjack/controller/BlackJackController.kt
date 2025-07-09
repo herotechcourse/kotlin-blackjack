@@ -10,6 +10,7 @@ object BlackJackController {
 
         // create players, create dealer -> store
         PlayerFactory.with(names)
+        PlayerFactory.createDealer()
 
         // give it to manager
         // hit the cards
