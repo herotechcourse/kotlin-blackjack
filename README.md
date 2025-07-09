@@ -8,15 +8,15 @@
 [ ] get list of names from the user input
 
 - Card 
-[ ] Create Enum class - Suits
-[ ] Create Emus class - Ranks
-[ ] Create Class - Card
-[ ] Visibility of the card - implemented by flipCard() 
-[ ] Determine the value of each card
+[x] Create Enum class - Suits
+[x] Create Emus class - Ranks
+[x] Create Class - Card
+[x] Visibility of the card - implemented by flipCard() 
+[x] Determine the value of each card
 
 - Deck
-[ ] prepare deck
-[ ] shuffle cards
+[x] prepare deck
+[x] shuffle cards
 
 - Member interface - drawCard(), update status
 [ ] Dealer - assign win and lose counter, 
