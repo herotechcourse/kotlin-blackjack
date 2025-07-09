@@ -30,8 +30,8 @@
 
 ## Hand
 
-- [ ] Add card to a hand
-- [ ] Calculate scores on hand
+- [x] Add card to a hand
+- [x] Calculate scores on hand
 
 ## Game
 
