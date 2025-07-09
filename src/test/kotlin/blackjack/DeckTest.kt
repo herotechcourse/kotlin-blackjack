@@ -17,4 +17,18 @@ class DeckTest {
     fun `should start with 52 cards`() {
         assertEquals(52, deck.remainingCards())
     }
+
+    @Test
+    fun `should draw one card and decrease deck size`() {
+        deck.drawCard()
+        assertEquals(51, deck.remainingCards())
+    }
+
+    @Test
+    fun `should throw error when drawing from empty deck`() {
+        repeat(52) { deck.drawCard() }
+        assertThrows(IllegalStateException::class.java) {
+            deck.drawCard()
+        }
+    }
 }
