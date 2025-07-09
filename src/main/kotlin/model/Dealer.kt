@@ -1,7 +1,11 @@
 package model
 
-class Dealer(name: String = "Dealer") : BasePlayer(name) {
+class Dealer() : BasePlayer("Dealer") {
+    private val deck = Deck()
+
     override fun makeDecision(): Boolean {
         return getScore() <= 16
     }
+
+    fun dealCard(): Card = deck.pop()
 }
