@@ -3,27 +3,31 @@
 ## Features
 
 ### Model
-- [ ] **Create Player Class**
-  - [ ] Should contain a name, score, hand: MutableList<Card>
-  - [ ] Should Add a card to the hand.
-  - [ ] Should track the score
-  - [ ] The name should be not empty.
-  - [ ] Should check if the score is Blackjack or Busts.
-- [ ] Create Dealer Class
+- [x] **Create Participant Class**
+  - [x] Should contain a name, hand
+  - [x] Should Add a card to the hand.
+  - [x] Should check for blackjack and busts
+  - [x] The name should be not empty.
+- [ ] **Create Player Class inherit from a participant**
+- [ ] **Create Dealer Class inherit from a participant**
   - [ ] Should Inherit maybe from the Player class.
   - [ ] Should contain a Deck and manage it.
   - [ ] Should be able to automatically add cards to the hand.
   - [ ] Should give a card to the player from the deck.
   - [ ] Should check if the score is less or equal to 16. 
-- [ ] create Card Class
-  - [ ] It contains Suit and Rank Properties
-  - [ ] Suit is an enum class containing the values: Diamonds, hearts, clubs, spades
-  - [ ] Rank is an enum class containing the symbols and values from the cards
-  - [ ] Card could contain toString() to simplify when a card is printed
-- [ ] create Deck value Class
-  - [ ] Should contain a list<Card>
-  - [ ] Should generate a new instance with the static method.
-  - [ ] The list is created from 52
+- [x] **Create Card Class**
+  - [x] It contains Suit and Rank Properties
+  - [x] Suit is an enum class containing the values: Diamonds, hearts, clubs, spades
+  - [x] Rank is an enum class containing the symbols and values from the cards
+  - [x] Card could contain toString() to simplify when a card is printed
+- [x] **Create Deck value Class**
+  - [x] Should contain an ImmutableList<Card>
+  - [x] The list is created from 52
+- [x] **Create a Hand Class**
+  - [x] contain an Immutable list of dealtCards
+  - [x] calculate the current score
+  - [x] check for blackjack and busts
+  - [x] toString() return a nice formatted string
 ### Controller
 - [ ] Create Game Controller
   - [ ] Should call the InputView to get the player names
