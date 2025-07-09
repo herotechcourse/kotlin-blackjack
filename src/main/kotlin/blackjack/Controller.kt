@@ -3,25 +3,33 @@ package blackjack
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
-object Controller {
+class Controller() {
+    private var players: List<Player> = mutableListOf()
+    private val dealer: Player = Player(GamblerInfo("dealer"))
+    private val deck = Deck()
 
     fun run() {
         try {
-            val players = processPlayerNames().map { it ->
-                Player(it)
-            }
-            val dealer = Player(GamblerInfo("dealer"))
+            createPlayers()
             OutputView.displayNamesOfPlayers(players)
-            val deck = Deck()
+            roundOne()
+            OutputView.displayDealersInitialCard(dealer)
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
         }
     }
 
-    private fun startGame() {
-        processPlayerNames()
+    private fun createPlayers() {
+        players =
+            processPlayerNames().map { it ->
+                Player(it)
+            }
     }
 
+    private fun roundOne() {
+        dealer.addCard(deck.drawCard(2))
+        players.forEach { it -> deck.drawCard(2) }
+    }
 
     fun processPlayerNames(): List<GamblerInfo> {
         repeat(MAX_ATTEMPTS) {
@@ -30,7 +38,7 @@ object Controller {
                 return names
                     .split(",")
                     .map(String::trim)
-                    .map { it -> GamblerInfo(it) } //to avoid abundant function: caller
+                    .map { it -> GamblerInfo(it) } // to avoid abundant function: caller
             } catch (err: IllegalArgumentException) {
                 OutputView.displayErrorMessages(err.message)
             }
@@ -38,11 +46,11 @@ object Controller {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-
-    //fun askWhetherToDrawOrNot() {
+    // fun askWhetherToDrawOrNot() {
 //            getUserInputAsString()
     // }
-
-    private const val MAX_ATTEMPTS = 5
-    private const val MAX_ATTEMPT_MESSAGE = "Too many attempts"
+    companion object {
+        private const val MAX_ATTEMPTS = 5
+        private const val MAX_ATTEMPT_MESSAGE = "Too many attempts"
+    }
 }
