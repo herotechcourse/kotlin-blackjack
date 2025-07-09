@@ -40,4 +40,9 @@ data class Dealer(override val name: String = "Dealer") : Playable {
         val score = calculateHand()
         return score <= 16
     }
+
+    fun getStringOfHand(): String {
+        val names = _hand.map { it.name }
+        return names.joinToString(", ")
+    }
 }

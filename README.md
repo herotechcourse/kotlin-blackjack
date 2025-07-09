@@ -42,7 +42,24 @@ InputView
 
 - [x] "Enter the names of the players (comma-separated):"
 - [x] "Would {name} like to draw another card? (y for yes, n for no)"
-- [ ] add validation for duplicated names in `readPlayerNames()` 
+- [ ] add validation for duplicated names in `readPlayerNames()`
+
+OutputView
+
+- [x] "Dealing two cards to dealer, {name of players}."
+    - [x] display initial state of hands of dealer and players
+        - [x] dealer only show first card (`hand[0]`)
+        - [x] player show all two cards
+- [x] "{name}'s cards: {hand of player}"
+    - [x] first hit question, display hand of player (both y or n)
+    - [x] from second hit question, display when player say y
+- [x] "Dealer draws one more card due to having 16 or less."
+    - [x] display the message everytime when dealer get new card
+- [x] "{name}'s cards: {hand} – Total: {score}"
+- [ ] "## Final Results"
+    - "Dealer: 1 Win 1 Lose"
+    - "{player.name}: Win"
+    - "{player.name}: Lose"
 
 ### Controller
 

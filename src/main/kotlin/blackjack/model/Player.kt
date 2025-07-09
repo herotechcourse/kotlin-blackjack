@@ -33,4 +33,9 @@ data class Player(override val name: String) : Playable {
     override fun isBust(): Boolean {
         return calculateHand() > 21
     }
+
+    fun getStringOfHand(): String {
+        val names = _hand.map { it.name }
+        return names.joinToString(", ")
+    }
 }
