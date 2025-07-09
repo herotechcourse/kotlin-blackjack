@@ -1,32 +1,19 @@
 package blackjack.model
 
 abstract class Participant(val name: String) {
-    var score: Int = 0
-    var aceCount: Int = 0
+    private val hand = Hand()
 
     init {
         require(name.isNotBlank()) { "Wrong name: $name. Participant name should not be blank." }
     }
 
-    fun isBlackjack(): Boolean = score == BLACK_JACK
+    fun isBlackjack(): Boolean = hand.isBlackjack()
 
-    fun isBusts(): Boolean = score > BLACK_JACK
+    fun isBusts(): Boolean = hand.isBusts()
 
-    companion object {
-       const val BLACK_JACK = 21
+    fun addCard(newCard: Card) = hand.addCard(newCard)
+
+    override fun toString(): String {
+        return "$name's cards: ${hand}"
     }
-
-//    fun isAce(card: Int): Boolean {
-//        return card == 11
-//    }
-//
-//    fun addCard(card: Int) {
-//        if (isAce(card)) {
-//            if (score + card > 21) {
-//
-//            }
-//        }
-//    }
-
-
 }

@@ -16,30 +16,10 @@ class PlayerTest {
     }
 
     @Test
-    fun `should return true isBlackjack() if score is 21`() {
-        val player = Player("bojana")
-        player.score = 21
-        assertThat(player.isBlackjack()).isTrue()
-    }
-
-    @Test
-    fun `should return true isBusts() if score over 21`() {
-        val player = Player("bojana")
-        player.score = 22
-        assertThat(player.isBusts()).isTrue()
-    }
-
-    @Test
-    fun `should return false isBlackjack() if score is not 21`() {
-        val player = Player("bojana")
-        player.score = 22
-        assertThat(player.isBlackjack()).isFalse()
-    }
-
-    @Test
-    fun `should return false isBusts() if score not over 21`() {
-        val player = Player("bojana")
-        player.score = 21
-        assertThat(player.isBusts()).isFalse()
+    fun `should return an string with the name + dealt cards`() {
+        val player = Player("Sebas")
+        player.addCard(Card(Card.Suit.DIAMONDS, Card.Rank.ACE))
+        player.addCard(Card(Card.Suit.DIAMONDS, Card.Rank.ACE))
+        println(player)
     }
 }

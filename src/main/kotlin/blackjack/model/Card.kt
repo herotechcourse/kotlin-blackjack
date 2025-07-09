@@ -2,11 +2,12 @@ package blackjack.model
 
 data class Card(val suit: Suit, val rank: Rank) {
     enum class Suit(val symbol: String) {
-       DIAMONDS("♦"),
+        DIAMONDS("♦"),
         HEARTS("♥"),
         CLUBS("♣"),
         SPADES("♠");
     }
+    // maybe change the name Rank
     enum class Rank(val symbol: String, val value: Int) {
         TWO("2", 2),
         THREE("3", 3),
@@ -24,6 +25,6 @@ data class Card(val suit: Suit, val rank: Rank) {
     }
 
     override fun toString(): String {
-        return rank.value.toString() + suit.symbol
+        return rank.symbol + suit.symbol
     }
 }
