@@ -1,5 +1,6 @@
 package blackjack.controller
 
+import blackjack.model.GameManager
 import blackjack.model.PlayerFactory
 
 object BlackJackController {
@@ -9,12 +10,23 @@ object BlackJackController {
         val names = listOf("mina", "vito")
 
         // create players, create dealer -> store
-        PlayerFactory.with(names)
-        PlayerFactory.createDealer()
+        val players = PlayerFactory.with(names)
+        val dealer = PlayerFactory.createDealer()
 
-        // give it to manager
-        // hit the cards
-        // show table cards
-        // asking y or n for new card
+        val totalPlayer = players + dealer
+        // give it to manager && set up
+        val gameManager = GameManager(dealer, players)
+        val setupResult = gameManager.setUp()
+
+//        OutputView.printPlayerResult(setupResult)
+
+        val totalPlayResult =
+            gameManager
+                .finalResult(
+                    totalPlayer,
+                    { true },
+                )
+
+//        OutputView.Print(totalPlayResult)
     }
 }
