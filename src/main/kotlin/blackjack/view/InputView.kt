@@ -14,8 +14,8 @@ object InputView {
         return playersNames
     }
 
-    fun getAnswer(): String {
-        println("Would you like to draw another card? (y for yes, n for no)")
+    fun getAnswer(playerName: String): String {
+        println("Would $playerName like to draw another card? (y for yes, n for no)")
         val input = readLine()?.trim()?.lowercase() ?: ""
         require(input == "y" || input == "n") {
             "Please answer in order to proceed with the game."
