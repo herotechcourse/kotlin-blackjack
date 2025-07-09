@@ -21,4 +21,20 @@ class Dealer : Participant("Dealer") {
         val card = dealCard()
         participant.addCard(card)
     }
+
+    fun askPlayerDraw(player: Player) {
+        while (true) {
+            println("Would ${player.name} like to draw another card? (y for yes, n for no)")
+            val input = readln().trim()
+            if (input == "y") {
+                giveCardTo(player)
+                println("${player.name}'s cards: ${player.displayHand()}")
+                if (isBusted(player)) break
+            } else if (input == "n") {
+                break
+            } else {
+                println("Invalid input. Please enter 'y' or 'n'.")
+            }
+        }
+    }
 }
