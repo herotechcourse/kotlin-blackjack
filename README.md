@@ -5,6 +5,7 @@
 ### Data class `Card`
 - [x] has `Rank`
 - [x] has `Suit`
+- [] method `toString()`
 
 #### enum class `Rank`
 - [x] includes names: "ACE"(1), "TWO", "THREE", ... "TEN", "JACK", "QUEEN", "KING"(13)
@@ -24,23 +25,32 @@
 
 ### class `Player`
 - [x] contains class `GamblerInfo`
-- [x] contains class `PlayerCards`
+- [x] contains class `hand`
 - [x] for representing 'Player1', 'Player2', ..., 'PlayerN', and 'Dealer'
 
 ### class `Deck`
-- [] contains function `generateCards()`
-- [] contains function `shuffle()`
-- [] contains function `Draw()`
+- [x] contains function `generateCards()`
+- [x] contains function `shuffle()`
+- [x] contains function `Draw()`
+
+### directory `view` : object `InputView`, object `OutputView`
+#### `InputView`
+- [] fun `get names of the player`
+
+#### `OutputView`
+- [] fun `display names of players`
+- [] fun `display the first draw`(parameter: List<Player>)
+  - [] private fun `display message for first draw`(parameter: Player)
+  - [] private fun `display cards and score`
+
+### object `Controller`
+- [] has function `startRound()`
+- [] has function `TakesTurn()`
+  - [] has function `askDrawOrNot()` : until score is greater than 21 or user says 'n'
 
 ### class `Statistic`
 - [] will use List<Player> as parameter
 
-### class `Controller`
-- [] has function `startRound()`
-- [] has function `playerTakesTurn()`
-  - [] has function `askDrawOrNot()` : until score is greater than 21 or user says 'n'
-
-### view : class `InputView`, `OutputView`
 
 
 ### class `Application`

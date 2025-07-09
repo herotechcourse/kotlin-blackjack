@@ -3,29 +3,29 @@ package blackjack
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class PlayerCardsTest {
+class handTest {
     @Test
     fun `should be equal result`() {
         val card = Card(Rank.TEN, Suit.SPADE)
-        val playerCards = PlayerCards()
-        playerCards.addCard(listOf(card))
-        assertEquals(10, playerCards.score)
+        val hand = Hand()
+        hand.addCard(listOf(card))
+        assertEquals(10, hand.score)
     }
 
     @Test
     fun `Ace card is considered one if score crosses 21`() {
         val cards = listOf(Card(Rank.ACE, Suit.SPADE), Card(Rank.ACE, Suit.HEART))
-        val playerCards = PlayerCards()
-        playerCards.addCard(cards)
-        assertEquals(12, playerCards.score)
+        val hand = Hand()
+        hand.addCard(cards)
+        assertEquals(12, hand.score)
     }
 
     @Test
     fun `Ace card is considered 11 if the new score is less than 21`() {
         val cards = listOf(Card(Rank.FOUR, Suit.SPADE), Card(Rank.ACE, Suit.HEART))
-        val playerCards = PlayerCards()
-        playerCards.addCard(cards)
-        assertEquals(15, playerCards.score)
+        val hand = Hand()
+        hand.addCard(cards)
+        assertEquals(15, hand.score)
     }
 
     @Test
@@ -36,9 +36,9 @@ class PlayerCardsTest {
                 Card(Rank.ACE, Suit.HEART),
                 Card(Rank.KING, Suit.HEART),
             )
-        val playerCards = PlayerCards()
-        playerCards.addCard(cards)
-        assertEquals(13, playerCards.score)
+        val hand = Hand()
+        hand.addCard(cards)
+        assertEquals(13, hand.score)
     }
 
     @Test
@@ -49,9 +49,9 @@ class PlayerCardsTest {
                 Card(Rank.ACE, Suit.HEART),
                 Card(Rank.KING, Suit.HEART),
             )
-        val playerCards = PlayerCards()
-        playerCards.addCard(cards)
-        assertEquals(12, playerCards.score)
+        val hand = Hand()
+        hand.addCard(cards)
+        assertEquals(12, hand.score)
     }
 
     @Test
@@ -65,8 +65,8 @@ class PlayerCardsTest {
                 Card(Rank.ACE, Suit.CLUB),
                 Card(Rank.ACE, Suit.DIAMOND)
             )
-        val playerCards = PlayerCards()
-        playerCards.addCard(cards)
-        assertEquals(22, playerCards.score)
+        val hand = Hand()
+        hand.addCard(cards)
+        assertEquals(22, hand.score)
     }
 }
