@@ -2,12 +2,28 @@ package blackjack.model
 
 interface Participant {
     val name: String
-    val isActive: Boolean
+    var isActive: Boolean
     val cardsInHand: MutableList<Card>
 
-    fun drawCard(card: Card)
+    fun drawCard(card: Card) {
+        cardsInHand += card
+    }
 
-    fun calculateTotalValueOfCards(): Int
+    private fun checkAces() = cardsInHand.count { card -> card.rank == Rank.ACE }
 
-    fun updateActiveStatus(totalValueOfCards: Int)
+    fun calculateTotalValueOfCards(): Int {
+        var totalValueOfCards = cardsInHand.sumOf { card -> card.rank.value }
+        var aceCounter = checkAces()
+        while (totalValueOfCards > 21 && aceCounter > 0) {
+            totalValueOfCards -= 10
+            aceCounter--
+        }
+        return totalValueOfCards
+    }
+
+    fun updateActiveStatus(totalValueOfCards: Int) {
+        if (totalValueOfCards > 21) {
+            isActive = false
+        }
+    }
 }
