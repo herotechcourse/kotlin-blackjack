@@ -4,9 +4,7 @@ data class CardDeck(private val hold: Hold) {
     constructor() : this(initPokerCards())
 
     companion object {
-        private fun initPokerCards(): Hold {
-            return Hold(listOfCardDeck().shuffled().toSet())
-        }
+        private fun initPokerCards() = Hold(listOfCardDeck().shuffled().toSet())
 
         private fun listOfCardsWith(suit: Suit): List<Card> {
             var index = 1
@@ -23,9 +21,14 @@ data class CardDeck(private val hold: Hold) {
         }
     }
 
-    fun numberOfCards(): Int {
-        return hold.cards.size
-    }
+    fun numberOfCards() = hold.cards.size
 
     fun getCards() = hold.cards.toList()
+
+    fun hit(
+        player: Player,
+        repeat: Int = 1,
+    ) {
+        repeat(repeat) { hold.moveCard(player) }
+    }
 }
