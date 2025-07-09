@@ -17,15 +17,15 @@
 - [x] contains fun `addCard` : updates total score, add element `card`
 - [x] Considers Ace as the value of 1 if the total score is going above 21
 
-### value class `Person`
+### value class `GamblerInfo`
 - [x] contains value `name`
   - [x] should not be empty
   - [x] can't be 'Dealer' which is already reserved for it (Case Insensitive)
 
 ### class `Player`
-- [] contains class `Person`
-- [] contains class `PlayerCards`
-- [] for representing 'Player1', 'Player2', ..., 'PlayerN', and 'Dealer'
+- [x] contains class `GamblerInfo`
+- [x] contains class `PlayerCards`
+- [x] for representing 'Player1', 'Player2', ..., 'PlayerN', and 'Dealer'
 
 ### class `Deck`
 - [] contains function `generateCards()`
