@@ -14,7 +14,7 @@ class Deck {
 
     fun shuffleCards() = cards.shuffled()
 
-    fun draw(): Card {
+    fun giveCard(): Card {
         require(cards.isNotEmpty()) { "Deck is empty!" }
         return cards.removeAt(0)
     }

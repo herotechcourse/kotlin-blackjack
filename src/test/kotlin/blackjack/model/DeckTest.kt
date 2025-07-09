@@ -12,14 +12,14 @@ class DeckTest {
     }
 
     @Test
-    fun `deck should reduce its size when drawing a card`() {
-        deck.draw()
+    fun `deck should reduce its size when giving a card`() {
+        deck.giveCard()
         assertThat(deck.getCards()).hasSize(51)
     }
 
     @Test
-    fun `draw should give a single card`() {
-        val listOfCards = listOf(deck.draw())
+    fun `should give a single card`() {
+        val listOfCards = listOf(deck.giveCard())
         assertThat(listOfCards).hasSize(1)
     }
 }
