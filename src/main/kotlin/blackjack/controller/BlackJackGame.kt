@@ -1,7 +1,6 @@
 package blackjack.controller
 
 import blackjack.model.Dealer
-import blackjack.model.Participant
 import blackjack.model.Player
 import blackjack.view.InputView
 import blackjack.view.OutputView
@@ -15,44 +14,7 @@ class BlackJackGame {
         dealFirstCards()
         dealingPlayersCards()
         dealingDealersCards()
-        OutputView.printFinalHands(players, dealer)
-
-        val dealerScore = dealer.getScore()
-        val dealerHasBlackJack = dealer.hasBlackJack()
-        val dealerIsBusts = dealer.isBusts()
-
-        for (player in players) {
-            val playerScore = player.getScore()
-            val playerHasBlackJack = player.hasBlackJack()
-            val playerIsBusts = player.isBusts()
-
-            when {
-                playerIsBusts -> {
-                    player.setLose()
-                    dealer.setWin()
-                }
-                dealerIsBusts -> {
-                    player.setWin()
-                    dealer.setLose()
-                }
-                playerHasBlackJack && !dealerHasBlackJack -> {
-                    player.setWin()
-                    dealer.setLose()
-                }
-                playerScore == dealerScore -> {
-                    player.setTie()
-                    dealer.setTie()
-                }
-                playerScore < dealerScore -> {
-                    player.setLose()
-                    dealer.setWin()
-                }
-                else -> {
-                    player.setWin()
-                    dealer.setLose()
-                }
-            }
-        }
+        calculateResults()
     }
 
     fun createPlayers() {
@@ -85,6 +47,45 @@ class BlackJackGame {
             dealer.addCard(dealer.dealCard())
             OutputView.printDealersMessage()
         }
-        dealer.showAll = true
+        dealer.showAllCards()
+    }
+
+    fun calculateResults() {
+        OutputView.printFinalHands(players, dealer)
+        val dealerScore = dealer.getScore()
+
+        for (player in players) {
+            setResultFrom(player, dealer, dealerScore)
+        }
+    }
+
+    private fun setResultFrom(player: Player, dealer: Dealer, dealerScore: Int) {
+        val playerScore = player.getScore()
+        when {
+            player.isBusts() -> {
+                player.setLose()
+                dealer.setWin()
+            }
+            dealer.isBusts() -> {
+                player.setWin()
+                dealer.setLose()
+            }
+            player.hasBlackJack() && !dealer.hasBlackJack() -> {
+                player.setWin()
+                dealer.setLose()
+            }
+            playerScore == dealerScore -> {
+                player.setTie()
+                dealer.setTie()
+            }
+            playerScore < dealerScore -> {
+                player.setLose()
+                dealer.setWin()
+            }
+            else -> {
+                player.setWin()
+                dealer.setLose()
+            }
+        }
     }
 }

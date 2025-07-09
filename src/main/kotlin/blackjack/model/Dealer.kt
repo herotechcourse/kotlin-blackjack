@@ -2,7 +2,7 @@ package blackjack.model
 
 class Dealer(name: String = "Dealer") : Participant(name) {
     val deck = Deck()
-    var showAll = false
+    private var showAllCards = false
 
     fun dealCard(): Card {
         return deck.drawCard()
@@ -10,8 +10,12 @@ class Dealer(name: String = "Dealer") : Participant(name) {
 
     fun shouldNotStand(): Boolean = hand.getScore() <= DEALER_STAND
 
+    fun showAllCards() {
+        showAllCards = true
+    }
+
     override fun toString(): String = when {
-        showAll -> "$name's cards: $hand"
+        showAllCards -> "$name's cards: $hand"
         hand.dealtCards.isEmpty() -> "$name has no cards yet."
         else -> "$name: ${hand.dealtCards[0]}"
     }
