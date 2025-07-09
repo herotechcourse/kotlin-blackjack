@@ -1,7 +1,7 @@
 package blackjack.model
 
 abstract class Participant(val name: String) {
-    private val hand = Hand()
+    protected val hand = Hand()
 
     init {
         require(name.isNotBlank()) { "Wrong name: $name. Participant name should not be blank." }
@@ -14,6 +14,6 @@ abstract class Participant(val name: String) {
     fun addCard(newCard: Card) = hand.addCard(newCard)
 
     override fun toString(): String {
-        return "$name's cards: ${hand}"
+        return "$name's cards: $hand"
     }
 }
