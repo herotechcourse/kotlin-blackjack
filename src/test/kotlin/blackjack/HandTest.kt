@@ -3,7 +3,7 @@ package blackjack
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class handTest {
+class HandTest {
     @Test
     fun `should be equal result`() {
         val card = Card(Rank.TEN, Suit.SPADE)
@@ -63,7 +63,7 @@ class handTest {
                 Card(Rank.ACE, Suit.HEART),
                 Card(Rank.ACE, Suit.SPADE),
                 Card(Rank.ACE, Suit.CLUB),
-                Card(Rank.ACE, Suit.DIAMOND)
+                Card(Rank.ACE, Suit.DIAMOND),
             )
         val hand = Hand()
         hand.addCard(cards)
