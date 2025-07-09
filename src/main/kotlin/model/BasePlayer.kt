@@ -1,7 +1,7 @@
 package model
 
 abstract class BasePlayer(val name: String) {
-    private val hand = Hand()
+    protected val hand = Hand()
 
     init {
         require(name.isNotEmpty() && name.isNotBlank()) { "Name must not be empty" }
@@ -13,6 +13,10 @@ abstract class BasePlayer(val name: String) {
 
     fun getCardsNumber(): Int {
         return hand.getCards().size
+    }
+
+    fun showCards(): Set<Card> {
+        return hand.getCards()
     }
 
     abstract fun makeDecision(): Boolean

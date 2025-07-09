@@ -3,6 +3,7 @@ package controller
 import model.Dealer
 import model.Player
 import view.InputView
+import view.OutputView
 
 class GameController() {
     companion object {
@@ -30,10 +31,27 @@ class GameController() {
             players: List<Player>,
             dealer: Dealer,
         ) {
+            playersTurn(players, dealer)
+            dealersTurn(dealer)
+        }
+
+        private fun playersTurn(
+            players: List<Player>,
+            dealer: Dealer,
+        ) {
             players.forEach { player ->
-                while (player.makeDecision()) player.drawCard(dealer.dealCard())
+                while (player.makeDecision()) {
+                    player.drawCard(dealer.dealCard())
+                    OutputView.displayPlayersTurn(player)
+                }
             }
-            while (dealer.makeDecision()) dealer.drawCard(dealer.dealCard())
+        }
+
+        private fun dealersTurn(dealer: Dealer) {
+            while (dealer.makeDecision()) {
+                dealer.drawCard(dealer.dealCard())
+                OutputView.displayDealersGame()
+            }
         }
     }
 }

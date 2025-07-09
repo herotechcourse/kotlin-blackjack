@@ -16,6 +16,6 @@ class Hand {
     }
 
     override fun toString(): String {
-        return cards.toString()
+        return cards.joinToString(", ")
     }
 }

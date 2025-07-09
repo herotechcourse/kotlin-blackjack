@@ -7,4 +7,8 @@ class Player(name: String) : BasePlayer(name) {
         val decision = InputView.requestPlayerDecision(name)
         return decision == "y"
     }
+
+    override fun toString(): String {
+        return "$name's cards: $hand"
+    }
 }

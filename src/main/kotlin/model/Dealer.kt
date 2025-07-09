@@ -8,4 +8,8 @@ class Dealer() : BasePlayer("Dealer") {
     }
 
     fun dealCard(): Card = deck.pop()
+
+    override fun toString(): String {
+        return "$name's cards: $hand"
+    }
 }
