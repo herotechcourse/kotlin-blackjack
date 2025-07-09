@@ -30,13 +30,9 @@ class GameManager {
 
             // player want more card
             if (requestMessage) {
+                isFirst = false
                 player.drawCard(cardManager.giveCard())
-                if (isFirst) {
-                    OutputView.displayCurrentHand(player)
-                    isFirst = false
-                } else if (requestMessage) {
-                    OutputView.displayCurrentHand(player)
-                }
+                OutputView.displayCurrentHand(player)
                 continue
             } else if (isFirst) {
                 OutputView.displayCurrentHand(player)
