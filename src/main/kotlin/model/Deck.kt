@@ -14,16 +14,7 @@ class Deck {
         return cards.first().also { cards.remove(it) }
     }
 
-    // TODO refactor is needed
     private fun generateCards(): MutableSet<Card> {
-        val cards = mutableSetOf<Card>()
-//        Rank.entries.forEach { rank -> Suite.entries.forEach { _cards.add(Card(rank, it)) } }
-//        Rank.entries.map { rank -> Suite.entries.map { suite -> Card(rank, suite) } }
-        for (rank in Rank.entries) {
-            for (suite in Suite.entries) {
-                cards.add(Card(rank, suite))
-            }
-        }
-        return cards.shuffled().toMutableSet()
+        return Suite.entries.flatMap { suite -> Rank.entries.map { rank -> Card(rank, suite) } }.shuffled().toMutableSet()
     }
 }
