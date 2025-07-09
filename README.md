@@ -42,8 +42,19 @@ InputView
 
 - [x] "Enter the names of the players (comma-separated):"
 - [x] "Would {name} like to draw another card? (y for yes, n for no)"
+- [ ] add validation for duplicated names in `readPlayerNames()` 
 
 ### Controller
+
+GameManager
+
+- [x] has 'players: List<player>' to store all players -> extract to 'PlayerManager'
+- [x] has 'dealer: Dealer' -> extract to 'DealerManager'
+- [ ] has 'winStatistics: Stats' to store data related with result of the game
+- [x] has link with 'InputView' to take user inputs
+- [ ] has link with 'OutputView' to output game result
+- [ ] separate responsibilities of GameManager into several new manager(controller) classes
+- [ ] refactor `run()` method (It is too big!!!)
 
 CardManager
 
