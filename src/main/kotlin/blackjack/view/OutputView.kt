@@ -17,4 +17,13 @@ object OutputView {
         return players.joinToString(", ") { it.name }
     }
 
+    fun printDealersMessage() {
+        println("Dealer draws one more card due to having 16 or less.")
+    }
+
+    fun printFinalHands(players: List<Player>, dealer: Dealer) {
+        println("$dealer - Total: ${dealer.getScore()}")
+        players.forEach { println("$it - Total: ${it.getScore()}")}
+    }
+
 }
