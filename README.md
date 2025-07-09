@@ -9,14 +9,13 @@
 
 ## Player
 
-- [ ] Draw a cards
+- [x] Draw a cards
 
 ## Dealer
 
-- [ ] Shuffle the deck
 - [ ] Start the game by dealing 2 cards for Players and dealer
 - [ ] Deal card when a player requests for a card
-- [ ] Decide to draw cards or not
+- [x] Decide to draw cards or not
     - score <= 16
     - score >= 17
     - score = 21
