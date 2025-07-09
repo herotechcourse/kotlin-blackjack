@@ -1,4 +1,4 @@
-package blackjack
+package blackjack.model
 
 class Player(
     val person: Person,

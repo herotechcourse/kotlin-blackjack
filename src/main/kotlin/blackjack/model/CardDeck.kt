@@ -1,26 +1,25 @@
-package blackjack
+package blackjack.model
 
 data class CardDeck(private val hold: Hold) {
-    constructor() : this(initPokerCards()) {
-    }
+    constructor() : this(initPokerCards())
 
     companion object {
         private fun initPokerCards(): Hold {
             return Hold(listOfCardDeck().shuffled().toSet())
         }
 
-        private fun listOfCardsWith(symbol: Symbol): List<Card> {
+        private fun listOfCardsWith(suit: Suit): List<Card> {
             var index = 1
             return List(13) {
-                Card(symbol, index++)
+                Card(suit, index++)
             }
         }
 
         fun listOfCardDeck(): List<Card> {
-            return listOfCardsWith(Symbol.SPADES)
-                .plus(listOfCardsWith(Symbol.HEART))
-                .plus(listOfCardsWith(Symbol.CLUBS))
-                .plus(listOfCardsWith(Symbol.DIAMONDS))
+            return listOfCardsWith(Suit.SPADES)
+                .plus(listOfCardsWith(Suit.HEART))
+                .plus(listOfCardsWith(Suit.CLUBS))
+                .plus(listOfCardsWith(Suit.DIAMONDS))
         }
     }
 

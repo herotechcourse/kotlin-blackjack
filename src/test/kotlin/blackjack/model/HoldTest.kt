@@ -1,4 +1,4 @@
-package blackjack
+package blackjack.model
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -9,10 +9,10 @@ class HoldTest {
         val hold =
             Hold(
                 setOf(
-                    Card(Symbol.HEART, 1),
-                    Card(Symbol.HEART, 2),
-                    Card(Symbol.HEART, 3),
-                    Card(Symbol.HEART, 4),
+                    Card(Suit.HEART, 1),
+                    Card(Suit.HEART, 2),
+                    Card(Suit.HEART, 3),
+                    Card(Suit.HEART, 4),
                 ),
             )
         val player = Player(Person("Mina"), Hand())
@@ -26,10 +26,10 @@ class HoldTest {
         val hold =
             Hold(
                 setOf(
-                    Card(Symbol.HEART, 1),
-                    Card(Symbol.HEART, 2),
-                    Card(Symbol.HEART, 3),
-                    Card(Symbol.HEART, 4),
+                    Card(Suit.HEART, 1),
+                    Card(Suit.HEART, 2),
+                    Card(Suit.HEART, 3),
+                    Card(Suit.HEART, 4),
                 ),
             )
         val player = Player(Person("Mina"), Hand())

@@ -1,4 +1,4 @@
-package blackjack
+package blackjack.model
 
 class Hand(private val hold: Hold) {
     constructor() : this(Hold(setOf()))
