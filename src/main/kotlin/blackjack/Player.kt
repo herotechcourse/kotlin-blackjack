@@ -1,6 +1,5 @@
 package blackjack
 
-data class Player(
-    val gamberInfo: GamberInfo,
-    val hand: Hand,
-)
+class Player(val gamblerInfo: GamblerInfo) {
+    private val hand = Hand()
+}

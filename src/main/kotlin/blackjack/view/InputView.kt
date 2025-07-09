@@ -1,6 +1,6 @@
 package blackjack.view
 
-import blackjack.GamberInfo
+import blackjack.GamblerInfo
 
 
 object InputView {

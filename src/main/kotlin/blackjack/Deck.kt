@@ -7,7 +7,6 @@ class Deck {
     init {
         generateCards()
         cards.shuffle()
-        println(cards)
     }
 
     fun drawCard(count: Int = 1): List<Card> {

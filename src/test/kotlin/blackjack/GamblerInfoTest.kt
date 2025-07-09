@@ -10,14 +10,14 @@ class GamblerInfoTest {
     @Test
     fun `should throw exception - empty input`() {
         assertThrows<IllegalArgumentException> {
-            GamberInfo("")
+            GamblerInfo("")
         }
     }
 
     @Test
     fun `should throw exception - blank input`() {
         assertThrows<IllegalArgumentException> {
-            GamberInfo("    ")
+            GamblerInfo("    ")
         }
     }
 
@@ -25,12 +25,12 @@ class GamblerInfoTest {
     @ValueSource(strings = ["dealer", "DEALER", "deaLEr"])
     fun `should throw exception - using Reserved word`(name: String) {
         assertThrows<IllegalArgumentException> {
-            GamberInfo(name)
+            GamblerInfo(name)
         }
     }
 
     @Test
     fun `should accept - normal name`() {
-        assertEquals(GamberInfo("Name").name, "Name")
+        assertEquals(GamblerInfo("Name").name, "Name")
     }
 }
