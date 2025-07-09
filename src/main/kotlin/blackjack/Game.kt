@@ -20,5 +20,14 @@ class Game {
         println()
 
         players.forEach { dealer.askPlayerDraw(it) }
+        println()
+        players.forEach { OutputView.displayPlayerHand(it) }
+
+        dealer.playDealerTurn()
+
+        println()
+        OutputView.displayDealerStatus(dealer)
+        players.forEach { OutputView.displayPlayerStatus(it, dealer) }
+
     }
 }
