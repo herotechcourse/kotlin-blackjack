@@ -36,6 +36,15 @@ Dealer: Playable
 - [x] follows interface `Playable`
 - [x] has a method `shouldDrawCardOrNot()` return true or false to 'requestCard()' or not
 
+Stats
+
+- [x] has `players: List<Player>`, `dealer: Dealer` having instance of players and dealer
+- [x] has `playerBoard: Map<Player, Int>` having key as player and value as result of player
+- [x] has `dealerStats: Map<String, Int>` having key as "win", "lose", "tie" and value as count
+- [x] has method `initPlayerBoard()` to initiate `playerBoard` based on the result of each player against dealer
+- [x] hsa method `updateDealerStats()` to update `dealerStats` calculation based on `playerBoard`
+- [ ] has method `compareDealerPlayer()` to compare win or lose or tie between dealer and player
+
 ### View
 
 InputView

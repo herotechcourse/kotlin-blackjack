@@ -2,14 +2,15 @@ package blackjack.controller
 
 import blackjack.model.Dealer
 import blackjack.model.Player
+import blackjack.model.Stats
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
 class GameManager {
     val cardManager = CardManager()
     var players: List<Player> = emptyList()
-    val dealer: Dealer = Dealer()
-//    val winStatistics: Stats
+    val dealer = Dealer()
+    var winStatistics = Stats(players, dealer)
 
     fun addPlayer(name: String) {
         val mutableList = players.toMutableList()
@@ -78,6 +79,11 @@ class GameManager {
         // display final state of players and dealer
         OutputView.displayFinalState(players, dealer)
 
+        // init Stats
+        winStatistics = Stats(players, dealer)
+        // update stats
+        winStatistics.updateDealerStats()
         // display final result
+        OutputView.displayFinalResults(winStatistics)
     }
 }

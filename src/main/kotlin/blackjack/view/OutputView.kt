@@ -2,6 +2,7 @@ package blackjack.view
 
 import blackjack.model.Dealer
 import blackjack.model.Player
+import blackjack.model.Stats
 
 object OutputView {
     fun displayInitialState(
@@ -34,11 +35,29 @@ object OutputView {
     }
 
     // TODO: implement function
-//    fun displayFinalResults(winStatistics: Stats) {
-//        println("\n## Final Results")
-//        //  "Dealer: 1 Win 1 Lose"
-//        // loop
-//            //  "{player.name}: Win"
-//            //  "{player.name}: Lose"
-//    }
+    fun displayFinalResults(winStatistics: Stats) {
+        val playersResult = winStatistics.playerBoard
+        val dealerResult = winStatistics.dealerStats
+        println("\n## Final Results")
+        //  "Dealer: 1 Win 1 Lose"
+        if (dealerResult["tie"] != 0) {
+            println("Dealer: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose ${dealerResult["tie"]} Tie")
+        } else {
+            println("Dealer: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose")
+        }
+        // loop
+        val playerKeys = playersResult.keys
+        playerKeys.forEach { player ->
+            val result =
+                when (playersResult[player]) {
+                    0 -> "Lose"
+                    1 -> "Win"
+                    2 -> "Tie"
+                    else -> "Error"
+                }
+            println("${player.name}: $result")
+        }
+        //  "{player.name}: Win"
+        //  "{player.name}: Lose"
+    }
 }
