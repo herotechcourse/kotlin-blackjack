@@ -25,11 +25,10 @@ InputView
 ### Controller
 
 CardManager
-- [ ] has 'cards: List<Card>' and get it from 'CardGenerator' as a input parameter
-- [ ] has 'cardMap: Map<Card, Boolean>' to figure out a card is used or not
-- [ ] giveCard method return random selected Card from 'cards', then check the card to 'false' in 'cardMap'
-- [ ] if giveCard choose a card that is 'false' in 'cardMap', recall giveCard method until it return 'true' card 
-  - e.g. use 'repeat()'
+- [x] has 'cards: List<Card>' and get it from 'CardGenerator' as a input parameter
+- [x] has 'cardMap: Map<Card, Boolean>' to figure out a card is available or not
+- [x] giveCard method return Card from shuffled 'cards', then check the card to 'false' in 'cardMap'
+- [x] use ArrayDeque to take a card and remove the card from the deque and update '_cards'
 
 
 ### Utils
