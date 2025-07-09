@@ -1,8 +1,5 @@
 package blackjack
 
-
-
-
 class Deck {
     var cards: MutableList<Card> = mutableListOf()
         private set
@@ -26,10 +23,11 @@ class Deck {
     }
 
     private fun generateCards() {
-        cards = Suit.entries.map { suit ->
-            Rank.entries.map { rank ->
-                Card(rank, suit)
-            }
-        }.flatten().toMutableList()
+        cards =
+            Suit.entries.map { suit ->
+                Rank.entries.map { rank ->
+                    Card(rank, suit)
+                }
+            }.flatten().toMutableList()
     }
 }

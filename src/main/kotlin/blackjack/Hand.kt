@@ -1,6 +1,5 @@
 package blackjack
 
-//TODO: rename (Hand, ...)
 class Hand() {
     private val _cards: MutableList<Card> = mutableListOf()
     var score: Int = 0
