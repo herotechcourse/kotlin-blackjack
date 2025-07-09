@@ -1,17 +1,24 @@
 package blackjack
 
-import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class DealerTest {
+
+    private lateinit var dealer: Dealer
+    private lateinit var player: Player
+
+    @BeforeEach
+    fun setUp() {
+        dealer = Dealer()
+        player = Player("TestPlayer")
+    }
     @Test
-    fun `giveCardTo should add one card to participant's hand`() {
-        val dealer = Dealer()
-        val player = Player("John")
-        assertEquals(0,player.getHand().size)
-
+    fun `should give one card to player`() {
+        val initialSize = player.getHand().size
         dealer.giveCardTo(player)
-
-        assertEquals(1,player.getHand().size)
+        val newSize = player.getHand().size
+        assertEquals(initialSize + 1, newSize)
     }
 }
