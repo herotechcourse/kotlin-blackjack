@@ -1,10 +1,12 @@
 package blackjack
 
 class Game {
+
     fun run() {
         val playerNames = InputView.askPlayerNames()
         val players = playerNames.map { Player(it) }
-        val dealer = Dealer()
+        val deck = Deck()
+        val dealer = Dealer(deck)
 
         OutputView.displayDealing(playerNames)
 
@@ -20,6 +22,7 @@ class Game {
         println()
 
         players.forEach { dealer.askPlayerDraw(it) }
+
         println()
         players.forEach { OutputView.displayPlayerHand(it) }
 
@@ -29,5 +32,44 @@ class Game {
         OutputView.displayDealerStatus(dealer)
         players.forEach { OutputView.displayPlayerStatus(it, dealer) }
 
+        val dealerScore = dealer.calculateScore(dealer)
+        val dealerBusted = dealer.isBusted(dealer)
+
+        var dealerWins = 0
+        var dealerLosses = 0
+
+        OutputView.displayFinalResultsHeader()
+
+        players.forEach { player ->
+            val playerScore = dealer.calculateScore(player)
+            val playerBusted = dealer.isBusted(player)
+
+            val result = when {
+                playerBusted -> {
+                    dealerWins++
+                    "Lose"
+                }
+                dealerBusted -> {
+                    dealerLosses++
+                    "Win"
+                }
+                playerScore > dealerScore -> {
+                    dealerLosses++
+                    "Win"
+                }
+                playerScore < dealerScore -> {
+                    dealerWins++
+                    "Lose"
+                }
+                else -> {
+                    dealerWins++
+                    "Lose"
+                }
+            }
+
+            OutputView.displayPlayerResult(player.name, result)
+        }
+
+        OutputView.displayDealerResult(dealerWins, dealerLosses)
     }
 }
