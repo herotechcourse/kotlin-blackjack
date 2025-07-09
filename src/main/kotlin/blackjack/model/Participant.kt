@@ -10,5 +10,4 @@ interface Participant {
     fun calculateTotalValueOfCards(): Int
 
     fun updateActiveStatus(totalValueOfCards: Int)
-
 }
