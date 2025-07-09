@@ -10,6 +10,8 @@ object Controller {
             val players = processPlayerNames().map { it ->
                 Player(it)
             }
+            val dealer = Player(GamblerInfo("dealer"))
+            OutputView.displayNamesOfPlayers(players)
             val deck = Deck()
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
@@ -21,14 +23,14 @@ object Controller {
     }
 
 
-    fun processPlayerNames(): List<GamberInfo> {
+    fun processPlayerNames(): List<GamblerInfo> {
         repeat(MAX_ATTEMPTS) {
             try {
                 val names = InputView.getNamesOfPlayers()
                 return names
                     .split(",")
                     .map(String::trim)
-                    .map { it -> GamberInfo(it) } //to avoid abundant function: caller
+                    .map { it -> GamblerInfo(it) } //to avoid abundant function: caller
             } catch (err: IllegalArgumentException) {
                 OutputView.displayErrorMessages(err.message)
             }
