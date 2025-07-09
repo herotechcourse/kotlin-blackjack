@@ -1,5 +1,8 @@
 package blackjack
 
+import blackjack.controller.BlackJackGame
+
 fun main() {
-    TODO()
+    val game = BlackJackGame()
+    game.start()
 }
