@@ -17,4 +17,27 @@ object OutputView {
     fun displayInvalidInput() {
         println("Invalid input. Please enter 'y' or 'n'.")
     }
+    fun displayDealerDraw() {
+        println("Dealer draws one more card due to having 16 or less.")
+    }
+
+    fun displayDealerStatus(dealer: Dealer) {
+        println("Dealer's cards: ${dealer.displayHand()} – Total: ${dealer.calculateScore(dealer)}")
+    }
+
+    fun displayPlayerStatus(player: Player, dealer: Dealer) {
+        println("${player.name}'s cards: ${player.displayHand()} – Total: ${dealer.calculateScore(player)}")
+    }
+
+    fun displayFinalResultsHeader() {
+        println("\n## Final Results")
+    }
+
+    fun displayDealerResult(wins: Int, losses: Int) {
+        println("Dealer: $wins Win $losses Lose")
+    }
+
+    fun displayPlayerResult(name: String, result: String) {
+        println("$name: $result")
+    }
 }
