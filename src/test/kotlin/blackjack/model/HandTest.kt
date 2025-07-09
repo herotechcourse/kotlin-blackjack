@@ -16,11 +16,11 @@ class HandTest {
     }
 
     @Test
-    fun `should isBlackjack() return true if the score is 21`() {
+    fun `should hasBlackJack() return true if the score is 21`() {
         val hand = Hand()
         hand.addCard(Card(Card.Suit.DIAMONDS, Card.Rank.KING))
         hand.addCard(Card(Card.Suit.DIAMONDS, Card.Rank.ACE))
-        assertThat(hand.isBlackjack()).isTrue()
+        assertThat(hand.hasBlackJack()).isTrue()
     }
 
     @Test
@@ -33,11 +33,11 @@ class HandTest {
     }
 
     @Test
-    fun `should isBlackjack() return false if the score is not 21`() {
+    fun `should hasBlackJack() return false if the score is not 21`() {
         val hand = Hand()
         hand.addCard(Card(Card.Suit.DIAMONDS, Card.Rank.KING))
         hand.addCard(Card(Card.Suit.DIAMONDS, Card.Rank.KING))
-        assertThat(hand.isBlackjack()).isFalse()
+        assertThat(hand.hasBlackJack()).isFalse()
     }
 
     @Test

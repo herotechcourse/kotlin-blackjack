@@ -8,7 +8,7 @@ class Dealer(name: String = "Dealer") : Participant(name) {
         return deck.drawCard()
     }
 
-    fun shouldStand(): Boolean = hand.getScore() > DEALER_STAND
+    fun shouldNotStand(): Boolean = hand.getScore() <= DEALER_STAND
 
     override fun toString(): String = when {
         showAll -> "$name's cards: $hand"

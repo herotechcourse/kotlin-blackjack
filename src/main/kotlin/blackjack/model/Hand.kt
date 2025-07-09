@@ -7,7 +7,7 @@ class Hand {
         if (!isBusts()) dealtCards.add(card)
     }
 
-    fun isBlackjack(): Boolean = dealtCards.isNotEmpty() && getScore() == BLACK_JACK
+    fun hasBlackJack(): Boolean = dealtCards.isNotEmpty() && getScore() == BLACK_JACK
 
     fun isBusts(): Boolean = dealtCards.isNotEmpty() && getScore() > BLACK_JACK
 
