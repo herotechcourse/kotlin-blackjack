@@ -31,6 +31,11 @@ Player: Playable
 - [x] has method `calculateHand()` to calculate score of hand with `Rank` of `Card`
     - TODO: MUST have to find a solid logic for calculation
 
+Dealer: Playable
+
+- [x] follows interface `Playable`
+- [x] has a method `shouldDrawCardOrNot()` return true or false to 'requestCard()' or not
+
 ### View
 
 InputView
@@ -42,7 +47,7 @@ InputView
 
 CardManager
 
-- [x] has 'cards: List<Card>' and get it from 'CardGenerator' as a input parameter
+- [x] has 'cards: List<Card>' and get it from 'CardGenerator' as an input parameter
 - [x] has 'cardMap: Map<Card, Boolean>' to figure out a card is available or not
 - [x] giveCard method return Card from shuffled 'cards', then check the card to 'false' in 'cardMap'
 - [x] use ArrayDeque to take a card and remove the card from the deque and update '_cards'

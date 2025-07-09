@@ -118,7 +118,6 @@ class PlayerTest {
         player.drawCard(cards[51])
         player.drawCard(cards[50])
         player.drawCard(cards[49])
-        val score = player.calculateHand()
         assertEquals(true, player.isBust())
     }
 
