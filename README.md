@@ -38,3 +38,8 @@
 
 ### idea
 - isAce = false -> true  -> eval value to 11
+
+### Questions
+- How can we make testable private functions? What is the good practise?
+  1. internal
+  2. companion object
