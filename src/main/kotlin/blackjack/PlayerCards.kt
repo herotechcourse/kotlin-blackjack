@@ -1,17 +1,20 @@
 package blackjack
 
-class PlayerCards(val cards: MutableList<Card> = mutableListOf()) {
+//TODO: rename (Hand, ...)
+class PlayerCards() {
+    private val _cards: MutableList<Card> = mutableListOf()
     var score: Int = 0
         private set
+    val cards = _cards.toList()
 
     fun addCard(element: Card) {
-        cards.add(element)
+        _cards.add(element)
         updateScore()
     }
 
     private fun updateScore() {
-        var aceCount = cards.count { it -> it.rank == Rank.ACE }
-        var totalScore = cards.sumOf { it -> it.rank.value }
+        var aceCount = _cards.count { it -> it.rank == Rank.ACE }
+        var totalScore = _cards.sumOf { it -> it.rank.value }
         while (totalScore > WINNING_SCORE && aceCount > 0) {
             totalScore -= 10
             aceCount--
