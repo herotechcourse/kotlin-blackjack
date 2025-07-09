@@ -7,8 +7,8 @@ class PlayerCards() {
         private set
     val cards = _cards.toList()
 
-    fun addCard(element: Card) {
-        _cards.add(element)
+    fun addCard(cards: List<Card>) {
+        _cards.addAll(cards)
         updateScore()
     }
 
