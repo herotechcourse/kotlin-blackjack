@@ -8,13 +8,12 @@
   - [x] Should Add a card to the hand.
   - [x] Should check for blackjack and busts
   - [x] The name should be not empty.
-- [ ] **Create Player Class inherit from a participant**
-- [ ] **Create Dealer Class inherit from a participant**
-  - [ ] Should Inherit maybe from the Player class.
-  - [ ] Should contain a Deck and manage it.
+- [x] **Create Player Class inherit from a participant**
+- [x] **Create Dealer Class inherit from a participant**
+  - [x] Should contain a Deck and manage it.
   - [ ] Should be able to automatically add cards to the hand.
-  - [ ] Should give a card to the player from the deck.
-  - [ ] Should check if the score is less or equal to 16. 
+  - [x] Should give a card to the player from the deck.
+  - [x] Should check if the score is less or equal to 16. 
 - [x] **Create Card Class**
   - [x] It contains Suit and Rank Properties
   - [x] Suit is an enum class containing the values: Diamonds, hearts, clubs, spades
