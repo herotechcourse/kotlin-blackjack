@@ -10,7 +10,7 @@ class Hold(hold: Set<Card>) {
     fun moveCard(to: Player) {
         val target = _cards.first()
         _cards.remove(target)
-        to.hand.addCard(target)
+        to.addCard(target)
     }
 
     fun add(card: Card) {
