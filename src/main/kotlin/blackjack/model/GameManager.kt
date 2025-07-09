@@ -8,6 +8,7 @@ class GameManager(private val dealer: Player, private val players: List<Player>)
     }
 
     private fun setUp() {
-        println("something")
+        players.forEach { cardDeck.hit(it, 2) }
+        cardDeck.hit(dealer)
     }
 }
