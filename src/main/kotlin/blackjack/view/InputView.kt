@@ -1,8 +1,5 @@
 package blackjack.view
 
-import blackjack.GamblerInfo
-
-
 object InputView {
     fun getNamesOfPlayers(): String {
         println(InputPrompt.GET_NAME_OF_PLAYER)
@@ -20,4 +17,3 @@ object InputView {
         return string.trim()
     }
 }
-

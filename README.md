@@ -35,10 +35,12 @@
 
 ### directory `view` : object `InputView`, object `OutputView`
 #### `InputView`
-- [] fun `get names of the player`
+- [x] fun `get names of the player`
+- [x] fun `read String`
+- [x] fun `read Char`
 
 #### `OutputView`
-- [] fun `display names of players`
+- [x] fun `display names of players`
 - [] fun `display the first draw`(parameter: List<Player>)
   - [] private fun `display message for first draw`(parameter: Player)
   - [] private fun `display cards and score`
