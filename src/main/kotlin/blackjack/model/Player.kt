@@ -7,4 +7,6 @@ class Player(name: String) {
     fun addCard(card: Card) = hand.addCard(card)
 
     fun numberInHand() = hand.numberOfCards()
+
+    fun hasPoint() = hand.hasPoints()
 }

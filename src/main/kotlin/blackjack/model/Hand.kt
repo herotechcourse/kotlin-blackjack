@@ -6,4 +6,17 @@ class Hand() {
     fun numberOfCards() = hold.cards.size
 
     fun addCard(card: Card) = this.hold.add(card)
+
+    fun hasPoints(): Int {
+        val countOfAce = hold.cards.filter { it.index == 1 }.size
+        var sum =
+            hold.cards.sumOf {
+                if (it.index in 11..13) 10 else it.index
+            }
+
+        repeat(countOfAce) {
+            if (sum + 10 <= 21) sum += 10
+        }
+        return sum
+    }
 }
