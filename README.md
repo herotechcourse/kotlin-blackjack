@@ -13,6 +13,13 @@ Hand
 Rank
 - [x] Add new enum class 'Rank'(for example) and use the class to calculate score of player's hand and dealer's hand
   
+Playable (interface)
+- [x] has value `name` in string
+- [x] has list of card called `hand` 
+- [x] has method `requestCard()` to request a card to the card manager with boolean
+- [x] has method `drawCard()` to take card given by a card manager
+- [x] has method `calculateHand()` to calculate score of hand
+- [x] has method `isBust()` to figure out the player of the dealer is bust or not
 
 
 ### View 
