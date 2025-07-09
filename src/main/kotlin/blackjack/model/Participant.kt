@@ -4,9 +4,11 @@ interface Participant {
     val name: String
     val isActive: Boolean
     val cardsInHand: MutableList<Card>
-    val totalValueOfCards: Int
 
-    fun drawCard(): Card
+    fun drawCard(card: Card)
 
-    fun updateActiveStatus()
+    fun calculateTotalValueOfCards(): Int
+
+    fun updateActiveStatus(totalValueOfCards: Int)
+
 }
