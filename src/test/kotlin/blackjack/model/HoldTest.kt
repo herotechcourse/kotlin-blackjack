@@ -15,7 +15,7 @@ class HoldTest {
                     Card(Suit.HEART, 4),
                 ),
             )
-        val player = Player(Person("Mina"), Hand())
+        val player = Player("Mina")
         hold.moveCard(player)
 
         assertThat(player.numberInHand()).isEqualTo(1)
@@ -32,7 +32,7 @@ class HoldTest {
                     Card(Suit.HEART, 4),
                 ),
             )
-        val player = Player(Person("Mina"), Hand())
+        val player = Player("Mina")
         hold.moveCard(player)
         assertThat(hold.cards).hasSize(3)
     }
