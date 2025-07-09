@@ -8,20 +8,21 @@ class Player(override val name: String, override var isActive: Boolean = true) :
         cardsInHand += card
     }
 
-    override fun calculateTotalValueOfCards() = cardsInHand.sumOf { card -> card.rank.value }
+    private fun checkAces() = cardsInHand.count { card -> card.rank == Rank.ACE }
+
+    override fun calculateTotalValueOfCards(): Int {
+        var totalValueOfCards = cardsInHand.sumOf { card -> card.rank.value }
+        var aceCounter = checkAces()
+        while (totalValueOfCards > 21 && aceCounter > 0) {
+            totalValueOfCards -= 10
+            aceCounter--
+        }
+        return totalValueOfCards
+    }
 
     override fun updateActiveStatus(totalValueOfCards: Int) {
         if (totalValueOfCards > 21) {
             isActive = false
         }
     }
-}
-
-fun main() {
-    val player = Player("Farhi")
-    val card1 = Card(Rank.TWO, Suit.HEARTS)
-    val card2 = Card(Rank.THREE, Suit.HEARTS)
-    player.drawCard(card1)
-    player.drawCard(card2)
-    player.calculateTotalValueOfCards()
 }
