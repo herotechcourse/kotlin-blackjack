@@ -17,6 +17,10 @@ class Controller() {
             players.forEach { OutputView.displayCardsOfPlayers(it) }
             players.forEach { playerTakesTurn(it) }
             dealerTakesTurn()
+
+            OutputView.displayCardsOfPlayersWithScore(dealer)
+            players.forEach { OutputView.displayCardsOfPlayersWithScore(it) }
+
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
         }
@@ -84,6 +88,5 @@ class Controller() {
         private const val MAX_ATTEMPTS = 5
         private const val BLACKJACK_SCORE = 21
         private const val MAX_ATTEMPT_MESSAGE = "Too many attempts"
-        private const val INVALID_ANSWER = "The answer must be y or n."
     }
 }

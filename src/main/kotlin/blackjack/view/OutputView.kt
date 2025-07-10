@@ -13,8 +13,11 @@ object OutputView {
     }
 
     fun displayCardsOfPlayers(player: Player) {
-        print(player.name + "'s card: ")
-        println(player.cards.joinToString(", "))
+        println(getCardsOfPlayers(player))
+    }
+
+    private fun getCardsOfPlayers(player: Player): String {
+        return "${player.name}'s card: " + player.cards.joinToString(", ")
     }
 
     fun displayCardsOfDealer(player: Player) {
@@ -25,4 +28,12 @@ object OutputView {
     fun displayDealersTurn() {
         println("Dealer draws one more card due to having 16 or less.")
     }
+
+    fun displayCardsOfPlayersWithScore(player: Player) {
+        val printableString =
+            getCardsOfPlayers(player) + " – Total: ${player.score}"
+        println(printableString)
+    }
+
+
 }
