@@ -12,7 +12,7 @@ data class Stats(val players: List<Player>, val dealer: Dealer) {
     val dealerScore: Int get() = dealer.calculateHand()
 
     // create and init 'playerBoard'
-    fun initPlayerBoard(): Map<Player, Int> {
+    private fun initPlayerBoard(): Map<Player, Int> {
         val board = mutableMapOf<Player, Int>()
         players.forEach { player ->
             val playerScore = player.calculateHand()
