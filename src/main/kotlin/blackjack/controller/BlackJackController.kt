@@ -2,6 +2,7 @@ package blackjack.controller
 
 import blackjack.model.GameManager
 import blackjack.model.PlayerFactory
+import blackjack.model.Statistics
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
@@ -15,12 +16,11 @@ object BlackJackController {
             val gameManager = GameManager(dealer, players)
             gameManager.setUp()
             OutputView.printAllPlayers(listOf(dealer) + players)
+            gameManager.playGame(dealer, players) { InputView.askForCard() }
 
-            val totalPlayResult = gameManager.playGame(totalPlayer) { InputView.askForCard() }
-
-            OutputView.printAllPlayers(listOf(dealer) + players)
-
-//        OutputView.Print(totalPlayResult)
+            val statistics = Statistics(dealer, players)
+            OutputView.printFinalResults(listOf(dealer) + players)
+            OutputView.printStatistics(statistics)
         } catch (e: Exception) {
             println(e.message)
         }
