@@ -2,20 +2,6 @@ package blackjack
 
 class Game {
 
-    private fun getGameResult(
-        playerScore: Int,
-        dealerScore: Int,
-        isPlayerBusted: Boolean,
-        isDealerBusted: Boolean
-    ): GameResult {
-        return when {
-            isPlayerBusted -> GameResult.LOSE
-            isDealerBusted -> GameResult.WIN
-            playerScore > dealerScore -> GameResult.WIN
-            playerScore < dealerScore -> GameResult.LOSE
-            else -> GameResult.DRAW
-        }
-    }
     fun run() {
         val playerNames = InputView.askPlayerNames()
         val players = playerNames.map { Player(it) }
@@ -57,9 +43,9 @@ class Game {
               val playerScore = ScoreCalculator.calculate(player)
               val isPlayerBusted = ScoreCalculator.isBusted(player)
 
-              val result = getGameResult(playerScore, dealerScore, isPlayerBusted, isDealerBusted)
+              val result = GameLogic.getGameResult(playerScore, dealerScore, isPlayerBusted, isDealerBusted)
 
-             when (result) {
+              when (result) {
                  GameResult.WIN -> dealerLosses++
                  GameResult.LOSE -> dealerWins++
                  GameResult.DRAW -> {}
