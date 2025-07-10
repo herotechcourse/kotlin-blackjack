@@ -1,7 +1,9 @@
 package blackjack
 
+import blackjack.view.OutputView
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.assertj.core.api.Assertions.assertThat
 
 class PlayerTest {
     @Test
@@ -69,4 +71,13 @@ class PlayerTest {
         player.addCard(cards)
         assertEquals(22, player.score)
     }
+
+    @Test
+    fun `should get cards`() {
+        val deck = Deck()
+        val player = Player(GamblerInfo("Jin"))
+        player.addCard(deck.drawCard(4))
+        assertThat(player.cards.size).isEqualTo(4)
+    }
+
 }

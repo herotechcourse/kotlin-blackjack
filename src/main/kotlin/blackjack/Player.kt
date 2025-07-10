@@ -4,15 +4,16 @@ class Player(val gamblerInfo: GamblerInfo) {
     private val _cards: MutableList<Card> = mutableListOf()
     var score: Int = 0
         private set
-    val cards = _cards.toList()
+
+    val cards: List<Card>
+        get() = _cards
+
+    val name: String
+        get() = gamblerInfo.name
 
     fun addCard(cards: List<Card>) {
         _cards.addAll(cards)
         updateScore()
-    }
-
-    fun getCards(): List<Card> {
-        return _cards.toList()
     }
 
     private fun updateScore() {

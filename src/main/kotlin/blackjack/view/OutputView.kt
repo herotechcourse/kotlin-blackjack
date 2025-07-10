@@ -12,16 +12,13 @@ object OutputView {
         println("\nDealing two cards to dealer, $nameList.")
     }
 
-//    fun displayCardsOfPlayers() {
-//
-//    }
-//
-//    fun displayCardsOfSinglePlayer(player: Player): String {
-//
-//    }
+    fun displayCardsOfPlayers(player: Player) {
+        print(player.name + "'s card: ")
+        println(player.cards.joinToString(", "))
+    }
 
     fun displayDealersInitialCard(player: Player) {
-        println(player.getCards())
+        println(player.cards)
 //        val card = player.cards.first().toString()
         println("Dealer: ")
     }
