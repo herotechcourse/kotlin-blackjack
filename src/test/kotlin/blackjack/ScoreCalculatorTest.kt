@@ -4,10 +4,6 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-import blackjack.Suit
-import blackjack.Rank
-import blackjack.Card
-
 class ScoreCalculatorTest {
 
     private lateinit var player: Player
