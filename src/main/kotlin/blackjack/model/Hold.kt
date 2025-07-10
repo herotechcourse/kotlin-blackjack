@@ -1,8 +1,6 @@
 package blackjack.model
 
 class Hold(hold: Set<Card>) {
-    constructor() : this(setOf())
-
     private val _cards: MutableSet<Card> = hold.toMutableSet()
     val cards: Set<Card>
         get() = _cards.toSet()

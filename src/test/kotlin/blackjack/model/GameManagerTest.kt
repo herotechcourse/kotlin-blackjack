@@ -11,7 +11,7 @@ class GameManagerTest {
         val dealer = PlayerFactory.createDealer()
 
         val gameManager = GameManager(dealer, players)
-        val setupResult = gameManager.setUp()
+        gameManager.setUp()
 
         assertThat(dealer.numberInHand()).isEqualTo(1)
         assertThat(players[0].numberInHand()).isEqualTo(2)
