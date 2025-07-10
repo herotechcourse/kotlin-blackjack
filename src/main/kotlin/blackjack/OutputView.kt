@@ -22,11 +22,11 @@ object OutputView {
     }
 
     fun displayDealerStatus(dealer: Dealer) {
-        println("Dealer's cards: ${dealer.displayHand()} – Total: ${dealer.calculateScore(dealer)}")
+        println("Dealer's cards: ${dealer.displayHand()} – Total: ${ScoreCalculator.calculate(dealer)}")
     }
 
     fun displayPlayerStatus(player: Player, dealer: Dealer) {
-        println("${player.name}'s cards: ${player.displayHand()} – Total: ${dealer.calculateScore(player)}")
+        println("${player.name}'s cards: ${player.displayHand()} – Total: ${ScoreCalculator.calculate(player)}")
     }
 
     fun displayFinalResultsHeader() {
