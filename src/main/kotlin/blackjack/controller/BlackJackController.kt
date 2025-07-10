@@ -21,14 +21,11 @@ object BlackJackController {
             val gameManager = GameManager(dealer, players)
             gameManager.setUp()
 
-            OutputView.printSetUp(players)
+            OutputView.printAllPlayers(listOf(dealer) + players)
 
-            val totalPlayResult =
-                gameManager
-                    .playGame(
-                        totalPlayer,
-                        { true },
-                    )
+            val totalPlayResult = gameManager.playGame(totalPlayer) { InputView.askForCard() }
+
+            OutputView.printAllPlayers(listOf(dealer) + players)
 
 //        OutputView.Print(totalPlayResult)
         } catch (e: Exception) {
