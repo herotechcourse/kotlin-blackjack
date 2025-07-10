@@ -13,13 +13,12 @@
 - After the game ends, display the result (win/loss) for each player.
 - 
 ## Features
-- [ ] Validate input name of players
+- [x] Validate input name of players
 
 ### Card
 - [x] implement simple card class
   - [x] has index
   - [x] has symbol : enum class { hearts, spades , clubs, diamonds }
-- [ ] toString(): return symbol character
 
 ### Hold
 - [x] implement Hold, wrapper class, Set<Card>
@@ -33,11 +32,9 @@
 ### Player / Person
 - [x] implement class
 
-### todo
-- [ ] Face cards (King, Queen, Jack) are each worth 10
-
-### idea
-- isAce = false -> true  -> eval value to 11
+### Rank
+- [x] Face cards (King, Queen, Jack) are each worth 10
+- [x] toString(): return symbol character with Rank()
 
 ### Questions
 - How can we make testable private functions? What is the good practise?
