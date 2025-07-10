@@ -12,12 +12,13 @@ object OutputView {
         var sentence = "dealer"
         players.forEach { sentence += ", " + it.name }
         println("\nDealing two cards to $sentence.")
-        println("Dealer: ${dealer.hand[0].name}")
+        println("Dealer: ${dealer.hand.cards[0].name}")
         players.forEach { displayCurrentHand(it) }
     }
 
     fun displayCurrentHand(player: Player) {
-        println("${player.name}'s cards: ${player.getStringOfHand()}")
+        val hand = player.hand
+        println("${player.name}'s cards: ${hand.toText()}")
     }
 
     fun displayDealerDrawsCard() {
@@ -28,9 +29,9 @@ object OutputView {
         players: List<Player>,
         dealer: Dealer,
     ) {
-        println("\nDealer's cards: ${dealer.getStringOfHand()} – Total: ${dealer.calculateHand()}")
+        println("\nDealer's cards: ${dealer.hand.toText()} – Total: ${dealer.calculateHand()}")
         players.forEach { player ->
-            println("${player.name}'s cards: ${player.getStringOfHand()} – Total: ${player.calculateHand()}")
+            println("${player.name}'s cards: ${player.hand.toText()} – Total: ${player.calculateHand()}")
         }
     }
 

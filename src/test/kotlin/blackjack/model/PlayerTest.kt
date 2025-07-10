@@ -33,17 +33,17 @@ class PlayerTest {
         val player = Player("player")
 
         // initial state of player's hand
-        assertEquals(0, player.hand.size)
+        assertEquals(0, player.hand.cards.size)
 
         // draw first card
         player.drawCard(cards[0])
-        assertEquals(1, player.hand.size)
-        assertEquals(cards[0], player.hand.last())
+        assertEquals(1, player.hand.cards.size)
+        assertEquals(cards[0], player.hand.cards.last())
 
         // draw second card
         player.drawCard(cards[1])
-        assertEquals(2, player.hand.size)
-        assertEquals(cards[1], player.hand.last())
+        assertEquals(2, player.hand.cards.size)
+        assertEquals(cards[1], player.hand.cards.last())
     }
 
     @Test
@@ -52,15 +52,15 @@ class PlayerTest {
         val player = Player("player")
 
         // initial state of player's hand
-        assertEquals(emptyList<Card>(), player.hand)
+        assertEquals(emptyList<Card>(), player.hand.cards)
 
         // draw first card
         player.drawCard(cards[0])
-        assertEquals(cards.subList(0, 1), player.hand)
+        assertEquals(cards.subList(0, 1), player.hand.cards)
 
         // draw second card
         player.drawCard(cards[1])
-        assertEquals(cards.subList(0, 2), player.hand)
+        assertEquals(cards.subList(0, 2), player.hand.cards)
     }
 
     @Test

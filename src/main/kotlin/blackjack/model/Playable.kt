@@ -2,13 +2,17 @@ package blackjack.model
 
 interface Playable {
     val name: String
-    val hand: List<Card>
+    val hand: Hand
 
-    fun requestCard(condition: () -> Boolean): Boolean
+    fun requestCard(condition: () -> Boolean): Boolean {
+        return condition()
+    }
 
     fun drawCard(newCard: Card)
 
     fun calculateHand(): Int
 
-    fun isBust(): Boolean
+    fun isBust(): Boolean {
+        return calculateHand() > 21
+    }
 }
