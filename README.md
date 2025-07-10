@@ -36,7 +36,7 @@
 
 - [x] initialize game
 - [x] run game
-- [ ] Calculate Results
+- [x] Calculate Results
 
 ## output
 
@@ -44,4 +44,4 @@
 - [x] display dealers draw action
 - [x] display players done action
 - [x] display all players hands with total score
-- [ ] display final result 
+- [x] display final result 
