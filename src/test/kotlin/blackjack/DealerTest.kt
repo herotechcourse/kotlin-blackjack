@@ -8,10 +8,13 @@ class DealerTest {
 
     private lateinit var dealer: Dealer
     private lateinit var player: Player
+    private lateinit var deck: Deck
+
 
     @BeforeEach
     fun setUp() {
-        dealer = Dealer()
+        deck = Deck()
+        dealer = Dealer(deck)
         player = Player("TestPlayer")
     }
     @Test
@@ -21,4 +24,5 @@ class DealerTest {
         val newSize = player.getHand().size
         assertEquals(initialSize + 1, newSize)
     }
+
 }
