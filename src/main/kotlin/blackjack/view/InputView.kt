@@ -7,6 +7,7 @@ object InputView {
         require(input.isNotBlank()) { "Please enter a name." }
         val trimmedInput = input.split(",")
         require(trimmedInput.isNotEmpty()) { "Please enter a name." }
+        require(trimmedInput.toSet().size == trimmedInput.size) { "There are duplicates in the names." }
         trimmedInput.forEach { require(it.isNotEmpty()) { "Please enter a valid name." } }
         return trimmedInput
     }
