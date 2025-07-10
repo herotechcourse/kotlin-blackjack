@@ -39,12 +39,12 @@ object OutputView {
         println("## Final Results")
     }
 
-    fun displayPlayerResult(win: Int, lose: Int) {
-        println("Dealer: $win Win $lose Lose")
+    fun displayPlayerResult(win: Int, lose: Int, draw: Int) {
+        println("Dealer: $win Win $draw Draw $lose Lose")
     }
 
     fun displayPlayerResult(name: String, result: Boolean) {
-        val printableString = name + if (result) "Win" else "lose"
+        val printableString = "$name: " + if (result) "Win" else "Lose"
         println(printableString)
     }
 

@@ -88,13 +88,22 @@ class Controller() {
     }
 
     fun calculateAndDisplayResults() {
+        var win: List<Player>
+        var lose: List<Player>
+        var draw: List<Player>
         if (dealer.score > BLACKJACK_SCORE) {
-
+            lose = players.filter { it.score > BLACKJACK_SCORE }
+            win = players - lose
+            draw = emptyList()
         } else {
-
+            win = players.filter { it.score <= BLACKJACK_SCORE && it.score > dealer.score }
+            draw = players.filter { it.score == dealer.score }
+            lose = players - win - draw
         }
-
-
+        OutputView.displayPlayerResult(lose.size, win.size, draw.size)
+        win.forEach { OutputView.displayPlayerResult(it.name, true) }
+        lose.forEach { OutputView.displayPlayerResult(it.name, false) }
+        draw.forEach { OutputView.displayPlayerResult(it.name, false) }
     }
 
     companion object {
