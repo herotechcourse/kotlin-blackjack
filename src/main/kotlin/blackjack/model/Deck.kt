@@ -25,7 +25,7 @@ class Deck() {
     private fun shuffle() = _cards.shuffle()
 
     fun drawCard(): Card {
-        if (_cards.isEmpty()) throw IllegalStateException()
+        check(_cards.isNotEmpty()) { "[FATAL]: Deck cards should not be empty." }
 
         return _cards.removeLast()
     }

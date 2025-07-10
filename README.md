@@ -38,7 +38,7 @@
   - [x] Print a final Hand from each participant
   - [x] Call the dealer to calculate the final hand for each player and set the results
   - [x] Print final results
-  - [ ] Add a try catch with a retry template function for the validation of the user input.
+  - [x] Add a try catch with a retry template function for the validation of the user input.
 ### View
 - [x] InputView
   - [x] Should accept the names of the players
@@ -49,6 +49,6 @@
   - [x] Should print the list of all participants and their hands.
   - [x] Should print the final hands and score.
   - [x] Should print the Final Result.
-  - [ ] Add empty lines between each step on the game.
-
+  - [x] Add empty lines between each step on the game.
+### Exceptions
   - [ ] check the exceptions messages
