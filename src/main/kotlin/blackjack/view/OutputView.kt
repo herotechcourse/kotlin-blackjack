@@ -35,30 +35,35 @@ object OutputView {
         }
     }
 
-    // TODO: implement function
     fun displayFinalResults(winStatistics: Stats) {
         val playersResult = winStatistics.playerBoard
         val dealerResult = winStatistics.dealerStats
         println("\n## Final Results")
-        //  "Dealer: 1 Win 1 Lose"
-        if (dealerResult["tie"] != 0) {
-            println("Dealer: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose ${dealerResult["tie"]} Tie")
-        } else {
-            println("Dealer: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose")
+        when (dealerResult["tie"]) {
+            0 -> println("Dealer: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose")
+            else -> println("Dealer: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose ${dealerResult["tie"]} Tie")
         }
-        // loop
-        val playerKeys = playersResult.keys
-        playerKeys.forEach { player ->
-            val result =
-                when (playersResult[player]) {
-                    0 -> "Lose"
-                    1 -> "Win"
-                    2 -> "Tie"
-                    else -> "Error"
-                }
+        playersResult.keys.forEach { player ->
+            val result = givePlayerResult(player, playersResult)
             println("${player.name}: $result")
         }
-        //  "{player.name}: Win"
-        //  "{player.name}: Lose"
+    }
+
+    private fun givePlayerResult(
+        player: Player,
+        playersResult: Map<Player, Int>,
+    ): String {
+        return when (playersResult[player]) {
+            PlayerResult.LOSE -> "Lose"
+            PlayerResult.WIN -> "Win"
+            PlayerResult.TIE -> "Tie"
+            else -> "Error"
+        }
+    }
+
+    private object PlayerResult {
+        const val LOSE = 0
+        const val WIN = 1
+        const val TIE = 2
     }
 }
