@@ -26,7 +26,7 @@ object OutputView {
     }
 
     fun displayDealersTurn() {
-        println("Dealer draws one more card due to having 16 or less.")
+        println("\nDealer draws one more card due to having 16 or less.")
     }
 
     fun displayCardsOfPlayersWithScore(player: Player) {
@@ -48,4 +48,7 @@ object OutputView {
         println(printableString)
     }
 
+    fun printEmptyLine() {
+        println()
+    }
 }

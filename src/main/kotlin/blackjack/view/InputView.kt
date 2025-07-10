@@ -6,12 +6,6 @@ object InputView {
         return readString()
     }
 
-    // TODO add gambler info
-    fun getNextTurnChar(): String {
-        println(InputPrompt.askNextTurnMessage("Hello"))
-        return readString()
-    }
-
     private fun readString(): String {
         val string = readLine() ?: throw IllegalArgumentException("")
         return string.trim()

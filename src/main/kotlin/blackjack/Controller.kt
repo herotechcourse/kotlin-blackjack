@@ -15,14 +15,14 @@ class Controller() {
             roundOne()
             OutputView.displayCardsOfDealer(dealer)
             players.forEach { OutputView.displayCardsOfPlayers(it) }
+            OutputView.printEmptyLine()
             players.forEach { playerTakesTurn(it) }
             dealerTakesTurn()
-
+            OutputView.printEmptyLine()
             OutputView.displayCardsOfPlayersWithScore(dealer)
             players.forEach { OutputView.displayCardsOfPlayersWithScore(it) }
-
+            OutputView.printEmptyLine()
             OutputView.displayFinalResultsHeading()
-
             calculateAndDisplayResults()
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
