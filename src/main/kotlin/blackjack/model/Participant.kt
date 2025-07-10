@@ -26,4 +26,12 @@ interface Participant {
             isActive = false
         }
     }
+
+    fun storePlayerHand(): String {
+        val playerHand = "$name's cards: ${
+            cardsInHand
+                .joinToString(", ") { card -> (card.rank.face + card.suit.symbol) }
+        }"
+        return playerHand
+    }
 }
