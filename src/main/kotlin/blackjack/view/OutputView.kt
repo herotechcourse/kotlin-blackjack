@@ -26,4 +26,9 @@ object OutputView {
         players.forEach { println("$it - Total: ${it.getScore()}")}
     }
 
+    fun printResults(players: List<Player>, dealer: Dealer) {
+        println("## Final Results")
+        println(dealer.getResults())
+        players.forEach { println(it.getResults()) }
+    }
 }
