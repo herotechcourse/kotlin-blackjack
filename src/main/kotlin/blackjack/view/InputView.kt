@@ -4,9 +4,9 @@ object InputView {
     fun getPlayersName(): List<String> {
         println("Enter the names of the players (comma-separated):")
         val input = (readlnOrNull() ?: throw IllegalArgumentException(Errors.INVALID_INPUT.message)).trim()
-        return input.split(",").also {
-            require(input.isNotEmpty()) { Errors.INVALID_PLAYERS_NAMES.message }
-        }
+        return input.split(",").map {
+            it.trim()
+        }.filterNot { it.isBlank() }
     }
 
     fun askForCard(): Boolean {
