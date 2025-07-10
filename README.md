@@ -1,20 +1,28 @@
 # kotlin-blackjack
 
 ## Description:
-Implement a program based on a simplified version of Blackjack. In this game, the player or dealer with a total closest to 21—without going over—wins.
+A simplified terminal-based Blackjack game written in Kotlin.  
+The player or dealer with a total closest to 21—without going over—wins.  
+Includes card dealing, drawing logic, and win/loss/draw result handling.
 
-## Features 
-### User Interface
-- [ ] Input name of players 
-- [ ] Input players if HIT or STAY
+## Features
 
-### Logic Interface 
-- [ ] 2 cards generated per player
-- [ ] Machine makes a sum of the cards for each player
-    - [ ] Ace logic checker (1 OR 11 value)
-- [ ] Dealer logic 
-  - [ ] Generated automatic >less than 16 = draw a new card 
-  - [ ] Generated automatic 17 or more = stays 
-- [ ] Calculation of results per player including dealer (loop)
-- [ ] Comparing results 
-- [ ] Final results 
+### Participant
+- [x] Create `Participant` abstract class with hand management
+- [x] Implement `Card` class with display and score logic
+
+### Dealer
+- [x] Deal card to any participant
+- [x] Dealer auto-draws when score ≤ 16
+- [x] Ask players if they want to draw more cards
+- [x] Check if a participant is busted
+- [x] Calculate participant score with Ace logic
+- [x] Announce game results
+
+### Game
+- [x] Accept player names
+- [x] Deal two initial cards to all participants
+- [x] Handle player turns
+- [x] Handle dealer turn
+- [x] Display final hands and scores
+- [x] Determine and print winners using `GameLogic.getGameResult()`
