@@ -1,5 +1,8 @@
 # kotlin-blackjack
 
+A simple kotlin project implementation of the classic Blackjack card game where a player competes against a dealer. 
+The goal is to get as close to 21 as possible without going over.
+
 ## Features 
 - Input View 
 - [x] ask user inputs for player name
@@ -28,11 +31,11 @@
 - [x] use Participant interface
 
 - Game (controller)
-- [ ] Initialize Game
-- [ ] Assign two cards to every member
-- [ ] Offer possibility to get a new card
-- [ ] Check status
-- [ ] Retrieve Winning Information
+- [x] Initialize Game
+- [x] Assign two cards to every member
+- [x] Offer possibility to get a new card
+- [x] Check status
+- [x] Retrieve Winning Information
 
 - Result 
 - [x] Get total value of the cards
