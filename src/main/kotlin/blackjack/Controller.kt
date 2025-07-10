@@ -13,7 +13,8 @@ class Controller() {
             createPlayers()
             OutputView.displayNamesOfPlayers(players)
             roundOne()
-            OutputView.displayDealersInitialCard(dealer)
+            OutputView.displayCardsOfDealer(dealer)
+            players.forEach { OutputView.displayCardsOfPlayers(it) }
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
         }
@@ -21,14 +22,12 @@ class Controller() {
 
     private fun createPlayers() {
         players =
-            processPlayerNames().map { it ->
-                Player(it)
-            }
+            processPlayerNames().map { Player(it) }
     }
 
     private fun roundOne() {
         dealer.addCard(deck.drawCard(2))
-        players.forEach { it -> deck.drawCard(2) }
+        players.forEach { it.addCard(deck.drawCard(2)) }
     }
 
     fun processPlayerNames(): List<GamblerInfo> {

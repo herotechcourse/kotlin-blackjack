@@ -8,7 +8,7 @@ object OutputView {
     }
 
     fun displayNamesOfPlayers(players: List<Player>) {
-        val nameList = players.joinToString(", ") { it -> it.gamblerInfo.name }
+        val nameList = players.joinToString(", ") { it.gamblerInfo.name }
         println("\nDealing two cards to dealer, $nameList.")
     }
 
@@ -17,9 +17,8 @@ object OutputView {
         println(player.cards.joinToString(", "))
     }
 
-    fun displayDealersInitialCard(player: Player) {
-        println(player.cards)
-//        val card = player.cards.first().toString()
-        println("Dealer: ")
+    fun displayCardsOfDealer(player: Player) {
+        print("Dealer: ")
+        println(player.cards[0].toString())
     }
 }
