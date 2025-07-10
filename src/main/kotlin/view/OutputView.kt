@@ -22,6 +22,16 @@ object OutputView {
         println("Dealer draws one more card due to having 16 or less.")
     }
 
+    fun displayFinalCardsOnHand(
+        players: List<Player>,
+        dealer: Dealer,
+    ) {
+        println("Dealer's cards: ${displayCards(dealer.showCards(), true)} - Total: ${dealer.getScore()}")
+        players.forEach {
+            println("${it.name}'s cards: ${displayCards(it.showCards(), true)} - Total: ${it.getScore()}")
+        }
+    }
+
     private fun displayCards(
         cards: Set<Card>,
         showAll: Boolean,
