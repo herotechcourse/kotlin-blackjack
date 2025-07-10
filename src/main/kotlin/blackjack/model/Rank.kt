@@ -19,22 +19,7 @@ enum class Rank(val digit: String, val value: Int) {
 
     companion object {
         fun of(digit: String): Rank {
-            return when (digit) {
-                "A" -> ACE
-                "2" -> TWO
-                "3" -> THREE
-                "4" -> FOUR
-                "5" -> FIVE
-                "6" -> SIX
-                "7" -> SEVEN
-                "8" -> EIGHT
-                "9" -> NINE
-                "10" -> TEN
-                "J" -> JACK
-                "Q" -> QUEEN
-                "K" -> KING
-                else -> NONE
-            }
+            return Rank.entries.firstOrNull { it.digit == digit } ?: NONE
         }
     }
 }
