@@ -4,7 +4,10 @@ object InputView {
     fun getPlayersNames(): List<String> {
         println("Enter the names of the players (coma-separated):")
         val input = readLine() ?: ""
-        val playersNames = input.trim().split(",").map { it.trim() }
+        val playersNames = input.trim().split(",")
+            .map { name ->
+                name.trim().also { require(it.isNotBlank()) { "Wrong name. Player's name should not be blank." } }
+            }
         require(playersNames.isNotEmpty()) {
             "Names cannot be empty. You need to provide minimum one name."
         }
