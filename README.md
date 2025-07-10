@@ -2,10 +2,8 @@
 
 ## Features 
 - Input View 
-- [ ] ask user inputs for player name
-- [ ] validate number of players (max 7 players)
-- [ ] validate name
-- [ ] get list of names from the user input
+- [x] ask user inputs for player name
+- [x] get list of names from the user input
 
 - Card 
 - [x] Visibility of the card implemented by flipCard() 
@@ -29,7 +27,7 @@
 - Player
 - [x] use Participant interface
 
-- Game 
+- Game (controller)
 - [ ] Initialize Game
 - [ ] Assign two cards to every member
 - [ ] Offer possibility to get a new card
@@ -37,11 +35,11 @@
 - [ ] Retrieve Winning Information
 
 - Result 
-- [ ] Get total value of the cards
-- [ ] Process Winning Information
+- [x] Get total value of the cards
+- [x] Process Winning Information
 
 - OutputView
-- [ ] Display cards
-- [ ] Display dealer message (if 16 or less)
-- [ ] Display all the cards with total value
-- [ ] Display Winning Result
+- [x] Display cards
+- [x] Display dealer message (if 16 or less)
+- [x] Display all the cards with total value
+- [x] Display Winning Result
