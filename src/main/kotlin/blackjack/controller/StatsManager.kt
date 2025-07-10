@@ -5,13 +5,14 @@ import blackjack.model.Player
 import blackjack.model.Stats
 
 class StatsManager(players: List<Player>, dealer: Dealer) {
-    var winStatistics = Stats(players, dealer)
+    private var _winStatistics = Stats(players, dealer)
+    val winStatistics: Stats = _winStatistics
 
     fun processStatistics(
         players: List<Player>,
         dealer: Dealer,
     ) {
-        winStatistics = Stats(players, dealer)
-        winStatistics.updateDealerStats()
+        _winStatistics = Stats(players, dealer)
+        _winStatistics.updateDealerStats()
     }
 }

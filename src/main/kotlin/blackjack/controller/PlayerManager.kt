@@ -4,13 +4,14 @@ import blackjack.model.Card
 import blackjack.model.Player
 
 class PlayerManager {
-    var players: List<Player> = emptyList()
+    private var _players: List<Player> = emptyList()
+    val players: List<Player> get() = _players
 
     fun addPlayer(name: String) {
-        val mutableList = players.toMutableList()
+        val mutableList = _players.toMutableList()
         val player = Player(name)
         mutableList.add(player)
-        players = mutableList.toList()
+        _players = mutableList.toList()
     }
 
     // TODO: resolve indent depth
@@ -37,11 +38,11 @@ class PlayerManager {
         return
     }
 
-    fun callGameManagerToReadYesOrNo(name: String): Boolean {
+    private fun callGameManagerToReadYesOrNo(name: String): Boolean {
         return GameManager.inputView.retryable { GameManager.inputView.readYesOrNo(name) }
     }
 
-    fun callGameManagerToDisplayHand(player: Player) {
+    private fun callGameManagerToDisplayHand(player: Player) {
         GameManager.outputView.displayCurrentHand(player)
     }
 }
