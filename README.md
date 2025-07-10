@@ -50,5 +50,8 @@
   - [x] Should print the final hands and score.
   - [x] Should print the Final Result.
   - [x] Add empty lines between each step on the game.
-### Exceptions
-  - [ ] check the exceptions messages
+
+### Todo
+  - [ ] Add customize exception messages
+  - [ ] Add constants to Input and Output Prompts
+  - [ ] Print cards with color (black and red)
