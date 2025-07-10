@@ -20,4 +20,14 @@ object InputView {
             else -> throw IllegalArgumentException("Please write 'y' for 'yes' or 'n' for 'no'.")
         }
     }
+
+    fun <T> retryable(inputMethod: () -> T): T {
+        while (true) {
+            try {
+                return inputMethod()
+            } catch (err: IllegalArgumentException) {
+                println("${err.message}")
+            }
+        }
+    }
 }
