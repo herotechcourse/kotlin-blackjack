@@ -8,9 +8,10 @@ Card
 
 - [x] Card class hold string value of name(e.g. "A♥") and string value of digit(e.g. "A", "5", "K")
 
-[//]: # (Hand)
+Hand
 
-[//]: # (- [ ] add method to link 'Card' and 'Rank' to calculate score of a hand)
+- [x] has `List<Card>` for player and dealer
+- [x] extract logic for calculation of hand's score from `Player` and `Dealer` into `calculateCards()`
 
 Rank
 
@@ -42,8 +43,7 @@ Stats
 - [x] has `playerBoard: Map<Player, Int>` having key as player and value as result of player
 - [x] has `dealerStats: Map<String, Int>` having key as "win", "lose", "tie" and value as count
 - [x] has method `initPlayerBoard()` to initiate `playerBoard` based on the result of each player against dealer
-- [x] hsa method `updateDealerStats()` to update `dealerStats` calculation based on `playerBoard`
-- [ ] has method `compareDealerPlayer()` to compare win or lose or tie between dealer and player
+- [x] has method `updateDealerStats()` to update `dealerStats` calculation based on `playerBoard`
 
 ### View
 
@@ -51,7 +51,7 @@ InputView
 
 - [x] "Enter the names of the players (comma-separated):"
 - [x] "Would {name} like to draw another card? (y for yes, n for no)"
-- [ ] add validation for duplicated names in `readPlayerNames()`
+- [x] add validation for duplicated names in `readPlayerNames()`
 
 OutputView
 
@@ -65,7 +65,7 @@ OutputView
 - [x] "Dealer draws one more card due to having 16 or less."
     - [x] display the message everytime when dealer get new card
 - [x] "{name}'s cards: {hand} – Total: {score}"
-- [ ] "## Final Results"
+- [x] "## Final Results"
     - "Dealer: 1 Win 1 Lose"
     - "{player.name}: Win"
     - "{player.name}: Lose"
@@ -76,11 +76,11 @@ GameManager
 
 - [x] has 'players: List<player>' to store all players -> extract to 'PlayerManager'
 - [x] has 'dealer: Dealer' -> extract to 'DealerManager'
-- [ ] has 'winStatistics: Stats' to store data related with result of the game
+- [x] has 'winStatistics: Stats' to store data related with result of the game
 - [x] has link with 'InputView' to take user inputs
-- [ ] has link with 'OutputView' to output game result
-- [ ] separate responsibilities of GameManager into several new manager(controller) classes
-- [ ] refactor `run()` method (It is too big!!!)
+- [x] has link with 'OutputView' to output game result
+- [x] separate responsibilities of GameManager into several new manager(controller) classes
+- [x] refactor `run()` method (It is too big!!!)
 
 CardManager
 
@@ -88,6 +88,21 @@ CardManager
 - [x] has 'cardMap: Map<Card, Boolean>' to figure out a card is available or not
 - [x] giveCard method return Card from shuffled 'cards', then check the card to 'false' in 'cardMap'
 - [x] use ArrayDeque to take a card and remove the card from the deque and update '_cards'
+
+PlayerManager
+
+- [x] has 'players: List<Player>'
+- [x] takes player related control logic from 'GameManager'
+
+DealerManager
+
+- [x] has 'dealer: Dealer'
+- [x] takes dealer related control logic from 'GameManager'
+
+StatsManager
+
+- [x] has 'winStatistics: Stats'
+- [x] takes stats related control logic from 'GameManager'
 
 ### Utils
 
