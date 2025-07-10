@@ -4,7 +4,10 @@ import blackjack.model.Dealer
 import blackjack.model.Player
 
 object OutputView {
-    fun printParticipantsHands(players: List<Player>, dealer: Dealer) {
+    fun printParticipantsHands(
+        players: List<Player>,
+        dealer: Dealer,
+    ) {
         printEmptyLine()
         println("Dealing two cards to ${dealer.name}, ${getPlayersNames(players)}.")
         println(dealer)
@@ -32,12 +35,18 @@ object OutputView {
         printEmptyLine()
     }
 
-    fun printFinalHands(players: List<Player>, dealer: Dealer) {
+    fun printFinalHands(
+        players: List<Player>,
+        dealer: Dealer,
+    ) {
         println("$dealer - Total: ${dealer.getScore()}")
-        players.forEach { println("$it - Total: ${it.getScore()}")}
+        players.forEach { println("$it - Total: ${it.getScore()}") }
     }
 
-    fun printResults(players: List<Player>, dealer: Dealer) {
+    fun printResults(
+        players: List<Player>,
+        dealer: Dealer,
+    ) {
         printEmptyLine()
         println("## Final Results")
         println(dealer.getResults())

@@ -11,7 +11,7 @@
 - [x] **Create Player Class inherit from a participant**
 - [x] **Create Dealer Class inherit from a participant**
   - [x] Should contain a Deck and manage it.
-  - [ ] Should be able to automatically add cards to the hand.
+  - [x] Should be able to automatically add cards to the hand.
   - [x] Should give a card to the player from the deck.
   - [x] Should check if the score is less or equal to 16. 
 - [x] **Create Card Class**
@@ -55,3 +55,4 @@
   - [ ] Add customize exception messages
   - [ ] Add constants to Input and Output Prompts
   - [ ] Print cards with color (black and red)
+  - [ ] Update the hasBlackJack method to return true only in the first hand

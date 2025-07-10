@@ -29,5 +29,4 @@ class Deck() {
 
         return _cards.removeLast()
     }
-
 }

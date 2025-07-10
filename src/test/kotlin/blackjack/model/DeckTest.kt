@@ -16,5 +16,4 @@ class DeckTest {
         val deck = Deck()
         assertThat(deck.drawCard()).isInstanceOf(Card::class.java)
     }
-
 }
