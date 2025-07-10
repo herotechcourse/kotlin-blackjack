@@ -28,20 +28,27 @@
   - [x] check for blackjack and busts
   - [x] toString() return a nice formatted string
 ### Controller
-- [ ] Create Game Controller
-  - [ ] Should call the InputView to get the player names
-  - [ ] Create the necessary Players and add to a List<Player>
-  - [ ] Should create Dealer("Dealer")
-  - [ ] Initialize the game by having the Dealer deal two cards to each player and two to themselves, one card at a time.
-  - [ ] The controller initializes the game, giving cards to each player as longer the player wants, or until the player isBusts()
-  - [ ] If all the players finish, then the Dealer drawCards automatically for themselves.
+- [x] Create Game Controller
+  - [x] Should call the InputView to get the player names
+  - [x] Create the necessary Players and add to a List<Player>
+  - [x] Should create Dealer("Dealer")
+  - [x] Initialize the game by having the Dealer deal two cards to each player and two to themselves, one card at a time.
+  - [x] The controller initializes the game, giving cards to each player as longer the player wants, or until the player isBusts()
+  - [x] If all the players finish, then the Dealer drawCards automatically for themselves.
+  - [x] Print a final Hand from each participant
+  - [x] Call the dealer to calculate the final hand for each player and set the results
+  - [x] Print final results
+  - [ ] Add a try catch with a retry template function for the validation of the user input.
 ### View
-- [ ] InputView
-  - [ ] Should accept the names of the players
-    - [ ] Should be comma separated names
-    - [ ] Should contain a minimum of one player.
-    - [ ] The names should be unique.
-- [ ] OutputView
-  - [ ] Should print the list of all participants and their hands.
-  - [ ] Should print the final hands and score.
-  - [ ] Should print the Final Result.
+- [x] InputView
+  - [x] Should accept the names of the players
+    - [x] Should be comma separated names
+    - [x] Should contain a minimum of one player.
+    - [x] The names should be unique.
+- [x] OutputView
+  - [x] Should print the list of all participants and their hands.
+  - [x] Should print the final hands and score.
+  - [x] Should print the Final Result.
+  - [ ] Add empty lines between each step on the game.
+
+  - [ ] check the exceptions messages
