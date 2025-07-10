@@ -63,16 +63,4 @@ class ResultEvaluator(val players: Players, val dealer: Dealer) {
             else -> PlayerResult(draw = true, name = player.name)
         }
     }
-
-
-    //DEALER
-    // isNotBusted()
-    // -> compare against each player
-    // -> player.isBusted() -> win
-    // -> player.isNotBusted() -> compare totals (win or loss)
-    // isBusted() -> players.size * loss, 0 win
-    //PLAYERS
-    // isBusted() -> loss
-    // Dealer isNotBusted() -> compare (loss or win)
-    // Dealer isBusted() -> win
 }
