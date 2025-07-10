@@ -15,6 +15,7 @@ class Controller() {
             roundOne()
             OutputView.displayCardsOfDealer(dealer)
             players.forEach { OutputView.displayCardsOfPlayers(it) }
+            players.forEach { playerTakesTurn(it) }
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
         }
@@ -45,11 +46,37 @@ class Controller() {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    // fun askWhetherToDrawOrNot() {
-//            getUserInputAsString()
-    // }
+
+    private fun playerTakesTurn(player: Player) {
+        var answer = false
+        while (player.score < BLACKJACK_SCORE) {
+            answer = processHitOrStay(player)
+            if (!answer) {
+                break
+            }
+            player.addCard(deck.drawCard())
+            OutputView.displayCardsOfPlayers(player)
+        }
+        if (!answer && player.cards.size == 2) {
+            OutputView.displayCardsOfPlayers(player)
+        }
+    }
+
+    fun processHitOrStay(player: Player): Boolean {
+        repeat(MAX_ATTEMPTS) {
+            try {
+                return InputView.getHitOrStand(player.name).isHitOrStand()
+            } catch (err: IllegalArgumentException) {
+                OutputView.displayErrorMessages(err.message)
+            }
+        }
+        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
+    }
+
     companion object {
         private const val MAX_ATTEMPTS = 5
+        private const val BLACKJACK_SCORE = 21
         private const val MAX_ATTEMPT_MESSAGE = "Too many attempts"
+        private const val INVALID_ANSWER = "The answer must be y or n."
     }
 }

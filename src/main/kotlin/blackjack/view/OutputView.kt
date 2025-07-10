@@ -21,4 +21,5 @@ object OutputView {
         print("Dealer: ")
         println(player.cards[0].toString())
     }
+
 }

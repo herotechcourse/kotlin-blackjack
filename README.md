@@ -37,12 +37,11 @@
 #### `InputView`
 - [x] fun `get names of the player`
 - [x] fun `read String`
-- [x] fun `read Char`
-
+- [] fun `get hit or stand
 #### `OutputView`
 - [x] fun `display names of players`
-- [] fun `display the first draw`(parameter: List<Player>)
-  - [] private fun `display message for first draw`(parameter: Player)
+- [x] fun `display the first draw`(parameter: List<Player>)
+  - [x] private fun `display message for first draw`(parameter: Player)
   - [] private fun `display cards and score`
 
 ### object `Controller`

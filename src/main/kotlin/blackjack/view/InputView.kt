@@ -16,4 +16,10 @@ object InputView {
         val string = readLine() ?: throw IllegalArgumentException("")
         return string.trim()
     }
+
+    fun getHitOrStand(name: String): String {
+        println(InputPrompt.askHitOrStand(name))
+        return readString()
+    }
+
 }
