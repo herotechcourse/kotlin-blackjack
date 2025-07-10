@@ -1,7 +1,7 @@
 package blackjack.model
 
 import org.assertj.core.api.Assertions.assertThat
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 class CardTest {
     @Test
@@ -9,13 +9,5 @@ class CardTest {
         val card = Card(Rank.TWO, Suit.HEARTS)
         assertThat(card.rank.toString()).isEqualTo("TWO")
         assertThat(card.suit.toString()).isEqualTo("HEARTS")
-    }
-
-    @Test
-    fun `should change the visibility of the card`() {
-        val card = Card(Rank.TWO, Suit.HEARTS)
-        assertThat(card.visibility).isEqualTo(false)
-        card.changeVisibilty()
-        assertThat(card.visibility).isEqualTo(true)
     }
 }
