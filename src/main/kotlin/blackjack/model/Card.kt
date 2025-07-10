@@ -5,8 +5,9 @@ data class Card(val suit: Suit, val rank: Rank) {
         DIAMONDS("♦"),
         HEARTS("♥"),
         CLUBS("♣"),
-        SPADES("♠");
+        SPADES("♠"),
     }
+
     // maybe change the name Rank
     enum class Rank(val symbol: String, val value: Int) {
         TWO("2", 2),
@@ -21,7 +22,7 @@ data class Card(val suit: Suit, val rank: Rank) {
         JACK("J", 10),
         QUEEN("Q", 10),
         KING("K", 10),
-        ACE("A", 11);
+        ACE("A", 11),
     }
 
     override fun toString(): String {

@@ -58,11 +58,12 @@ class Dealer(name: String = "Dealer") : Participant(name) {
         return "$name: $winText $loseText $tieText"
     }
 
-    override fun toString(): String = when {
-        showAllCards -> "$name's cards: $hand"
-        hand.dealtCards.isEmpty() -> "$name has no cards yet."
-        else -> "$name: ${hand.dealtCards[0]}"
-    }
+    override fun toString(): String =
+        when {
+            showAllCards -> "$name's cards: $hand"
+            hand.dealtCards.isEmpty() -> "$name has no cards yet."
+            else -> "$name: ${hand.dealtCards[0]}"
+        }
 
     companion object {
         const val DEALER_STAND = 16

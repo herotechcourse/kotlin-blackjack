@@ -12,7 +12,7 @@ class PlayerTest {
 
     @Test
     fun `should throw an error if player name is empty`() {
-        assertThrows<IllegalArgumentException> {Player("")}
+        assertThrows<IllegalArgumentException> { Player("") }
     }
 
     @Test

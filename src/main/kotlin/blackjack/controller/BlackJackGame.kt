@@ -34,7 +34,7 @@ class BlackJackGame {
     fun dealingPlayersCards() {
         for (player in players) {
             while (!player.hasBlackJack() && !player.isBusts()) {
-                val answer = retryUntilSuccess {  InputView.getAnswer(player.name) }
+                val answer = retryUntilSuccess { InputView.getAnswer(player.name) }
                 if (answer == "y") {
                     val card = dealer.dealCard()
                     player.addCard(card)
@@ -53,8 +53,9 @@ class BlackJackGame {
             dealer.addCard(dealer.dealCard())
             OutputView.printDealersDrawMessage()
         }
-        if (isDealerHitACard)
+        if (isDealerHitACard) {
             OutputView.printDealersStandMessage()
+        }
         dealer.showAllCards()
     }
 
