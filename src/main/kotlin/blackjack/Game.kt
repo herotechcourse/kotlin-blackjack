@@ -2,6 +2,20 @@ package blackjack
 
 class Game {
 
+    private fun getGameResult(
+        playerScore: Int,
+        dealerScore: Int,
+        isPlayerBusted: Boolean,
+        isDealerBusted: Boolean
+    ): GameResult {
+        return when {
+            isPlayerBusted -> GameResult.LOSE
+            isDealerBusted -> GameResult.WIN
+            playerScore > dealerScore -> GameResult.WIN
+            playerScore < dealerScore -> GameResult.LOSE
+            else -> GameResult.DRAW
+        }
+    }
     fun run() {
         val playerNames = InputView.askPlayerNames()
         val players = playerNames.map { Player(it) }
@@ -39,35 +53,20 @@ class Game {
         var dealerLosses = 0
 
         OutputView.displayFinalResultsHeader()
+          players.forEach { player ->
+              val playerScore = ScoreCalculator.calculate(player)
+              val isPlayerBusted = ScoreCalculator.isBusted(player)
 
-        players.forEach { player ->
-            val playerScore = ScoreCalculator.calculate(player)
-            val isPlayerBusted = ScoreCalculator.isBusted(player)
+              val result = getGameResult(playerScore, dealerScore, isPlayerBusted, isDealerBusted)
 
-            val result = when {
-                isPlayerBusted -> {
-                    dealerWins++
-                    "Lose"
-                }
-                isDealerBusted -> {
-                    dealerLosses++
-                    "Win"
-                }
-                playerScore > dealerScore -> {
-                    dealerLosses++
-                    "Win"
-                }
-                playerScore < dealerScore -> {
-                    dealerWins++
-                    "Lose"
-                }
-                else -> {
-                    dealerWins++
-                    "Draw"
-                }
-            }
+             when (result) {
+                 GameResult.WIN -> dealerLosses++
+                 GameResult.LOSE -> dealerWins++
+                 GameResult.DRAW -> {}
+             }
 
-            OutputView.displayPlayerResult(player.name, result)
+
+            OutputView.displayPlayerResult(player.name, result.label)
         }
 
         OutputView.displayDealerResult(dealerWins, dealerLosses)
