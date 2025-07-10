@@ -1,4 +1,4 @@
-package blackjack
+package blackjack.controller
 
 fun String.isHitOrStand(): Boolean {
     return when (this) {

@@ -1,6 +1,6 @@
 package blackjack.view
 
-import blackjack.Player
+import blackjack.model.Player
 
 object OutputView {
     fun displayErrorMessages(message: String?) {
@@ -39,11 +39,18 @@ object OutputView {
         println("## Final Results")
     }
 
-    fun displayPlayerResult(win: Int, lose: Int, draw: Int) {
+    fun displayPlayerResult(
+        win: Int,
+        lose: Int,
+        draw: Int,
+    ) {
         println("Dealer: $win Win $draw Draw $lose Lose")
     }
 
-    fun displayPlayerResult(name: String, result: Boolean) {
+    fun displayPlayerResult(
+        name: String,
+        result: Boolean,
+    ) {
         val printableString = "$name: " + if (result) "Win" else "Lose"
         println(printableString)
     }

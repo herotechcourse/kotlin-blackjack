@@ -1,4 +1,4 @@
-package blackjack
+package blackjack.model
 
 enum class Rank(val value: Int) {
     ACE(11),

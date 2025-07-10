@@ -1,4 +1,4 @@
-package blackjack
+package blackjack.model
 
 class Deck {
     var cards: MutableList<Card> = mutableListOf()
