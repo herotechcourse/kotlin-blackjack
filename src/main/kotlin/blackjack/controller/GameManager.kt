@@ -1,7 +1,5 @@
 package blackjack.controller
 
-import blackjack.model.Dealer
-import blackjack.model.Stats
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
@@ -9,7 +7,7 @@ class GameManager {
     val cardManager = CardManager()
     val playerManager = PlayerManager()
     val dealerManager = DealerManager()
-    var winStatistics = Stats(playerManager.players, dealerManager.dealer)
+    val statsManager = StatsManager(playerManager.players, dealerManager.dealer)
 
     fun run() {
         val names = InputView.readPlayerNames()
@@ -35,8 +33,6 @@ class GameManager {
 
         OutputView.displayFinalState(playerManager.players, dealerManager.dealer)
 
-        winStatistics = Stats(playerManager.players, dealerManager.dealer)
-        winStatistics.updateDealerStats()
-        OutputView.displayFinalResults(winStatistics)
+        statsManager.processStatistics(playerManager.players, dealerManager.dealer)
     }
 }
