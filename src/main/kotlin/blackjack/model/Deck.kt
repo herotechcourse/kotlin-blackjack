@@ -6,13 +6,11 @@ class Deck {
             .entries
             .flatMap { suit ->
                 Rank.entries.map { rank -> Card(rank, suit) }
-            }.toMutableList()
+            }.shuffled().toMutableList()
 
     fun getCards(): List<Card> {
         return cards
     }
-
-    fun shuffleCards() = cards.shuffled()
 
     fun giveCard(): Card {
         require(cards.isNotEmpty()) { "Deck is empty!" }
