@@ -9,8 +9,9 @@ object OutputView {
         players: List<Player>,
         dealer: Dealer,
     ) {
-        var sentence = "dealer"
-        players.forEach { sentence += ", " + it.name }
+        var sentence = "dealer, "
+        val names = players.map { it.name }
+        sentence += names.joinToString(", ")
         println("\nDealing two cards to $sentence.")
         println("Dealer: ${dealer.hand.cards[0].name}")
         players.forEach { displayCurrentHand(it) }

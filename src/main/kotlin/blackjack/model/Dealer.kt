@@ -16,8 +16,6 @@ data class Dealer(override val name: String = "Dealer") : Playable {
     }
 
     fun shouldDrawCardOrNot(): Boolean {
-        // calculateHand() <= 16 -> true
-        // calculateHand() >= 17 -> false
         val score = calculateHand()
         return score <= 16
     }
