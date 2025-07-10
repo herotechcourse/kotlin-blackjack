@@ -32,8 +32,8 @@ class Game {
         OutputView.displayDealerStatus(dealer)
         players.forEach { OutputView.displayPlayerStatus(it, dealer) }
 
-        val dealerScore = dealer.calculateScore(dealer)
-        val dealerBusted = dealer.isBusted(dealer)
+        val dealerScore = ScoreCalculator.calculate(dealer)
+        val isDealerBusted = ScoreCalculator.isBusted(dealer)
 
         var dealerWins = 0
         var dealerLosses = 0
@@ -41,15 +41,15 @@ class Game {
         OutputView.displayFinalResultsHeader()
 
         players.forEach { player ->
-            val playerScore = dealer.calculateScore(player)
-            val playerBusted = dealer.isBusted(player)
+            val playerScore = ScoreCalculator.calculate(player)
+            val isPlayerBusted = ScoreCalculator.isBusted(player)
 
             val result = when {
-                playerBusted -> {
+                isPlayerBusted -> {
                     dealerWins++
                     "Lose"
                 }
-                dealerBusted -> {
+                isDealerBusted -> {
                     dealerLosses++
                     "Win"
                 }
@@ -63,7 +63,7 @@ class Game {
                 }
                 else -> {
                     dealerWins++
-                    "Lose"
+                    "Draw"
                 }
             }
 
