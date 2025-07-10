@@ -36,7 +36,6 @@ object GameManager {
         }
     }
 
-    // TODO: extract InputView from 'askPlayerHit()'
     private fun askPlayersToHit() {
         playerManager.players.forEach { player ->
             playerManager.askPlayerHit(player) { cardManager.giveCard() }
