@@ -21,6 +21,9 @@ class Controller() {
             OutputView.displayCardsOfPlayersWithScore(dealer)
             players.forEach { OutputView.displayCardsOfPlayersWithScore(it) }
 
+            OutputView.displayFinalResultsHeading()
+
+            calculateAndDisplayResults()
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
         }
@@ -82,6 +85,16 @@ class Controller() {
             }
         }
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
+    }
+
+    fun calculateAndDisplayResults() {
+        if (dealer.score > BLACKJACK_SCORE) {
+
+        } else {
+
+        }
+
+
     }
 
     companion object {
