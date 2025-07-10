@@ -4,6 +4,7 @@ object InputView {
     fun readPlayerNames(): List<String> {
         println("Enter the names of the players (comma-separated):")
         val input = readln().trim()
+        require(input.isNotBlank()) { "Please enter a name." }
         val trimmedInput = input.split(",")
         require(trimmedInput.isNotEmpty()) { "Please enter a name." }
         trimmedInput.forEach { require(it.isNotEmpty()) { "Please enter a valid name." } }

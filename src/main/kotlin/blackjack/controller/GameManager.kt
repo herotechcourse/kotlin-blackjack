@@ -19,16 +19,11 @@ class GameManager {
         players = mutableList.toList()
     }
 
-    // TODO: add display user hand method inside of logic
+    // TODO: resolve indent depth
     fun askPlayerHit(player: Player) {
         var isFirst = true
-
-        // player not busted
         while (!player.isBust()) {
-            // ask and take input to draw another card from {0} player
             val requestMessage = player.requestCard { InputView.readYesOrNo(player.name) }
-
-            // player want more card
             if (requestMessage) {
                 isFirst = false
                 player.drawCard(cardManager.giveCard())
@@ -37,7 +32,6 @@ class GameManager {
             } else if (isFirst) {
                 OutputView.displayCurrentHand(player)
             }
-            // until the player say no or bust
             break
         }
         return
