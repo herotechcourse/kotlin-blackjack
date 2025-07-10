@@ -14,21 +14,22 @@ data class Stats(val players: List<Player>, val dealer: Dealer) {
     // create and init 'playerBoard'
     private fun initPlayerBoard(): Map<Player, Int> {
         val board = mutableMapOf<Player, Int>()
-        players.forEach { player ->
-            val playerScore = player.calculateHand()
-            if (player.isBust()) {
-                board[player] = 0
-            } else if (dealer.isBust()) {
-                board[player] = 1
-            } else if (playerScore > dealerScore) {
-                board[player] = 1
-            } else if (playerScore < dealerScore) {
-                board[player] = 0
-            } else {
-                board[player] = 2
-            }
-        }
+        players.forEach { recordPlayerBoard(it, board) }
         return board.toMap()
+    }
+
+    private fun recordPlayerBoard(
+        player: Player,
+        board: MutableMap<Player, Int>,
+    ) {
+        val playerScore = player.calculateHand()
+        when {
+            player.isBust() -> board[player] = 0
+            dealer.isBust() -> board[player] = 1
+            playerScore > dealerScore -> board[player] = 1
+            playerScore < dealerScore -> board[player] = 0
+            else -> board[player] = 2
+        }
     }
 
     fun updateDealerStats() {
