@@ -14,4 +14,11 @@ class Player(name: String) {
 
     val cards
         get() = hand.cards
+
+    val isBlackJack
+        get() = numberInHand() == 2 && calculatePoints() == 21
+    val isBust
+        get() = calculatePoints() > 21
+
+    fun cardsToString() = cards.joinToString(", ")
 }
