@@ -20,4 +20,8 @@ class Hold(hold: Set<Card>) {
     operator fun plus(other: Hold): Hold {
         return Hold((other.cards + this.cards))
     }
+
+    override fun toString(): String {
+        return cards.joinToString(", ", prefix = "", postfix = "")
+    }
 }

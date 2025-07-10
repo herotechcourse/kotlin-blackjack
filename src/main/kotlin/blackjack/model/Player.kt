@@ -12,5 +12,6 @@ class Player(name: String) {
 
     val name = person.name
 
-    val cards = hand.cards
+    val cards
+        get() = hand.cards
 }

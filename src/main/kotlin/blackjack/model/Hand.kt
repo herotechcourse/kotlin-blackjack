@@ -3,7 +3,8 @@ package blackjack.model
 class Hand() {
     private val hold: Hold = Hold(setOf())
 
-    val cards = hold.cards
+    val cards
+        get() = hold.cards
 
     fun numberOfCards() = hold.cards.size
 
