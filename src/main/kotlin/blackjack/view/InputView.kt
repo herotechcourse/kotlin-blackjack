@@ -8,4 +8,13 @@ object InputView {
             require(input.isNotEmpty()) { Errors.INVALID_PLAYERS_NAMES.message }
         }
     }
+
+    fun askForCard(): Boolean {
+        val input = (readlnOrNull() ?: throw IllegalArgumentException(Errors.INVALID_INPUT.message)).trim()
+        return when (input) {
+            "y" -> true
+            "n" -> false
+            else -> askForCard()
+        }
+    }
 }
