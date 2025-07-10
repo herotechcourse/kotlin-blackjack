@@ -43,5 +43,5 @@
 - [x] display initial cards in hand
 - [x] display dealers draw action
 - [x] display players done action
-- [ ] display all players hands with total score
+- [x] display all players hands with total score
 - [ ] display final result 
