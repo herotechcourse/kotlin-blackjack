@@ -1,79 +1,42 @@
 package blackjack.controller
 
 import blackjack.model.Dealer
-import blackjack.model.Player
 import blackjack.model.Stats
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
 class GameManager {
     val cardManager = CardManager()
-    var players: List<Player> = emptyList()
+    val playerManager = PlayerManager()
     val dealer = Dealer()
-    var winStatistics = Stats(players, dealer)
-
-    fun addPlayer(name: String) {
-        val mutableList = players.toMutableList()
-        val player = Player(name)
-        mutableList.add(player)
-        players = mutableList.toList()
-    }
-
-    // TODO: resolve indent depth
-    fun askPlayerHit(player: Player) {
-        var isFirst = true
-        while (!player.isBust()) {
-            val requestMessage = player.requestCard { InputView.readYesOrNo(player.name) }
-            if (requestMessage) {
-                isFirst = false
-                player.drawCard(cardManager.giveCard())
-                OutputView.displayCurrentHand(player)
-                continue
-            } else if (isFirst) {
-                OutputView.displayCurrentHand(player)
-            }
-            break
-        }
-        return
-    }
+    var winStatistics = Stats(playerManager.players, dealer)
 
     fun run() {
-        // [x] generate CardManager
-        // [x] generate Cards
-
         val names = InputView.readPlayerNames()
-        // [x] create players
-        names.forEach { name -> addPlayer(name) }
-        // [x] create dealer
+        names.forEach { name -> playerManager.addPlayer(name) }
 
-        // [x] give two cards to each player and dealer
         repeat(2) {
-            players.forEach { player ->
+            playerManager.players.forEach { player ->
                 player.drawCard(cardManager.giveCard())
             }
             dealer.drawCard(cardManager.giveCard())
         }
 
-        // display initial state of players and dealer
-        OutputView.displayInitialState(players, dealer)
+        OutputView.displayInitialState(playerManager.players, dealer)
 
-        // loop over players
-        players.forEach { askPlayerHit(it) }
+        playerManager.players.forEach { player ->
+            playerManager.askPlayerHit(player) { cardManager.giveCard() }
+        }
 
-        // dealer take cards based on the condition
         while (dealer.shouldDrawCardOrNot()) {
             dealer.drawCard(cardManager.giveCard())
             OutputView.displayDealerDrawsCard()
         }
 
-        // display final state of players and dealer
-        OutputView.displayFinalState(players, dealer)
+        OutputView.displayFinalState(playerManager.players, dealer)
 
-        // init Stats
-        winStatistics = Stats(players, dealer)
-        // update stats
+        winStatistics = Stats(playerManager.players, dealer)
         winStatistics.updateDealerStats()
-        // display final result
         OutputView.displayFinalResults(winStatistics)
     }
 }
