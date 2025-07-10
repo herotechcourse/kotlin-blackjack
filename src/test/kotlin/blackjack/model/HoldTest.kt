@@ -9,10 +9,10 @@ class HoldTest {
         val hold =
             Hold(
                 setOf(
-                    Card(Suit.HEART, 1),
-                    Card(Suit.HEART, 2),
-                    Card(Suit.HEART, 3),
-                    Card(Suit.HEART, 4),
+                    Card(Suit.HEART, Rank.ACE),
+                    Card(Suit.HEART, Rank.TWO),
+                    Card(Suit.HEART, Rank.THREE),
+                    Card(Suit.HEART, Rank.FOUR),
                 ),
             )
         val player = Player("Mina")
@@ -26,10 +26,10 @@ class HoldTest {
         val hold =
             Hold(
                 setOf(
-                    Card(Suit.HEART, 1),
-                    Card(Suit.HEART, 2),
-                    Card(Suit.HEART, 3),
-                    Card(Suit.HEART, 4),
+                    Card(Suit.HEART, Rank.ACE),
+                    Card(Suit.HEART, Rank.TWO),
+                    Card(Suit.HEART, Rank.THREE),
+                    Card(Suit.HEART, Rank.FOUR),
                 ),
             )
         val player = Player("Mina")

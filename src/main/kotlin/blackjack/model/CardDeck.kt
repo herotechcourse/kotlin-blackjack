@@ -4,20 +4,10 @@ data class CardDeck(private val hold: Hold) {
     constructor() : this(initPokerCards())
 
     companion object {
-        private fun initPokerCards() = Hold(listOfCardDeck().shuffled().toSet())
+        private fun initPokerCards() = Hold(list().shuffled().toSet())
 
-        private fun listOfCardsWith(suit: Suit): List<Card> {
-            var index = 1
-            return List(13) {
-                Card(suit, index++)
-            }
-        }
-
-        fun listOfCardDeck(): List<Card> {
-            return listOfCardsWith(Suit.SPADES)
-                .plus(listOfCardsWith(Suit.HEART))
-                .plus(listOfCardsWith(Suit.CLUBS))
-                .plus(listOfCardsWith(Suit.DIAMONDS))
+        private fun list(): List<Card> {
+            return Suit.entries.flatMap { suit -> Rank.entries.map { rank -> Card(suit, rank) } }
         }
     }
 

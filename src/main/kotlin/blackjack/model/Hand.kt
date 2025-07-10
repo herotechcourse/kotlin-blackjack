@@ -10,10 +10,10 @@ class Hand() {
     fun addCard(card: Card) = this.hold.add(card)
 
     fun calculatePoints(): Int {
-        val countOfAce = hold.cards.filter { it.index == 1 }.size
+        val countOfAce = hold.cards.filter { it.rank.value == 1 }.size
         var sum =
             hold.cards.sumOf {
-                if (it.index in 11..13) 10 else it.index
+                it.rank.value
             }
 
         repeat(countOfAce) {
