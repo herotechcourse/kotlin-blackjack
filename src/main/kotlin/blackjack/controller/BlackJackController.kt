@@ -3,6 +3,7 @@ package blackjack.controller
 import blackjack.model.GameManager
 import blackjack.model.PlayerFactory
 import blackjack.view.InputView
+import blackjack.view.OutputView
 
 object BlackJackController {
     fun play() {
@@ -18,13 +19,13 @@ object BlackJackController {
             val totalPlayer = players + dealer
             // give it to manager && set up
             val gameManager = GameManager(dealer, players)
-            val setupResult = gameManager.setUp()
+            gameManager.setUp()
 
-            // OutputView.printPlayerResult(setupResult)
+            OutputView.printSetUp(players)
 
             val totalPlayResult =
                 gameManager
-                    .finalResult(
+                    .playGame(
                         totalPlayer,
                         { true },
                     )

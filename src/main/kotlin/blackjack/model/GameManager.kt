@@ -3,39 +3,31 @@ package blackjack.model
 class GameManager(private val dealer: Player, private val players: List<Player>) {
     private val cardDeck = CardDeck()
 
-    init {
-        setUp()
-    }
-
     fun setUp() {
         players.forEach { cardDeck.hit(it, 2) }
         cardDeck.hit(dealer)
     }
 
-    fun finalResult(
+    fun playGame(
         players: List<Player>,
         goToLoop: () -> Boolean,
-    ): List<PlayerResult> {
-        return players.map {
+    ) {
+        players.forEach {
             if (it === dealer) {
-                singlePlayerResult(it, { true })
+                single(it, { true })
             } else {
-                singlePlayerResult(it, goToLoop)
+                single(it, goToLoop)
             }
-        }.toList()
+        }
     }
 
-    fun singlePlayerResult(
+    fun single(
         player: Player,
         goToLoop: () -> Boolean,
-    ): PlayerResult {
+    ) {
         while (goToLoop() && ableToReceive(player)) {
             cardDeck.hit(player)
-//            val currentResult = PlayerResult(player)
-//            println("${currentResult.name} ${ currentResult.cards } - ${currentResult.points}")
-            // OutputView.printPlayerResult(PlayerResult(player))
         }
-        return PlayerResult(player)
     }
 
     private fun ableToReceive(player: Player): Boolean {
