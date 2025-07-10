@@ -11,30 +11,25 @@ class GameManager(private val dealer: Player, private val players: List<Player>)
     }
 
     fun playGame(
+        dealer: Player,
         players: List<Player>,
         askForCard: () -> Boolean,
     ) {
-        players.forEach {
-            if (it === dealer) {
-                single(it)
-            } else {
-                single(it, askForCard)
-            }
-        }
+        players.forEach { round(it, askForCard) }
+        round(dealer)
     }
 
-    fun single(
+    internal fun round(
         player: Player,
         askForCard: () -> Boolean = { true },
     ) {
-        if (player === dealer) {
-            playDealer(player)
-        } else {
-            playPlayer(player, askForCard)
+        when (player) {
+            dealer -> roundForDealer(player)
+            else -> roundForPlayers(player, askForCard)
         }
     }
 
-    fun playPlayer(
+    private fun roundForPlayers(
         player: Player,
         askForCard: () -> Boolean,
     ) {
@@ -49,7 +44,7 @@ class GameManager(private val dealer: Player, private val players: List<Player>)
         }
     }
 
-    fun playDealer(player: Player) {
+    private fun roundForDealer(player: Player) {
         while (ableToReceive(player)) {
             cardDeck.hit(player)
         }
