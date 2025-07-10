@@ -22,4 +22,7 @@ object OutputView {
         println(player.cards[0].toString())
     }
 
+    fun displayDealersTurn() {
+        println("Dealer draws one more card due to having 16 or less.")
+    }
 }

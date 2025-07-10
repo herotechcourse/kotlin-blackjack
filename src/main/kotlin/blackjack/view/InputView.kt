@@ -21,5 +21,4 @@ object InputView {
         println(InputPrompt.askHitOrStand(name))
         return readString()
     }
-
 }

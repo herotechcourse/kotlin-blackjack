@@ -1,9 +1,8 @@
 package blackjack
 
-import blackjack.view.OutputView
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.assertj.core.api.Assertions.assertThat
 
 class PlayerTest {
     @Test
@@ -79,5 +78,4 @@ class PlayerTest {
         player.addCard(deck.drawCard(4))
         assertThat(player.cards.size).isEqualTo(4)
     }
-
 }

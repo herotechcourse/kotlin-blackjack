@@ -16,6 +16,7 @@ class Controller() {
             OutputView.displayCardsOfDealer(dealer)
             players.forEach { OutputView.displayCardsOfPlayers(it) }
             players.forEach { playerTakesTurn(it) }
+            dealerTakesTurn()
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
         }
@@ -46,10 +47,16 @@ class Controller() {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
+    private fun dealerTakesTurn() {
+        while (dealer.score <= 16) {
+            dealer.addCard(deck.drawCard())
+            OutputView.displayDealersTurn()
+        }
+    }
 
     private fun playerTakesTurn(player: Player) {
         var answer = false
-        while (player.score < BLACKJACK_SCORE) {
+        while (player.score <= BLACKJACK_SCORE) {
             answer = processHitOrStay(player)
             if (!answer) {
                 break
