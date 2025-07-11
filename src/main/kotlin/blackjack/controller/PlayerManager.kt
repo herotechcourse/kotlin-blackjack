@@ -2,6 +2,8 @@ package blackjack.controller
 
 import blackjack.model.Player
 import blackjack.model.PlayingCard
+import blackjack.view.InputView
+import blackjack.view.OutputView
 
 class PlayerManager {
     private var _players: List<Player> = emptyList()
@@ -23,26 +25,18 @@ class PlayerManager {
         while (!player.isBust()) {
             val requestMessage =
                 player.requestCard {
-                    callGameManagerToReadYesOrNo(player.name)
+                    InputView.retryable { InputView.readYesOrNo(player.name) }
                 }
             if (requestMessage) {
                 isFirst = false
                 player.drawCard(receiveCard())
-                callGameManagerToDisplayHand(player)
+                OutputView.displayCurrentHand(player)
                 continue
             } else if (isFirst) {
-                callGameManagerToDisplayHand(player)
+                OutputView.displayCurrentHand(player)
             }
             break
         }
         return
-    }
-
-    private fun callGameManagerToReadYesOrNo(name: String): Boolean {
-        return GameManager.inputView.retryable { GameManager.inputView.readYesOrNo(name) }
-    }
-
-    private fun callGameManagerToDisplayHand(player: Player) {
-        GameManager.outputView.displayCurrentHand(player)
     }
 }

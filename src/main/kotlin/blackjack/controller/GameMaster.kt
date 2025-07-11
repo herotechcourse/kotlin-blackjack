@@ -4,13 +4,11 @@ import blackjack.model.Dealer
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
-object GameManager {
+object GameMaster {
     val cardManager = CardManager()
     val playerManager = PlayerManager()
     val dealer = Dealer()
     val statsManager = StatsManager()
-    val inputView = InputView
-    val outputView = OutputView
 
     fun run() {
         takePlayerNames()
@@ -24,7 +22,7 @@ object GameManager {
     }
 
     private fun takePlayerNames() {
-        val names = inputView.retryable { InputView.readPlayerNames() }
+        val names = InputView.retryable { InputView.readPlayerNames() }
         names.forEach { name -> playerManager.addPlayer(name) }
     }
 
