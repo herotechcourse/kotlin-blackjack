@@ -1,7 +1,7 @@
 package blackjack.model
 
 import blackjack.model.game.CardDeck
-import blackjack.model.participant.Player
+import blackjack.model.participant.PlayerBackup
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -15,7 +15,7 @@ class CardDeckTest {
     @Test
     fun `hit a card to a player`() {
         val cardDeck = CardDeck()
-        val player1 = Player("Mina")
+        val player1 = PlayerBackup("Mina")
         cardDeck.hit(player1) // should move card to player
         assertThat(player1.numberInHand()).isEqualTo(1)
     }

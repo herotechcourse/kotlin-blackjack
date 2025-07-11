@@ -3,7 +3,7 @@ package blackjack.model.game
 import blackjack.model.card.Card
 import blackjack.model.card.Rank
 import blackjack.model.card.Suit
-import blackjack.model.participant.Player
+import blackjack.model.participant.PlayerBackup
 
 data class CardDeck(private val hold: Hold) {
     constructor() : this(initPokerCards())
@@ -21,7 +21,7 @@ data class CardDeck(private val hold: Hold) {
     fun getCards() = hold.cards.toList()
 
     fun hit(
-        player: Player,
+        player: PlayerBackup,
         repeat: Int = 1,
     ) {
         repeat(repeat) { hold.moveCard(player) }

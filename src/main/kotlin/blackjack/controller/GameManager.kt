@@ -1,10 +1,10 @@
 package blackjack.controller
 
 import blackjack.model.game.CardDeck
-import blackjack.model.participant.Player
+import blackjack.model.participant.PlayerBackup
 import blackjack.view.OutputView
 
-class GameManager(private val dealer: Player, private val players: List<Player>) {
+class GameManager(private val dealer: PlayerBackup, private val players: List<PlayerBackup>) {
     private val cardDeck = CardDeck()
 
     fun setUp() {
@@ -13,8 +13,8 @@ class GameManager(private val dealer: Player, private val players: List<Player>)
     }
 
     fun playGame(
-        dealer: Player,
-        players: List<Player>,
+        dealer: PlayerBackup,
+        players: List<PlayerBackup>,
         askForCard: () -> Boolean = { true },
     ) {
         players.forEach { round(it, askForCard) }
@@ -22,7 +22,7 @@ class GameManager(private val dealer: Player, private val players: List<Player>)
     }
 
     internal fun round(
-        player: Player,
+        player: PlayerBackup,
         askForCard: () -> Boolean = { true },
     ) {
         when (player) {
@@ -32,7 +32,7 @@ class GameManager(private val dealer: Player, private val players: List<Player>)
     }
 
     private fun roundForPlayers(
-        player: Player,
+        player: PlayerBackup,
         askForCard: () -> Boolean,
     ) {
         while (ableToReceive(player)) {
@@ -46,14 +46,14 @@ class GameManager(private val dealer: Player, private val players: List<Player>)
         }
     }
 
-    private fun roundForDealer(player: Player) {
+    private fun roundForDealer(player: PlayerBackup) {
         while (ableToReceive(player)) {
             cardDeck.hit(player)
         }
         OutputView.printDealerDrawsCards(player)
     }
 
-    private fun ableToReceive(player: Player): Boolean {
+    private fun ableToReceive(player: PlayerBackup): Boolean {
         val isDealer = player === dealer
         if (isDealer) return dealer.calculatePoints() <= ABLE_TO_RECEIVE
         return player.calculatePoints() < BLACKJACK

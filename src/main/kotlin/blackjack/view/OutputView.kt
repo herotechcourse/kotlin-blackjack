@@ -1,26 +1,26 @@
 package blackjack.view
 
-import blackjack.model.participant.Player
+import blackjack.model.participant.PlayerBackup
 import blackjack.model.Statistics
 
 object OutputView {
-    fun printAllPlayers(players: List<Player>) {
+    fun printAllPlayers(players: List<PlayerBackup>) {
         players.forEach { printOnePlayer(it) }
     }
 
-    fun printOnePlayer(player: Player) {
+    fun printOnePlayer(player: PlayerBackup) {
         println("${player.name}'s cards: " + player.cardsToString())
     }
 
-    fun printDealerDrawsCards(player: Player) {
+    fun printDealerDrawsCards(player: PlayerBackup) {
         println("Dealer draws ${player.numberInHand() - 1} more card due to having 16 or less.")
     }
 
-    fun printAskForCard(player: Player) {
+    fun printAskForCard(player: PlayerBackup) {
         println("Would ${player.name} like to draw another card? (y for yes, n for no)")
     }
 
-    fun printOnePlayerFinalResult(player: Player) {
+    fun printOnePlayerFinalResult(player: PlayerBackup) {
         println("${player.name}'s cards: " + "${player.cardsToString()} - Total: ${player.calculatePoints()}.")
     }
 

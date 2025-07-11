@@ -3,14 +3,14 @@ package blackjack.model
 import blackjack.model.card.Card
 import blackjack.model.card.Rank
 import blackjack.model.card.Suit
-import blackjack.model.participant.Player
+import blackjack.model.participant.PlayerBackup
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class HandTest {
     @Test
     fun calculatePoints() {
-        val player = Player("doggo")
+        val player = PlayerBackup("doggo")
         val listOfCards =
             listOf(
                 Card(Suit.DIAMONDS, Rank.ACE),
@@ -24,7 +24,7 @@ class HandTest {
 
     @Test
     fun hasPoints2() {
-        val player = Player("doggo")
+        val player = PlayerBackup("doggo")
         val listOfCards =
             listOf(
                 Card(Suit.DIAMONDS, Rank.ACE),
@@ -36,7 +36,7 @@ class HandTest {
 
     @Test
     fun hasPoints3() {
-        val player = Player("doggo")
+        val player = PlayerBackup("doggo")
         val listOfCards =
             listOf(
                 Card(Suit.DIAMONDS, Rank.ACE),
@@ -50,7 +50,7 @@ class HandTest {
 
     @Test
     fun hasPoints4() {
-        val player = Player("doggo")
+        val player = PlayerBackup("doggo")
         val listOfCards =
             listOf(
                 Card(Suit.DIAMONDS, Rank.ACE),
