@@ -6,7 +6,7 @@ abstract class CardHolder {
     protected val _cards: MutableList<Card> = mutableListOf()
     val cards: List<Card> get() = _cards
 
-    abstract val name: String
+    fun size() : Int = cards.size
 
     /** fallback when cannot draw */
     abstract fun onDrawFailed(): Card
