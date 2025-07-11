@@ -12,7 +12,7 @@ class ParticipantTest {
         val name = "mina"
         val participants = Participants(name)
 
-        assertThat(participants.containAll(name)).isTrue()
+        assertThat(participants.contain(name)).isTrue()
     }
 
     @Test
@@ -21,12 +21,14 @@ class ParticipantTest {
         val participants = Participants(player)
         val dealer = Dealer()
 
-        assertThat(participants.containAll(dealer)).isTrue()
+        assertThat(participants.contain(dealer)).isTrue()
     }
     @Test
     fun `Participants init with players`() {
         val participants = Participants("mina", "guri")
 
-        assertThat(participants.containAll("mina", "guri")).isTrue()
+        assertThat(participants.containsAll("mina", "guri")).isTrue()
+        assertThat(participants.containsAll("guri", "I am not Guri")).isFalse()
+        assertThat(participants[0].name).isEqualTo("mina")
     }
 }
