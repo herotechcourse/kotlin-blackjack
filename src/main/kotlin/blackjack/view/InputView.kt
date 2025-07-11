@@ -2,12 +2,12 @@ package blackjack.view
 
 object InputView {
     fun getNamesOfPlayers(): String {
-        println(InputPrompt.GET_NAME_OF_PLAYER)
+        println(GET_NAME_OF_PLAYER)
         return readString()
     }
 
     fun getHitOrStand(name: String): String {
-        println(InputPrompt.askHitOrStand(name))
+        println(askHitOrStand(name))
         return readString()
     }
 
@@ -15,4 +15,8 @@ object InputView {
         val string = readLine() ?: throw IllegalArgumentException("")
         return string.trim()
     }
+
+    private fun askHitOrStand(name: String): String = "Would $name like to draw another card? (y for yes, n for no)"
+
+    private const val GET_NAME_OF_PLAYER = "Enter the names of the players (comma-separated):"
 }
