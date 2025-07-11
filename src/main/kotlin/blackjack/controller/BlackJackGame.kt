@@ -35,7 +35,7 @@ class BlackJackGame {
         for (player in players) {
             while (!player.hasBlackJack() && !player.isBusts()) {
                 val answer = retryUntilSuccess { InputView.getAnswer(player.name) }
-                if (answer == "y") {
+                if (answer == AFFIRMATIVE_ANSWER) {
                     val card = dealer.dealCard()
                     player.addCard(card)
                     println(player)
@@ -80,5 +80,6 @@ class BlackJackGame {
 
     companion object {
         private const val RETRY_LIMIT = 100
+        private const val AFFIRMATIVE_ANSWER = "y"
     }
 }

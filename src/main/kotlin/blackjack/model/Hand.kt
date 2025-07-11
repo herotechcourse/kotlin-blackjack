@@ -15,12 +15,12 @@ class Hand {
         var aceCount = 0
         var score = 0
         dealtCards.forEach {
-            if (it.rank == Card.Rank.ACE) aceCount += 1
+            if (it.rank == Card.Rank.ACE) ++aceCount
 
             score += it.rank.value
             if (score > BLACK_JACK && aceCount > 0) {
-                score -= 10
-                aceCount -= 1
+                score -= ACE_ADJUSTMENT
+                --aceCount
             }
         }
 
@@ -33,5 +33,6 @@ class Hand {
 
     companion object {
         const val BLACK_JACK = 21
+        const val ACE_ADJUSTMENT = 10
     }
 }
