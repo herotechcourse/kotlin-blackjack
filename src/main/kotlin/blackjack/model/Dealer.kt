@@ -17,6 +17,10 @@ data class Dealer(override val name: String = "Dealer") : Playable {
 
     fun shouldDrawCardOrNot(): Boolean {
         val score = calculateHand()
-        return score <= 16
+        return score < DRAW_LIMIT
+    }
+
+    companion object {
+        const val DRAW_LIMIT = 17
     }
 }

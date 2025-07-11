@@ -13,6 +13,10 @@ interface Playable {
     fun calculateHand(): Int
 
     fun isBust(): Boolean {
-        return calculateHand() > 21
+        return calculateHand() > BUST_LIMIT
+    }
+
+    companion object {
+        const val BUST_LIMIT = 21
     }
 }
