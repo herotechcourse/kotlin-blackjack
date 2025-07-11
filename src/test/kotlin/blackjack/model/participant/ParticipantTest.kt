@@ -7,7 +7,7 @@ class ParticipantTest {
     @Test
     fun `Participants init with player and dealer, and recognize by name`() {
         val playerNames = listOf("mina", "guri", "life", "hard")
-        val participants = Participants(playerNames)
+        val participants = Participants.from(playerNames)
 
         Assertions.assertThat( playerNames.all { participants.contain(it)}).isTrue
     }
@@ -15,7 +15,7 @@ class ParticipantTest {
     @Test
     fun `Participants init with player and dealer, and recognize by type of Participant`() {
         val playerNames = listOf("mina", "guri", "life", "hard")
-        val participants = Participants(playerNames)
+        val participants = Participants.from(playerNames)
         val dealer = participants.getDealer()
 
         Assertions.assertThat(participants.contain(dealer)).isTrue()
