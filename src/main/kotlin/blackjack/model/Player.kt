@@ -1,9 +1,9 @@
 package blackjack.model
 
 class Player(name: String) {
-    private val person = Person(name)
+    private val playerName = PlayerName(name)
     private val hand = Hand()
-    val name = person.name
+    val name = playerName.name
 
     val cards
         get() = hand.cards
