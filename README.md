@@ -1,5 +1,18 @@
 # kotlin-blackjack
 
+### Reminders for Improvement from Reviewer --@Wordbe
+
+- Use backing properties only when truly necessary.
+    - They can make the code harder to read and understand.
+- Instead of using numbers to represent states, consider using enums.
+    - They make the code much more readable.
+- Avoid creating and parsing strings unnecessarily.
+- Manage data in structured formats from the beginning—it’ll be easier to maintain.
+- Strive to simplify your code as much as possible.
+    - Simple code is always easier to manage than complex logic.
+- Replace magic numbers with constants.
+    - This improves clarity, reduces mistakes, and enhances overall understanding.
+
 ## Features List
 
 ### Model
