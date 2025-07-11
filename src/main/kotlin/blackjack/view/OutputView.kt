@@ -2,6 +2,7 @@ package blackjack.view
 
 import blackjack.model.Dealer
 import blackjack.model.Player
+import blackjack.model.Result
 import blackjack.model.Stats
 
 object OutputView {
@@ -40,9 +41,9 @@ object OutputView {
         val playersResult = winStatistics.playerBoard
         val dealerResult = winStatistics.dealerStats
         println("\n## Final Results")
-        when (dealerResult["tie"]) {
-            0 -> println("Dealer: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose")
-            else -> println("Dealer: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose ${dealerResult["tie"]} Tie")
+        when (dealerResult[Result.TIE]) {
+            0 -> println("Dealer: ${dealerResult[Result.WIN]} Win ${dealerResult[Result.LOSE]} Lose")
+            else -> println("Dealer: ${dealerResult[Result.WIN]} Win ${dealerResult[Result.LOSE]} Lose ${dealerResult[Result.TIE]} Tie")
         }
         playersResult.keys.forEach { player ->
             val result = givePlayerResult(player, playersResult)
@@ -52,19 +53,13 @@ object OutputView {
 
     private fun givePlayerResult(
         player: Player,
-        playersResult: Map<Player, Int>,
+        playersResult: Map<Player, Result>,
     ): String {
         return when (playersResult[player]) {
-            PlayerResult.LOSE -> "Lose"
-            PlayerResult.WIN -> "Win"
-            PlayerResult.TIE -> "Tie"
+            Result.LOSE -> "Lose"
+            Result.WIN -> "Win"
+            Result.TIE -> "Tie"
             else -> "Error"
         }
-    }
-
-    private object PlayerResult {
-        const val LOSE = 0
-        const val WIN = 1
-        const val TIE = 2
     }
 }

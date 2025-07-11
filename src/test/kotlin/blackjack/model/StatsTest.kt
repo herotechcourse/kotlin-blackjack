@@ -29,9 +29,9 @@ class StatsTest {
 
         val stats = Stats(listOf(player1, player2, player3), dealer)
         val board = stats.playerBoard
-        assertEquals(0, board[player1])
-        assertEquals(1, board[player2])
-        assertEquals(2, board[player3])
+        assertEquals(Result.LOSE, board[player1])
+        assertEquals(Result.WIN, board[player2])
+        assertEquals(Result.TIE, board[player3])
     }
 
     @Test
@@ -59,8 +59,8 @@ class StatsTest {
         val stats = Stats(listOf(player1, player2, player3), dealer)
         stats.updateDealerStats()
         val dealerStats = stats.dealerStats
-        assertEquals(1, dealerStats["win"])
-        assertEquals(1, dealerStats["lose"])
-        assertEquals(1, dealerStats["tie"])
+        assertEquals(1, dealerStats[Result.WIN])
+        assertEquals(1, dealerStats[Result.LOSE])
+        assertEquals(1, dealerStats[Result.TIE])
     }
 }
