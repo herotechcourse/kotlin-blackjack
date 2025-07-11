@@ -1,9 +1,6 @@
 package blackjack.view
 
-import blackjack.model.Card
-import blackjack.model.Player
-import blackjack.model.Rank
-import blackjack.model.Suit
+import blackjack.model.*
 
 object OutputView {
     fun displayErrorMessages(message: String?) {
@@ -11,21 +8,21 @@ object OutputView {
     }
 
     fun displayNamesOfPlayers(players: List<Player>) {
-        val nameList = players.joinToString(", ") { it.gamblerInfo.name }
+        val nameList = players.joinToString(", ") { it.name }
         println("\nDealing two cards to dealer, $nameList.")
     }
 
-    fun displayCardsOfPlayers(players: List<Player>) {
+    fun displayCardsOfPlayers(players: List<Gambler>) {
         val printableString = players.joinToString("\n") { getCardsOfPlayers(it) }
         println(printableString + "\n")
     }
 
-    fun displayCardsOfPlayers(player: Player) {
-        println(getCardsOfPlayers(player))
+    fun displayCardsOfPlayers(gambler: Gambler) {
+        println(getCardsOfPlayers(gambler))
     }
 
-    fun displayCardsOfDealer(player: Player) {
-        val printableString = "Dealer: ${convertCardToString(player.cards[0])}"
+    fun displayCardsOfDealer(dealer: Dealer) {
+        val printableString = "Dealer: ${convertCardToString(dealer.cards[0])}"
         println(printableString)
     }
 
@@ -64,7 +61,7 @@ object OutputView {
 
     private fun getCardsOfPlayers(player: Player): String {
         return "${player.name}'s card: " +
-            player.cards.joinToString(", ", transform = ::convertCardToString)
+                player.cards.joinToString(", ", transform = ::convertCardToString)
     }
 
     private fun convertCardToString(card: Card): String {

@@ -18,12 +18,20 @@
 - [x] contains value `name`
   - [x] should not be empty
 
-### class `Player`
+### abstract class `Player`
 - [x] contains class `GamblerInfo`
 - [x] contains list<Card>
 - [x] for representing 'Player1', 'Player2', ..., 'PlayerN', and 'Dealer'
 - [x] `addCard()` to add card
   - [x] private fun `updateScore` to update score on each insertion
+
+### class `Gambler` inherits `Player`
+- [x] fun `isPlayerBelowBlackJack`
+  - [x] returns true if score is below 21
+
+### class `Dealer` inherits `Player`
+- [x] fun `isDealerBelowMinScore`
+  - [x] returns true if score is below 16
 
 ### class `Deck`
 - [x] contains function `generateCards()`

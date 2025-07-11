@@ -5,15 +5,15 @@ import blackjack.view.InputView
 import blackjack.view.OutputView
 
 class Controller() {
-    private var players: List<Player> = mutableListOf()
-    private val dealer: Player = Player(GamblerInfo("dealer"))
+    private var players: List<Gambler> = mutableListOf()
+    private val dealer: Dealer = Dealer(GamblerInfo("dealer"))
     private val deck = Deck()
 
     fun run() {
         try {
             createPlayers()
-            roundOne()
-            roundTwo()
+            firstDraw()
+            finalDraw()
             showResults(FinalResult(dealer, players))
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
@@ -22,18 +22,18 @@ class Controller() {
 
     private fun createPlayers() {
         players =
-            processPlayerNames().map { Player(it) }
+            processPlayerNames().map { Gambler(it) }
         OutputView.displayNamesOfPlayers(players)
     }
 
-    private fun roundOne() {
+    private fun firstDraw() {
         dealer.addCard(getInitialCards())
         players.forEach { it.addCard(getInitialCards()) }
         OutputView.displayCardsOfDealer(dealer)
         OutputView.displayCardsOfPlayers(players)
     }
 
-    private fun roundTwo() {
+    private fun finalDraw() {
         players.forEach { playerTakesTurn(it) }
         dealerTakesTurn()
         OutputView.displayCardsOfPlayersWithScore(listOf(dealer) + players)
@@ -43,15 +43,15 @@ class Controller() {
     private fun getInitialCards(): List<Card> = deck.drawCards(INITIAL_CARD_COUNT)
 
     private fun dealerTakesTurn() {
-        while (dealer.score <= DEALER_MIN_SCORE) {
+        while (dealer.isDealerBelowMinScore()) {
             dealer.addCard(deck.drawCards())
             OutputView.displayDealersTurn()
         }
     }
 
-    private fun playerTakesTurn(player: Player) {
+    private fun playerTakesTurn(player: Gambler) {
         var answer = false
-        while (player.score <= BLACKJACK_SCORE) {
+        while (player.isPlayerBelowBlackJack()) {
             answer = processHitOrStay(player)
             if (!answer) {
                 break
@@ -117,7 +117,6 @@ class Controller() {
     companion object {
         private const val MAX_ATTEMPTS = 5
         const val BLACKJACK_SCORE = 21
-        const val DEALER_MIN_SCORE = 16
         const val INITIAL_CARD_COUNT = 2
         private const val MAX_ATTEMPT_MESSAGE = "Too many attempts"
     }

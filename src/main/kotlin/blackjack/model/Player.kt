@@ -1,6 +1,6 @@
 package blackjack.model
 
-class Player(val gamblerInfo: GamblerInfo) {
+abstract class Player(val gamblerInfo: GamblerInfo) {
     private val _cards: MutableList<Card> = mutableListOf()
     var score: Int = 0
         private set
@@ -27,6 +27,6 @@ class Player(val gamblerInfo: GamblerInfo) {
     }
 
     companion object {
-        private const val WINNING_SCORE = 21
+        const val WINNING_SCORE = 21
     }
 }

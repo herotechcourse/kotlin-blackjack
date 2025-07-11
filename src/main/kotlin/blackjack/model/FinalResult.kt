@@ -2,7 +2,7 @@ package blackjack.model
 
 import blackjack.controller.Controller.Companion.BLACKJACK_SCORE
 
-class FinalResult(val dealer: Player, players: List<Player>) {
+class FinalResult(val dealer: Dealer, players: List<Player>) {
     var win: List<Player> = listOf()
         private set
     var lose: List<Player> = listOf()
