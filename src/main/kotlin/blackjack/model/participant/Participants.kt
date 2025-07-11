@@ -5,6 +5,8 @@ class Participants private constructor(private val players: List<Participant>) {
 
     fun getDealer(): Dealer = dealer
 
+    fun numberOfPlayers() = players.size
+
     constructor(vararg player: Player) : this(player.toList())
     constructor(vararg names: String) : this(names.map { Player(it) })
 
