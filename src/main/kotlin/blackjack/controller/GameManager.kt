@@ -1,5 +1,7 @@
-package blackjack.model
+package blackjack.controller
 
+import blackjack.model.CardDeck
+import blackjack.model.Player
 import blackjack.view.OutputView
 
 class GameManager(private val dealer: Player, private val players: List<Player>) {
@@ -13,7 +15,7 @@ class GameManager(private val dealer: Player, private val players: List<Player>)
     fun playGame(
         dealer: Player,
         players: List<Player>,
-        askForCard: () -> Boolean,
+        askForCard: () -> Boolean = { true },
     ) {
         players.forEach { round(it, askForCard) }
         round(dealer)
