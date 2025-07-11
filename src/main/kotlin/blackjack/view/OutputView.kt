@@ -17,10 +17,6 @@ object OutputView {
         println("Dealer draws ${player.numberInHand() - 1} more card due to having 16 or less.")
     }
 
-    fun printAskForCard(player: Player) {
-        println("Would ${player.name} like to draw another card? (y for yes, n for no)")
-    }
-
     fun printOnePlayerFinalResult(player: Player) {
         println("${player.name}'s cards: " + "${player.cards.joinToString(" ") { displayCard(it) }} - Total: ${player.calculatePoints()}.")
     }
