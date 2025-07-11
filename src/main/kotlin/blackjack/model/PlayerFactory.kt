@@ -1,4 +1,4 @@
-package blackjack.model.participant
+package blackjack.model
 
 object PlayerFactory {
     fun createPlayers(names: List<String>) = names.map { PlayerBackup(it) }

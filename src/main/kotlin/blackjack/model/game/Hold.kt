@@ -1,7 +1,7 @@
 package blackjack.model.game
 
 import blackjack.model.card.Card
-import blackjack.model.participant.PlayerBackup
+import blackjack.model.PlayerBackup
 
 class Hold(hold: Set<Card>) {
     private val _cards: MutableSet<Card> = hold.toMutableSet()

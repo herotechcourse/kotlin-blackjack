@@ -1,7 +1,7 @@
 package blackjack.controller
 
 import blackjack.model.game.CardDeck
-import blackjack.model.participant.PlayerBackup
+import blackjack.model.PlayerBackup
 import blackjack.view.OutputView
 
 class GameManager(private val dealer: PlayerBackup, private val players: List<PlayerBackup>) {
