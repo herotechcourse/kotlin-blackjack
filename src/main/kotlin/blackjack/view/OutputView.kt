@@ -46,4 +46,8 @@ object OutputView {
             println("${player.name}: ${printWinOrLose(winnings == 1)}")
         }
     }
+
+    fun printError(msg: String?) {
+        println("Error: $msg")
+    }
 }
