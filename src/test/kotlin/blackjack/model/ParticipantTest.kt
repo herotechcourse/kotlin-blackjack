@@ -19,10 +19,11 @@ class ParticipantTest {
     fun `Participants init with player and dealer, and recognize by type of Participant`() {
         val player = Player("name")
         val participants = Participants(player)
-        val dealer = Dealer()
+        val dealer = participants.getDealer()
 
         assertThat(participants.contain(dealer)).isTrue()
     }
+
     @Test
     fun `Participants init with players`() {
         val participants = Participants("mina", "guri")
