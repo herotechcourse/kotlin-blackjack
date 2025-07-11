@@ -18,8 +18,12 @@ class Hand() {
             }
 
         repeat(countOfAce) {
-            if (sum + 10 <= 21) sum += 10
+            if (sum + 10 <= BLACKJACK) sum += 10
         }
         return sum
+    }
+
+    companion object {
+        private const val BLACKJACK = 21
     }
 }
