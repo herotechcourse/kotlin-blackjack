@@ -7,3 +7,7 @@ fun String.isHitOrStand(): Boolean {
         else -> throw IllegalArgumentException("The answer must be y or n.")
     }
 }
+
+fun String.parseCommaString(): List<String> {
+    return split(",").map(String::trim)
+}
