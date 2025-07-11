@@ -1,5 +1,9 @@
 HELP.md
 .gradle
+
+gradlew.bat
+kotlin-blackjack/src/test/kotlin/study/
+
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
@@ -38,3 +42,5 @@ out/
 
 ### Mac OS ###
 .DS_Store
+
+study/
