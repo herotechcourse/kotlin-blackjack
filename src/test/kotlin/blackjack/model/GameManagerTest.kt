@@ -8,7 +8,7 @@ class GameManagerTest {
     @Test
     fun `init game manager, the manage should set up a game`() {
         val listOfName = listOf("Vito", "Mina")
-        val players = PlayerFactory.with(listOfName)
+        val players = PlayerFactory.createPlayers(listOfName)
         val dealer = PlayerFactory.createDealer()
 
         val gameManager = GameManager(dealer, players)
@@ -22,7 +22,7 @@ class GameManagerTest {
     @Test
     fun `test single player`() {
         val listOfName = listOf("Vito", "Mina")
-        val players = PlayerFactory.with(listOfName)
+        val players = PlayerFactory.createPlayers(listOfName)
         val dealer = PlayerFactory.createDealer()
 
         val gameManager = GameManager(dealer, players)

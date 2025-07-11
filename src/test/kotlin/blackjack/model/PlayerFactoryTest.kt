@@ -7,7 +7,7 @@ class PlayerFactoryTest {
     @Test
     fun with() {
         val names = listOf("mina", "vito")
-        val players = PlayerFactory.with(names)
+        val players = PlayerFactory.createPlayers(names)
         assertThat(players).hasSize(2)
     }
 }

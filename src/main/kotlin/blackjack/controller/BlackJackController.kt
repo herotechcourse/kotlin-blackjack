@@ -9,7 +9,7 @@ object BlackJackController {
     fun play() {
         try {
             val names = InputView.getPlayersName()
-            val players = PlayerFactory.with(names)
+            val players = PlayerFactory.createPlayers(names)
             val dealer = PlayerFactory.createDealer()
 
             val gameManager = GameManager(dealer, players)
