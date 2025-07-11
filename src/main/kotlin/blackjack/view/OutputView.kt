@@ -61,7 +61,7 @@ object OutputView {
 
     private fun getCardsOfPlayers(player: Player): String {
         return "${player.name}'s card: " +
-                player.cards.joinToString(", ", transform = ::convertCardToString)
+            player.cards.joinToString(", ", transform = ::convertCardToString)
     }
 
     private fun convertCardToString(card: Card): String {

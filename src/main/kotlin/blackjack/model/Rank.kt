@@ -14,17 +14,4 @@ enum class Rank(val value: Int) {
     JACK(10),
     QUEEN(10),
     KING(10),
-    ;
-
-    companion object {
-        fun toString(rank: Rank): String {
-            return when (rank) {
-                ACE -> "A"
-                KING -> "K"
-                QUEEN -> "Q"
-                JACK -> "J"
-                else -> rank.value.toString()
-            }
-        }
-    }
 }
