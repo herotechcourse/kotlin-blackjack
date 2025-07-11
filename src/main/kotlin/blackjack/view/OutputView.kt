@@ -1,6 +1,9 @@
 package blackjack.view
 
+import blackjack.model.Card
 import blackjack.model.Player
+import blackjack.model.Rank
+import blackjack.model.Suit
 
 object OutputView {
     fun displayErrorMessages(message: String?) {
@@ -18,7 +21,7 @@ object OutputView {
     }
 
     fun displayCardsOfDealer(player: Player) {
-        val printableString = "Dealer: ${player.cards[0]}"
+        val printableString = "Dealer: ${convertCardToString(player.cards[0])}"
         println(printableString)
     }
 
@@ -54,6 +57,30 @@ object OutputView {
     }
 
     private fun getCardsOfPlayers(player: Player): String {
-        return "${player.name}'s card: " + player.cards.joinToString(", ")
+        return "${player.name}'s card: " +
+                player.cards.joinToString(", ", transform = ::convertCardToString)
+    }
+
+    private fun convertCardToString(card: Card): String {
+        return getRankSymbol(card.rank) + getSuitSymbol(card.suit)
+    }
+
+    private fun getSuitSymbol(suit: Suit): String {
+        return when (suit) {
+            Suit.SPADE -> "♠"
+            Suit.DIAMOND -> "♥"
+            Suit.CLUB -> "♣"
+            Suit.HEART -> "♦"
+        }
+    }
+
+    private fun getRankSymbol(rank: Rank): String {
+        return when (rank) {
+            Rank.ACE -> "A"
+            Rank.KING -> "K"
+            Rank.QUEEN -> "Q"
+            Rank.JACK -> "J"
+            else -> rank.value.toString()
+        }
     }
 }
