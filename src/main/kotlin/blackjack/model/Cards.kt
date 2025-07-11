@@ -1,6 +1,6 @@
 package blackjack.model
 
-class Hold(hold: Set<Card>) {
+class Cards(hold: Set<Card>) {
     private val _cards: MutableSet<Card> = hold.toMutableSet()
     val cards: Set<Card>
         get() = _cards.toSet()
@@ -15,7 +15,7 @@ class Hold(hold: Set<Card>) {
         _cards.add(card)
     }
 
-    operator fun plus(other: Hold): Hold {
-        return Hold((other.cards + this.cards))
+    operator fun plus(other: Cards): Cards {
+        return Cards((other.cards + this.cards))
     }
 }
