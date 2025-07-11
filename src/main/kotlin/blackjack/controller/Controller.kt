@@ -30,20 +30,17 @@ class Controller() {
         dealer.addCard(getInitialCards())
         players.forEach { it.addCard(getInitialCards()) }
         OutputView.displayCardsOfDealer(dealer)
-        players.forEach { OutputView.displayCardsOfPlayers(it, it == players.last()) }
+        OutputView.displayCardsOfPlayers(players)
     }
 
     private fun roundTwo() {
         players.forEach { playerTakesTurn(it) }
         dealerTakesTurn()
-        OutputView.displayCardsOfPlayersWithScore(dealer)
-        players.forEach { OutputView.displayCardsOfPlayersWithScore(it, it == players.last()) }
+        OutputView.displayCardsOfPlayersWithScore(listOf(dealer) + players)
         OutputView.displayFinalResultsHeading()
     }
 
-    private fun getInitialCards(): List<Card> {
-        return deck.drawCards(INITIAL_CARD_COUNT)
-    }
+    private fun getInitialCards(): List<Card> = deck.drawCards(INITIAL_CARD_COUNT)
 
     private fun dealerTakesTurn() {
         while (dealer.score <= DEALER_MIN_SCORE) {
@@ -98,7 +95,7 @@ class Controller() {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    fun processHitOrStay(player: Player): Boolean {
+    private fun processHitOrStay(player: Player): Boolean {
         repeat(MAX_ATTEMPTS) {
             try {
                 return isHitOrStand(InputView.getHitOrStand(player.name))
