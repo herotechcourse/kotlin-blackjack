@@ -1,5 +1,7 @@
 package blackjack.model
 
+import blackjack.model.participant.Player
+
 class Statistics(val dealer: Player, val players: List<Player>) {
 
     val totalResult

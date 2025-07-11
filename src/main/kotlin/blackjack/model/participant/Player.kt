@@ -1,4 +1,7 @@
-package blackjack.model
+package blackjack.model.participant
+
+import blackjack.model.card.Card
+import blackjack.model.game.Hand
 
 class Player(name: String) {
     private val person = Person(name)

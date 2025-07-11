@@ -1,7 +1,7 @@
 package blackjack.controller
 
-import blackjack.model.CardDeck
-import blackjack.model.Player
+import blackjack.model.game.CardDeck
+import blackjack.model.participant.Player
 import blackjack.view.OutputView
 
 class GameManager(private val dealer: Player, private val players: List<Player>) {

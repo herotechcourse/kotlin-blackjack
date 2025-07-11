@@ -1,4 +1,4 @@
-package blackjack.model
+package blackjack.model.participant
 
 @JvmInline
 value class Person(val name: String)

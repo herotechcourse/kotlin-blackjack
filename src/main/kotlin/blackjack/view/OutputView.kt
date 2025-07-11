@@ -1,6 +1,6 @@
 package blackjack.view
 
-import blackjack.model.Player
+import blackjack.model.participant.Player
 import blackjack.model.Statistics
 
 object OutputView {

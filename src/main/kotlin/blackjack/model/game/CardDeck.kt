@@ -1,4 +1,9 @@
-package blackjack.model
+package blackjack.model.game
+
+import blackjack.model.card.Card
+import blackjack.model.card.Rank
+import blackjack.model.card.Suit
+import blackjack.model.participant.Player
 
 data class CardDeck(private val hold: Hold) {
     constructor() : this(initPokerCards())

@@ -1,4 +1,4 @@
-package blackjack.model
+package blackjack.model.card
 
 enum class Rank(val face: String, val value: Int) {
     ACE("A", 1),

@@ -1,4 +1,6 @@
-package blackjack.model
+package blackjack.model.game
+
+import blackjack.model.card.Card
 
 class Hand() {
     private val hold: Hold = Hold(emptySet())
