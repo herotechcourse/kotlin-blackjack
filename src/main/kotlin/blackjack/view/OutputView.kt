@@ -1,5 +1,6 @@
 package blackjack.view
 
+import blackjack.model.Card
 import blackjack.model.Player
 import blackjack.model.Statistics
 
@@ -9,7 +10,7 @@ object OutputView {
     }
 
     fun printOnePlayer(player: Player) {
-        println("${player.name}'s cards: " + player.cardsToString())
+        println("${player.name}'s cards: " + player.cards.joinToString(" ") { displayCard(it) })
     }
 
     fun printDealerDrawsCards(player: Player) {
@@ -21,7 +22,7 @@ object OutputView {
     }
 
     fun printOnePlayerFinalResult(player: Player) {
-        println("${player.name}'s cards: " + "${player.cardsToString()} - Total: ${player.calculatePoints()}.")
+        println("${player.name}'s cards: " + "${player.cards.joinToString(" ") { displayCard(it) }} - Total: ${player.calculatePoints()}.")
     }
 
     fun printFinalResults(players: List<Player>) {
@@ -42,5 +43,9 @@ object OutputView {
                 (player, winnings) ->
             println("${player.name}: ${printWinOrLose(winnings == 1)}")
         }
+    }
+
+    fun displayCard(card: Card): String {
+        return "${card.rank.face}${card.suit.symbol}"
     }
 }
