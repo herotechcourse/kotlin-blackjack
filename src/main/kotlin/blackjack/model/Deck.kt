@@ -16,9 +16,7 @@ class Deck {
     }
 
     private fun removeCards(element: List<Card>) {
-        element.forEach { card ->
-            cards.remove(card)
-        }
+        cards -= element
     }
 
     private fun generateCards() {
