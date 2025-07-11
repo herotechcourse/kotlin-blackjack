@@ -1,6 +1,6 @@
 package blackjack.model
 
-data class Hand(val cards: List<PlayingCard> = emptyList()) {
+class Hand(val cards: List<PlayingCard> = emptyList()) {
     fun calculateHand(): Int {
         val values = cards.map { it.value }
         var aceCounts = values.count { it == 11 }
