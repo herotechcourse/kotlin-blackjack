@@ -39,7 +39,7 @@ object OutputView {
     fun printStatistics(statistics: Statistics) {
         println("\n## Final Results")
         println("Dealer: ${statistics.dealerWin} Win ${statistics.dealerLose} Lose")
-        statistics.totalResult.forEach {
+        statistics.calculatePlayersWinning().forEach {
                 (player, winnings) ->
             println("${player.name}: ${printWinOrLose(winnings == 1)}")
         }

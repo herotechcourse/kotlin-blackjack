@@ -1,8 +1,6 @@
 package blackjack.model
 
 class Statistics(private val dealer: Player, private val players: List<Player>) {
-    val totalResult
-        get() = calculatePlayersWinning()
     val dealerWin
         get() = calculateDealerWinning()
     val dealerLose
@@ -13,7 +11,7 @@ class Statistics(private val dealer: Player, private val players: List<Player>) 
     }
 
     fun calculateDealerWinning(): Int {
-        val howManyPlayersWon = totalResult.filter { it.value == 1 }.size
+        val howManyPlayersWon = calculatePlayersWinning().count { it.value == 1 }
         return players.size - howManyPlayersWon
     }
 
