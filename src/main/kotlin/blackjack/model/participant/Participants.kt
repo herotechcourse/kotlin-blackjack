@@ -1,31 +1,36 @@
 package blackjack.model.participant
 
-class Participants private constructor(private val players: List<Participant>) {
-    private val dealer = Dealer()
+class Participants private constructor(
+    private val players: List<Player>,
+    private val dealer: Dealer = Dealer()
+) {
 
     fun getDealer(): Dealer = dealer
 
-    fun numberOfPlayers() = players.size
+    fun getPlayer(index: Int) = players[index]
 
-    constructor(vararg names: String) : this(names.map { Player(it) })
+    fun playersCount() = players.size
 
-    internal fun contain(name: String): Boolean {
+
+    fun contain(name: String): Boolean {
         return players.any { it.name == name }
     }
 
-    internal fun containsAll(vararg names: String): Boolean {
+    fun containsAll(vararg names: String): Boolean {
         return players.map { it.name }.containsAll(names.toList())
     }
 
-    operator fun get(index: Int) = players[index]
-
     fun contain(participant: Participant): Boolean {
-        return participant::class == dealer::class || players.any { it == participant }
+        return when (participant) {
+            is Dealer -> true
+            is Player -> players.contains(participant)
+            else -> false
+        }
     }
 
     companion object {
-        fun from(names: List<String>): Participants {
-            return Participants(names.map { Player(it) })
-        }
+        fun from(vararg names: String) = Participants(names.map { Player(it) })
+
+        fun from(names: List<String>) = Participants(names.map { Player(it) })
     }
 }
