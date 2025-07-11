@@ -1,7 +1,9 @@
 package blackjack.model.participant
 
-class Participants private constructor(private val players: List<Participant>) : List<Participant> by players {
-    val dealer = Dealer()
+class Participants private constructor(private val players: List<Participant>) {
+    private val dealer = Dealer()
+
+    fun getDealer(): Dealer = dealer
 
     constructor(vararg player: Player) : this(player.toList())
     constructor(vararg names: String) : this(names.map { Player(it) })
