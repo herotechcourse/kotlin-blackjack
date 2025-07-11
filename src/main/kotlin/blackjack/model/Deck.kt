@@ -5,14 +5,19 @@ class Deck {
         private set
 
     init {
-        generateCards()
-        cards.shuffle()
+        generateShuffledCards()
     }
 
     fun drawCards(count: Int = 1): List<Card> {
+        if (cards.size == 1) generateShuffledCards()
         val drawnCards = cards.take(count)
         removeCards(drawnCards)
         return drawnCards
+    }
+
+    private fun generateShuffledCards() {
+        generateCards()
+        cards.shuffle()
     }
 
     private fun removeCards(element: List<Card>) {
