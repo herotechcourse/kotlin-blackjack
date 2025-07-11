@@ -17,8 +17,8 @@ object OutputView {
     }
 
     fun displayCardsOfDealer(player: Player) {
-        print("Dealer: ")
-        println(player.cards[0].toString())
+        val printableString = "Dealer: ${player.cards[0]}"
+        println(printableString)
     }
 
     fun displayDealersTurn() {
@@ -51,11 +51,11 @@ object OutputView {
         println(printableString)
     }
 
-    private fun getCardsOfPlayers(player: Player): String {
-        return "${player.name}'s card: " + player.cards.joinToString(", ")
-    }
-
     fun printEmptyLine() {
         println()
+    }
+
+    private fun getCardsOfPlayers(player: Player): String {
+        return "${player.name}'s card: " + player.cards.joinToString(", ")
     }
 }

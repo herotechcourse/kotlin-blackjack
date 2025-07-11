@@ -1,5 +1,6 @@
 package blackjack.controller
 
+import blackjack.model.Card
 import blackjack.model.Deck
 import blackjack.model.FinalResult
 import blackjack.model.GamblerInfo
@@ -15,18 +16,8 @@ class Controller() {
     fun run() {
         try {
             createPlayers()
-            OutputView.displayNamesOfPlayers(players)
             roundOne()
-            OutputView.displayCardsOfDealer(dealer)
-            players.forEach { OutputView.displayCardsOfPlayers(it) }
-            OutputView.printEmptyLine()
-            players.forEach { playerTakesTurn(it) }
-            dealerTakesTurn()
-            OutputView.printEmptyLine()
-            OutputView.displayCardsOfPlayersWithScore(dealer)
-            players.forEach { OutputView.displayCardsOfPlayersWithScore(it) }
-            OutputView.printEmptyLine()
-            OutputView.displayFinalResultsHeading()
+            roundTwo()
             showResults(FinalResult(dealer, players))
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
@@ -36,25 +27,29 @@ class Controller() {
     private fun createPlayers() {
         players =
             processPlayerNames().map { Player(it) }
+        OutputView.displayNamesOfPlayers(players)
     }
 
     private fun roundOne() {
-        dealer.addCard(deck.drawCards(INITIAL_CARD_COUNT))
-        players.forEach { it.addCard(deck.drawCards(INITIAL_CARD_COUNT)) }
+        dealer.addCard(getIntialCards())
+        players.forEach { it.addCard(getIntialCards()) }
+        OutputView.displayCardsOfDealer(dealer)
+        players.forEach { OutputView.displayCardsOfPlayers(it) }
+        OutputView.printEmptyLine()
     }
 
-    fun processPlayerNames(): List<GamblerInfo> {
-        repeat(MAX_ATTEMPTS) {
-            try {
-                val names = InputView.getNamesOfPlayers()
-                return names
-                    .parseCommaString()
-                    .map(::GamblerInfo)
-            } catch (err: IllegalArgumentException) {
-                OutputView.displayErrorMessages(err.message)
-            }
-        }
-        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
+    private fun roundTwo() {
+        players.forEach { playerTakesTurn(it) }
+        dealerTakesTurn()
+        OutputView.printEmptyLine()
+        OutputView.displayCardsOfPlayersWithScore(dealer)
+        players.forEach { OutputView.displayCardsOfPlayersWithScore(it) }
+        OutputView.printEmptyLine()
+        OutputView.displayFinalResultsHeading()
+    }
+
+    private fun getIntialCards(): List<Card> {
+        return deck.drawCards(INITIAL_CARD_COUNT)
     }
 
     private fun dealerTakesTurn() {
@@ -94,6 +89,20 @@ class Controller() {
         finalResult.draw.forEach {
             OutputView.displayPlayerResult(it.name, false)
         }
+    }
+
+    private fun processPlayerNames(): List<GamblerInfo> {
+        repeat(MAX_ATTEMPTS) {
+            try {
+                val names = InputView.getNamesOfPlayers()
+                return names
+                    .parseCommaString()
+                    .map(::GamblerInfo)
+            } catch (err: IllegalArgumentException) {
+                OutputView.displayErrorMessages(err.message)
+            }
+        }
+        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
     fun processHitOrStay(player: Player): Boolean {
