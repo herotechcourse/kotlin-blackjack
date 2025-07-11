@@ -99,12 +99,20 @@ class Controller() {
     fun processHitOrStay(player: Player): Boolean {
         repeat(MAX_ATTEMPTS) {
             try {
-                return InputView.getHitOrStand(player.name).isHitOrStand()
+                return isHitOrStand(InputView.getHitOrStand(player.name))
             } catch (err: IllegalArgumentException) {
                 OutputView.displayErrorMessages(err.message)
             }
         }
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
+    }
+
+    private fun isHitOrStand(input: String): Boolean {
+        return when (input) {
+            "y" -> true
+            "n" -> false
+            else -> throw IllegalArgumentException("The answer must be y or n.")
+        }
     }
 
     companion object {
