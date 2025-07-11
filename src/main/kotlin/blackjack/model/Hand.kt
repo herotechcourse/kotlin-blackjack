@@ -1,7 +1,7 @@
 package blackjack.model
 
 class Hand() {
-    private val hold: Hold = Hold(setOf())
+    private val hold: Cards = Cards(setOf())
 
     val cards
         get() = hold.cards
