@@ -23,7 +23,8 @@ class GameManagerTest {
         val dealer = PlayerFactory.createDealer()
         val gameManager = GameManager(dealer, players)
         val sizeOfDealerCard = dealer.numberInHand()
-        gameManager.round(dealer)
+
+        gameManager.round(dealer, { true }, { true })
 
         assertThat(sizeOfDealerCard).isNotEqualTo(dealer.numberInHand())
     }
