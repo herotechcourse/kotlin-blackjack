@@ -21,4 +21,9 @@ class Player(name: String) {
         get() = calculatePoints() > 21
 
     fun cardsToString() = cards.joinToString(", ")
+
+    operator fun plus(players: List<Player>): List<Player> {
+        return listOf(this) + players
+    }
 }
+
