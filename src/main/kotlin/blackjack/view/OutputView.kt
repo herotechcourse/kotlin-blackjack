@@ -12,8 +12,9 @@ object OutputView {
         println("\nDealing two cards to dealer, $nameList.")
     }
 
-    fun displayCardsOfPlayers(player: Player) {
+    fun displayCardsOfPlayers(player: Player, extraLine: Boolean = false) {
         println(getCardsOfPlayers(player))
+        if (extraLine) println()
     }
 
     fun displayCardsOfDealer(player: Player) {
@@ -25,10 +26,11 @@ object OutputView {
         println("\nDealer draws one more card due to having 16 or less.")
     }
 
-    fun displayCardsOfPlayersWithScore(player: Player) {
+    fun displayCardsOfPlayersWithScore(player: Player, extraLine: Boolean = false) {
         val printableString =
             getCardsOfPlayers(player) + " – Total: ${player.score}"
         println(printableString)
+        if (extraLine) println()
     }
 
     fun displayFinalResultsHeading() {
@@ -49,10 +51,6 @@ object OutputView {
     ) {
         val printableString = "$name: " + if (result) "Win" else "Lose"
         println(printableString)
-    }
-
-    fun printEmptyLine() {
-        println()
     }
 
     private fun getCardsOfPlayers(player: Player): String {

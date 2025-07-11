@@ -1,10 +1,6 @@
 package blackjack.controller
 
-import blackjack.model.Card
-import blackjack.model.Deck
-import blackjack.model.FinalResult
-import blackjack.model.GamblerInfo
-import blackjack.model.Player
+import blackjack.model.*
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
@@ -31,24 +27,21 @@ class Controller() {
     }
 
     private fun roundOne() {
-        dealer.addCard(getIntialCards())
-        players.forEach { it.addCard(getIntialCards()) }
+        dealer.addCard(getInitialCards())
+        players.forEach { it.addCard(getInitialCards()) }
         OutputView.displayCardsOfDealer(dealer)
-        players.forEach { OutputView.displayCardsOfPlayers(it) }
-        OutputView.printEmptyLine()
+        players.forEach { OutputView.displayCardsOfPlayers(it, it == players.last()) }
     }
 
     private fun roundTwo() {
         players.forEach { playerTakesTurn(it) }
         dealerTakesTurn()
-        OutputView.printEmptyLine()
         OutputView.displayCardsOfPlayersWithScore(dealer)
-        players.forEach { OutputView.displayCardsOfPlayersWithScore(it) }
-        OutputView.printEmptyLine()
+        players.forEach { OutputView.displayCardsOfPlayersWithScore(it, it == players.last()) }
         OutputView.displayFinalResultsHeading()
     }
 
-    private fun getIntialCards(): List<Card> {
+    private fun getInitialCards(): List<Card> {
         return deck.drawCards(INITIAL_CARD_COUNT)
     }
 
