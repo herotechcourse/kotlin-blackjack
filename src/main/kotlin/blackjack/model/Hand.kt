@@ -1,7 +1,7 @@
 package blackjack.model
 
-data class Hand(val cards: List<Card> = emptyList()) {
-    fun calculateCards(): Int {
+data class Hand(val cards: List<PlayingCard> = emptyList()) {
+    fun calculateHand(): Int {
         val values = cards.map { it.value }
         var aceCounts = values.count { it == 11 }
         var score = values.sum()
@@ -16,7 +16,7 @@ data class Hand(val cards: List<Card> = emptyList()) {
     }
 
     fun toText(): String {
-        val names = cards.map { it.name }
-        return names.joinToString(", ")
+        val forms = cards.map { it.string }
+        return forms.joinToString(", ")
     }
 }

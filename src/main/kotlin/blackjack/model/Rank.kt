@@ -14,12 +14,11 @@ enum class Rank(val digit: String, val value: Int) {
     JACK("J", 10),
     QUEEN("Q", 10),
     KING("K", 10),
-    NONE("0", 0),
     ;
 
     companion object {
         fun of(digit: String): Rank {
-            return Rank.entries.firstOrNull { it.digit == digit } ?: NONE
+            return Rank.entries.firstOrNull { it.digit == digit } ?: throw IllegalArgumentException("Unknown rank: $digit")
         }
     }
 }

@@ -1,7 +1,7 @@
 package blackjack.controller
 
-import blackjack.model.Card
 import blackjack.model.Player
+import blackjack.model.PlayingCard
 
 class PlayerManager {
     private var _players: List<Player> = emptyList()
@@ -17,7 +17,7 @@ class PlayerManager {
     // TODO: resolve indent depth
     fun askPlayerHit(
         player: Player,
-        receiveCard: () -> Card,
+        receiveCard: () -> PlayingCard,
     ) {
         var isFirst = true
         while (!player.isBust()) {

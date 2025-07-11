@@ -7,7 +7,7 @@ object GameManager {
     val cardManager = CardManager()
     val playerManager = PlayerManager()
     val dealerManager = DealerManager()
-    val statsManager = StatsManager(playerManager.players, dealerManager.dealer)
+    val statsManager = StatsManager()
     val inputView = InputView
     val outputView = OutputView
 

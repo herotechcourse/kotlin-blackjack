@@ -1,6 +1,6 @@
 package blackjack.controller
 
-import blackjack.utils.CardGenerator
+import blackjack.model.PlayingCard
 import io.kotest.matchers.collections.shouldNotContainInOrder
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -9,7 +9,7 @@ class CardManagerTest {
     @Test
     fun `card manager has random ordered cards`() {
         val manager = CardManager()
-        val orderedCards = CardGenerator.generateCards()
+        val orderedCards = PlayingCard.Deck
         manager.cards.shouldNotContainInOrder(orderedCards)
     }
 

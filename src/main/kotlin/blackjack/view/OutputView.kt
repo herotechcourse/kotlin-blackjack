@@ -13,7 +13,7 @@ object OutputView {
         val names = players.map { it.name }
         sentence += names.joinToString(", ")
         println("\nDealing two cards to $sentence.")
-        println("Dealer: ${dealer.hand.cards[0].name}")
+        println("Dealer: ${dealer.hand.cards[0].string}")
         players.forEach { displayCurrentHand(it) }
     }
 

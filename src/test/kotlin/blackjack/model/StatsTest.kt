@@ -1,5 +1,6 @@
 package blackjack.model
 
+import blackjack.Fixture
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -8,24 +9,23 @@ class StatsTest {
     fun `playerBoard - Stats make good player board that represent state of player`() {
         // player1 -> bust
         val player1 = Player("player1")
-        player1.drawCard(Card("Q♦"))
-        player1.drawCard(Card("K♦"))
-        player1.drawCard(Card("J♠"))
+        player1.drawCard(Fixture.DIAMONDS_TEN)
+        player1.drawCard(Fixture.DIAMONDS_JACK)
+        player1.drawCard(Fixture.DIAMONDS_QUEEN)
 
         // player2 -> win
         val player2 = Player("player2")
-        player2.drawCard(Card("10♦"))
-        player2.drawCard(Card("A♦"))
+        player2.drawCard(Fixture.DIAMONDS_TEN)
+        player2.drawCard(Fixture.DIAMONDS_ACE)
 
         // player3 -> tie
         val player3 = Player("player3")
-        player3.drawCard(Card("9♦"))
-        player3.drawCard(Card("J♦"))
+        player3.drawCard(Fixture.DIAMONDS_NINE)
+        player3.drawCard(Fixture.DIAMONDS_JACK)
 
         val dealer = Dealer()
-        dealer.drawCard(Card("3♦"))
-        dealer.drawCard(Card("6♦"))
-        dealer.drawCard(Card("10♠"))
+        dealer.drawCard(Fixture.DIAMONDS_NINE)
+        dealer.drawCard(Fixture.DIAMONDS_JACK)
 
         val stats = Stats(listOf(player1, player2, player3), dealer)
         val board = stats.playerBoard
@@ -38,24 +38,23 @@ class StatsTest {
     fun `updateDealerStats() - method update dealer's stats`() {
         // player1 -> bust
         val player1 = Player("player1")
-        player1.drawCard(Card("Q♦"))
-        player1.drawCard(Card("K♦"))
-        player1.drawCard(Card("J♠"))
+        player1.drawCard(Fixture.DIAMONDS_TEN)
+        player1.drawCard(Fixture.DIAMONDS_JACK)
+        player1.drawCard(Fixture.DIAMONDS_QUEEN)
 
         // player2 -> win
         val player2 = Player("player2")
-        player2.drawCard(Card("10♦"))
-        player2.drawCard(Card("A♦"))
+        player2.drawCard(Fixture.DIAMONDS_TEN)
+        player2.drawCard(Fixture.DIAMONDS_ACE)
 
         // player3 -> tie
         val player3 = Player("player3")
-        player3.drawCard(Card("9♦"))
-        player3.drawCard(Card("J♦"))
+        player3.drawCard(Fixture.DIAMONDS_NINE)
+        player3.drawCard(Fixture.DIAMONDS_JACK)
 
         val dealer = Dealer()
-        dealer.drawCard(Card("3♦"))
-        dealer.drawCard(Card("6♦"))
-        dealer.drawCard(Card("10♠"))
+        dealer.drawCard(Fixture.DIAMONDS_NINE)
+        dealer.drawCard(Fixture.DIAMONDS_JACK)
 
         val stats = Stats(listOf(player1, player2, player3), dealer)
         stats.updateDealerStats()

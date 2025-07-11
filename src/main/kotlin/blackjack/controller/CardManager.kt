@@ -1,44 +1,45 @@
 package blackjack.controller
 
-import blackjack.model.Card
-import blackjack.utils.CardGenerator
+import blackjack.model.PlayingCard
 
-class CardManager(generator: CardGenerator = CardGenerator) {
-    private var _cards = generator.generateCards().shuffled()
-    val cards: List<Card>
-        get() = _cards
-
-    private var _cardMap = initiateCardMap()
-    val cardMap: Map<Card, Boolean>
+class CardManager() {
+    var cards: List<PlayingCard> = emptyList()
+    private var _cardMap: Map<PlayingCard, Boolean> = emptyMap()
+    val cardMap: Map<PlayingCard, Boolean>
         get() = _cardMap
 
-    private fun initiateCardMap(): Map<Card, Boolean> {
-        val map = mutableMapOf<Card, Boolean>()
+    init {
+        cards = PlayingCard.Deck.toList().shuffled()
+        _cardMap = initiateCardMap()
+    }
+
+    private fun initiateCardMap(): Map<PlayingCard, Boolean> {
+        val map = mutableMapOf<PlayingCard, Boolean>()
         cards.forEach { card ->
             map[card] = true
         }
         return map
     }
 
-    fun checkCardMap(card: Card): Boolean {
+    fun checkCardMap(card: PlayingCard): Boolean {
         return cardMap.getOrDefault(card, false)
     }
 
-    private fun updateCardMap(card: Card) {
+    private fun updateCardMap(card: PlayingCard) {
         val map = cardMap.toMutableMap()
         map[card] = false
         _cardMap = map.toMap()
     }
 
-    private fun getCard(): Card {
+    private fun getCard(): PlayingCard {
         val deque = ArrayDeque(cards)
         val card = deque.first()
         deque.removeFirst()
-        _cards = deque.toList()
+        cards = deque.toList()
         return card
     }
 
-    fun giveCard(): Card {
+    fun giveCard(): PlayingCard {
         val card = getCard()
         updateCardMap(card)
         return card

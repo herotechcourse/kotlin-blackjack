@@ -1,6 +1,6 @@
 package blackjack.model
 
-import blackjack.utils.CardGenerator
+import blackjack.Fixture
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -29,30 +29,29 @@ class PlayerTest {
 
     @Test
     fun `drawCard()`() {
-        val cards = CardGenerator.generateCards()
         val player = Player("player")
 
         // initial state of player's hand
         assertEquals(0, player.hand.cards.size)
 
         // draw first card
-        player.drawCard(cards[0])
+        player.drawCard(Fixture.SPADES_ACE)
         assertEquals(1, player.hand.cards.size)
-        assertEquals(cards[0], player.hand.cards.last())
+        assertEquals(Fixture.SPADES_ACE, player.hand.cards.last())
 
         // draw second card
-        player.drawCard(cards[1])
+        player.drawCard(Fixture.DIAMONDS_JACK)
         assertEquals(2, player.hand.cards.size)
-        assertEquals(cards[1], player.hand.cards.last())
+        assertEquals(Fixture.DIAMONDS_JACK, player.hand.cards.last())
     }
 
     @Test
     fun `Player has hand which is a list of card`() {
-        val cards = CardGenerator.generateCards()
+        val cards = PlayingCard.Deck
         val player = Player("player")
 
         // initial state of player's hand
-        assertEquals(emptyList<Card>(), player.hand.cards)
+        assertEquals(emptyList<PlayingCard>(), player.hand.cards)
 
         // draw first card
         player.drawCard(cards[0])
@@ -67,67 +66,62 @@ class PlayerTest {
     fun `calculateHand() - player has TWO and TEN`() {
         val player = Player("player")
 
-        player.drawCard(Card("2♦"))
-        player.drawCard(Card("10♦"))
+        player.drawCard(Fixture.DIAMONDS_TWO)
+        player.drawCard(Fixture.DIAMONDS_TEN)
 
         assertEquals(12, player.calculateHand())
     }
 
     @Test
     fun `calculateHand() - player has Two ACE`() {
-        val cards = CardGenerator.generateCards()
         val player = Player("player")
 
-        player.drawCard(cards[0])
-        player.drawCard(cards[1])
+        player.drawCard(Fixture.DIAMONDS_ACE)
+        player.drawCard(Fixture.SPADES_ACE)
 
         assertEquals(12, player.calculateHand())
     }
 
     @Test
     fun `calculateHand() - player has Three ACE and TWO`() {
-        val cards = CardGenerator.generateCards()
         val player = Player("player")
 
-        player.drawCard(cards[0])
-        player.drawCard(cards[1])
-        player.drawCard(cards[2])
-        player.drawCard(Card("2♦"))
+        player.drawCard(Fixture.DIAMONDS_ACE)
+        player.drawCard(Fixture.SPADES_ACE)
+        player.drawCard(Fixture.HEARTS_ACE)
+        player.drawCard(Fixture.DIAMONDS_TWO)
 
         assertEquals(15, player.calculateHand())
     }
 
     @Test
     fun `calculateHand() - player has Three ACE and TEN`() {
-        val cards = CardGenerator.generateCards()
         val player = Player("player")
 
-        player.drawCard(cards[0])
-        player.drawCard(cards[1])
-        player.drawCard(cards[2])
-        player.drawCard(Card("10♦"))
+        player.drawCard(Fixture.DIAMONDS_ACE)
+        player.drawCard(Fixture.SPADES_ACE)
+        player.drawCard(Fixture.HEARTS_ACE)
+        player.drawCard(Fixture.DIAMONDS_TEN)
 
         assertEquals(13, player.calculateHand())
     }
 
     @Test
     fun `isBust() - player is busted`() {
-        val cards = CardGenerator.generateCards()
         val player = Player("player")
 
-        player.drawCard(cards[51])
-        player.drawCard(cards[50])
-        player.drawCard(cards[49])
+        player.drawCard(Fixture.DIAMONDS_TEN)
+        player.drawCard(Fixture.DIAMONDS_JACK)
+        player.drawCard(Fixture.DIAMONDS_QUEEN)
         assertEquals(true, player.isBust())
     }
 
     @Test
     fun `isBust() - player is not busted`() {
-        val cards = CardGenerator.generateCards()
         val player = Player("player")
 
-        player.drawCard(cards[51])
-        player.drawCard(cards[50])
+        player.drawCard(Fixture.DIAMONDS_TEN)
+        player.drawCard(Fixture.DIAMONDS_JACK)
         assertEquals(false, player.isBust())
     }
 }

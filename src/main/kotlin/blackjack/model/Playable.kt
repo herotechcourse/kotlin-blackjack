@@ -8,7 +8,7 @@ interface Playable {
         return condition()
     }
 
-    fun drawCard(newCard: Card)
+    fun drawCard(newCard: PlayingCard)
 
     fun calculateHand(): Int
 

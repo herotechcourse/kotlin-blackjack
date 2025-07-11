@@ -5,14 +5,14 @@ data class Dealer(override val name: String = "Dealer") : Playable {
     override val hand: Hand
         get() = _hand
 
-    override fun drawCard(newCard: Card) {
+    override fun drawCard(newCard: PlayingCard) {
         val deque = ArrayDeque(hand.cards)
         deque.addLast(newCard)
         _hand = Hand(deque.toList())
     }
 
     override fun calculateHand(): Int {
-        return _hand.calculateCards()
+        return _hand.calculateHand()
     }
 
     fun shouldDrawCardOrNot(): Boolean {
