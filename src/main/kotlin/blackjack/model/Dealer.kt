@@ -1,8 +1,9 @@
 package blackjack.model
 
-class Dealer(name: String = "Dealer") : Participant(name) {
-    val deck = Deck()
+class Dealer(name: String = "Dealer", private val deck: Deck = Deck.generateADeck()) : Participant(name) {
     private var showAllCards = false
+
+    fun shuffleDeck() = deck.shuffle()
 
     fun dealCard(): Card {
         return deck.drawCard()
