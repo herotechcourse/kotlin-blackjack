@@ -8,20 +8,25 @@ import org.junit.jupiter.api.Test
 
 class ParticipantTest {
     @Test
-    fun `Participants create players and dealer, and recognize by name`() {
+    fun `Participants init with player and dealer, and recognize by name`() {
         val name = "mina"
         val participants = Participants(name)
 
-        assertThat(participants.contain(name)).isTrue()
+        assertThat(participants.containAll(name)).isTrue()
     }
 
     @Test
-
-    fun `Participants create players and dealer, and recognize by type of Participant`() {
+    fun `Participants init with player and dealer, and recognize by type of Participant`() {
         val player = Player("name")
         val participants = Participants(player)
         val dealer = Dealer()
 
-        assertThat(participants.contain(dealer)).isTrue()
+        assertThat(participants.containAll(dealer)).isTrue()
+    }
+    @Test
+    fun `Participants init with players`() {
+        val participants = Participants("mina", "guri")
+
+        assertThat(participants.containAll("mina", "guri")).isTrue()
     }
 }
