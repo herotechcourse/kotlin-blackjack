@@ -13,7 +13,7 @@ object BlackJackGame {
 
     fun start() {
         val players = createPlayers()
-        val dealer = Dealer()
+        val dealer = Dealer().also { it.shuffleDeck() }
         dealFirstCards(players, dealer)
         dealingPlayersCards(players, dealer)
         dealingDealersCards(dealer)
