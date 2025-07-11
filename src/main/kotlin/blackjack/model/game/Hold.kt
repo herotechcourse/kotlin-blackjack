@@ -1,14 +1,14 @@
 package blackjack.model.game
 
 import blackjack.model.card.Card
-import blackjack.model.participant.Player
+import blackjack.model.participant.PlayerBackup
 
 class Hold(hold: Set<Card>) {
     private val _cards: MutableSet<Card> = hold.toMutableSet()
     val cards: Set<Card>
         get() = _cards.toSet()
 
-    fun moveCard(to: Player) {
+    fun moveCard(to: PlayerBackup) {
         val target = _cards.first()
         _cards.remove(target)
         to.addCard(target)
