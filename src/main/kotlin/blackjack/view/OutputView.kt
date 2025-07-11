@@ -16,10 +16,6 @@ object OutputView {
         println(getCardsOfPlayers(player))
     }
 
-    private fun getCardsOfPlayers(player: Player): String {
-        return "${player.name}'s card: " + player.cards.joinToString(", ")
-    }
-
     fun displayCardsOfDealer(player: Player) {
         print("Dealer: ")
         println(player.cards[0].toString())
@@ -53,6 +49,10 @@ object OutputView {
     ) {
         val printableString = "$name: " + if (result) "Win" else "Lose"
         println(printableString)
+    }
+
+    private fun getCardsOfPlayers(player: Player): String {
+        return "${player.name}'s card: " + player.cards.joinToString(", ")
     }
 
     fun printEmptyLine() {

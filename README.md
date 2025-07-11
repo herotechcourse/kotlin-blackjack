@@ -55,3 +55,36 @@
 #### `InputPrompt`
 - [x] `GET_NAME_OF_PLAYER`
 - [x] fun `askHitOrStand`
+
+
+## Sample Output
+```
+Enter the names of the players (comma-separated):
+player1,player2
+
+Dealing two cards to dealer, player1, player2.
+Dealer: K♦
+player1's card: 4♠, 6♦
+player2's card: Q♦, K♣
+
+Would player1 like to draw another card? (y for yes, n for no)
+y
+player1's card: 4♠, 6♦, 7♠
+Would player1 like to draw another card? (y for yes, n for no)
+y
+player1's card: 4♠, 6♦, 7♠, 2♦
+Would player1 like to draw another card? (y for yes, n for no)
+n
+Would player2 like to draw another card? (y for yes, n for no)
+n
+player2's card: Q♦, K♣
+
+dealer's card: K♦, 9♥ – Total: 19
+player1's card: 4♠, 6♦, 7♠, 2♦ – Total: 19
+player2's card: Q♦, K♣ – Total: 20
+
+## Final Results
+Dealer: 0 Win 1 Draw 1 Lose
+player2: Win
+player1: Lose
+```
