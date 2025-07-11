@@ -39,8 +39,8 @@ class Controller() {
     }
 
     private fun roundOne() {
-        dealer.addCard(deck.drawCard(2))
-        players.forEach { it.addCard(deck.drawCard(2)) }
+        dealer.addCard(deck.drawCard(INITIAL_CARD_COUNT))
+        players.forEach { it.addCard(deck.drawCard(INITIAL_CARD_COUNT)) }
     }
 
     fun processPlayerNames(): List<GamblerInfo> {
@@ -58,7 +58,7 @@ class Controller() {
     }
 
     private fun dealerTakesTurn() {
-        while (dealer.score <= 16) {
+        while (dealer.score <= DEALER_MIN_SCORE) {
             dealer.addCard(deck.drawCard())
             OutputView.displayDealersTurn()
         }
@@ -74,7 +74,7 @@ class Controller() {
             player.addCard(deck.drawCard())
             OutputView.displayCardsOfPlayers(player)
         }
-        if (!answer && player.cards.size == 2) {
+        if (!answer && player.cards.size == INITIAL_CARD_COUNT) {
             OutputView.displayCardsOfPlayers(player)
         }
     }
@@ -110,6 +110,8 @@ class Controller() {
     companion object {
         private const val MAX_ATTEMPTS = 5
         const val BLACKJACK_SCORE = 21
+        const val DEALER_MIN_SCORE = 16
+        const val INITIAL_CARD_COUNT = 2
         private const val MAX_ATTEMPT_MESSAGE = "Too many attempts"
     }
 }
