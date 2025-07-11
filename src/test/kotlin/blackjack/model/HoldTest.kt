@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test
 class HoldTest {
     @Test
     fun `should be able to move a card`() {
-        val hold =
-            Hold(
+        val cards =
+            Cards(
                 setOf(
                     Card(Suit.HEART, Rank.ACE),
                     Card(Suit.HEART, Rank.TWO),
@@ -16,15 +16,15 @@ class HoldTest {
                 ),
             )
         val player = Player("Mina")
-        hold.moveCard(player)
+        cards.moveCard(player)
 
         assertThat(player.numberInHand()).isEqualTo(1)
     }
 
     @Test
     fun `should be able to move a card and remove that card from the cardDesk`() {
-        val hold =
-            Hold(
+        val cards =
+            Cards(
                 setOf(
                     Card(Suit.HEART, Rank.ACE),
                     Card(Suit.HEART, Rank.TWO),
@@ -33,8 +33,8 @@ class HoldTest {
                 ),
             )
         val player = Player("Mina")
-        hold.moveCard(player)
-        assertThat(hold.cards).hasSize(3)
+        cards.moveCard(player)
+        assertThat(cards.cards).hasSize(3)
     }
 
     @Test

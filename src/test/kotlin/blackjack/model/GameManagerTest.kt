@@ -9,9 +9,7 @@ class GameManagerTest {
         val listOfName = listOf("Vito", "Mina")
         val players = PlayerFactory.with(listOfName)
         val dealer = PlayerFactory.createDealer()
-
-        val gameManager = GameManager(dealer, players)
-        gameManager.setUp()
+        GameManager(dealer, players)
 
         assertThat(dealer.numberInHand()).isEqualTo(1)
         assertThat(players[0].numberInHand()).isEqualTo(2)
@@ -23,10 +21,7 @@ class GameManagerTest {
         val listOfName = listOf("Vito", "Mina")
         val players = PlayerFactory.with(listOfName)
         val dealer = PlayerFactory.createDealer()
-
         val gameManager = GameManager(dealer, players)
-        gameManager.setUp()
-
         val sizeOfDealerCard = dealer.numberInHand()
         gameManager.round(dealer)
 
