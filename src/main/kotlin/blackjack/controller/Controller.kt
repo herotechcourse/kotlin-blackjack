@@ -48,9 +48,8 @@ class Controller() {
             try {
                 val names = InputView.getNamesOfPlayers()
                 return names
-                    .split(",")
-                    .map(String::trim)
-                    .map { it -> GamblerInfo(it) } // to avoid abundant function: caller
+                    .parseCommaString()
+                    .map(::GamblerInfo)
             } catch (err: IllegalArgumentException) {
                 OutputView.displayErrorMessages(err.message)
             }
