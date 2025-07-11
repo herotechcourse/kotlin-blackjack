@@ -53,6 +53,10 @@ object OutputView {
         players.forEach { println(it.getResults()) }
     }
 
+    fun showErrorMessage(message: String) {
+        println(message)
+    }
+
     private fun printEmptyLine() {
         println()
     }

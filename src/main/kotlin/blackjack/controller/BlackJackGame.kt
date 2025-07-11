@@ -7,23 +7,24 @@ import blackjack.view.OutputView
 import java.lang.Exception
 import kotlin.system.exitProcess
 
-class BlackJackGame {
-    val dealer = Dealer()
-    var players = listOf<Player>()
+object BlackJackGame {
+    private const val RETRY_LIMIT = 100
+    private const val YES = "y"
 
     fun start() {
-        createPlayers()
-        dealFirstCards()
-        dealingPlayersCards()
-        dealingDealersCards()
-        calculateResults()
+        val players = createPlayers()
+        val dealer = Dealer()
+        dealFirstCards(players, dealer)
+        dealingPlayersCards(players, dealer)
+        dealingDealersCards(dealer)
+        calculateResults(players, dealer)
     }
 
-    fun createPlayers() {
-        players = retryUntilSuccess { InputView.getPlayersNames() }.map { Player(it) }
+    internal fun createPlayers(): List<Player> {
+        return retryUntilSuccess { InputView.getPlayersNames() }.map { Player(it) }
     }
 
-    fun dealFirstCards() {
+    internal fun dealFirstCards(players: List<Player>, dealer: Dealer) {
         repeat(2) {
             dealer.addCard(dealer.dealCard())
             players.forEach { it.addCard(dealer.dealCard()) }
@@ -31,11 +32,11 @@ class BlackJackGame {
         OutputView.printParticipantsHands(players, dealer)
     }
 
-    fun dealingPlayersCards() {
+    internal fun dealingPlayersCards(players: List<Player>, dealer: Dealer) {
         for (player in players) {
             while (!player.hasBlackJack() && !player.isBusts()) {
                 val answer = retryUntilSuccess { InputView.getAnswer(player.name) }
-                if (answer == AFFIRMATIVE_ANSWER) {
+                if (answer == YES) {
                     val card = dealer.dealCard()
                     player.addCard(card)
                     println(player)
@@ -46,7 +47,7 @@ class BlackJackGame {
         }
     }
 
-    fun dealingDealersCards() {
+    internal fun dealingDealersCards(dealer: Dealer) {
         var isDealerHitACard = false
         while (dealer.shouldNotStand()) {
             isDealerHitACard = true
@@ -59,7 +60,7 @@ class BlackJackGame {
         dealer.showAllCards()
     }
 
-    fun calculateResults() {
+    internal fun calculateResults(players: List<Player>, dealer: Dealer) {
         OutputView.printFinalHands(players, dealer)
 
         players.forEach { dealer.setResultFor(it) }
@@ -67,19 +68,15 @@ class BlackJackGame {
         OutputView.printResults(players, dealer)
     }
 
-    private fun <T> retryUntilSuccess(block: () -> T): T {
+    internal fun <T> retryUntilSuccess(block: () -> T): T {
         repeat(RETRY_LIMIT) {
             try {
                 return block()
             } catch (e: Exception) {
-                println(e.message)
+                OutputView.showErrorMessage(e.message ?: "[ERROR]: Unknown Error. Try again.")
             }
         }
+        OutputView.showErrorMessage("[ERROR]: You tried so many times. Sorry the Game is over. Bye!!")
         exitProcess(1)
-    }
-
-    companion object {
-        private const val RETRY_LIMIT = 100
-        private const val AFFIRMATIVE_ANSWER = "y"
     }
 }
