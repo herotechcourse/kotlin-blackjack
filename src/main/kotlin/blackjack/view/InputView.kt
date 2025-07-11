@@ -16,9 +16,7 @@ object InputView {
     fun promptForDraw(player: Player): Boolean {
         println("\nWould ${player.name} like to draw another card? (y for yes, n for no)")
         val input = readln().trim()
-        if (input.isEmpty()) {
-            throw IllegalArgumentException(ErrorMessage.EMPTY_INPUT.toString())
-        }
+        require(input.isNotEmpty()) { ErrorMessage.EMPTY_INPUT.toString() }
         return when (input) {
             YES -> true
             NO -> false
