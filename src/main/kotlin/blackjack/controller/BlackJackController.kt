@@ -15,7 +15,7 @@ object BlackJackController {
 
             val gameManager = GameManager(dealer, players)
             OutputView.printAllPlayers(listOf(dealer) + players)
-            gameManager.playGame(dealer, players) { InputView.askForCard() }
+            gameManager.playGame(dealer, players, InputView::askForCard, OutputView::printOnePlayer)
 
             OutputView.printFinalResults(listOf(dealer) + players)
             val statistics = Statistics(dealer, players)

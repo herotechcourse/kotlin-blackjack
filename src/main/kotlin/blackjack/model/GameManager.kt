@@ -13,31 +13,33 @@ class GameManager(private val dealer: Player, private val players: List<Player>)
     fun playGame(
         dealer: Player,
         players: List<Player>,
-        askForCard: () -> Boolean,
+        askForCard: (Player) -> Boolean,
+        printPlayerResult: (Player) -> Unit,
     ) {
-        players.forEach { round(it, askForCard) }
-        round(dealer)
+        players.forEach { round(it, askForCard, printPlayerResult) }
+        round(dealer, askForCard, printPlayerResult)
     }
 
     internal fun round(
         player: Player,
-        askForCard: () -> Boolean = { true },
+        askForCard: (Player) -> Boolean = { true },
+        printPlayerResult: (Player) -> Unit,
     ) {
         when (player) {
             dealer -> roundForDealer(player)
-            else -> roundForPlayers(player, askForCard)
+            else -> roundForPlayers(player, askForCard, printPlayerResult)
         }
     }
 
     private fun roundForPlayers(
         player: Player,
-        askForCard: () -> Boolean,
+        askForCard: (Player) -> Boolean,
+        printPlayerResult: (Player) -> Unit,
     ) {
         while (ableToReceive(player)) {
-            OutputView.printAskForCard(player)
-            if (askForCard()) {
+            if (askForCard(player)) {
                 cardDeck.hit(player)
-                OutputView.printOnePlayer(player)
+                printPlayerResult(player)
             } else {
                 break
             }
