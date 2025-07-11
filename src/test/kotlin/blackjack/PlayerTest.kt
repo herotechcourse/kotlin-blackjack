@@ -81,7 +81,7 @@ class PlayerTest {
     fun `should get cards`() {
         val deck = Deck()
         val player = Player(GamblerInfo("Jin"))
-        player.addCard(deck.drawCard(4))
+        player.addCard(deck.drawCards(4))
         assertThat(player.cards.size).isEqualTo(4)
     }
 }

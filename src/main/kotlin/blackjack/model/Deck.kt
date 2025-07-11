@@ -9,7 +9,7 @@ class Deck {
         cards.shuffle()
     }
 
-    fun drawCard(count: Int = 1): List<Card> {
+    fun drawCards(count: Int = 1): List<Card> {
         val drawnCards = cards.take(count)
         removeCards(drawnCards)
         return drawnCards

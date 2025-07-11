@@ -39,8 +39,8 @@ class Controller() {
     }
 
     private fun roundOne() {
-        dealer.addCard(deck.drawCard(INITIAL_CARD_COUNT))
-        players.forEach { it.addCard(deck.drawCard(INITIAL_CARD_COUNT)) }
+        dealer.addCard(deck.drawCards(INITIAL_CARD_COUNT))
+        players.forEach { it.addCard(deck.drawCards(INITIAL_CARD_COUNT)) }
     }
 
     fun processPlayerNames(): List<GamblerInfo> {
@@ -59,7 +59,7 @@ class Controller() {
 
     private fun dealerTakesTurn() {
         while (dealer.score <= DEALER_MIN_SCORE) {
-            dealer.addCard(deck.drawCard())
+            dealer.addCard(deck.drawCards())
             OutputView.displayDealersTurn()
         }
     }
@@ -71,7 +71,7 @@ class Controller() {
             if (!answer) {
                 break
             }
-            player.addCard(deck.drawCard())
+            player.addCard(deck.drawCards())
             OutputView.displayCardsOfPlayers(player)
         }
         if (!answer && player.cards.size == INITIAL_CARD_COUNT) {
