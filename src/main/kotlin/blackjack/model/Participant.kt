@@ -22,8 +22,6 @@ abstract class Participant(val name: String) {
 
     fun setTie() = gameResults.ties++
 
-    abstract fun getResults(): String
-
     override fun toString(): String {
         return "$name's cards: $hand"
     }

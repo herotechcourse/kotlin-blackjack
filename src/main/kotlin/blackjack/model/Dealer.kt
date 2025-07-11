@@ -51,19 +51,11 @@ class Dealer(name: String = "Dealer", private val deck: Deck = Deck.generateADec
         }
     }
 
-    override fun getResults(): String {
-        val winText = if (gameResults.wins > 0) "${gameResults.wins} Win" else ""
-        val loseText = if (gameResults.loses > 0) "${gameResults.loses} Lose" else ""
-        val tieText = if (gameResults.ties > 0) "${gameResults.ties} Tie" else ""
-
-        return "$name: $winText $loseText $tieText"
-    }
-
     override fun toString(): String =
         when {
             showAllCards -> "$name's cards: $hand"
-            hand.dealtCards.isEmpty() -> "$name has no cards yet."
-            else -> "$name: ${hand.dealtCards[0]}"
+            hand.cards.isEmpty() -> "$name has no cards yet."
+            else -> "$name: ${hand.cards[0]}"
         }
 
     companion object {

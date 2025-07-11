@@ -1,6 +1,9 @@
 package blackjack.model
 
 class Hand(private val dealtCards: MutableList<Card> = mutableListOf()) {
+    val cards: List<Card>
+        get() = dealtCards.toList()
+
     fun addCard(card: Card) {
         if (!isBusts()) dealtCards.add(card)
     }
