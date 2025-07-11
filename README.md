@@ -14,44 +14,44 @@
 #### enum class `Suit`
 - [x] includes names: "SPADE", "HEART", "CLUB", "DIAMOND"
 
-### class `PlayerCard`
-- [x] contains fun `addCard` : updates total score, add element `card`
-- [x] Considers Ace as the value of 1 if the total score is going above 21
-
 ### value class `GamblerInfo`
 - [x] contains value `name`
   - [x] should not be empty
-  - [x] can't be 'Dealer' which is already reserved for it (Case Insensitive)
 
 ### class `Player`
 - [x] contains class `GamblerInfo`
-- [x] contains class `hand`
+- [x] contains list<Card>
 - [x] for representing 'Player1', 'Player2', ..., 'PlayerN', and 'Dealer'
+- [x] `addCard()` to add card
+  - [x] private fun `updateScore` to update score on each insertion
 
 ### class `Deck`
 - [x] contains function `generateCards()`
 - [x] contains function `shuffle()`
 - [x] contains function `Draw()`
 
+### class `FinalResult`
+- [x] Calculates the winnings for Player
+
 ### directory `view` : object `InputView`, object `OutputView`
 #### `InputView`
-- [x] fun `get names of the player`
-- [x] fun `read String`
-- [] fun `get hit or stand
+- [x] fun `getNamesOfPlayers`
+- [x] fun `getHitOrStand`
+- [x] private fun `readString`
+
 #### `OutputView`
-- [x] fun `display names of players`
-- [x] fun `display the first draw`(parameter: List<Player>)
-  - [x] private fun `display message for first draw`(parameter: Player)
-  - [] private fun `display cards and score`
+- [x] fun `displayErrorMessages`
+- [x] fun `displayNamesOfPlayers`
+- [x] fun `displayCardsOfPlayers`
+- [x] fun `displayCardsOfDealer`
+- [x] fun `displayDealersTurn`
+- [x] fun `displayCardsOfPlayersWithScore`
+- [x] fun `displayFinalResultsHeading`
+- [x] fun `displayPlayerResult`
+- [x] fun `displayPlayerResult`
+- [x] fun `printEmptyLine`
+- [x] fun `getCardsOfPlayers`
 
-### object `Controller`
-- [] has function `startRound()`
-- [] has function `TakesTurn()`
-  - [] has function `askDrawOrNot()` : until score is greater than 21 or user says 'n'
-
-### class `Statistic`
-- [] will use List<Player> as parameter
-
-
-
-### class `Application`
+#### `InputPrompt`
+- [x] `GET_NAME_OF_PLAYER`
+- [x] fun `askHitOrStand`

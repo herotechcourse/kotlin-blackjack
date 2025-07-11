@@ -17,8 +17,8 @@ class Player(val gamblerInfo: GamblerInfo) {
     }
 
     private fun updateScore() {
-        var aceCount = _cards.count { it -> it.rank == Rank.ACE }
-        var totalScore = _cards.sumOf { it -> it.rank.value }
+        var aceCount = _cards.count { it.rank == Rank.ACE }
+        var totalScore = _cards.sumOf { it.rank.value }
         while (totalScore > WINNING_SCORE && aceCount > 0) {
             totalScore -= 10
             aceCount--
