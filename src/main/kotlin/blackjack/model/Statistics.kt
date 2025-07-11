@@ -1,6 +1,7 @@
 package blackjack.model
 
-class Statistics(private val dealer: Player, private val players: List<Player>) {
+class Statistics(val dealer: Player, val players: List<Player>) {
+
     val totalResult
         get() = calculatePlayersWinning()
     val dealerWin

@@ -24,7 +24,8 @@ object OutputView {
         println("${player.name}'s cards: " + "${player.cardsToString()} - Total: ${player.calculatePoints()}.")
     }
 
-    fun printFinalResults(players: List<Player>) {
+    private fun printFinalResults(statistics: Statistics) {
+        val players = statistics.dealer + statistics.players
         players.forEach { printOnePlayerFinalResult(it) }
     }
 
@@ -36,6 +37,8 @@ object OutputView {
     }
 
     fun printStatistics(statistics: Statistics) {
+        printFinalResults(statistics)
+
         println("\n## Final Results")
         println("Dealer: ${statistics.dealerWin} Win ${statistics.dealerLose} Lose")
         statistics.totalResult.forEach {
