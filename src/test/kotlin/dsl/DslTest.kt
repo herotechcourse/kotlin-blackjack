@@ -30,6 +30,8 @@ class DslTest {
                 name(value)
                 skills {
                 }
+                languages {
+                }
             }
         assertThat(person.name).isEqualTo(value)
     }
@@ -41,6 +43,8 @@ class DslTest {
                 name("Vito")
                 company("DH")
                 skills {
+                }
+                languages {
                 }
             }
         assertThat(person.name).isEqualTo("Vito")
@@ -58,9 +62,34 @@ class DslTest {
                     soft("Good communication skills")
                     hard("Kotlin")
                 }
+                languages {
+                }
             }
         assertThat(person.name).isEqualTo("Vito")
         assertThat(person.company).isEqualTo("DH")
         assertThat(person.skills.soft.first()).isEqualTo("A passion for problem solving")
+    }
+
+    @Test
+    fun languages() {
+        val person =
+            introduce {
+                name("Vito")
+                company("DH")
+                skills {
+                    soft("A passion for problem solving")
+                    soft("Good communication skills")
+                    hard("Kotlin")
+                }
+                languages {
+                    "Italian" level 5
+                    "English" level 3
+                    "German" level 4
+                }
+            }
+        assertThat(person.name).isEqualTo("Vito")
+        assertThat(person.company).isEqualTo("DH")
+        assertThat(person.skills.soft.first()).isEqualTo("A passion for problem solving")
+        assertThat(person.languages.languages["Italian"]).isEqualTo(5)
     }
 }
