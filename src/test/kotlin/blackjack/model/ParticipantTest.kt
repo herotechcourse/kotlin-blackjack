@@ -32,4 +32,10 @@ class ParticipantTest {
         assertThat(participants.containsAll("guri", "I am not Guri")).isFalse()
         assertThat(participants[0].name).isEqualTo("mina")
     }
+
+    @Test
+    fun `can recognize number of players`() {
+        val participants = Participants("mina", "guri")
+        assertThat(participants.numberOfPlayers()).isEqualTo(2)
+    }
 }
