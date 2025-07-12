@@ -17,4 +17,15 @@ object InputView {
             else -> askForCard()
         }
     }
+
+    fun <T> retry(
+        block: () -> T
+    ): T {
+        return try {
+            block()
+        } catch (exception: IllegalArgumentException) {
+            OutputView.printError(exception.message)
+            retry { block() }
+        }
+    }
 }
