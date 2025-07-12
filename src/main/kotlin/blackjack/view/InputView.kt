@@ -1,28 +1,38 @@
 package blackjack.view
 
 object InputView {
-    fun askPlayersName(): String {
-        OutputView.printEnterPlayerName()
-        return readlnOrNull() ?: throw IllegalArgumentException(Errors.INVALID_INPUT.message)
+
+    fun readPlayersNames(): List<String> {
+        return Ask.retryable(
+            Ask::playersName,
+            Parser::playerNames,
+        )
     }
 
-
-    fun askForCard(): String {
-        while (true) {
+    internal object Ask {
+        fun playersName(): String {
+            OutputView.printEnterPlayerName()
             return readlnOrNull() ?: throw IllegalArgumentException(Errors.INVALID_INPUT.message)
         }
-    }
 
-    fun <T> retry(
-        input : () -> String,
-        result: (String) -> T
-    ): T {
-        while (true) {
-            val input = input()
-            try {
-                return result(input)
-            } catch (exception: IllegalArgumentException) {
-                OutputView.printError(exception.message)
+
+        fun forCard(): String {
+            while (true) {
+                return readlnOrNull() ?: throw IllegalArgumentException(Errors.INVALID_INPUT.message)
+            }
+        }
+
+        fun <T> retryable(
+            ask: () -> String,
+            parser: (String) -> T
+        ): T {
+            while (true) {
+                val input = ask()
+                try {
+                    return parser(input)
+                } catch (exception: IllegalArgumentException) {
+                    OutputView.printError(exception.message)
+                }
             }
         }
     }

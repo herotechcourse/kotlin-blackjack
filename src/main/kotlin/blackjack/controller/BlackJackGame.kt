@@ -8,7 +8,7 @@ import kotlin.system.exitProcess
 object BlackJackGame {
     fun run() {
         runCatching {
-            val names = InputView.getPlayersName()
+            val names = InputView.readPlayersNames()
             val participants = Participants.from(names)
 
         }.onFailure { exception ->
