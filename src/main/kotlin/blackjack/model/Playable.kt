@@ -2,17 +2,25 @@ package blackjack.model
 
 import blackjack.utils.Constants
 
-interface Playable {
-    val name: String
-    val hand: Hand
+abstract class Playable {
+    abstract val name: String
+    protected var handInternal: Hand = Hand()
+    open val hand: Hand
+        get() = handInternal
 
-    fun requestCard(condition: () -> Boolean): Boolean {
+    open fun requestCard(condition: () -> Boolean): Boolean {
         return condition()
     }
 
-    fun drawCard(newCard: Card)
+    open fun drawCard(newCard: Card) {
+        val deque = ArrayDeque(hand.cards)
+        deque.addLast(newCard)
+        handInternal = Hand(deque.toList())
+    }
 
-    fun calculateHand(): Int
+    open fun calculateHand(): Int {
+        return handInternal.calculateCards()
+    }
 
     fun isBust(): Boolean {
         return calculateHand() > Constants.BLACK_JACK
