@@ -1,5 +1,7 @@
 package blackjack.model
 
+import blackjack.utils.Constants
+
 data class Stats(val players: List<Player>, val dealer: Dealer) {
     private var _playerBoard = initPlayerBoard()
     val playerBoard: Map<Player, Int> get() = _playerBoard
@@ -21,28 +23,22 @@ data class Stats(val players: List<Player>, val dealer: Dealer) {
     ) {
         val playerScore = player.calculateHand()
         when {
-            player.isBust() -> board[player] = LOSE
-            dealer.isBust() -> board[player] = WIN
-            playerScore > dealerScore -> board[player] = WIN
-            playerScore < dealerScore -> board[player] = LOSE
-            else -> board[player] = TIE
+            player.isBust() -> board[player] = Constants.LOSE
+            dealer.isBust() -> board[player] = Constants.WIN
+            playerScore > dealerScore -> board[player] = Constants.WIN
+            playerScore < dealerScore -> board[player] = Constants.LOSE
+            else -> board[player] = Constants.TIE
         }
     }
 
     fun updateDealerStats() {
         val stats = _dealerStats.toMutableMap()
-        val winCount = playerBoard.values.count { it == LOSE }
-        val loseCount = playerBoard.values.count { it == WIN }
-        val tieCount = playerBoard.values.count { it == TIE }
+        val winCount = playerBoard.values.count { it == Constants.LOSE }
+        val loseCount = playerBoard.values.count { it == Constants.WIN }
+        val tieCount = playerBoard.values.count { it == Constants.TIE }
         stats["win"] = winCount
         stats["lose"] = loseCount
         stats["tie"] = tieCount
         _dealerStats = stats.toMap()
-    }
-
-    companion object {
-        const val LOSE = 0
-        const val WIN = 1
-        const val TIE = 2
     }
 }

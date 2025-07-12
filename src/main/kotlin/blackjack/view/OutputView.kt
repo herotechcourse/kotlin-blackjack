@@ -3,6 +3,7 @@ package blackjack.view
 import blackjack.model.Dealer
 import blackjack.model.Player
 import blackjack.model.Stats
+import blackjack.utils.Constants
 
 object OutputView {
     fun displayInitialState(
@@ -58,16 +59,10 @@ object OutputView {
         playersResult: Map<Player, Int>,
     ): String {
         return when (playersResult[player]) {
-            PlayerResult.LOSE -> "Lose"
-            PlayerResult.WIN -> "Win"
-            PlayerResult.TIE -> "Tie"
+            Constants.LOSE -> "Lose"
+            Constants.WIN -> "Win"
+            Constants.TIE -> "Tie"
             else -> "Error"
         }
-    }
-
-    private object PlayerResult {
-        const val LOSE = 0
-        const val WIN = 1
-        const val TIE = 2
     }
 }

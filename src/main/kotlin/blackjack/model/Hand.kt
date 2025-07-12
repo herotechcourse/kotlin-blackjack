@@ -1,16 +1,18 @@
 package blackjack.model
 
+import blackjack.utils.Constants
+
 data class Hand(val cards: List<Card> = emptyList()) {
     fun calculateCards(): Int {
         val values = cards.map { it.value }
-        var aceCounts = values.count { it == 11 }
+        var aceCounts = values.count { it == Constants.ACE_HIGH }
         var score = values.sum()
-        while (aceCounts > 0 && score > 21) {
-            score -= 10
+        while (aceCounts > 0 && score > Constants.BLACK_JACK) {
+            score -= Constants.ACE_HIGH - Constants.ACE_LOW
             aceCounts--
         }
-        if (score < 10 && values.contains(11)) {
-            score += 10
+        if (score < Constants.SCORE_THRESHOLD_FOR_ACE && values.contains(Constants.ACE_HIGH)) {
+            score += Constants.ACE_HIGH - Constants.ACE_LOW
         }
         return score
     }
