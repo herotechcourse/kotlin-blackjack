@@ -8,9 +8,9 @@ class Hand(private val dealtCards: MutableList<Card> = mutableListOf()) {
         if (!isBusts()) dealtCards.add(card)
     }
 
-    fun hasBlackJack(): Boolean = dealtCards.isNotEmpty() && getScore() == BLACK_JACK
+    fun hasBlackJack(): Boolean = dealtCards.size == 2 && getScore() == MAX_SCORE
 
-    fun isBusts(): Boolean = dealtCards.isNotEmpty() && getScore() > BLACK_JACK
+    fun isBusts(): Boolean = dealtCards.isNotEmpty() && getScore() > MAX_SCORE
 
     fun getScore(): Int {
         var aceCount = 0
@@ -19,7 +19,7 @@ class Hand(private val dealtCards: MutableList<Card> = mutableListOf()) {
             if (it.rank == Card.Rank.ACE) ++aceCount
 
             score += it.rank.value
-            if (score > BLACK_JACK && aceCount > 0) {
+            if (score > MAX_SCORE && aceCount > 0) {
                 score -= ACE_ADJUSTMENT
                 --aceCount
             }
@@ -33,7 +33,7 @@ class Hand(private val dealtCards: MutableList<Card> = mutableListOf()) {
     }
 
     companion object {
-        const val BLACK_JACK = 21
+        const val MAX_SCORE = 21
         const val ACE_ADJUSTMENT = 10
     }
 }
