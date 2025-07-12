@@ -7,6 +7,6 @@ fun main() {
     try {
         BlackJackGame.start()
     } catch (e: Exception) {
-        OutputView.showErrorMessage("[FATAL]: ${e.message ?: "[FATAL]: Unknown error."}")
+        OutputView.printErrorMessage("[FATAL]: ${e.message ?: "[FATAL]: Unknown error."}")
     }
 }

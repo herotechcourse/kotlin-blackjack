@@ -1,18 +1,20 @@
 package blackjack.view
 
-import blackjack.model.Dealer
+import blackjack.model.Participants
 import blackjack.model.Player
 
 object OutputView {
-    fun printParticipantsHands(
-        players: List<Player>,
-        dealer: Dealer,
-    ) {
-        printEmptyLine()
-        println("Dealing two cards to ${dealer.name}, ${getPlayersNames(players)}.")
-        println(dealer)
+    fun printPlayerInfo(player: Player) {
+        println(player)
+    }
 
-        players.forEach(::println)
+    fun printParticipantsHands(participants: Participants) {
+        printEmptyLine()
+        println("Dealing two cards to ${participants.dealer.name}, ${getPlayersNames(participants.players)}.")
+
+        println(participants.dealer)
+        participants.players.forEach(::println)
+
         printEmptyLine()
     }
 
@@ -27,33 +29,27 @@ object OutputView {
         printEmptyLine()
     }
 
-    fun printFinalHands(
-        players: List<Player>,
-        dealer: Dealer,
-    ) {
-        println("$dealer - Total: ${dealer.getScore()}")
-        players.forEach { println("$it - Total: ${it.getScore()}") }
+    fun printFinalHands(participants: Participants) {
+        println("${participants.dealer} - Total: ${participants.dealerScore}")
+        participants.players.forEach { println("$it - Total: ${it.getScore()}") }
     }
 
-    fun printResults(
-        players: List<Player>,
-        dealer: Dealer,
-    ) {
+    fun printResults(participants: Participants) {
         printEmptyLine()
         println("## Final Results")
-        println("${dealer.name}: ${dealer.result}")
-        players.forEach { println("${it.name}: ${it.result}") }
+        println("${participants.dealerName}: ${participants.dealerResult}")
+        participants.players.forEach { println("${it.name}: ${it.result}") }
     }
 
-    fun showErrorMessage(message: String) {
-        println("[ERROR]: $message")
+    fun printErrorMessage(message: String) {
+        println("\n[ERROR]: $message\n")
+    }
+
+    fun printEmptyLine() {
+        println()
     }
 
     private fun getPlayersNames(players: List<Player>): String {
         return players.joinToString(", ") { it.name }
-    }
-
-    private fun printEmptyLine() {
-        println()
     }
 }
