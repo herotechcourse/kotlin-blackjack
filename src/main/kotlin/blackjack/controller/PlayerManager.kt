@@ -20,7 +20,7 @@ class PlayerManager {
         receiveCard: () -> Card,
     ) {
         var isFirst = true
-        while (!player.isBust()) {
+        while (player.canContinue()) {
             val requestMessage =
                 player.requestCard {
                     callGameManagerToReadYesOrNo(player.name)

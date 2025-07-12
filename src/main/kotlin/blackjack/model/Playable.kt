@@ -15,4 +15,8 @@ interface Playable {
     fun isBust(): Boolean {
         return calculateHand() > 21
     }
+
+    fun canContinue(): Boolean {
+        return calculateHand() <= 21
+    }
 }
