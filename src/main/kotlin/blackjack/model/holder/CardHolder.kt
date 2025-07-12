@@ -3,7 +3,7 @@ package blackjack.model.holder
 import blackjack.model.card.Card
 
 abstract class CardHolder {
-    protected val _cards: MutableList<Card> = mutableListOf()
+    protected var _cards: MutableList<Card> = mutableListOf()
     val cards: List<Card>
         get() = _cards
 
