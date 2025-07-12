@@ -4,7 +4,8 @@ import blackjack.model.card.Card
 
 abstract class CardHolder {
     protected val _cards: MutableList<Card> = mutableListOf()
-    val cards: List<Card> get() = _cards
+    val cards: List<Card>
+        get() = _cards
 
     fun size() : Int = cards.size
 
@@ -14,6 +15,8 @@ abstract class CardHolder {
     fun receive(card: Card) {
         _cards.add(card)
     }
+
+    fun peek(): Card = cards.first()
 
     /**
      * @throws IllegalStateException if try failed and should throw error
