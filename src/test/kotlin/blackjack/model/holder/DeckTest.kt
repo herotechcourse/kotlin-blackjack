@@ -13,11 +13,12 @@ class DeckTest {
     }
 
     @Test
-    fun `empty card deck generate new deck`() {
+    fun `empty deck generate new deck`() {
         val deck = Deck()
-        val oldDeck = deck.cards.toList()
+        val oldDeck = deck.cards
 
-        repeat(Deck.FULL_DECK_SIZE) { deck.draw() }
-        assertThat(deck.cards).isNotEqualTo(oldDeck)
+        repeat(Deck.FULL_DECK_SIZE + 1) { deck.draw() }
+        assertThat(deck.size()).isEqualTo(Deck.FULL_DECK_SIZE - 1)
+        assertThat(deck.cards).isNotSameAs(oldDeck)
     }
 }
