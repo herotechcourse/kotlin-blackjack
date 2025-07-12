@@ -66,5 +66,5 @@
 ### Todo
 
 - [x] Add constants to Input and Output Prompts
-  - [ ] Print cards with color (black and red)
+- [x] Print cards with color (black and red)
 - [x] Update the hasBlackJack method to return true only if score is 21 and Hand size 2

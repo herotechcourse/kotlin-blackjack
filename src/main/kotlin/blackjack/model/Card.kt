@@ -1,11 +1,17 @@
 package blackjack.model
 
 data class Card(val suit: Suit, val rank: Rank) {
-    enum class Suit(val symbol: String) {
-        DIAMONDS("♦"),
-        HEARTS("♥"),
-        CLUBS("♣"),
-        SPADES("♠"),
+    enum class Color(val ansiCode: String) {
+        RED_ON_WHITE("\u001B[38;5;9;48;5;15m"),    // bright red
+        BLACK_ON_WHITE("\u001B[38;5;0;48;5;15m"),
+        RESET("\u001B[0m");
+    }
+
+    enum class Suit(val symbol: String, val color: Color) {
+        DIAMONDS("♦", Color.RED_ON_WHITE),
+        HEARTS("♥", Color.RED_ON_WHITE),
+        CLUBS("♣", Color.BLACK_ON_WHITE),
+        SPADES("♠", Color.BLACK_ON_WHITE);
     }
 
     // maybe change the name Rank
@@ -22,10 +28,10 @@ data class Card(val suit: Suit, val rank: Rank) {
         JACK("J", 10),
         QUEEN("Q", 10),
         KING("K", 10),
-        ACE("A", 11),
+        ACE("A", 11);
     }
 
     override fun toString(): String {
-        return rank.symbol + suit.symbol
+        return "${suit.color.ansiCode}${rank.symbol}${suit.symbol}${Color.RESET.ansiCode}"
     }
 }
