@@ -9,6 +9,13 @@ object InputView {
         )
     }
 
+    fun readUserAnswer() : Boolean {
+        return Ask.retryable(
+            Ask::forCard,
+            Parser::cardChoice,
+        )
+    }
+
     internal object Ask {
         fun playersName(): String {
             OutputView.printEnterPlayerName()
@@ -39,10 +46,15 @@ object InputView {
 
     internal object Parser {
         fun playerNames(input: String): List<String> {
-            return input.split(",")
+            val names = input.split(",")
                 .map { it.trim() }
                 .filterNot { it.isBlank() }
-                .ifEmpty { throw IllegalArgumentException(Errors.INVALID_INPUT.message + ": $input") }
+
+            if (names.isEmpty() || names.any { !it.all { char -> char.isLetterOrDigit() } }) {
+                throw IllegalArgumentException(Errors.INVALID_INPUT.message + ": $input")
+            }
+
+            return names
         }
 
         fun cardChoice(input: String): Boolean {
