@@ -1,54 +1,22 @@
 package blackjack.model
 
-class Dealer(name: String = "Dealer", private val deck: Deck = Deck.generateADeck()) : Participant(name) {
+class Dealer(name: String = "Dealer", private val deck: Deck = Deck.generateADeck()) :
+    Participant(name, DealerResultTracker()) {
     private var showAllCards = false
 
     fun shuffleDeck() = deck.shuffle()
-
-    fun dealCard(): Card {
-        return deck.drawCard()
-    }
-
+    fun dealCard(): Card = deck.drawCard()
     fun shouldNotStand(): Boolean = hand.getScore() <= DEALER_STAND
-
-    fun showAllCards() {
-        showAllCards = true
-    }
+    fun showAllCards() { showAllCards = true }
 
     fun setResultFor(player: Player) {
-        val playerScore = player.getScore()
-        val dealerScore = this.getScore()
-        when {
-            player.isBusts() -> {
-                player.setLose()
-                this.setWin()
-            }
+        val result = evaluateResult(player)
+        player.recordResult(result)
+        recordResult(inverse(result))
+    }
 
-            this.isBusts() -> {
-                player.setWin()
-                this.setLose()
-            }
-
-            player.hasBlackJack() && !this.hasBlackJack() -> {
-                player.setWin()
-                this.setLose()
-            }
-
-            playerScore == dealerScore -> {
-                player.setTie()
-                this.setTie()
-            }
-
-            playerScore < dealerScore -> {
-                player.setLose()
-                this.setWin()
-            }
-
-            else -> {
-                player.setWin()
-                this.setLose()
-            }
-        }
+    override fun resultSummary(): String {
+        return "$name: $resultTracker"
     }
 
     override fun toString(): String =
@@ -57,6 +25,22 @@ class Dealer(name: String = "Dealer", private val deck: Deck = Deck.generateADec
             hand.cards.isEmpty() -> "$name has no cards yet."
             else -> "$name: ${hand.cards[0]}"
         }
+
+    private fun evaluateResult(player: Player): Result = when {
+            player.isBusts() -> Result.LOSE
+            this.isBusts() -> Result.WIN
+            player.hasBlackJack() && !this.hasBlackJack() -> Result.WIN
+            player.getScore() > this.getScore() -> Result.WIN
+            player.getScore() < this.getScore() -> Result.LOSE
+            else -> Result.TIE
+        }
+
+    private fun inverse(result: Result): Result = when (result) {
+        Result.WIN -> Result.LOSE
+        Result.LOSE -> Result.WIN
+        Result.TIE -> Result.TIE
+    }
+
 
     companion object {
         const val DEALER_STAND = 16
