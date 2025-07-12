@@ -1,6 +1,6 @@
 package model
 
-class Dealer() : BasePlayer("Dealer") {
+class Dealer() : BasePlayer("Deal") {
     private val deck = Deck()
 
     fun giveInitialCardsToPlayers(players: List<Player>) {
@@ -15,7 +15,7 @@ class Dealer() : BasePlayer("Dealer") {
         }
     }
 
-    override fun makeDecision(): Boolean = getScore() <= 16
+    fun makeDecision(): Boolean = getScore() <= 16
 
     fun dealCard(): Card = deck.pop()
 }
