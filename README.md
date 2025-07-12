@@ -35,7 +35,10 @@
   - [x] Should implement the ResultTracker interface
   - [x] Should save the result of the player in a state of Result and dealer in a Map<Result, Int> to track the results
     of the game.
-  - [ ] Should print the results at the end of the game.
+  - [x] Should return the results at the end of the game to print them.
+- [x] **Create GameJudge Object**
+  - [x] Should contain a method to calculate the final hand of each player and dealer.
+  - [x] Should set the result of the game for each player and dealer.
 ### Controller
 - [x] Create Game Controller
   - [x] Should call the InputView to get the player names
@@ -61,7 +64,6 @@
   - [x] Add empty lines between each step on the game.
 
 ### Todo
-  - [ ] Add customize exception messages
   - [ ] Add constants to Input and Output Prompts
   - [ ] Print cards with color (black and red)
   - [ ] Update the hasBlackJack method to return true only if score is 21 and Hand size 2
