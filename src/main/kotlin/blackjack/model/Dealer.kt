@@ -1,6 +1,6 @@
 package blackjack.model
 
-class Dealer(name: String = "Dealer", private val deck: Deck = Deck.generateADeck()) :
+class Dealer(name: String = "Dealer", internal val deck: Deck = Deck.generateADeck()) :
     Participant(name, DealerResultTracker()) {
     private var showAllCards = false
     val result: String

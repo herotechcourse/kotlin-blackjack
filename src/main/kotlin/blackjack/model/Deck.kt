@@ -4,10 +4,6 @@ class Deck(private val _cards: MutableList<Card> = mutableListOf()) {
     val cards: List<Card>
         get() = _cards.toList()
 
-    init {
-        create()
-    }
-
     fun shuffle() = _cards.shuffle()
 
     fun drawCard(): Card {
@@ -26,7 +22,6 @@ class Deck(private val _cards: MutableList<Card> = mutableListOf()) {
             }
         }
     }
-
 
     companion object {
         fun generateADeck(): Deck {

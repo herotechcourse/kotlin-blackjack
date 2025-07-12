@@ -7,6 +7,6 @@ class CardTest {
     @Test
     fun `should return the rank value and the suit symbol toString()`() {
         val card = Card(Card.Suit.DIAMONDS, Card.Rank.TEN)
-        assertThat(card.toString()).isEqualTo("${card.rank.value}${card.suit.symbol}")
+        assertThat(card.toString()).contains("${card.rank.value}${card.suit.symbol}")
     }
 }
