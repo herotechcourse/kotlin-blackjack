@@ -36,6 +36,6 @@ class ParticipantTest {
         val names = listOf("mina", "guri")
         val participants = Participants.from(names)
 
-        Assertions.assertThat(participants.playersCount()).isEqualTo(2)
+        Assertions.assertThat(participants.getPlayers().size).isEqualTo(2)
     }
 }

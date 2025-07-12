@@ -7,10 +7,9 @@ class Participants private constructor(
 
     fun getDealer(): Dealer = dealer
 
-    fun getPlayer(index: Int) = players[index]
+    fun getPlayers() : List<Player> = players
 
-    fun playersCount() = players.size
-
+    internal fun getPlayer(index: Int) = players[index]
 
     fun contain(name: String): Boolean {
         return players.any { it.name == name }
