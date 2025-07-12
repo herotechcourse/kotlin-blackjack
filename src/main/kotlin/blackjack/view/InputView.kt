@@ -1,6 +1,6 @@
 package blackjack.view
 
-class InputView {
+object InputView {
     fun askPlayerNames(): List<String> {
         println("Enter the names of the players (comma-separated):")
         try {

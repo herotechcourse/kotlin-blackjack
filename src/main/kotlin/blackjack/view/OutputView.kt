@@ -4,7 +4,7 @@ import blackjack.model.Dealer
 import blackjack.model.Participant
 import blackjack.model.Player
 
-class OutputView {
+object OutputView {
 
     fun showHandCards(participant: Participant, isFirstRound: Boolean) : String {
          return when {
