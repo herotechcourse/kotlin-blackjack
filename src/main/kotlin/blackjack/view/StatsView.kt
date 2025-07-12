@@ -1,8 +1,10 @@
-package blackjack.model
+package blackjack.view
 
+import blackjack.model.Dealer
+import blackjack.model.Player
 import blackjack.utils.Constants
 
-data class Stats(val players: List<Player>, val dealer: Dealer) {
+data class StatsView(val players: List<Player>, val dealer: Dealer) {
     private var _playerBoard = initPlayerBoard()
     val playerBoard: Map<Player, Int> get() = _playerBoard
 

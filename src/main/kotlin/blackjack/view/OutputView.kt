@@ -2,7 +2,6 @@ package blackjack.view
 
 import blackjack.model.Dealer
 import blackjack.model.Player
-import blackjack.model.Stats
 import blackjack.utils.Constants
 
 object OutputView {
@@ -38,7 +37,7 @@ object OutputView {
     }
 
     fun displayFinalResults(
-        winStatistics: Stats,
+        winStatistics: StatsView,
         dealer: Dealer,
     ) {
         val playersResult = winStatistics.playerBoard

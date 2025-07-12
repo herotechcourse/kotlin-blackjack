@@ -1,5 +1,6 @@
 package blackjack.model
 
+import blackjack.view.StatsView
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -27,7 +28,7 @@ class StatsTest {
         dealer.drawCard(Card(Rank.SIX, Suit.DIAMONDS))
         dealer.drawCard(Card(Rank.TEN, Suit.SPADES))
 
-        val stats = Stats(listOf(player1, player2, player3), dealer)
+        val stats = StatsView(listOf(player1, player2, player3), dealer)
         val board = stats.playerBoard
         assertEquals(0, board[player1])
         assertEquals(1, board[player2])
@@ -57,7 +58,7 @@ class StatsTest {
         dealer.drawCard(Card(Rank.SIX, Suit.DIAMONDS))
         dealer.drawCard(Card(Rank.TEN, Suit.SPADES))
 
-        val stats = Stats(listOf(player1, player2, player3), dealer)
+        val stats = StatsView(listOf(player1, player2, player3), dealer)
         stats.updateDealerStats()
         val dealerStats = stats.dealerStats
         assertEquals(1, dealerStats["win"])
