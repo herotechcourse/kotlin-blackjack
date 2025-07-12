@@ -7,9 +7,14 @@ class Dealer(name: String = "Dealer", internal val deck: Deck = Deck.generateADe
         get() = resultTracker.toString()
 
     fun shuffleDeck() = deck.shuffle()
+
     fun dealCard(): Card = deck.drawCard()
+
     fun shouldNotStand(): Boolean = hand.getScore() <= DEALER_STAND
-    fun showAllCards() { showAllCards = true }
+
+    fun showAllCards() {
+        showAllCards = true
+    }
 
     override fun toString(): String =
         when {

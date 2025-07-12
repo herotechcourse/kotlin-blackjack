@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test
 
 class BlackJackGameTest {
     @Test
-    fun retryUntilSuccessTest()
-    {
+    fun retryUntilSuccessTest() {
         var counter = 0
         BlackJackGame.retryUntilSuccess {
             counter++
@@ -15,5 +14,4 @@ class BlackJackGameTest {
 
         assertThat(counter).isEqualTo(5)
     }
-
 }

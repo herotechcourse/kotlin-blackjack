@@ -8,9 +8,13 @@ abstract class Participant(val name: String, protected val resultTracker: Result
     }
 
     fun addCard(newCard: Card) = hand.addCard(newCard)
+
     fun getScore(): Int = hand.getScore()
+
     fun hasBlackJack(): Boolean = hand.hasBlackJack()
+
     fun isBusts(): Boolean = hand.isBusts()
+
     fun recordResult(result: Result) = resultTracker.record(result)
 
     override fun toString(): String {

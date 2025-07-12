@@ -1,6 +1,6 @@
 package blackjack.model
 
-class PlayerResultTracker: ResultTracker {
+class PlayerResultTracker : ResultTracker {
     private var lastResult: Result? = null
 
     override fun toString(): String {

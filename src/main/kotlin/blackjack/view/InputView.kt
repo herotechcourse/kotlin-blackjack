@@ -6,11 +6,12 @@ object InputView {
     fun getPlayersNames(): List<String> {
         println(NAMES_PROMPT)
         val input = readLine() ?: ""
-        val playersNames = input.trim().split(",").map {
-            it.trim().also {
-                require(it.isNotBlank()) { "Wrong name. Player's name should not be blank." }
+        val playersNames =
+            input.trim().split(",").map {
+                it.trim().also {
+                    require(it.isNotBlank()) { "Wrong name. Player's name should not be blank." }
+                }
             }
-        }
         require(playersNames.isNotEmpty()) { "Names cannot be empty. You need to provide minimum one name." }
         require(playersNames.toSet().size == playersNames.size) { "Names should be unique." }
         return playersNames

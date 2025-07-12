@@ -36,13 +36,17 @@ object BlackJackGame {
         participants.players.forEach { player ->
             dealCardsTo(
                 player,
-                participants.dealer
+                participants.dealer,
             ) { retryUntilSuccess { InputView.getAnswer(player.name) == YES } }
         }
         OutputView.printEmptyLine()
     }
 
-    internal fun dealCardsTo(player: Player, dealer: Dealer, shouldHit: () -> Boolean) {
+    internal fun dealCardsTo(
+        player: Player,
+        dealer: Dealer,
+        shouldHit: () -> Boolean,
+    ) {
         if (player.hasBlackJack()) {
             OutputView.printPlayerInfo(player)
             return

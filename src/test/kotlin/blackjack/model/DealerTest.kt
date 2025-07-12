@@ -11,13 +11,14 @@ class DealerTest {
     @BeforeEach
     fun setUp() {
         // Create a predictable deck
-        deck = Deck(
-            mutableListOf(
-                Card(Card.Suit.SPADES, Card.Rank.TWO),
-                Card(Card.Suit.HEARTS, Card.Rank.FIVE),
-                Card(Card.Suit.CLUBS, Card.Rank.KING)
+        deck =
+            Deck(
+                mutableListOf(
+                    Card(Card.Suit.SPADES, Card.Rank.TWO),
+                    Card(Card.Suit.HEARTS, Card.Rank.FIVE),
+                    Card(Card.Suit.CLUBS, Card.Rank.KING),
+                ),
             )
-        )
         dealer = Dealer(deck = deck)
     }
 
