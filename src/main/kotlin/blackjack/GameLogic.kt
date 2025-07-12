@@ -29,4 +29,27 @@ class GameLogic {
         gameScores.put(dealer.name, dealerSum)
         return gameScores
     }
+
+    fun getScoreResults(players: List<Player>, dealer: Dealer): MutableList<Results> {
+        val scores = getScores(players, dealer)
+        val results = mutableListOf<Results>()
+        scores.forEach { score ->
+
+            println("${score.key}: ${score.value}")
+            when {
+                score.value == 21 -> results.add(Results.BLACKJACK)
+                score.value > 21 -> results.add(Results.BUSTED)
+                else -> results.add(Results.STAY)
+            }
+        }
+        return results
+    }
+
+    fun hasBlackJack(players: List<Player>, dealer: Dealer): Boolean {
+        val results = getScoreResults(players, dealer)
+        return when {
+            Results.BLACKJACK in results -> true
+            else -> false
+        }
+    }
 }
