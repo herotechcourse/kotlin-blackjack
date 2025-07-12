@@ -1,16 +1,23 @@
 package blackjack.view
 
+import blackjack.model.Card
 import blackjack.model.Dealer
 import blackjack.model.Participant
 import blackjack.model.Player
 
 object OutputView {
 
+    private fun showCardFaceAndSymbol(card: Card):String{
+        val face = RankView.fromRank(card.rank).face
+        val symbol = SuitView.fromSuit(card.suit).symbol
+        return "${face}${symbol}"
+    }
+
     fun showHandCards(participant: Participant, isFirstRound: Boolean) : String {
          return when {
-             participant is Dealer && isFirstRound-> "${participant.name}: ${participant.cardsInHand[0].showCardFace()}"
+             participant is Dealer && isFirstRound-> "${participant.name}: ${showCardFaceAndSymbol(participant.cardsInHand[0])}"
 
-             else -> "${participant.name}´s cards: ${participant.cardsInHand.joinToString(", ") { card -> (card.showCardFace()) }}"
+             else -> "${participant.name}´s cards: ${participant.cardsInHand.joinToString(", ") { card -> showCardFaceAndSymbol(card) }}"
         }
     }
 
@@ -40,7 +47,7 @@ object OutputView {
 
     fun getFinalResultForDealer(players: List<Player>): String {
         val lose = players.count { !it.isBusted }
-        val win = players.count { !it.isBusted }
+        val win = players.count { it.isBusted }
         return "$win Win $lose Lose"
     }
 
@@ -52,7 +59,7 @@ object OutputView {
         println("${dealer.name}: ${getFinalResultForDealer(players)}")
         players.forEach {
             print("${it.name}: ")
-            if (!it.isBusted) println("Win") else println("Lose")
+            if (it.isBusted) println("Win") else println("Lose")
         }
     }
 }
