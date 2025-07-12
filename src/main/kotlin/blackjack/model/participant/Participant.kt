@@ -1,3 +1,6 @@
 package blackjack.model.participant
 
-abstract class Participant(val name: String)
+import blackjack.model.holder.Hand
+
+abstract class Participant(val name: String) : Hand() {
+}

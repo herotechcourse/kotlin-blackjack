@@ -2,7 +2,7 @@ package blackjack.model.holder
 
 import blackjack.model.card.Card
 
-class Hand : CardHolder() {
+open class Hand : CardHolder() {
     override fun onDrawFailed(): Card {
         throw IllegalStateException(HAND_EMPTY_BUT_TRY_TO_DRAW)
     }
