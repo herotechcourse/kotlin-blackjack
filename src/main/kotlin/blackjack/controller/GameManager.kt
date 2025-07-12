@@ -1,6 +1,6 @@
 package blackjack.controller
 
-import blackjack.model.game.CardDeck
+import blackjack.model.holder.CardDeck
 import blackjack.model.participant.Participant
 
 class GameManager(
