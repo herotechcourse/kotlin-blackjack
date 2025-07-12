@@ -3,6 +3,8 @@ package blackjack.model
 class Dealer(name: String = "Dealer", private val deck: Deck = Deck.generateADeck()) :
     Participant(name, DealerResultTracker()) {
     private var showAllCards = false
+    val result: String
+        get() = resultTracker.toString()
 
     fun shuffleDeck() = deck.shuffle()
     fun dealCard(): Card = deck.drawCard()
@@ -13,10 +15,6 @@ class Dealer(name: String = "Dealer", private val deck: Deck = Deck.generateADec
         val result = evaluateResult(player)
         player.recordResult(result)
         recordResult(inverse(result))
-    }
-
-    override fun resultSummary(): String {
-        return "$name: $resultTracker"
     }
 
     override fun toString(): String =

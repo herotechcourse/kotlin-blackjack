@@ -27,6 +27,15 @@
   - [x] calculate the current score
   - [x] check for blackjack and busts
   - [x] toString() return a nice formatted string
+- [x] **Create a Result enum Class**
+  - [x] Should contain the values: WIN, LOSE, DRAW
+- [x] **Create a ResultTracker Interface**
+  - [x] Should contain an abstract method to save the result depending if is a player or a dealer.
+- [x] **Create a PlayerResultTracker and DealerResultTracker Class**
+  - [x] Should implement the ResultTracker interface
+  - [x] Should save the result of the player in a state of Result and dealer in a Map<Result, Int> to track the results
+    of the game.
+  - [ ] Should print the results at the end of the game.
 ### Controller
 - [x] Create Game Controller
   - [x] Should call the InputView to get the player names

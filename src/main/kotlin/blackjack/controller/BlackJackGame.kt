@@ -73,10 +73,10 @@ object BlackJackGame {
             try {
                 return block()
             } catch (e: Exception) {
-                OutputView.showErrorMessage(e.message ?: "[ERROR]: Unknown Error. Try again.")
+                OutputView.showErrorMessage(e.message ?: "Unknown Error. Try again.")
             }
         }
-        OutputView.showErrorMessage("[ERROR]: You tried so many times. Sorry the Game is over. Bye!!")
+        OutputView.showErrorMessage("You tried so many times. Sorry the Game is over. Bye!!")
         exitProcess(1)
     }
 }

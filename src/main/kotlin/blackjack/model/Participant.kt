@@ -13,8 +13,6 @@ abstract class Participant(val name: String, protected val resultTracker: Result
     fun isBusts(): Boolean = hand.isBusts()
     fun recordResult(result: Result) = resultTracker.record(result)
 
-    abstract fun resultSummary(): String
-
     override fun toString(): String {
         return "$name's cards: $hand"
     }
