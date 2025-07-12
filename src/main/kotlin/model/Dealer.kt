@@ -18,4 +18,8 @@ class Dealer() : BasePlayer("Deal") {
     fun makeDecision(): Boolean = getScore() <= 16
 
     fun dealCard(): Card = deck.pop()
+
+    fun dealFromSelf() {
+        drawCard(dealCard())
+    }
 }

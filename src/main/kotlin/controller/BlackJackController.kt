@@ -37,12 +37,12 @@ object BlackJackController {
     ) {
         players.forEach { player ->
             while (InputView.requestPlayerDecision(player.name).isYes()) {
-                player.drawCard(dealer.dealCard())
+                player.requestCardFromDealer(dealer)
                 OutputView.displayPlayersTurn(player)
             }
         }
         while (dealer.makeDecision()) {
-            dealer.drawCard(dealer.dealCard())
+            dealer.dealFromSelf()
             OutputView.displayDealersGame()
         }
     }
