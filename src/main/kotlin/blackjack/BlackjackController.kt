@@ -3,14 +3,12 @@ package blackjack
 object BlackjackController {
     fun run() {
         val game = GameLogic()
-        val deckGenerator = DeckGenerator()
-
+        val deck = Deck.generate()
+        val dealer = Dealer(deck)
 
         val playersNames = listOf("Lili", "Jon")
         val players = game.namesToPlayers(playersNames)
-
-        val deck = deckGenerator.generate()
-        val dealer = Dealer(deck)
+        game.firstTurnCards(players, dealer)
 
     }
 }
