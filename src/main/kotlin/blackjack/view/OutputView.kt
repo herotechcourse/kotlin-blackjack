@@ -1,54 +1,48 @@
 package blackjack.view
 
 import blackjack.model.Dealer
+import blackjack.model.Participant
 import blackjack.model.Player
-import kotlin.collections.joinToString
 
 class OutputView {
+
+    fun showHandCards(participant: Participant, isFirstRound: Boolean) : String {
+         return when {
+             participant is Dealer && isFirstRound-> "${participant.name}: ${participant.cardsInHand[0].showCardFace()}"
+
+             else -> "${participant.name}´s cards: ${participant.cardsInHand.joinToString(", ") { card -> (card.showCardFace()) }}"
+        }
+    }
+
     fun displayInitialCards(
         dealer: Dealer,
         players: List<Player>,
+        isFirstRound: Boolean = true
     ) {
         val playerNames = players.joinToString(", ") { it.name }
-        val allParticipants = "Dealer, " + playerNames
-        println("Dealing two cards to $allParticipants.")
-        displayDealerInitialCards(dealer)
-        displayPlayersInitialCards(players)
-    }
-
-    fun displayPlayersInitialCards(players: List<Player>) {
-        players.forEach {
-            displayHandCards(it)
+        println("\nDealing two cards to ${dealer.name}, $playerNames.")
+        println(showHandCards(dealer, isFirstRound))
+        players.forEach { player ->
+                println(showHandCards(player, isFirstRound))
         }
-    }
-
-    fun displayDealerInitialCards(dealer: Dealer) {
-        println("Dealer: ${dealer.cardsInHand[0].rank.face}${dealer.cardsInHand[0].suit.symbol}")
-    }
-
-    fun displayHandCards(player: Player) {
-        println(player.storePlayerHand())
+        println()
     }
 
     fun displayDealerDrawMessage() {
-        println("Dealer draws one more card due to having 16 or less.")
+        println("\nDealer draws one more card due to having 16 or less.\n")
     }
 
     fun displayCardsWithTotalValue(
-        dealer: Dealer,
-        players: List<Player>,
+        participant: Participant, isFirstRound: Boolean = false
     ) {
-        println("${dealer.storePlayerHand()} - Total: ${dealer.calculateTotalValueOfCards()}")
-        players.forEach {
-            println("${it.storePlayerHand()} - Total: ${it.calculateTotalValueOfCards()}")
-        }
+        println("${showHandCards(participant, isFirstRound)} - Total: ${participant.calculateTotalValueOfCards()}")
     }
 
     fun displayFinalResults(
         dealer: Dealer,
         players: List<Player>,
     ) {
-        println("## Final Results")
+        println("\n## Final Results")
         println(dealer.getFinalResultForDealer(players))
         players.forEach {
             print("${it.name}: ")

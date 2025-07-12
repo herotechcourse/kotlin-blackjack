@@ -20,7 +20,8 @@ class Game(
         outputView.displayInitialCards(dealer, players)
         askPlayersToDraw(players)
         dealerDraws()
-        outputView.displayCardsWithTotalValue(dealer, players)
+        outputView.displayCardsWithTotalValue(dealer)
+        players.forEach { player ->  outputView.displayCardsWithTotalValue(player)}
         compareFinalCards(players)
         outputView.displayFinalResults(dealer, players)
     }
@@ -46,7 +47,7 @@ class Game(
                 if (answer) {
                     it.drawCard(deck.giveCard())
                     it.updateActiveStatus(it.calculateTotalValueOfCards())
-                    outputView.displayHandCards(it)
+                    println(outputView.showHandCards(it, false))
                 }
             } while (answer && it.isActive)
         }
