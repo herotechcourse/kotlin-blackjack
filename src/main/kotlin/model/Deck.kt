@@ -3,7 +3,6 @@ package model
 class Deck {
     private val cards = generateCards()
 
-    // for testing
     fun getCards(): Set<Card> {
         return cards.toSet()
     }
