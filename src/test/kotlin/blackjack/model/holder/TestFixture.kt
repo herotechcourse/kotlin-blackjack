@@ -1,16 +1,10 @@
-package blackjack.model
+package blackjack.model.holder
 
 import blackjack.model.card.Card
 import blackjack.model.card.Rank
 import blackjack.model.card.Suit
-import blackjack.model.holder.Hand
-import org.junit.jupiter.api.Test
 
-class HandTest {
-    @Test
-    fun `init Hand`() {
-        Hand()
-    }
+class TestFixture {
 
     companion object {
         object DoesNotHasAce {
