@@ -1,8 +1,6 @@
 package blackjack.model
 
-class Dealer() : Participant() {
-    val name : String = "Dealer"
-
+class Dealer(name: String = "Dealer") : Participant( name) {
     fun mustDraw(totalValueOfCards: Int) = totalValueOfCards <= 16
 
     fun getFinalResultForDealer(players: List<Player>): String {

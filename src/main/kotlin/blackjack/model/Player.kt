@@ -1,5 +1,5 @@
 package blackjack.model
 
 class Player(
-    val name: String,
-) : Participant()
+    name: String,
+) : Participant(name)
