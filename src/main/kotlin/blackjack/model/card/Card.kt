@@ -1,4 +1,4 @@
-package blackjack.model
+package blackjack.model.card
 
 data class Card(val suit: Suit, val rank: Rank) {
     enum class Color(val ansiCode: String) {

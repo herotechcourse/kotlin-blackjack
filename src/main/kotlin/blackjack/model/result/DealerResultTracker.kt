@@ -1,4 +1,4 @@
-package blackjack.model
+package blackjack.model.result
 
 class DealerResultTracker : ResultTracker {
     private val resultMap =

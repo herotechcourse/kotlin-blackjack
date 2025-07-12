@@ -1,4 +1,4 @@
-package blackjack.model
+package blackjack.model.participant
 
 class Participants(val dealer: Dealer, val players: List<Player>) {
     val dealerScore: Int

@@ -1,5 +1,7 @@
 package blackjack.model
 
+import blackjack.model.result.PlayerResultTracker
+import blackjack.model.result.Result
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

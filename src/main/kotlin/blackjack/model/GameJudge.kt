@@ -1,5 +1,10 @@
 package blackjack.model
 
+import blackjack.model.participant.Dealer
+import blackjack.model.participant.Participants
+import blackjack.model.participant.Player
+import blackjack.model.result.Result
+
 object GameJudge {
     fun evaluateAll(participants: Participants) {
         participants.players.forEach { evaluate(participants.dealer, it) }

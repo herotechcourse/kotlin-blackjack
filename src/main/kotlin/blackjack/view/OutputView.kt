@@ -1,7 +1,7 @@
 package blackjack.view
 
-import blackjack.model.Participants
-import blackjack.model.Player
+import blackjack.model.participant.Participants
+import blackjack.model.participant.Player
 
 object OutputView {
     private const val DEALER_DREW_MESSAGE = "Dealer draws one more card due to having 16 or less."

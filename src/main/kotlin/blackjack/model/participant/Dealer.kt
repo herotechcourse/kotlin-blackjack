@@ -1,4 +1,8 @@
-package blackjack.model
+package blackjack.model.participant
+
+import blackjack.model.card.Card
+import blackjack.model.card.Deck
+import blackjack.model.result.DealerResultTracker
 
 class Dealer(name: String = "Dealer", internal val deck: Deck = Deck.generateADeck()) :
     Participant(name, DealerResultTracker()) {

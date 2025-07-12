@@ -1,4 +1,4 @@
-package blackjack.model
+package blackjack.model.result
 
 class PlayerResultTracker : ResultTracker {
     private var lastResult: Result? = null

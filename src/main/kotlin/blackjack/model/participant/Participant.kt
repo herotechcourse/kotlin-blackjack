@@ -1,4 +1,9 @@
-package blackjack.model
+package blackjack.model.participant
+
+import blackjack.model.card.Card
+import blackjack.model.card.Hand
+import blackjack.model.result.Result
+import blackjack.model.result.ResultTracker
 
 abstract class Participant(val name: String, protected val resultTracker: ResultTracker) {
     protected val hand = Hand()
