@@ -14,8 +14,4 @@ class Hand {
     fun scoreOnHand(): Int {
         return ScoreCalculator.getScore(cards)
     }
-
-    override fun toString(): String {
-        return cards.joinToString(", ")
-    }
 }

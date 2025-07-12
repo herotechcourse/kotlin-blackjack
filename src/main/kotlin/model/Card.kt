@@ -1,17 +1,8 @@
 package model
 
-// TODO think if we need override all methods
-
 data class Card(val rank: Rank, val suite: Suite, val faceUp: Boolean = true) {
     override fun equals(other: Any?): Boolean {
         return rank == (other as Card).rank && suite == other.suite
-    }
-
-    override fun toString(): String {
-        if (faceUp) {
-            return rank.value + suite.value
-        }
-        return ""
     }
 
     override fun hashCode(): Int {
