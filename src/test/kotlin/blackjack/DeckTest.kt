@@ -3,13 +3,11 @@ package blackjack
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class CardGeneratorTest {
+class DeckTest {
     @Test
     fun `generate cards with suit`() {
-        val generator = CardGenerator()
-        val cardsAmount = generator.generate().count()
+        val deck = Deck.generate()
+        val cardsAmount = deck.cards.size
         assertEquals(48, cardsAmount, "Cards amount aren't 48",)
     }
-
-
 }

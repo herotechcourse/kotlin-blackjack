@@ -1,3 +1,7 @@
 package blackjack
 
-class Dealer(deck: Deck) : Participant("Dealer") {}
+class Dealer(val deck: Deck) : Participant("Dealer") {
+    fun drawCard(): Card {
+        return deck.drawCard()
+    }
+}

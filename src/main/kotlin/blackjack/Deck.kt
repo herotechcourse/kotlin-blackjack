@@ -1,6 +1,11 @@
 package blackjack
 
-class Deck(val cards: List<Card>) {
+class Deck(cards: List<Card>) {
+    val cards = cards.shuffled().toMutableList()
+
+    fun drawCard(): Card {
+        return cards.removeFirst()
+    }
 
     companion object {
         val cardValues = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
