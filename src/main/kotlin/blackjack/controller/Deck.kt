@@ -3,7 +3,7 @@ package blackjack.controller
 import blackjack.model.Card
 import blackjack.utils.CardGenerator
 
-class CardManager(generator: CardGenerator = CardGenerator) {
+class Deck(generator: CardGenerator = CardGenerator) {
     private var _cards = generator.generateCards().shuffled()
     val cards: List<Card>
         get() = _cards
@@ -38,7 +38,7 @@ class CardManager(generator: CardGenerator = CardGenerator) {
         return card
     }
 
-    fun giveCard(): Card {
+    fun drawCard(): Card {
         val card = getCard()
         updateCardMap(card)
         return card

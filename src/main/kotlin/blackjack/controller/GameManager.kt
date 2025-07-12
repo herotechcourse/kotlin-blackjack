@@ -4,7 +4,7 @@ import blackjack.view.InputView
 import blackjack.view.OutputView
 
 object GameManager {
-    val cardManager = CardManager()
+    val deck = Deck()
     val playerManager = PlayerManager()
     val dealerManager = DealerManager()
     val statsManager = StatsManager(playerManager.players, dealerManager.dealer)
@@ -13,7 +13,8 @@ object GameManager {
 
     fun run() {
         takePlayerNames()
-        initHands()
+        dealerManager.dealer.giveInitCardsToPlayers(playerManager.players, deck)
+        dealerManager.dealer.selfDrawInitCards(deck)
         OutputView.displayInitialState(playerManager.players, dealerManager.dealer)
         askPlayersToHit()
         drawDealerCards()
@@ -27,24 +28,15 @@ object GameManager {
         names.forEach { name -> playerManager.addPlayer(name) }
     }
 
-    private fun initHands() {
-        repeat(2) {
-            playerManager.players.forEach { player ->
-                player.drawCard(cardManager.giveCard())
-            }
-            dealerManager.dealer.drawCard(cardManager.giveCard())
-        }
-    }
-
     private fun askPlayersToHit() {
         playerManager.players.forEach { player ->
-            playerManager.askPlayerHit(player) { cardManager.giveCard() }
+            playerManager.askPlayerHit(player) { deck.drawCard() }
         }
     }
 
     private fun drawDealerCards() {
         while (dealerManager.dealer.shouldDrawCardOrNot()) {
-            dealerManager.dealer.drawCard(cardManager.giveCard())
+            dealerManager.dealer.drawCard(deck.drawCard())
             OutputView.displayDealerDrawsCard()
         }
     }
