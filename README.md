@@ -6,9 +6,12 @@ The player or dealer with a total closest to 21—without going over—wins.
 Includes card dealing, drawing logic, and win/loss/draw result handling.
 
 ## Features: 
-### Players:
-- [ ] Create Players abstract class with hand management
-- [ ] Implement Card class with display and score logic
+### Blackjack as Controller:
+- [x] Implement a Blackjack class as a controller
+- 
+### Participants:
+- [x] Create Participant abstract class and extend it as Player and Dealer classes
+- [x] Implement Card, Deck and DeckGenerator classes
 
 ### Dealer
 - [ ] Deal card to any participant
@@ -20,7 +23,7 @@ Includes card dealing, drawing logic, and win/loss/draw result handling.
 
 ### Game
 - [ ] Accept player names
-- [ ] Deal two initial cards to all participants
+- [x] Deal two initial cards to all participants
 - [ ] Handle player turns
 - [ ] Handle dealer turn
 - [ ] Display final hands and scores
