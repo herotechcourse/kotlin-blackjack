@@ -2,9 +2,12 @@ package blackjack.model.participant
 
 import blackjack.model.card.Rank
 import blackjack.model.holder.Hand
+import blackjack.model.state.State
 
 abstract class Participant(val name: String) : Hand() {
-    val points = getPoints()
+    val points get() = getPoints()
+
+    abstract var state: State
 
     private fun getPoints(): Int {
         return when (cards.isEmpty()) {
