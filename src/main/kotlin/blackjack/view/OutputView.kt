@@ -38,12 +38,18 @@ object OutputView {
         println("${showHandCards(participant, isFirstRound)} - Total: ${participant.calculateTotalValueOfCards()}")
     }
 
+    fun getFinalResultForDealer(players: List<Player>): String {
+        val lose = players.count { it.isActive }
+        val win = players.count { !it.isActive }
+        return "$win Win $lose Lose"
+    }
+
     fun displayFinalResults(
         dealer: Dealer,
         players: List<Player>,
     ) {
         println("\n## Final Results")
-        println(dealer.getFinalResultForDealer(players))
+        println("${dealer.name}: ${getFinalResultForDealer(players)}")
         players.forEach {
             print("${it.name}: ")
             if (it.isActive) println("Win") else println("Lose")
