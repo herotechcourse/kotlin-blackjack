@@ -18,7 +18,7 @@ class DeckTest {
         val oldDeck = deck.cards
 
         repeat(Deck.FULL_DECK_SIZE + 1) { deck.draw() }
-        assertThat(deck.size()).isEqualTo(Deck.FULL_DECK_SIZE - 1)
+        assertThat(deck.cardsCount()).isEqualTo(Deck.FULL_DECK_SIZE - 1)
         assertThat(deck.cards).isNotSameAs(oldDeck)
     }
 }

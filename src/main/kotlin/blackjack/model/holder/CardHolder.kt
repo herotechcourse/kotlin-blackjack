@@ -7,7 +7,7 @@ abstract class CardHolder {
     val cards: List<Card>
         get() = _cards
 
-    fun size() : Int = cards.size
+    fun cardsCount() : Int = cards.size
 
     /** fallback when cannot draw */
     abstract fun onDrawFailed(): Card
