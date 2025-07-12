@@ -18,4 +18,15 @@ class GameLogic {
             dealer.addCard(card)
         })
     }
+
+    fun getScores(players: List<Player>, dealer: Dealer): MutableMap<String, Int> {
+        val gameScores = mutableMapOf<String, Int>()
+        players.map{ player ->
+            val sum = player.hand.sumCards()
+            gameScores.put(player.toString(), sum)
+        }
+        val dealerSum = dealer.hand.sumCards()
+        gameScores.put(dealer.name, dealerSum)
+        return gameScores
+    }
 }
