@@ -38,7 +38,7 @@ class Game(
                 val answer = InputView.askToHit(it.name)
                 if (answer) {
                     dealer.dealCardToPlayer(it)
-                    it.updateBustedStatus()
+                    it.checkCardsValueLimit()
                     println(OutputView.showHandCards(it, false))
                 }
             } while (answer && !it.isBusted)
@@ -52,12 +52,15 @@ class Game(
             dealer.selfDrawCard()
             mustDraw = dealer.mustDraw(dealer.cardsInHand.calculateTotalValueOfCards())
         }
+        dealer.checkCardsValueLimit()
     }
 
     private fun compareFinalCards(players: List<Player>) {
-        val dealerPoints = dealer.cardsInHand.calculateTotalValueOfCards()
-        players.forEach {
-            it.comparePointsAgainstDealer(dealerPoints)
+        if (!dealer.isBusted) {
+            val dealerPoints = dealer.cardsInHand.calculateTotalValueOfCards()
+            players.forEach {
+                it.comparePointsAgainstDealer(dealerPoints)
+            }
         }
         OutputView.displayFinalResults(dealer, players)
     }

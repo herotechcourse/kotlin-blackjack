@@ -58,8 +58,10 @@ object OutputView {
         )
     }
 
-    fun getFinalResultForDealer(players: List<Player>): String {
+    fun getFinalResultForDealer(dealer: Dealer, players: List<Player>): String {
         val lose = players.count { !it.isBusted }
+        if (dealer.isBusted)
+            return "0 Win $lose Lose"
         val win = players.count { it.isBusted }
         return "$win Win $lose Lose"
     }
@@ -69,7 +71,7 @@ object OutputView {
         players: List<Player>,
     ) {
         println("\n## Final Results")
-        println("${dealer.name}: ${getFinalResultForDealer(players)}")
+        println("${dealer.name}: ${getFinalResultForDealer(dealer, players)}")
         players.forEach {
             print("${it.name}: ")
             if (!it.isBusted) println("Win") else println("Lose")
