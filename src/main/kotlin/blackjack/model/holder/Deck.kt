@@ -3,6 +3,7 @@ package blackjack.model.holder
 import blackjack.model.card.Card
 import blackjack.model.card.Rank
 import blackjack.model.card.Suit
+import blackjack.view.OutputView
 
 class Deck : CardHolder() {
     init {
@@ -10,8 +11,7 @@ class Deck : CardHolder() {
     }
 
     override fun onDrawFailed(): Card {
-        // TODO: output view
-        println("Card deck is empty... prepare for a new card deck.")
+        OutputView.printGenerateNewCard()
         _cards = initShuffledDeck().toMutableList()
         return draw()
     }

@@ -50,4 +50,8 @@ object OutputView {
     fun printError(msg: String?) {
         println("Error: $msg")
     }
+
+    object Message {
+        const val GENERATE_NEW_CARD = " Card deck is empty... prepare for a new card deck."
+    }
 }
