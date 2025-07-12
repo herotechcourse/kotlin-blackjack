@@ -1,0 +1,47 @@
+package blackjack.view
+
+import blackjack.model.Card
+import blackjack.model.Player
+import blackjack.model.Statistics
+
+object OutputView {
+    fun printAllPlayers(players: List<Player>) {
+        players.forEach { printOnePlayer(it) }
+    }
+
+    fun printOnePlayer(player: Player) {
+        println("${player.name}'s cards: " + player.cards.joinToString(" ") { displayCard(it) })
+    }
+
+    fun printDealerDrawsCards(player: Player) {
+        println("Dealer draws ${player.numberInHand() - 1} more card due to having 16 or less.")
+    }
+
+    fun printOnePlayerFinalResult(player: Player) {
+        println("${player.name}'s cards: " + "${player.cards.joinToString(" ") { displayCard(it) }} - Total: ${player.calculatePoints()}.")
+    }
+
+    fun printFinalResults(players: List<Player>) {
+        players.forEach { printOnePlayerFinalResult(it) }
+    }
+
+    private fun printWinOrLose(condition: Boolean): String {
+        return when (condition) {
+            true -> "Win"
+            false -> "Lose"
+        }
+    }
+
+    fun printStatistics(statistics: Statistics) {
+        println("\n## Final Results")
+        println("Dealer: ${statistics.dealerWin} Win ${statistics.dealerLose} Lose")
+        statistics.calculatePlayersWinning().forEach {
+                (player, winnings) ->
+            println("${player.name}: ${printWinOrLose(winnings == 1)}")
+        }
+    }
+
+    fun displayCard(card: Card): String {
+        return "${card.rank.face}${card.suit.symbol}"
+    }
+}
