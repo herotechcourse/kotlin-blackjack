@@ -28,8 +28,8 @@ object OutputView {
         println()
     }
 
-    fun displayDealerDrawMessage() {
-        println("\nDealer draws one more card due to having 16 or less.\n")
+    fun displayDealerDrawMessage(dealer: Dealer) {
+        println("\n${dealer.name} draws one more card due to having 16 or less.\n")
     }
 
     fun displayCardsWithTotalValue(
