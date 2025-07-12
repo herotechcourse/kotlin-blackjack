@@ -28,7 +28,7 @@ class ParticipantTest {
 
         Assertions.assertThat(participants.containsAll("mina", "guri")).isTrue()
         Assertions.assertThat(participants.containsAll("guri", "I am not Guri")).isFalse()
-        Assertions.assertThat(participants.getPlayer(1).name).isEqualTo("mina")
+        Assertions.assertThat(participants.getPlayer(0).name).isEqualTo("mina")
     }
 
     @Test
