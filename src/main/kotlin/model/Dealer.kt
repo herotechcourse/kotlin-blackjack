@@ -3,13 +3,19 @@ package model
 class Dealer() : BasePlayer("Dealer") {
     private val deck = Deck()
 
-    override fun makeDecision(): Boolean {
-        return getScore() <= 16
-    }
+    override fun makeDecision(): Boolean = getScore() <= 16
 
     fun dealCard(): Card = deck.pop()
 
-    override fun toString(): String {
-        return "$name's cards: $hand"
+    fun giveInitialCardsToPlayers(players: List<Player>) {
+        repeat(2) {
+            players.forEach { player -> player.drawCard(dealCard()) }
+        }
+    }
+
+    fun drawInitialCards() {
+        repeat(2) {
+            drawCard(dealCard())
+        }
     }
 }
