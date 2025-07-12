@@ -4,6 +4,10 @@ import blackjack.model.Participants
 import blackjack.model.Player
 
 object OutputView {
+    private const val DEALER_DREW_MESSAGE = "Dealer draws one more card due to having 16 or less."
+    private const val DEALER_STAND_MESSAGE = "Dealer stands directly."
+    private const val RESULTS_HEAD = "## Final Results"
+
     fun printPlayerInfo(player: Player) {
         println(player)
     }
@@ -19,13 +23,13 @@ object OutputView {
     }
 
     fun printDealersDrawMessage() {
-        println("Dealer draws one more card due to having 16 or less.")
+        println(DEALER_DREW_MESSAGE)
         printEmptyLine()
     }
 
     fun printDealersStandMessage() {
         printEmptyLine()
-        println("Dealer stands directly.")
+        println(DEALER_STAND_MESSAGE)
         printEmptyLine()
     }
 
@@ -36,7 +40,7 @@ object OutputView {
 
     fun printResults(participants: Participants) {
         printEmptyLine()
-        println("## Final Results")
+        println(RESULTS_HEAD)
         println("${participants.dealerName}: ${participants.dealerResult}")
         participants.players.forEach { println("${it.name}: ${it.result}") }
     }

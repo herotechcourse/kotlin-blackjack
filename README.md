@@ -64,6 +64,7 @@
   - [x] Add empty lines between each step on the game.
 
 ### Todo
-  - [ ] Add constants to Input and Output Prompts
+
+- [x] Add constants to Input and Output Prompts
   - [ ] Print cards with color (black and red)
-  - [ ] Update the hasBlackJack method to return true only if score is 21 and Hand size 2
+- [x] Update the hasBlackJack method to return true only if score is 21 and Hand size 2
