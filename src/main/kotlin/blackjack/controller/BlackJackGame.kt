@@ -2,6 +2,7 @@ package blackjack.controller
 
 import blackjack.model.Dealer
 import blackjack.model.Player
+import blackjack.model.Players
 import blackjack.view.InputView
 import blackjack.view.OutputView
 import java.lang.Exception
@@ -9,44 +10,25 @@ import kotlin.system.exitProcess
 
 class BlackJackGame {
     val dealer = Dealer()
-    var players = listOf<Player>()
+    lateinit var players: Players
 
     fun start() {
         createPlayers()
-        dealFirstCards()
-        dealingPlayersCards()
+        players.dealFirstCards(dealer)
+        OutputView.printParticipantsHands(players.toList(), dealer)
+        players.dealingPlayersCards(::retryUntilSuccess, dealer)
         dealingDealersCards()
-        calculateResults()
+        OutputView.printFinalHands(players.toList(), dealer)
+        players.calculateResults(dealer)
+        OutputView.printResults(players.toList(), dealer)
     }
 
-    fun createPlayers() {
-        players = retryUntilSuccess { InputView.getPlayersNames() }.map { Player(it) }
+    private fun createPlayers() {
+        val playerList = retryUntilSuccess { InputView.getPlayersNames() }.map { Player(it) }
+        players = Players(playerList)
     }
 
-    fun dealFirstCards() {
-        repeat(2) {
-            dealer.addCard(dealer.dealCard())
-            players.forEach { it.addCard(dealer.dealCard()) }
-        }
-        OutputView.printParticipantsHands(players, dealer)
-    }
-
-    fun dealingPlayersCards() {
-        for (player in players) {
-            while (!player.hasBlackJack() && !player.isBusts()) {
-                val answer = retryUntilSuccess { InputView.getAnswer(player.name) }
-                if (answer == "y") {
-                    val card = dealer.dealCard()
-                    player.addCard(card)
-                    println(player)
-                } else {
-                    break
-                }
-            }
-        }
-    }
-
-    fun dealingDealersCards() {
+    private fun dealingDealersCards() {
         var isDealerHitACard = false
         while (dealer.shouldNotStand()) {
             isDealerHitACard = true
@@ -57,14 +39,6 @@ class BlackJackGame {
             OutputView.printDealersStandMessage()
         }
         dealer.showAllCards()
-    }
-
-    fun calculateResults() {
-        OutputView.printFinalHands(players, dealer)
-
-        players.forEach { dealer.setResultFor(it) }
-
-        OutputView.printResults(players, dealer)
     }
 
     private fun <T> retryUntilSuccess(block: () -> T): T {
