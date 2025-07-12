@@ -1,31 +1,46 @@
 package blackjack.view
 
 object InputView {
-    fun getPlayersName(): List<String> {
+    fun askPlayersName(): String {
         OutputView.printEnterPlayerName()
-        val input = (readlnOrNull() ?: throw IllegalArgumentException(Errors.INVALID_INPUT.message)).trim()
-        return input.split(",").map {
-            it.trim()
-        }.filterNot { it.isBlank() }
+        return readlnOrNull() ?: throw IllegalArgumentException(Errors.INVALID_INPUT.message)
     }
 
-    fun askForCard(): Boolean {
-        val input = (readlnOrNull() ?: throw IllegalArgumentException(Errors.INVALID_INPUT.message)).trim()
-        return when (input) {
-            "y" -> true
-            "n" -> false
-            else -> askForCard()
+
+    fun askForCard(): String {
+        while (true) {
+            return readlnOrNull() ?: throw IllegalArgumentException(Errors.INVALID_INPUT.message)
         }
     }
 
     fun <T> retry(
-        block: () -> T
+        input : () -> String,
+        result: (String) -> T
     ): T {
-        return try {
-            block()
-        } catch (exception: IllegalArgumentException) {
-            OutputView.printError(exception.message)
-            retry { block() }
+        while (true) {
+            val input = input()
+            try {
+                return result(input)
+            } catch (exception: IllegalArgumentException) {
+                OutputView.printError(exception.message)
+            }
+        }
+    }
+
+    internal object Parser {
+        fun playerNames(input: String): List<String> {
+            return input.split(",")
+                .map { it.trim() }
+                .filterNot { it.isBlank() }
+                .ifEmpty { throw IllegalArgumentException(Errors.INVALID_INPUT.message + ": $input") }
+        }
+
+        fun cardChoice(input: String): Boolean {
+            return when (input) {
+                "y" -> true
+                "n" -> false
+                else -> throw IllegalArgumentException("${Errors.INVALID_INPUT.message}, try again.")
+            }
         }
     }
 }
