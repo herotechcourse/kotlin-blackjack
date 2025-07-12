@@ -1,5 +1,7 @@
 package blackjack.model
 
+import blackjack.view.RankView
+import blackjack.view.SuitView
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -10,10 +12,10 @@ class CardTest {
     fun `Card create valid digit from name`(candidate: String) {
         val digit = candidate.dropLast(1)
         val suitSymbol = candidate.last()
-        val rank = Rank.of(digit)
-        val suit = Suit.fromSymbol(suitSymbol)
+        val rank = RankView.fromSymbol(digit)
+        val suit = SuitView.fromSymbol(suitSymbol)
         val card = Card(rank, suit)
 
-        assertEquals(digit, card.rank.digit)
+        assertEquals(digit, RankView.toSymbol(card.rank))
     }
 }
