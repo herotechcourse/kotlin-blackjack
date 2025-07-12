@@ -52,6 +52,7 @@ object OutputView {
     }
 
     object Message {
+        const val ENTER_PLAYERS_NAMES = "Enter the names of the players (comma-separated):"
         const val GENERATE_NEW_CARD = " Card deck is empty... prepare for a new card deck."
     }
 }
