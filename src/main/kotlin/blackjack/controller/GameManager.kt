@@ -1,12 +1,18 @@
 package blackjack.controller
 
 import blackjack.model.holder.Deck
+import blackjack.model.participant.Dealer
 import blackjack.model.participant.Participant
+import blackjack.model.participant.Participants
+import blackjack.model.participant.Player
+import blackjack.view.OutputView
 
 class GameManager(
-    private val participant: Participant,
+    private val participants: Participants,
 ) {
     private val cardDeck = Deck()
+    private val dealer = participants.getDealer()
+    private val players = participants.getPlayers()
 
     fun setUp() {
         players.forEach { cardDeck.hit(it, 2) }
@@ -14,8 +20,6 @@ class GameManager(
     }
 
     fun playGame(
-        dealer: Player,
-        players: List<Player>,
         askForCard: () -> Boolean = { true },
     ) {
         players.forEach { round(it, askForCard) }
@@ -23,42 +27,46 @@ class GameManager(
     }
 
     internal fun round(
-        player: Player,
+        participant: Participant,
         askForCard: () -> Boolean = { true },
     ) {
-        when (player) {
-            dealer -> roundForDealer(player)
-            else -> roundForPlayers(player, askForCard)
+        when (participant) {
+            is Dealer -> dealerPlay(participant)
+            is Player -> playersPlay(participant, askForCard)
         }
+        throw IllegalStateException()
     }
 
-    private fun roundForPlayers(
-        player: Player,
+    private fun ableToReceive(participant: Participant): Boolean {
+        when (participant) {
+            is Dealer -> return participant.points <= ABLE_TO_RECEIVE
+            is Player -> participant.points < BLACKJACK
+        }
+        throw IllegalStateException()
+    }
+
+    private fun playersPlay(
+        participant: Participant,
         askForCard: () -> Boolean,
     ) {
-        while (ableToReceive(player)) {
-            OutputView.printAskForCard(player)
+        while (ableToReceive(participant)) {
+            OutputView.printAskForCard(participant)
             if (askForCard()) {
-                cardDeck.hit(player)
-                OutputView.printOnePlayer(player)
+                cardDeck.hit(participant)
+                OutputView.printOnePlayer(participant)
             } else {
                 break
             }
         }
     }
 
-    private fun roundForDealer(player: Player) {
-        while (ableToReceive(player)) {
-            cardDeck.hit(player)
+    private fun dealerPlay(dealer: Dealer) {
+        while (ableToReceive(dealer)) {
+            cardDeck.hit(dealer)
         }
-        OutputView.printDealerDrawsCards(player)
+        OutputView.printDealerDrawsCards(dealer)
     }
 
-    private fun ableToReceive(player: Player): Boolean {
-        val isDealer = player === dealer
-        if (isDealer) return dealer.calculatePoints() <= ABLE_TO_RECEIVE
-        return player.calculatePoints() < BLACKJACK
-    }
 
     companion object {
         private const val ABLE_TO_RECEIVE = 16
