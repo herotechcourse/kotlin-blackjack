@@ -11,18 +11,28 @@ class Game(
     fun startGame() {
         val playersName = InputView.askPlayerNames()
         val players = playersName.map { Player(it) }
+
+        assignInitialCards(players)
+
+        hitOrStay(players)
+
+        compareFinalCards(players)
+    }
+
+    private fun assignInitialCards(players: List<Player>) {
         dealer.selfDrawInitialCards()
         dealer.dealInitialCardsToPlayers(players)
         OutputView.displayInitialCards(dealer, players)
+    }
+
+    private fun hitOrStay(players: List<Player>) {
         askPlayersToHit(players)
         dealerDraws()
         OutputView.displayCardsWithTotalValue(dealer)
         players.forEach { player -> OutputView.displayCardsWithTotalValue(player) }
-        compareFinalCards(players)
-        OutputView.displayFinalResults(dealer, players)
     }
 
-    fun askPlayersToHit(players: List<Player>) {
+    private fun askPlayersToHit(players: List<Player>) {
         players.forEach {
             do {
                 val answer = InputView.askToHit(it.name)
@@ -35,19 +45,20 @@ class Game(
         }
     }
 
-    fun dealerDraws() {
-        val mustDraw = dealer.mustDraw(dealer.cardsInHand.calculateTotalValueOfCards())
-        if (mustDraw) {
+    private fun dealerDraws() {
+        var mustDraw = dealer.mustDraw(dealer.cardsInHand.calculateTotalValueOfCards())
+        while (mustDraw) {
             OutputView.displayDealerDrawMessage(dealer)
             dealer.selfDrawCard()
+            mustDraw = dealer.mustDraw(dealer.cardsInHand.calculateTotalValueOfCards())
         }
     }
 
-    fun compareFinalCards(players: List<Player>) {
+    private fun compareFinalCards(players: List<Player>) {
+        val dealerPoints = dealer.cardsInHand.calculateTotalValueOfCards()
         players.forEach {
-            if (it.cardsInHand.calculateTotalValueOfCards() < dealer.cardsInHand.calculateTotalValueOfCards()) {
-                it.isBusted = true
-            }
+            it.comparePointsAgainstDealer(dealerPoints)
         }
+        OutputView.displayFinalResults(dealer, players)
     }
 }

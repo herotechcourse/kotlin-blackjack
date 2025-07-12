@@ -7,17 +7,23 @@ import blackjack.model.Player
 
 object OutputView {
 
-    private fun showCardFaceAndSymbol(card: Card):String{
+    private fun showCardFaceAndSymbol(card: Card): String {
         val face = RankView.fromRank(card.rank).face
         val symbol = SuitView.fromSuit(card.suit).symbol
         return "${face}${symbol}"
     }
 
-    fun showHandCards(participant: Participant, isFirstRound: Boolean) : String {
-         return when {
-             participant is Dealer && isFirstRound-> "${participant.name}: ${showCardFaceAndSymbol(participant.cardsInHand.cards[0])}"
+    fun showHandCards(participant: Participant, isFirstRound: Boolean): String {
+        return when {
+            participant is Dealer && isFirstRound -> "${participant.name}: ${showCardFaceAndSymbol(participant.cardsInHand.cards[0])}"
 
-             else -> "${participant.name}´s cards: ${participant.cardsInHand.cards.joinToString(", ") { card -> showCardFaceAndSymbol(card) }}"
+            else -> "${participant.name}´s cards: ${
+                participant.cardsInHand.cards.joinToString(", ") { card ->
+                    showCardFaceAndSymbol(
+                        card
+                    )
+                }
+            }"
         }
     }
 
@@ -30,19 +36,26 @@ object OutputView {
         println("\nDealing two cards to ${dealer.name}, $playerNames.")
         println(showHandCards(dealer, isFirstRound))
         players.forEach { player ->
-                println(showHandCards(player, isFirstRound))
+            println(showHandCards(player, isFirstRound))
         }
         println()
     }
 
     fun displayDealerDrawMessage(dealer: Dealer) {
-        println("\n${dealer.name} draws one more card due to having 16 or less.\n")
+        println("\n${dealer.name} draws one more card due to having 16 or less.")
     }
 
     fun displayCardsWithTotalValue(
         participant: Participant, isFirstRound: Boolean = false
     ) {
-        println("${showHandCards(participant, isFirstRound)} - Total: ${participant.cardsInHand.calculateTotalValueOfCards()}")
+        println(
+            "${
+                showHandCards(
+                    participant,
+                    isFirstRound
+                )
+            } - Total: ${participant.cardsInHand.calculateTotalValueOfCards()}"
+        )
     }
 
     fun getFinalResultForDealer(players: List<Player>): String {
@@ -59,7 +72,7 @@ object OutputView {
         println("${dealer.name}: ${getFinalResultForDealer(players)}")
         players.forEach {
             print("${it.name}: ")
-            if (it.isBusted) println("Win") else println("Lose")
+            if (!it.isBusted) println("Win") else println("Lose")
         }
     }
 }

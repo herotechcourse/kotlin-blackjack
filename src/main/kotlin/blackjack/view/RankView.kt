@@ -18,6 +18,6 @@ enum class RankView(val rank: Rank, val face: String) {
     ACE(Rank.ACE, "A");
 
     companion object {
-        fun fromRank(rank: Rank) : RankView =  RankView.entries.first { it.rank == rank }
+        fun fromRank(rank: Rank): RankView = RankView.entries.first { it.rank == rank }
     }
 }
