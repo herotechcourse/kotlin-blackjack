@@ -14,6 +14,6 @@ class Deck {
 
     fun giveCard(): Card {
         require(cards.isNotEmpty()) { "Deck is empty!" }
-        return cards.removeAt(0)
+        return cards.removeFirst()
     }
 }
