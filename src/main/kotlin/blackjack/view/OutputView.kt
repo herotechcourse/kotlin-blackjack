@@ -15,9 +15,9 @@ object OutputView {
 
     fun showHandCards(participant: Participant, isFirstRound: Boolean) : String {
          return when {
-             participant is Dealer && isFirstRound-> "${participant.name}: ${showCardFaceAndSymbol(participant.cardsInHand[0])}"
+             participant is Dealer && isFirstRound-> "${participant.name}: ${showCardFaceAndSymbol(participant.cardsInHand.cards[0])}"
 
-             else -> "${participant.name}´s cards: ${participant.cardsInHand.joinToString(", ") { card -> showCardFaceAndSymbol(card) }}"
+             else -> "${participant.name}´s cards: ${participant.cardsInHand.cards.joinToString(", ") { card -> showCardFaceAndSymbol(card) }}"
         }
     }
 
@@ -42,7 +42,7 @@ object OutputView {
     fun displayCardsWithTotalValue(
         participant: Participant, isFirstRound: Boolean = false
     ) {
-        println("${showHandCards(participant, isFirstRound)} - Total: ${participant.calculateTotalValueOfCards()}")
+        println("${showHandCards(participant, isFirstRound)} - Total: ${participant.cardsInHand.calculateTotalValueOfCards()}")
     }
 
     fun getFinalResultForDealer(players: List<Player>): String {
