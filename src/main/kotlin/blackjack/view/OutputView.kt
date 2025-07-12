@@ -1,5 +1,8 @@
 package blackjack.view
 
+import blackjack.model.participant.Dealer
+import blackjack.model.participant.Participant
+
 import blackjack.model.PlayerBackup
 import blackjack.model.Statistics
 
@@ -12,8 +15,8 @@ object OutputView {
         println("${player.name}'s cards: " + player.cardsToString())
     }
 
-    fun printDealerDrawsCards(player: PlayerBackup) {
-        println("Dealer draws ${player.numberInHand() - 1} more card due to having 16 or less.")
+    fun printDealerDrawsCards(dealer: Dealer) {
+        println("Dealer draws ${dealer.cardsCount() - 1} more card due to having 16 or less.")
     }
 
     fun printAskForCard(player: PlayerBackup) {
