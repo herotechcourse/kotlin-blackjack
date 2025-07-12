@@ -6,7 +6,7 @@ class Player(
 
     fun comparePointsAgainstDealer(dealerPoints: Int) {
         if (cardsInHand.calculateTotalValueOfCards() <= dealerPoints) {
-            isBusted = true
+            updateBustedStatus()
         }
     }
 }
