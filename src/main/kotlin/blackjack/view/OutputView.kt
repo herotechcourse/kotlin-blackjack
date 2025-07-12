@@ -9,11 +9,11 @@ object OutputView {
         players: List<Player>,
         dealer: Dealer,
     ) {
-        var sentence = "dealer, "
+        var sentence = "${dealer.name}, "
         val names = players.map { it.name }
         sentence += names.joinToString(", ")
         println("\nDealing two cards to $sentence.")
-        println("Dealer: ${dealer.hand.cards[0]}")
+        println("${dealer.name}: ${dealer.hand.cards[0]}")
         players.forEach { displayCurrentHand(it) }
     }
 
@@ -22,27 +22,30 @@ object OutputView {
         println("${player.name}'s cards: ${hand.toText()}")
     }
 
-    fun displayDealerDrawsCard() {
-        println("\nDealer draws one more card due to having 16 or less.")
+    fun displayDealerDrawsCard(dealer: Dealer) {
+        println("\n${dealer.name} draws one more card due to having 16 or less.")
     }
 
     fun displayFinalState(
         players: List<Player>,
         dealer: Dealer,
     ) {
-        println("\nDealer's cards: ${dealer.hand.toText()} – Total: ${dealer.calculateHand()}")
+        println("\n${dealer.name}'s cards: ${dealer.hand.toText()} – Total: ${dealer.calculateHand()}")
         players.forEach { player ->
             println("${player.name}'s cards: ${player.hand.toText()} – Total: ${player.calculateHand()}")
         }
     }
 
-    fun displayFinalResults(winStatistics: Stats) {
+    fun displayFinalResults(
+        winStatistics: Stats,
+        dealer: Dealer,
+    ) {
         val playersResult = winStatistics.playerBoard
         val dealerResult = winStatistics.dealerStats
         println("\n## Final Results")
         when (dealerResult["tie"]) {
-            0 -> println("Dealer: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose")
-            else -> println("Dealer: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose ${dealerResult["tie"]} Tie")
+            0 -> println("${dealer.name}: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose")
+            else -> println("${dealer.name}: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose ${dealerResult["tie"]} Tie")
         }
         playersResult.keys.forEach { player ->
             val result = givePlayerResult(player, playersResult)

@@ -20,7 +20,7 @@ object GameManager {
         drawDealerCards()
         OutputView.displayFinalState(playerManager.players, dealerManager.dealer)
         statsManager.processStatistics(playerManager.players, dealerManager.dealer)
-        OutputView.displayFinalResults(statsManager.winStatistics)
+        OutputView.displayFinalResults(statsManager.winStatistics, dealerManager.dealer)
     }
 
     private fun takePlayerNames() {
@@ -37,7 +37,7 @@ object GameManager {
     private fun drawDealerCards() {
         while (dealerManager.dealer.shouldDrawCardOrNot()) {
             dealerManager.dealer.drawCard(deck.drawCard())
-            OutputView.displayDealerDrawsCard()
+            OutputView.displayDealerDrawsCard(dealerManager.dealer)
         }
     }
 }
