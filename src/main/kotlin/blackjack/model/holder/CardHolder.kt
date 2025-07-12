@@ -16,7 +16,8 @@ abstract class CardHolder {
         _cards.add(card)
     }
 
-    fun peek(): Card = cards.first()
+    fun first(): Card = cards.first()
+    fun last(): Card = cards.last()
 
     /**
      * @throws IllegalStateException if try failed and should throw error
@@ -24,7 +25,7 @@ abstract class CardHolder {
      */
     fun draw(): Card {
         return if (_cards.isNotEmpty()) {
-            _cards.removeAt(0)
+            _cards.removeFirst()
         } else {
             onDrawFailed()
         }

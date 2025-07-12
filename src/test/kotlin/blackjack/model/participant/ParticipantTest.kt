@@ -13,7 +13,7 @@ class ParticipantTest {
         val card = deck.draw()
 
         player.receive(card)
-        assertThat(player.peekLast()).isEqualTo(card)
-        assertThat(player.peekLast()).isSameAs(card)
+        assertThat(player.last()).isEqualTo(card)
+        assertThat(player.last()).isSameAs(card)
     }
 }
