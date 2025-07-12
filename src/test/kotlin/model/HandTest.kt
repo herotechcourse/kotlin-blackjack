@@ -18,7 +18,8 @@ class HandTest {
     @ParameterizedTest
     @MethodSource("cardProvider")
     fun `score for one card should return card value`(card: Card) {
-        assertThat(Hand.getScore(setOf(card))).isEqualTo(Rank.score(card.rank))
+        val hand = Hand()
+        assertThat(hand.getScore(setOf(card))).isEqualTo(Rank.score(card.rank))
     }
 
     @ParameterizedTest
@@ -27,7 +28,8 @@ class HandTest {
         cards: Set<Card>,
         expectedTotal: Int,
     ) {
-        assertThat(Hand.getScore(cards)).isEqualTo(expectedTotal)
+        val hand = Hand()
+        assertThat(hand.getScore(cards)).isEqualTo(expectedTotal)
     }
 
     companion object {
