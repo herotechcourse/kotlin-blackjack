@@ -7,8 +7,8 @@ class DealerTest {
     @Test
     fun `shouldDrawCardOrNot() - return true if dealer's hand is less or equal to 16`() {
         val dealer = Dealer()
-        dealer.drawCard(Card("6♦"))
-        dealer.drawCard(Card("10♦"))
+        dealer.drawCard(Card(Rank.SIX, Suit.DIAMONDS))
+        dealer.drawCard(Card(Rank.TEN, Suit.DIAMONDS))
 
         assertEquals(true, dealer.shouldDrawCardOrNot())
     }
@@ -16,8 +16,8 @@ class DealerTest {
     @Test
     fun `shouldDrawCardOrNot() - return false if dealer's hand is bigger or equal to 17`() {
         val dealer = Dealer()
-        dealer.drawCard(Card("7♦"))
-        dealer.drawCard(Card("10♦"))
+        dealer.drawCard(Card(Rank.SEVEN, Suit.DIAMONDS))
+        dealer.drawCard(Card(Rank.TEN, Suit.DIAMONDS))
 
         assertEquals(false, dealer.shouldDrawCardOrNot())
     }

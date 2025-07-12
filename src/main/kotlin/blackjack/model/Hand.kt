@@ -16,7 +16,6 @@ data class Hand(val cards: List<Card> = emptyList()) {
     }
 
     fun toText(): String {
-        val names = cards.map { it.name }
-        return names.joinToString(", ")
+        return cards.joinToString(", ") { it.toString() }
     }
 }

@@ -67,67 +67,62 @@ class PlayerTest {
     fun `calculateHand() - player has TWO and TEN`() {
         val player = Player("player")
 
-        player.drawCard(Card("2♦"))
-        player.drawCard(Card("10♦"))
+        player.drawCard(Card(Rank.TWO, Suit.DIAMONDS))
+        player.drawCard(Card(Rank.TEN, Suit.DIAMONDS))
 
         assertEquals(12, player.calculateHand())
     }
 
     @Test
     fun `calculateHand() - player has Two ACE`() {
-        val cards = CardGenerator.generateCards()
         val player = Player("player")
 
-        player.drawCard(cards[0])
-        player.drawCard(cards[1])
+        player.drawCard(Card(Rank.ACE, Suit.DIAMONDS))
+        player.drawCard(Card(Rank.ACE, Suit.SPADES))
 
         assertEquals(12, player.calculateHand())
     }
 
     @Test
     fun `calculateHand() - player has Three ACE and TWO`() {
-        val cards = CardGenerator.generateCards()
         val player = Player("player")
 
-        player.drawCard(cards[0])
-        player.drawCard(cards[1])
-        player.drawCard(cards[2])
-        player.drawCard(Card("2♦"))
+        player.drawCard(Card(Rank.ACE, Suit.DIAMONDS))
+        player.drawCard(Card(Rank.ACE, Suit.SPADES))
+        player.drawCard(Card(Rank.ACE, Suit.HEARTS))
+        player.drawCard(Card(Rank.TWO, Suit.DIAMONDS))
 
         assertEquals(15, player.calculateHand())
     }
 
     @Test
     fun `calculateHand() - player has Three ACE and TEN`() {
-        val cards = CardGenerator.generateCards()
         val player = Player("player")
 
-        player.drawCard(cards[0])
-        player.drawCard(cards[1])
-        player.drawCard(cards[2])
-        player.drawCard(Card("10♦"))
+        player.drawCard(Card(Rank.ACE, Suit.DIAMONDS))
+        player.drawCard(Card(Rank.ACE, Suit.SPADES))
+        player.drawCard(Card(Rank.ACE, Suit.HEARTS))
+        player.drawCard(Card(Rank.TEN, Suit.DIAMONDS))
 
         assertEquals(13, player.calculateHand())
     }
 
     @Test
     fun `isBust() - player is busted`() {
-        val cards = CardGenerator.generateCards()
         val player = Player("player")
 
-        player.drawCard(cards[51])
-        player.drawCard(cards[50])
-        player.drawCard(cards[49])
+        player.drawCard(Card(Rank.TEN, Suit.DIAMONDS))
+        player.drawCard(Card(Rank.KING, Suit.DIAMONDS))
+        player.drawCard(Card(Rank.NINE, Suit.DIAMONDS))
         assertEquals(true, player.isBust())
     }
 
     @Test
     fun `isBust() - player is not busted`() {
-        val cards = CardGenerator.generateCards()
         val player = Player("player")
 
-        player.drawCard(cards[51])
-        player.drawCard(cards[50])
+        player.drawCard(Card(Rank.TEN, Suit.DIAMONDS))
+        player.drawCard(Card(Rank.TEN, Suit.SPADES))
         assertEquals(false, player.isBust())
     }
 }

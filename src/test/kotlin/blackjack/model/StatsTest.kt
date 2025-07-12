@@ -8,24 +8,24 @@ class StatsTest {
     fun `playerBoard - Stats make good player board that represent state of player`() {
         // player1 -> bust
         val player1 = Player("player1")
-        player1.drawCard(Card("Q♦"))
-        player1.drawCard(Card("K♦"))
-        player1.drawCard(Card("J♠"))
+        player1.drawCard(Card(Rank.TWO, Suit.DIAMONDS))
+        player1.drawCard(Card(Rank.KING, Suit.DIAMONDS))
+        player1.drawCard(Card(Rank.JACK, Suit.SPADES))
 
         // player2 -> win
         val player2 = Player("player2")
-        player2.drawCard(Card("10♦"))
-        player2.drawCard(Card("A♦"))
+        player2.drawCard(Card(Rank.TEN, Suit.DIAMONDS))
+        player2.drawCard(Card(Rank.ACE, Suit.DIAMONDS))
 
         // player3 -> tie
         val player3 = Player("player3")
-        player3.drawCard(Card("9♦"))
-        player3.drawCard(Card("J♦"))
+        player3.drawCard(Card(Rank.NINE, Suit.DIAMONDS))
+        player3.drawCard(Card(Rank.JACK, Suit.DIAMONDS))
 
         val dealer = Dealer()
-        dealer.drawCard(Card("3♦"))
-        dealer.drawCard(Card("6♦"))
-        dealer.drawCard(Card("10♠"))
+        dealer.drawCard(Card(Rank.THREE, Suit.DIAMONDS))
+        dealer.drawCard(Card(Rank.SIX, Suit.DIAMONDS))
+        dealer.drawCard(Card(Rank.TEN, Suit.SPADES))
 
         val stats = Stats(listOf(player1, player2, player3), dealer)
         val board = stats.playerBoard
@@ -38,24 +38,24 @@ class StatsTest {
     fun `updateDealerStats() - method update dealer's stats`() {
         // player1 -> bust
         val player1 = Player("player1")
-        player1.drawCard(Card("Q♦"))
-        player1.drawCard(Card("K♦"))
-        player1.drawCard(Card("J♠"))
+        player1.drawCard(Card(Rank.QUEEN, Suit.DIAMONDS))
+        player1.drawCard(Card(Rank.KING, Suit.DIAMONDS))
+        player1.drawCard(Card(Rank.JACK, Suit.SPADES))
 
         // player2 -> win
         val player2 = Player("player2")
-        player2.drawCard(Card("10♦"))
-        player2.drawCard(Card("A♦"))
+        player2.drawCard(Card(Rank.TEN, Suit.DIAMONDS))
+        player2.drawCard(Card(Rank.ACE, Suit.DIAMONDS))
 
         // player3 -> tie
         val player3 = Player("player3")
-        player3.drawCard(Card("9♦"))
-        player3.drawCard(Card("J♦"))
+        player3.drawCard(Card(Rank.NINE, Suit.DIAMONDS))
+        player3.drawCard(Card(Rank.JACK, Suit.DIAMONDS))
 
         val dealer = Dealer()
-        dealer.drawCard(Card("3♦"))
-        dealer.drawCard(Card("6♦"))
-        dealer.drawCard(Card("10♠"))
+        dealer.drawCard(Card(Rank.THREE, Suit.DIAMONDS))
+        dealer.drawCard(Card(Rank.SIX, Suit.DIAMONDS))
+        dealer.drawCard(Card(Rank.TEN, Suit.SPADES))
 
         val stats = Stats(listOf(player1, player2, player3), dealer)
         stats.updateDealerStats()

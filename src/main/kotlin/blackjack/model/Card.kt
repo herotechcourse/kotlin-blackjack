@@ -1,6 +1,9 @@
 package blackjack.model
 
-data class Card(val name: String) {
-    val digit = name.substring(0, name.length - 1)
-    val value = Rank.of(digit).value
+data class Card(val rank: Rank, val suit: Suit) {
+    val value: Int get() = rank.value
+
+    override fun toString(): String {
+        return "${rank.digit}${suit.symbol}"
+    }
 }

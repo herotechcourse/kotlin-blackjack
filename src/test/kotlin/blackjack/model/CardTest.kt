@@ -8,7 +8,12 @@ class CardTest {
     @ParameterizedTest(name = "Card - create valid digit value from {0}")
     @ValueSource(strings = ["A♥", "3♣", "4♠", "5♥", "6♣", "7♥", "8♠", "9♣", "10♥", "J♦", "Q♣", "K♦", "3♥"])
     fun `Card create valid digit from name`(candidate: String) {
-        val card = Card(candidate)
-        assertEquals(candidate.substring(0, candidate.length - 1), card.digit)
+        val digit = candidate.dropLast(1)
+        val suitSymbol = candidate.last()
+        val rank = Rank.of(digit)
+        val suit = Suit.fromSymbol(suitSymbol)
+        val card = Card(rank, suit)
+
+        assertEquals(digit, card.rank.digit)
     }
 }
