@@ -1,10 +1,8 @@
 package blackjack.model
 
-class Dealer(
-    override val name: String = "Dealer",
-    override var isActive: Boolean = true,
-    override val cardsInHand: MutableList<Card> = mutableListOf(),
-) : Participant {
+class Dealer() : Participant() {
+    val name : String = "Dealer"
+
     fun mustDraw(totalValueOfCards: Int) = totalValueOfCards <= 16
 
     fun getFinalResultForDealer(players: List<Player>): String {

@@ -1,9 +1,9 @@
 package blackjack.model
 
-interface Participant {
-    val name: String
-    var isActive: Boolean
-    val cardsInHand: MutableList<Card>
+abstract class Participant(
+    var isActive: Boolean = true,
+    val cardsInHand: MutableList<Card> = mutableListOf()
+) {
 
     fun drawCard(card: Card) {
         cardsInHand += card
@@ -27,11 +27,4 @@ interface Participant {
         }
     }
 
-    fun storePlayerHand(): String {
-        val playerHand = "$name's cards: ${
-            cardsInHand
-                .joinToString(", ") { card -> (card.rank.face + card.suit.symbol) }
-        }"
-        return playerHand
-    }
 }
