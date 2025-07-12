@@ -16,7 +16,7 @@ object InputView {
         }
     }
 
-    fun askToDrawCard(name: String): Boolean {
+    fun askToHit(name: String): Boolean {
         println("Would $name like to draw another card? (y for yes, n for no)")
         val choice = readln()
         return when (choice) {

@@ -14,7 +14,7 @@ class Game(
         dealer.selfDrawInitialCards()
         dealer.dealInitialCardsToPlayers(players)
         OutputView.displayInitialCards(dealer, players)
-        askPlayersToDraw(players)
+        askPlayersToHit(players)
         dealerDraws()
         OutputView.displayCardsWithTotalValue(dealer)
         players.forEach { player -> OutputView.displayCardsWithTotalValue(player) }
@@ -22,16 +22,16 @@ class Game(
         OutputView.displayFinalResults(dealer, players)
     }
 
-    fun askPlayersToDraw(players: List<Player>) {
+    fun askPlayersToHit(players: List<Player>) {
         players.forEach {
             do {
-                val answer = InputView.askToDrawCard(it.name)
+                val answer = InputView.askToHit(it.name)
                 if (answer) {
                     dealer.dealCardToPlayer(it)
-                    it.updateActiveStatus(it.calculateTotalValueOfCards())
+                    it.updateBustedStatus(it.calculateTotalValueOfCards())
                     println(OutputView.showHandCards(it, false))
                 }
-            } while (answer && it.isActive)
+            } while (answer && !it.isBusted)
         }
     }
 
@@ -46,7 +46,7 @@ class Game(
     fun compareFinalCards(players: List<Player>) {
         players.forEach {
             if (it.calculateTotalValueOfCards() < dealer.calculateTotalValueOfCards()) {
-                it.isActive = false
+                it.isBusted = true
             }
         }
     }

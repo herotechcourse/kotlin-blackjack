@@ -2,7 +2,7 @@ package blackjack.model
 
 abstract class Participant(
     val name: String,
-    var isActive: Boolean = true,
+    var isBusted: Boolean = false,
     val cardsInHand: MutableList<Card> = mutableListOf()
 ) {
 
@@ -15,17 +15,16 @@ abstract class Participant(
     fun calculateTotalValueOfCards(): Int {
         var totalValueOfCards = cardsInHand.sumOf { card -> card.rank.value }
         var aceCounter = checkAces()
-        while (totalValueOfCards > 21 && aceCounter > 0) {
-            totalValueOfCards -= 10
+        while (totalValueOfCards > BlackJackValues.HAND_VALUE_LIMIT && aceCounter > 0) {
+            totalValueOfCards -= BlackJackValues.ACE_DIFFERENCE
             aceCounter--
         }
         return totalValueOfCards
     }
 
-    fun updateActiveStatus(totalValueOfCards: Int) {
-        if (totalValueOfCards > 21) {
-            isActive = false
+    fun updateBustedStatus(totalValueOfCards: Int) {
+        if (totalValueOfCards > BlackJackValues.HAND_VALUE_LIMIT) {
+            isBusted = true
         }
     }
-
 }
