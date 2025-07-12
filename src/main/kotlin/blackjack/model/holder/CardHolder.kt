@@ -11,11 +11,15 @@ abstract class CardHolder {
     /** fallback when cannot draw */
     abstract fun onDrawFailed(): Card
 
-    fun receiveCard(card: Card) {
+    fun receive(card: Card) {
         _cards.add(card)
     }
 
-    fun drawCard(): Card {
+    /**
+     * @throws IllegalStateException if try failed and should throw error
+     *
+     */
+    fun draw(): Card {
         return if (_cards.isNotEmpty()) {
             _cards.removeAt(0)
         } else {
