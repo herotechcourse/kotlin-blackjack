@@ -26,21 +26,39 @@ Participant -> Player & Dealer -> Participants
 - [ ] Delete/move methods for tests
 
 #### Participant
-- [ ] Implement interface/abstract class `Participant` that can separate Player and Dealer
-- [ ] Implement Parent class as `Participant` interface first, then change if needed
+- [x] Implement interface/abstract class `Participant` that can separate Player and Dealer
+- [x] Implement Parent class as `Participant` interface first, then change if needed
 - 
 #### Player & Dealer
-- [ ] Implement `Player`
-  - [ ] has `name`
-- [ ] Implement `Dealer`
-  - [ ] has `name` as "Dealer"
+- [x] Implement `Player`
+  - [x] has `name`
+- [x] Implement `Dealer`
+  - [x] has `name` as "Dealer"
 
 #### Participants
-- [ ] Implement Participants that has List<Participant>
-  - [ ] Contains Dealer
-  - [ ] Contains Player
-  - [ ] Implement contain/containsAll that can be used as test functions
+- [x] Implement Participants that has List<Participant>
+  - [x] Contains Dealer / Player
+  - [x] Implement contain/containsAll that can be used as test functions
+
+---
 
 ### Holder package
 
+```
+CardHoler -> Hand & Deck
+```
+### CardHolder
+CardHolder's child classes will have core logic:
+- "draw or receive card/s with own property `List<Card>`"
+- and "if `List<Card>` empty but try to draw, `do something`"
 
+- [x] Implement interface/abstract class CardHolder
+- [ ] Implement `draw`/`receive` logic
+- [ ] Implement `onDrawFailed()`
+
+### Deck
+- [ ] has 52 unique cards at `List<Card>`
+- [ ] Implement `onDrawFailed()`: if failed, generate a new card deck
+
+### Hand
+- [ ] Implement `onDrawFailed()`: if failed, throw logic error!
