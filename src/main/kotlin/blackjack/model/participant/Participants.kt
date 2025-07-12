@@ -28,8 +28,6 @@ class Participants private constructor(
     }
 
     companion object {
-        fun from(vararg names: String) = Participants(names.map { Player(it) })
-
         fun from(names: List<String>) = Participants(names.map { Player(it) })
     }
 }
