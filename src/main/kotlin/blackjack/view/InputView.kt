@@ -3,7 +3,7 @@ package blackjack.view
 object InputView {
     fun getPlayersNames(): List<String> {
         println("Enter the names of the players (coma-separated):")
-        val input = readLine() ?: ""
+        val input = readlnOrNull() ?: ""
         val playersNames =
             input.trim().split(",")
                 .map { name ->
@@ -20,7 +20,7 @@ object InputView {
 
     fun getAnswer(playerName: String): String {
         println("Would $playerName like to draw another card? (y for yes, n for no)")
-        val input = readLine()?.trim()?.lowercase() ?: ""
+        val input = readlnOrNull()?.trim()?.lowercase() ?: ""
         require(input == "y" || input == "n") {
             "Please answer in order to proceed with the game."
         }
