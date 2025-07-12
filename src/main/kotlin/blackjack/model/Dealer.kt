@@ -14,6 +14,10 @@ class Dealer(name: String = "Dealer") : Participant(name) {
         showAllCards = true
     }
 
+    fun isShowingAllCards() = showAllCards
+
+    fun getDealtCards() = hand.dealtCards.toList()
+
     fun setResultFor(player: Player) {
         val playerScore = player.getScore()
         val dealerScore = this.getScore()
@@ -49,13 +53,6 @@ class Dealer(name: String = "Dealer") : Participant(name) {
             }
         }
     }
-
-    override fun toString(): String =
-        when {
-            showAllCards -> "$name's cards: $hand"
-            hand.dealtCards.isEmpty() -> "$name has no cards yet."
-            else -> "$name: ${hand.dealtCards[0]}"
-        }
 
     companion object {
         const val DEALER_STAND = 16

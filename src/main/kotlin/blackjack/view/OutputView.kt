@@ -10,7 +10,7 @@ object OutputView {
     ) {
         printEmptyLine()
         println("Dealing two cards to ${dealer.name}, ${getPlayersNames(players)}.")
-        println(dealer)
+        printDealerHand(dealer)
 
         for (player in players) {
             println(player)
@@ -18,6 +18,18 @@ object OutputView {
 
         printEmptyLine()
     }
+
+    fun printDealerHand(dealer: Dealer) {
+        val output = if (dealer.isShowingAllCards()) {
+            "${dealer.name}'s cards: ${dealer.getDealtCards()}"
+        } else if (dealer.getDealtCards().isEmpty()) {
+            "${dealer.name} has no cards yet."
+        } else {
+            "${dealer.name}: ${dealer.getDealtCards()[0]}"
+        }
+        println(output)
+    }
+
 
     private fun getPlayersNames(players: List<Player>): String {
         return players.joinToString(", ") { it.name }
