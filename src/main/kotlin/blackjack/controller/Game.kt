@@ -38,7 +38,7 @@ class Game(
                 val answer = InputView.askToHit(it.name)
                 if (answer) {
                     dealer.dealCardToPlayer(it)
-                    it.updateBustedStatus(it.cardsInHand.calculateTotalValueOfCards())
+                    it.updateBustedStatus()
                     println(OutputView.showHandCards(it, false))
                 }
             } while (answer && !it.isBusted)

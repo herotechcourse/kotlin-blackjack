@@ -10,8 +10,8 @@ abstract class Participant(
         cardsInHand.addCard(card)
     }
 
-    fun updateBustedStatus(totalValueOfCards: Int) {
-        if (totalValueOfCards > BlackJackValues.HAND_VALUE_LIMIT) {
+    fun updateBustedStatus() {
+        if (cardsInHand.calculateTotalValueOfCards() > BlackJackValues.HAND_VALUE_LIMIT) {
             isBusted = true
         }
     }
