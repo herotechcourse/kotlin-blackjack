@@ -11,32 +11,36 @@
 - The dealer must draw a card if their total is 16 or less, and must stand on 17 or more.
 - If the dealer busts (goes over 21), all remaining players automatically win.
 - After the game ends, display the result (win/loss) for each player.
+
+---
+
+## Refactor, step 1
+
+### Participant package
+```
+Participant -> Player & Dealer -> Participants
+```
+
+**Think about this/check later**
+- [ ] Currently Participant has a rule that "all `Participant`s" have a "`name`", which is why it was changed to abstract class. Is this decision really necessary?
+- [ ] Delete/move methods for tests
+
+#### Participant
+- [ ] Implement interface/abstract class `Participant` that can separate Player and Dealer
+- [ ] Implement Parent class as `Participant` interface first, then change if needed
 - 
-## Features
-- [x] Validate input name of players
+#### Player & Dealer
+- [ ] Implement `Player`
+  - [ ] has `name`
+- [ ] Implement `Dealer`
+  - [ ] has `name` as "Dealer"
 
-### Card
-- [x] implement simple card class
-  - [x] has index
-  - [x] has symbol : enum class { hearts, spades , clubs, diamonds }
+#### Participants
+- [ ] Implement Participants that has List<Participant>
+  - [ ] Contains Dealer
+  - [ ] Contains Player
+  - [ ] Implement contain/containsAll that can be used as test functions
 
-### Hold
-- [x] implement Hold, wrapper class, Set<Card>
-- [x] provide all unique elements
+### Holder package
 
-### CardDeck
-- [x] cardDeck can hit cards to players
-- [x] implement CardDeck, wrapper class, Hold and Set<Card * 52> 
-- [x] add shuffle logic when initialed
 
-### Player / Person
-- [x] implement class
-
-### Rank
-- [x] Face cards (King, Queen, Jack) are each worth 10
-- [x] toString(): return symbol character with Rank()
-
-### Questions
-- How can we make testable private functions? What is the good practise?
-  1. internal
-  2. companion object
