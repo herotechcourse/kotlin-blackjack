@@ -4,6 +4,7 @@ import blackjack.model.holder.Deck
 import blackjack.model.participant.Dealer
 import blackjack.model.participant.Participant
 import blackjack.model.participant.Participants
+import blackjack.model.participant.Player
 import blackjack.model.result.GameResult
 import blackjack.model.state.State
 import blackjack.view.InputView
@@ -12,7 +13,7 @@ import blackjack.view.OutputView
 class GameManager(
     private val participants: Participants,
 ) {
-    private val cardDeck = Deck()
+    private val deck = Deck()
     private val dealer = participants.getDealer()
     private val players = participants.getPlayers()
 
@@ -25,8 +26,8 @@ class GameManager(
     }
 
     internal fun setUp() {
-        players.forEach { cardDeck.hit(it, 2) }
-        cardDeck.hit(dealer)
+        players.forEach { deck.hit(it, 2) }
+        deck.hit(dealer)
     }
 
     private fun keepPlay(askForCard: () -> Boolean = { true }) {
@@ -44,18 +45,18 @@ class GameManager(
         }
     }
 
-    private fun canReceiveCard(participant: Participant): Boolean {
+    internal fun canReceiveCard(participant: Participant): Boolean {
         return participant.state == State.HIT
     }
 
-    private fun playPlayerRound(
+    internal fun playPlayerRound(
         participant: Participant,
         getPlayerChoice: () -> Boolean,
     ) {
         while (canReceiveCard(participant)) {
             OutputView.askHit(participant)
             if (getPlayerChoice()) {
-                cardDeck.hit(participant)
+                deck.hit(participant)
                 OutputView.showCards(participant)
             } else {
                 participant.currentState = State.STAY
@@ -66,8 +67,14 @@ class GameManager(
 
     private fun playDealerRound(dealer: Dealer) {
         while (canReceiveCard(dealer)) {
-            cardDeck.hit(dealer)
+            deck.hit(dealer)
         }
         OutputView.showDealerDraw(dealer)
     }
+
+    internal fun getPlayers(): List<Player> = players
+
+    internal fun getDealer(): Dealer = dealer
+
+    internal fun getDeck(): Deck = deck
 }
