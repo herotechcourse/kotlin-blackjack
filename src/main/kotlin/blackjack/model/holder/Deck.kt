@@ -19,8 +19,7 @@ class Deck : CardHolder() {
     }
 
     fun hit(participant: Participant, count: Int = GameConstants.DEALER_FIRST_HIT_COUNT) {
-        val card = this.draw()
-        participant.receive(card)
+        repeat(count) { participant.receive(this.draw()) }
     }
 
     companion object {
