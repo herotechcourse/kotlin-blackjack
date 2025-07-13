@@ -1,5 +1,6 @@
 package blackjack.controller
 
+import blackjack.model.PlayResult
 import blackjack.model.holder.Deck
 import blackjack.model.participant.Dealer
 import blackjack.model.participant.Participant
@@ -28,28 +29,29 @@ class GameManager(
 
     internal fun round(
         participant: Participant,
-        askForCard: () -> Boolean = { true },
+        getPlayerChoice: () -> Boolean = { true },
     ) {
         when (participant) {
             is Dealer -> playDealerRound(participant)
-            else -> playPlayerRound(participant, askForCard)
+            else -> playPlayerRound(participant, getPlayerChoice)
         }
     }
+
     private fun canReceiveCard(participant: Participant): Boolean {
         return participant.state == State.HIT
     }
 
     private fun playPlayerRound(
         participant: Participant,
-        askForCard: () -> Boolean,
+        getPlayerChoice: () -> Boolean,
     ) {
         while (canReceiveCard(participant)) {
             OutputView.askHit(participant)
-            if (askForCard()) {
+            if (getPlayerChoice()) {
                 cardDeck.hit(participant)
                 OutputView.showCards(participant)
             } else {
-                break
+                participant.state == State.STAY
             }
         }
     }
