@@ -34,4 +34,11 @@ class FirstTurnTest {
         val next = state.draw(TestCards.Ace).draw(TestCards.TWO)
         assertTrue(next is Hit)
     }
+
+    @Test
+    fun `if two cards and sum is 21 return BlackJack`() {
+        val state = FirstTurn()
+        val next = state.draw(TestCards.Ace).draw(TestCards.JACK)
+        assertTrue(next is Blackjack)
+    }
 }
