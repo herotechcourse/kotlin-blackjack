@@ -11,6 +11,14 @@ object TestFixture {
                 blackjack.model.card.Card(Suit.DIAMONDS, Rank.QUEEN),
                 blackjack.model.card.Card(Suit.DIAMONDS, Rank.FOUR),
             )
+
+        val TOTAL_SUM_25 =
+            listOf(
+                blackjack.model.card.Card(Suit.DIAMONDS, Rank.TWO),
+                blackjack.model.card.Card(Suit.DIAMONDS, Rank.QUEEN),
+                blackjack.model.card.Card(Suit.DIAMONDS, Rank.FOUR),
+                blackjack.model.card.Card(Suit.DIAMONDS, Rank.NINE),
+            )
     }
 
     object HasAce {
@@ -27,7 +35,7 @@ object TestFixture {
         val TOTAL_SUM_20 =
             listOf(
                 blackjack.model.card.Card(Suit.DIAMONDS, Rank.ACE),
-                blackjack.model.card.Card(Suit.HEART, Rank.ACE),
+                blackjack.model.card.Card(Suit.HEARTS, Rank.ACE),
                 blackjack.model.card.Card(Suit.SPADES, Rank.ACE),
                 blackjack.model.card.Card(Suit.DIAMONDS, Rank.SEVEN),
             )
@@ -35,7 +43,7 @@ object TestFixture {
         val TOTAL_SUM_13 =
             listOf(
                 blackjack.model.card.Card(Suit.DIAMONDS, Rank.ACE),
-                blackjack.model.card.Card(Suit.HEART, Rank.ACE),
+                blackjack.model.card.Card(Suit.HEARTS, Rank.ACE),
                 blackjack.model.card.Card(Suit.SPADES, Rank.ACE),
                 blackjack.model.card.Card(Suit.DIAMONDS, Rank.JACK),
             )
@@ -43,6 +51,6 @@ object TestFixture {
 
     object Card {
         val DIAMOND_JACK = blackjack.model.card.Card(Suit.DIAMONDS, Rank.JACK)
-        val HEART_ACE = blackjack.model.card.Card(Suit.HEART, Rank.ACE)
+        val HEART_ACE = blackjack.model.card.Card(Suit.HEARTS, Rank.ACE)
     }
 }
