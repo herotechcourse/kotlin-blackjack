@@ -10,7 +10,7 @@ class Hit(override val hand: Hand) : State {
         return Hit(hand)
     }
 
-    fun stay(): State {
+    override fun stay(): State {
         return Stay(hand)
     }
 
