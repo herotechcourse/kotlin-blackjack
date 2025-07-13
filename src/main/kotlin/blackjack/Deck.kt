@@ -8,7 +8,7 @@ class Deck(cards: List<Card>) {
     }
 
     companion object {
-        val cardValues = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+        val cardPositionValues = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
 
         fun generate(): Deck{
             val cardSuits = listOf(CardSuit.HEART, CardSuit.DIAMOND, CardSuit.CLUB, CardSuit.SPADE)
@@ -17,7 +17,7 @@ class Deck(cards: List<Card>) {
         }
 
         private fun generateCardsWithSuit(suit: CardSuit): List<Card> {
-            val cards = cardValues.map { cardValue -> Card(suit, cardValue) }
+            val cards = cardPositionValues.map { cardValue -> Card(suit, cardValue) }
             return cards
         }
     }

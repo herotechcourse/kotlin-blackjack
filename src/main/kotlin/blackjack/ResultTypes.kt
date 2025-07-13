@@ -1,6 +1,6 @@
 package blackjack
 
-enum class Results() {
+enum class ResultTypes() {
     BLACKJACK,
     BUSTED,
     STAY
