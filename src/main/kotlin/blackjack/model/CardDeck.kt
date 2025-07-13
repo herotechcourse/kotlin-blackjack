@@ -4,7 +4,9 @@ class CardDeck(
     val deck: ArrayDeque<Card> = ArrayDeque(),
 ) {
     init {
-        generateDeck()
+        repeat (Rules.NUMBER_OF_DECKS) {
+            generateDeck()
+        }
         this.shuffle()
     }
 
