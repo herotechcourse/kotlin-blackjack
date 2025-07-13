@@ -1,5 +1,7 @@
 package blackjack.view
 
+import blackjack.AnsiColor
+import blackjack.model.card.Card
 import blackjack.model.participant.Participants
 import blackjack.model.participant.Player
 
@@ -8,18 +10,18 @@ object OutputView {
     private const val DEALER_STAND_MESSAGE = "Dealer stands directly."
     private const val RESULTS_HEAD = "## Final Results"
 
-    fun printPlayerInfo(player: Player) {
-        println(player)
-    }
-
     fun printParticipantsHands(participants: Participants) {
         printEmptyLine()
         println("Dealing two cards to ${participants.dealer.name}, ${getPlayersNames(participants.players)}.")
 
-        println(participants.dealer)
-        participants.players.forEach(::println)
+        println("${participants.dealer}'s cards: ${getColorizedCards(participants.dealer.hand)}")
+        participants.players.forEach { println("$it's cards: ${getColorizedCards(it.hand)}") }
 
         printEmptyLine()
+    }
+
+    fun printPlayerInfo(player: Player) {
+        println("$player's cards: ${getColorizedCards(player.hand)}")
     }
 
     fun printDealersDrawMessage() {
@@ -34,8 +36,11 @@ object OutputView {
     }
 
     fun printFinalHands(participants: Participants) {
-        println("${participants.dealer} - Total: ${participants.dealerScore}")
-        participants.players.forEach { println("$it - Total: ${it.getScore()}") }
+        print("${participants.dealer}'s cards: ${getColorizedCards(participants.dealer.hand)} ")
+        println("- Total: ${participants.dealerScore}")
+        participants.players.forEach {
+            println("$it's cards: ${getColorizedCards(it.hand)} - Total: ${it.getScore()}")
+        }
     }
 
     fun printResults(participants: Participants) {
@@ -46,11 +51,22 @@ object OutputView {
     }
 
     fun printErrorMessage(message: String) {
-        println("\n[ERROR]: $message\n")
+        println("\n${AnsiColor.RED}[ERROR]: $message\n${AnsiColor.RESET}")
     }
 
     fun printEmptyLine() {
         println()
+    }
+
+    fun getColorizedCards(cards: List<Card>): String {
+        return cards.joinToString(", ") { getColorizedCard(it) }
+    }
+
+    fun getColorizedCard(card: Card): String {
+        return when (card.suit) {
+            Card.Suit.DIAMONDS, Card.Suit.HEARTS -> "${AnsiColor.RED_ON_WHITE}${card}${AnsiColor.RESET}"
+            else -> "${AnsiColor.BLACK_ON_WHITE}${card}${AnsiColor.RESET}"
+        }
     }
 
     private fun getPlayersNames(players: List<Player>): String {

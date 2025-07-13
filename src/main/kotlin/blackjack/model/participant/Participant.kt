@@ -6,23 +6,23 @@ import blackjack.model.result.Result
 import blackjack.model.result.ResultTracker
 
 abstract class Participant(val name: String, protected val resultTracker: ResultTracker) {
-    protected val hand = Hand()
+    protected val _hand = Hand()
 
     init {
         require(name.isNotBlank()) { "Wrong name: $name. Participant name should not be blank." }
     }
 
-    fun addCard(newCard: Card) = hand.addCard(newCard)
+    fun addCard(newCard: Card) = _hand.addCard(newCard)
 
-    fun getScore(): Int = hand.getScore()
+    fun getScore(): Int = _hand.getScore()
 
-    fun hasBlackJack(): Boolean = hand.hasBlackJack()
+    fun hasBlackJack(): Boolean = _hand.hasBlackJack()
 
-    fun isBusts(): Boolean = hand.isBusts()
+    fun isBusts(): Boolean = _hand.isBusts()
 
     fun recordResult(result: Result) = resultTracker.record(result)
 
     override fun toString(): String {
-        return "$name's cards: $hand"
+        return name
     }
 }
