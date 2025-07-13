@@ -1,58 +1,78 @@
 package blackjack.view
 
+import blackjack.model.Card
 import blackjack.model.Dealer
 import blackjack.model.Player
-import kotlin.collections.joinToString
+import blackjack.model.Suit
 
 object OutputView {
-    fun displayInitialCards(
+    private fun formatCard(card: Card): String {
+        val rankFace =
+            when (card.rank.name) {
+                "TEN" -> "10"
+                "JACK" -> "J"
+                "QUEEN" -> "Q"
+                "KING" -> "K"
+                "ACE" -> "A"
+                else -> card.rank.value.toString()
+            }
+
+        val suitSymbol =
+            when (card.suit) {
+                Suit.HEARTS -> "♥"
+                Suit.DIAMONDS -> "♦"
+                Suit.CLUBS -> "♣"
+                Suit.SPADES -> "♠"
+            }
+        return "$rankFace$suitSymbol"
+    }
+
+    fun showInitialCards(
         dealer: Dealer,
         players: List<Player>,
     ) {
         val playerNames = players.joinToString(", ") { it.name }
-        val allParticipants = "Dealer, " + playerNames
-        println("Dealing two cards to $allParticipants.")
-        displayDealerInitialCards(dealer)
-        displayPlayersInitialCards(players)
-    }
+        println("Dealing two cards to dealer, $playerNames.")
 
-    fun displayPlayersInitialCards(players: List<Player>) {
+        println("Dealer: ${formatCard(dealer.cardsInHand[0])}")
+
         players.forEach {
-            displayHandCards(it)
+            println("${it.name}'s cards: ${it.cardsInHand.joinToString(", ") { card -> formatCard(card) }}")
         }
+        println()
     }
 
-    fun displayDealerInitialCards(dealer: Dealer) {
-        println("Dealer: ${dealer.cardsInHand[0].rank.face}${dealer.cardsInHand[0].suit.symbol}")
+    fun showPlayerCards(player: Player) {
+        println("${player.name}'s cards: ${player.cardsInHand.joinToString(", ") { formatCard(it) }}")
     }
 
-    fun displayHandCards(player: Player) {
-        println(player.storePlayerHand())
+    fun showDealerDrawsCard() {
+        println("Dealer draws one more card due to having 16 or less.\n")
     }
 
-    fun displayDealerDrawMessage() {
-        println("Dealer draws one more card due to having 16 or less.")
-    }
-
-    fun displayCardsWithTotalValue(
+    fun showFinalHands(
         dealer: Dealer,
         players: List<Player>,
     ) {
-        println("${dealer.storePlayerHand()} - Total: ${dealer.calculateTotalValueOfCards()}")
+        println("Dealer's cards: ${dealer.cardsInHand.joinToString(", ") { formatCard(it) }} – Total: ${dealer.total()}")
         players.forEach {
-            println("${it.storePlayerHand()} - Total: ${it.calculateTotalValueOfCards()}")
+            println("${it.name}'s cards: ${it.cardsInHand.joinToString(", ") { card -> formatCard(card) }} – Total: ${it.total()}")
         }
+        println()
     }
 
-    fun displayFinalResults(
+    fun showFinalResults(
         dealer: Dealer,
         players: List<Player>,
     ) {
+        val dealerWins = players.count { it.isBusted() || it.total() < dealer.total() }
+        val dealerLoses = players.size - dealerWins
+
         println("## Final Results")
-        println(dealer.getFinalResultForDealer(players))
-        players.forEach {
-            print("${it.name}: ")
-            if (it.isActive) println("Win") else println("Lose")
+        println("Dealer: $dealerWins Win $dealerLoses Lose")
+        players.forEach { player ->
+            val result = if (player.isBusted() || (!dealer.isBusted() && dealer.total() >= player.total())) "Lose" else "Win"
+            println("${player.name}: $result")
         }
     }
 }
