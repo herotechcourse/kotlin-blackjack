@@ -35,7 +35,7 @@ object OutputView {
 
     fun displayResults(
         results: List<ResultStatus>,
-        allPlayers: Players
+        allPlayers: Players,
     ) {
         println("\n## Final Results")
         println(getDealersResult(results))
@@ -44,7 +44,10 @@ object OutputView {
         }
     }
 
-    fun displayFinalEarnings(allPlayers: Players, dealer:Dealer) {
+    fun displayFinalEarnings(
+        allPlayers: Players,
+        dealer: Dealer,
+    ) {
         println("\n## Final Earnings")
         println("Dealer: ${dealer.earnings.toInt()}")
         for (i in allPlayers.players.indices) {

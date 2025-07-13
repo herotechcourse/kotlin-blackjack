@@ -33,7 +33,6 @@ object BlackJackController {
         allPlayers.players.forEach { player -> player.bet = Bet(InputView.requestPlayersBet(player.name)) }
     }
 
-
     private fun startGame(
         players: Players,
         dealer: Dealer,
@@ -64,10 +63,11 @@ object BlackJackController {
         dealer: Dealer,
     ) {
         OutputView.displayFinalCardsOnHand(allPlayers, dealer)
-        val result = ResultCalculator.getResult(
-            allPlayers.players.map { it.getScore() },
-            dealer.getScore(),
-        )
+        val result =
+            ResultCalculator.getResult(
+                allPlayers.players.map { it.getScore() },
+                dealer.getScore(),
+            )
         OutputView.displayResults(result, allPlayers)
         val earningResult = ResultCalculator.calculateEarning(allPlayers, dealer.getScore(), dealer.isBlackJack())
         ResultCalculator.applyEarningResult(allPlayers, dealer, earningResult)

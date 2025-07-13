@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test
 
 class EarningCalculatorTest {
     @Test
-    fun `Player loses`(){
+    fun `Player loses`() {
         val player1 = Player("A")
         player1.bet = Bet(1000.0)
         val dealer = Dealer()
@@ -24,12 +24,15 @@ class EarningCalculatorTest {
         dealer.drawCard(Card(Rank.NINE, Suite.HEARTS))
         val dealerHasBlackJack = dealer.isBlackJack()
 
-        assertThat(ResultCalculator.calculateEarning(players, dealer.getScore(), dealerHasBlackJack)).isEqualTo(listOf(
-            PlayerEarningResult(0, -1000.0, 1000.0)))
+        assertThat(ResultCalculator.calculateEarning(players, dealer.getScore(), dealerHasBlackJack)).isEqualTo(
+            listOf(
+                PlayerEarningResult(0, -1000.0, 1000.0),
+            ),
+        )
     }
 
     @Test
-    fun `Draw with blackjack`(){
+    fun `Draw with blackjack`() {
         val player1 = Player("A")
         player1.bet = Bet(1000.0)
 
@@ -42,12 +45,15 @@ class EarningCalculatorTest {
         dealer.drawCard(Card(Rank.ACE, Suite.HEARTS))
         val dealerHasBlackJack = dealer.isBlackJack()
 
-        assertThat(ResultCalculator.calculateEarning(players, dealer.getScore(), dealerHasBlackJack)).isEqualTo(listOf(
-            PlayerEarningResult(0, 1000.0, 0.0)))
+        assertThat(ResultCalculator.calculateEarning(players, dealer.getScore(), dealerHasBlackJack)).isEqualTo(
+            listOf(
+                PlayerEarningResult(0, 1000.0, 0.0),
+            ),
+        )
     }
 
     @Test
-    fun `Draw without blackjack`(){
+    fun `Draw without blackjack`() {
         val player1 = Player("A")
         player1.bet = Bet(1000.0)
 
@@ -60,12 +66,15 @@ class EarningCalculatorTest {
         dealer.drawCard(Card(Rank.TEN, Suite.HEARTS))
         val dealerHasBlackJack = dealer.isBlackJack()
 
-        assertThat(ResultCalculator.calculateEarning(players, dealer.getScore(), dealerHasBlackJack)).isEqualTo(listOf(
-            PlayerEarningResult(0, 1000.0, 0.0)))
+        assertThat(ResultCalculator.calculateEarning(players, dealer.getScore(), dealerHasBlackJack)).isEqualTo(
+            listOf(
+                PlayerEarningResult(0, 1000.0, 0.0),
+            ),
+        )
     }
 
     @Test
-    fun `Player wins with blackjack`(){
+    fun `Player wins with blackjack`() {
         val player1 = Player("A")
         player1.bet = Bet(1000.0)
 
@@ -85,12 +94,16 @@ class EarningCalculatorTest {
         dealer.drawCard(Card(Rank.NINE, Suite.HEARTS))
         val dealerHasBlackJack = dealer.isBlackJack()
 
-        assertThat(ResultCalculator.calculateEarning(players, dealer.getScore(), dealerHasBlackJack)).isEqualTo(listOf(
-            PlayerEarningResult(0, 1500.0, 0.0), PlayerEarningResult(1, 4000.0, 0.0)))
+        assertThat(ResultCalculator.calculateEarning(players, dealer.getScore(), dealerHasBlackJack)).isEqualTo(
+            listOf(
+                PlayerEarningResult(0, 1500.0, 0.0),
+                PlayerEarningResult(1, 4000.0, 0.0),
+            ),
+        )
     }
 
     @Test
-    fun `Player wins without blackjack`(){
+    fun `Player wins without blackjack`() {
         val player1 = Player("A")
         player1.bet = Bet(1000.0)
 
@@ -109,12 +122,16 @@ class EarningCalculatorTest {
         dealer.drawCard(Card(Rank.NINE, Suite.HEARTS))
         val dealerHasBlackJack = dealer.isBlackJack()
 
-        assertThat(ResultCalculator.calculateEarning(players, dealer.getScore(), dealerHasBlackJack)).isEqualTo(listOf(
-            PlayerEarningResult(0, -1000.0, 1000.0), PlayerEarningResult(1, 4000.0, 0.0)))
+        assertThat(ResultCalculator.calculateEarning(players, dealer.getScore(), dealerHasBlackJack)).isEqualTo(
+            listOf(
+                PlayerEarningResult(0, -1000.0, 1000.0),
+                PlayerEarningResult(1, 4000.0, 0.0),
+            ),
+        )
     }
 
     @Test
-    fun `all Players lose`(){
+    fun `all Players lose`() {
         val player1 = Player("A")
         player1.bet = Bet(1000.0)
 
@@ -133,10 +150,22 @@ class EarningCalculatorTest {
         dealer.drawCard(Card(Rank.NINE, Suite.HEARTS))
         val dealerHasBlackJack = dealer.isBlackJack()
 
-        assertThat(ResultCalculator.calculateEarning(players, dealer.getScore(), dealerHasBlackJack)).isEqualTo(listOf(
-            PlayerEarningResult(0, -1000.0, 1000.0), PlayerEarningResult(1, -1000.0, 1000.0)))
-        ResultCalculator.applyEarningResult(players, dealer, (listOf(
-            PlayerEarningResult(0, -1000.0, 1000.0), PlayerEarningResult(1, -1000.0, 1000.0))))
+        assertThat(ResultCalculator.calculateEarning(players, dealer.getScore(), dealerHasBlackJack)).isEqualTo(
+            listOf(
+                PlayerEarningResult(0, -1000.0, 1000.0),
+                PlayerEarningResult(1, -1000.0, 1000.0),
+            ),
+        )
+        ResultCalculator.applyEarningResult(
+            players,
+            dealer,
+            (
+                listOf(
+                    PlayerEarningResult(0, -1000.0, 1000.0),
+                    PlayerEarningResult(1, -1000.0, 1000.0),
+                )
+            ),
+        )
         assertThat(dealer.earnings).isEqualTo(2000.0)
     }
 }
