@@ -66,10 +66,4 @@ class GameManager(
         }
         OutputView.printDealerDrawsCards(dealer)
     }
-
-
-    companion object {
-        private const val ABLE_TO_RECEIVE = 16
-        private const val BLACKJACK = 21
-    }
 }
