@@ -6,13 +6,11 @@ import blackjack.model.state.State
 
 class Player(name: String) : Participant(name) {
     override var _state: State = State.HIT
-        get() = evaluateState()
-
-    private fun evaluateState(): State {
-        if (isFirstRound()) return blackOrHit()
-        if (points > BLACKJACK_SCORE) return State.BUST
-        return _state
-    }
+        get() = when {
+            points > BLACKJACK_SCORE -> State.BUST
+            isFirstRound() -> blackOrHit()
+            else -> field
+        }
 
     private fun isFirstRound(): Boolean {
         return cardsCount() == PLAYER_FIRST_HIT_COUNT
