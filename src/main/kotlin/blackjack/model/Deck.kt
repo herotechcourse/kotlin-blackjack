@@ -8,12 +8,11 @@ class Deck {
                 Rank.entries.map { rank -> Card(rank, suit) }
             }.shuffled().toMutableList()
 
-    fun getCards(): List<Card> {
-        return cards
+    fun draw(count: Int = 1): List<Card> {
+        require(count > 0) { "Card count must be positive." }
+        require(cards.size >= count) { "Not enough cards in the deck!" }
+        return (1..count).map { cards.removeAt(0) }
     }
 
-    fun giveCard(): Card {
-        require(cards.isNotEmpty()) { "Deck is empty!" }
-        return cards.removeAt(0)
-    }
+    fun countCards(): Int = cards.size
 }

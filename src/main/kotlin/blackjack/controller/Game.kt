@@ -24,16 +24,12 @@ class Game(
     }
 
     fun dealCardsToDealer() {
-        repeat(2) {
-            dealer.drawCard(deck.giveCard())
-        }
+        dealer.drawCard(deck.draw(2))
     }
 
     fun dealCardsToPlayer(players: List<Player>) {
-        repeat(2) {
-            players.forEach {
-                it.drawCard(deck.giveCard())
-            }
+        players.forEach {
+            it.drawCard(deck.draw(2))
         }
     }
 
@@ -42,7 +38,7 @@ class Game(
             do {
                 val answer = InputView.askToDrawCard(it.name)
                 if (answer) {
-                    it.drawCard(deck.giveCard())
+                    it.drawCard(deck.draw(1))
                     it.updateActiveStatus(it.calculateTotalValueOfCards())
                     OutputView.displayHandCards(it)
                 }
@@ -54,7 +50,7 @@ class Game(
         val mustDraw = dealer.mustDraw(dealer.calculateTotalValueOfCards())
         if (mustDraw) {
             OutputView.displayDealerDrawMessage()
-            dealer.drawCard(deck.giveCard())
+            dealer.drawCard(deck.draw())
         }
     }
 

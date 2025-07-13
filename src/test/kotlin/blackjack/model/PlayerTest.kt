@@ -10,7 +10,7 @@ class PlayerTest {
     fun `should add cards to cardsInHand`() {
         val card = Card(Rank.KING, Suit.HEARTS)
         assertThat(player.cardsInHand).hasSize(0)
-        player.drawCard(card)
+        player.drawCard(listOf(card))
         assertThat(player.cardsInHand).hasSize(1)
     }
 
@@ -19,9 +19,9 @@ class PlayerTest {
         val card1 = Card(Rank.ACE, Suit.HEARTS)
         val card2 = Card(Rank.ACE, Suit.DIAMONDS)
         val card3 = Card(Rank.FIVE, Suit.DIAMONDS)
-        player.drawCard(card1)
-        player.drawCard(card2)
-        player.drawCard(card3)
+        player.drawCard(listOf(card1))
+        player.drawCard(listOf(card2))
+        player.drawCard(listOf(card3))
         player.calculateTotalValueOfCards()
         assertThat(player.calculateTotalValueOfCards()).isEqualTo(17)
     }
@@ -30,8 +30,8 @@ class PlayerTest {
     fun `should calculate sum of values of cards in hand`() {
         val card1 = Card(Rank.TWO, Suit.HEARTS)
         val card2 = Card(Rank.THREE, Suit.HEARTS)
-        player.drawCard(card1)
-        player.drawCard(card2)
+        player.drawCard(listOf(card1))
+        player.drawCard(listOf(card2))
         assertThat(player.calculateTotalValueOfCards()).isEqualTo(5)
     }
 

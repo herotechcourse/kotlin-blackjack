@@ -5,8 +5,8 @@ interface Participant {
     var isActive: Boolean
     val cardsInHand: MutableList<Card>
 
-    fun drawCard(card: Card) {
-        cardsInHand += card
+    fun drawCard(cards: List<Card>) {
+        cardsInHand.addAll(cards)
     }
 
     private fun checkAces() = cardsInHand.count { card -> card.rank == Rank.ACE }
