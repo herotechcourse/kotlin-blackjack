@@ -2,7 +2,6 @@ package blackjack.controller
 
 import blackjack.model.CardDeck
 import blackjack.model.Dealer
-import blackjack.model.ErrorMessage
 import blackjack.model.Player
 import blackjack.model.Players
 import blackjack.model.ResultEvaluator
@@ -59,29 +58,11 @@ class Controller {
         }
     }
 
-    fun wantsToDraw(player: Player): Boolean {
-        repeat(MAX_TRIES){
-            try {
-                return InputView.promptForDraw(player)
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-                return@repeat
-            }
-        }
-        throw RuntimeException(ErrorMessage.MAX_TRIES.message)
-    }
+    fun wantsToDraw(player: Player): Boolean = InputView.promptForDraw(player)
 
     fun initializePlayers(): Players {
-        repeat(MAX_TRIES) {
-            try {
-                val playerNames = InputView.readNames()
-                val players = Players(playerNames.map { Player(it) })
-                return players
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-            }
-        }
-        throw RuntimeException(ErrorMessage.MAX_TRIES.message)
+        val playerNames = InputView.readNames()
+        return Players(playerNames.map { Player(it) })
     }
 
     fun drawInitialCards() {
@@ -90,9 +71,5 @@ class Controller {
             dealer.drawCard(deck)
             players.forEach { it.drawCard(deck) }
         }
-    }
-
-    companion object {
-        const val MAX_TRIES = 5
     }
 }
