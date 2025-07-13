@@ -40,3 +40,23 @@
 - How can we make testable private functions? What is the good practise?
   1. internal
   2. companion object
+
+## State Pattern Feature Plan
+
+- [ ] `interface State` -> interface for all states
+- [ ] FirstTurn -> First 2 cards are being drawn
+  - [ ] Accepts 0–2 cards
+  - [ ] If 2 cards and total is 21 → return Blackjack
+  - [ ] If 2 cards and total < 21 → return Hit
+  - [ ] Otherwise → stay in FirstTurn
+    - [ ]stay() throws → can’t stay before 2 cards
+
+- [ ] Hit - Player has drawn 2+ cards
+  - [ ]  If new card makes total > 21 → return `Bust`
+  - [ ]  Else → remain in `Hit`
+  - [ ]  `stay()` returns `Stay`
+- [ ] Finished : State -> End state — can be Blackjack, Bust, or Stay
+  - [ ]  `profit(money: Int)` returns correct payout
+- [ ] Bust
+- [ ] Stay
+- [ ] BlackJack
