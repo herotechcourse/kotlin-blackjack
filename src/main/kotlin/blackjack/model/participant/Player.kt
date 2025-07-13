@@ -7,7 +7,7 @@ import blackjack.model.state.State
 class Player(name: String) : Participant(name) {
     override var _state: State = State.HIT
         get() = when {
-            points > BLACKJACK_SCORE -> State.BUST
+            score > BLACKJACK_SCORE -> State.BUST
             isFirstRound() -> blackOrHit()
             else -> field
         }
@@ -17,7 +17,7 @@ class Player(name: String) : Participant(name) {
     }
 
     private fun blackOrHit(): State {
-        return when (points) {
+        return when (score) {
             BLACKJACK_SCORE -> State.BLACKJACK
             else -> State.HIT
         }

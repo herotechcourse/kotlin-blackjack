@@ -11,9 +11,9 @@ class Dealer() : Participant("Dealer") {
 
     private fun calculateState(): State {
         if (isFirstRound()) return blackOrHit()
-        if (points > BLACKJACK_SCORE) return State.BUST
+        if (score > BLACKJACK_SCORE) return State.BUST
 
-        return if (points <= GameConstants.ABLE_TO_RECEIVE) State.HIT
+        return if (score <= GameConstants.ABLE_TO_RECEIVE) State.HIT
         else State.STAY
     }
 
@@ -22,7 +22,7 @@ class Dealer() : Participant("Dealer") {
     }
 
     private fun blackOrHit(): State {
-        return when (points) {
+        return when (score) {
             BLACKJACK_SCORE -> State.BLACKJACK
             else -> State.HIT
         }

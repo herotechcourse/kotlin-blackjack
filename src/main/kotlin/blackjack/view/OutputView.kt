@@ -59,7 +59,7 @@ object OutputView {
     }
 
     private fun showPoints(participant: Participant): String {
-        return " - Total: ${participant.points}"
+        return " - Total: ${participant.score}"
     }
 
 

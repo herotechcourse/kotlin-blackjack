@@ -5,7 +5,7 @@ import blackjack.model.holder.Hand
 import blackjack.model.state.State
 
 abstract class Participant(val name: String) : Hand() {
-    val points get() = getCurrentPoints()
+    val score get() = getCurrentPoints()
 
     abstract var _state: State
     val state get() = _state

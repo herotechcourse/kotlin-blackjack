@@ -12,8 +12,8 @@ class GameResult(private val participants: Participants) {
         return when {
             player.state == State.BUST -> Outcome.LOSE
             dealer.state == State.BUST -> Outcome.WIN
-            player.points > dealer.points -> Outcome.WIN
-            player.points == dealer.points -> Outcome.DRAW
+            player.score > dealer.score -> Outcome.WIN
+            player.score == dealer.score -> Outcome.DRAW
             else -> Outcome.LOSE
         }
     }
