@@ -20,11 +20,17 @@ class GameLogic {
     }
 
     fun otherTurnCards(players: List<Player>, dealer: Dealer) {
+        val output = OutputView()
         players.forEach { player ->
-            if(player.shouldHit()) player.addCard(dealer.drawCard())
+            while (player.shouldHit()) {
+                player.addCard(dealer.drawCard())
+                output.printCurrentCardsOfOnePlayer(player)
+            }
         }
-        if(dealer.shouldHit()) dealer.addCard(dealer.drawCard())
+        while (dealer.shouldHit()) {
+            dealer.addCard(dealer.drawCard())
+            output.printCurrentDealerCards(dealer)
+        }
     }
-
 
 }
