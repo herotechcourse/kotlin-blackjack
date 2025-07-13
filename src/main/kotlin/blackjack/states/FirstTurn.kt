@@ -1,6 +1,7 @@
 package blackjack.states
 import blackjack.model.Card
 import blackjack.model.Hand
+import blackjack.view.Errors
 
 class FirstTurn(override val hand: Hand = Hand(emptyList())) : State {
     override fun draw(card: Card): State {
@@ -10,5 +11,9 @@ class FirstTurn(override val hand: Hand = Hand(emptyList())) : State {
             return Hit(hand)
         }
         return FirstTurn(hand)
+    }
+
+    override fun stay(): State {
+        throw IllegalStateException(Errors.INVALID_STAY.message)
     }
 }
