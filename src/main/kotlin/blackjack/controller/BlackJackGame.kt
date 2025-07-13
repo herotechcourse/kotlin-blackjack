@@ -1,7 +1,7 @@
 package blackjack.controller
 
-import blackjack.model.result.GameResult
 import blackjack.model.participant.Participants
+import blackjack.model.result.GameResult
 import blackjack.view.InputView
 import blackjack.view.OutputView
 import kotlin.system.exitProcess

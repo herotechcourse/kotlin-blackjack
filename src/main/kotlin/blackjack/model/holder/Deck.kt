@@ -9,16 +9,19 @@ import blackjack.view.OutputView
 
 class Deck : CardHolder() {
     init {
-        _cards = initShuffledDeck().toMutableList()
+        currentCards = initShuffledDeck().toMutableList()
     }
 
     override fun onDrawFailed(): Card {
         OutputView.showNewCard()
-        _cards = initShuffledDeck().toMutableList()
+        currentCards = initShuffledDeck().toMutableList()
         return draw()
     }
 
-    fun hit(participant: Participant, count: Int = GameConstants.DEALER_FIRST_HIT_COUNT) {
+    fun hit(
+        participant: Participant,
+        count: Int = GameConstants.DEALER_FIRST_HIT_COUNT,
+    ) {
         repeat(count) { participant.receive(this.draw()) }
     }
 

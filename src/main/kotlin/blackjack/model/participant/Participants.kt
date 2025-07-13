@@ -2,12 +2,11 @@ package blackjack.model.participant
 
 class Participants private constructor(
     private val players: List<Player>,
-    private val dealer: Dealer = Dealer()
+    private val dealer: Dealer = Dealer(),
 ) {
-
     fun getDealer(): Dealer = dealer
 
-    fun getPlayers() : List<Player> = players
+    fun getPlayers(): List<Player> = players
 
     internal fun getPlayer(index: Int) = players[index]
 

@@ -9,7 +9,6 @@ class DeckTest {
     fun `init deck return sorted 52 cards`() {
         val cards = initDeck()
         assertThat(cards).hasSize(Deck.FULL_DECK_SIZE)
-
     }
 
     @Test

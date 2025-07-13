@@ -1,7 +1,6 @@
 package blackjack.view
 
 object InputView {
-
     fun readPlayersNames(): List<String> {
         return Ask.retryable(
             Ask::playersName,
@@ -9,7 +8,7 @@ object InputView {
         )
     }
 
-    fun readUserAnswer() : Boolean {
+    fun readUserAnswer(): Boolean {
         return Ask.retryable(
             Ask::forCard,
             Parser::cardChoice,
@@ -22,7 +21,6 @@ object InputView {
             return readlnOrNull() ?: throw IllegalArgumentException(Errors.INVALID_INPUT.message)
         }
 
-
         fun forCard(): String {
             while (true) {
                 return readlnOrNull() ?: throw IllegalArgumentException(Errors.INVALID_INPUT.message)
@@ -31,7 +29,7 @@ object InputView {
 
         fun <T> retryable(
             ask: () -> String,
-            parser: (String) -> T
+            parser: (String) -> T,
         ): T {
             while (true) {
                 val input = ask()
@@ -46,9 +44,10 @@ object InputView {
 
     internal object Parser {
         fun playerNames(input: String): List<String> {
-            val names = input.split(",")
-                .map { it.trim() }
-                .filterNot { it.isBlank() }
+            val names =
+                input.split(",")
+                    .map { it.trim() }
+                    .filterNot { it.isBlank() }
 
             if (names.isEmpty() || names.any { !it.all { char -> char.isLetterOrDigit() } }) {
                 throw IllegalArgumentException(Errors.INVALID_INPUT.message + ": $input")

@@ -5,8 +5,8 @@ import blackjack.model.participant.Player
 import blackjack.model.state.State
 
 class GameResult(private val participants: Participants) {
-        val dealer = participants.getDealer()
-        val playersResults: Map<Player, Outcome> = getAllResults()
+    val dealer = participants.getDealer()
+    val playersResults: Map<Player, Outcome> = getAllResults()
 
     private fun getPlayerResult(player: Player): Outcome {
         return when {

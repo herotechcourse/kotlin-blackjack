@@ -1,10 +1,10 @@
 package blackjack.controller
 
-import blackjack.model.result.GameResult
 import blackjack.model.holder.Deck
 import blackjack.model.participant.Dealer
 import blackjack.model.participant.Participant
 import blackjack.model.participant.Participants
+import blackjack.model.result.GameResult
 import blackjack.model.state.State
 import blackjack.view.InputView
 import blackjack.view.OutputView
@@ -29,9 +29,7 @@ class GameManager(
         cardDeck.hit(dealer)
     }
 
-    private fun keepPlay(
-        askForCard: () -> Boolean = { true },
-    ) {
+    private fun keepPlay(askForCard: () -> Boolean = { true }) {
         players.forEach { round(it, askForCard) }
         round(dealer)
     }
@@ -60,7 +58,7 @@ class GameManager(
                 cardDeck.hit(participant)
                 OutputView.showCards(participant)
             } else {
-                participant._state = State.STAY
+                participant.currentState = State.STAY
                 break
             }
         }

@@ -7,13 +7,15 @@ import blackjack.model.result.GameResult
 import blackjack.model.result.Outcome
 
 object OutputView {
-
     fun showAllPayersCards(participants: Participants) {
         participants.getPlayers().forEach { showCards(it) }
         println()
     }
 
-    fun showCards(participant: Participant, extra: String = "") {
+    fun showCards(
+        participant: Participant,
+        extra: String = "",
+    ) {
         println("${participant.name}'s cards: " + participant.cards.joinToString() + extra)
     }
 
@@ -46,7 +48,7 @@ object OutputView {
 
         println("\n${Message.FINAL_RESULTS_TITLE}")
 
-        val dealerWin = playersResults.filter { it.value == Outcome.LOSE}.size
+        val dealerWin = playersResults.filter { it.value == Outcome.LOSE }.size
         val dealerLose = playersResults.filter { it.value == Outcome.WIN }.size
         val dealerDraw = playersResults.size - dealerLose - dealerWin
         val showDraw = if (dealerDraw > 0) ", $dealerDraw Draw" else ""
@@ -61,7 +63,6 @@ object OutputView {
     private fun showPoints(participant: Participant): String {
         return " - Total: ${participant.score}"
     }
-
 
     object Message {
         const val ENTER_PLAYERS_NAMES = "Enter the names of the players (comma-separated):"

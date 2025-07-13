@@ -5,7 +5,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class ParticipantTest {
-
     @Test
     fun `Participant sub classes execute card exchange logic with Deck`() {
         val deck = Deck()

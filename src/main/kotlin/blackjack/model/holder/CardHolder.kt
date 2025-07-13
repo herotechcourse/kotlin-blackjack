@@ -3,20 +3,21 @@ package blackjack.model.holder
 import blackjack.model.card.Card
 
 abstract class CardHolder {
-    protected var _cards: MutableList<Card> = mutableListOf()
+    protected var currentCards: MutableList<Card> = mutableListOf()
     val cards: List<Card>
-        get() = _cards
+        get() = currentCards
 
-    fun cardsCount() : Int = cards.size
+    fun cardsCount(): Int = cards.size
 
     /** fallback when cannot draw */
     abstract fun onDrawFailed(): Card
 
     fun receive(card: Card) {
-        _cards.add(card)
+        currentCards.add(card)
     }
 
     fun first(): Card = cards.first()
+
     fun last(): Card = cards.last()
 
     /**
@@ -24,8 +25,8 @@ abstract class CardHolder {
      *
      */
     fun draw(): Card {
-        return if (_cards.isNotEmpty()) {
-            _cards.removeFirst()
+        return if (currentCards.isNotEmpty()) {
+            currentCards.removeFirst()
         } else {
             onDrawFailed()
         }

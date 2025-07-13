@@ -20,7 +20,6 @@ class InputViewTest {
     @ValueSource(strings = ["#####", "%23!", "m1112@", "111133/22", "#####, %23!", "#####, %23!"])
     @ParameterizedTest
     fun `throw if name format is not correct`(input: String) {
-
         assertThrows<IllegalArgumentException> {
             Parser.playerNames(input)
         }

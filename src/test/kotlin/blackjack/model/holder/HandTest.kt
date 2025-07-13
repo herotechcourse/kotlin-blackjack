@@ -25,7 +25,7 @@ class HandTest {
         val card = TestFixture.Card.HEART_ACE
 
         hand.receive(card)
-       assertEquals(card, hand.first())
+        assertEquals(card, hand.first())
     }
 
     @Test
@@ -36,6 +36,5 @@ class HandTest {
         hand.receive(card)
         val drawCard = hand.draw()
         assertEquals(drawCard, card)
-
     }
 }
