@@ -7,6 +7,13 @@ class Dealer : Participant("Dealer") {
 
     private val deck = Deck()
 
+    fun giveTwoCardsTo(participants: List<Participant>) {
+        repeat(2) {
+            giveCardTo(this)
+            participants.forEach { giveCardTo(it) }
+        }
+    }
+
     fun giveCardTo(participant: Participant) {
         val card = deck.drawCard()
         participant.addCard(card)

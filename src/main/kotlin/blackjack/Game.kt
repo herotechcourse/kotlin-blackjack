@@ -12,12 +12,7 @@ class Game {
 
         OutputView.displayDealing(playerNames)
 
-        repeat(2) {
-            dealer.giveCardTo(dealer)
-            players.forEach { player ->
-                dealer.giveCardTo(player)
-            }
-        }
+        dealer.giveTwoCardsTo(players)
 
         OutputView.displayDealerFirstTwoCards(dealer.getHand().take(2))
         OutputView.displayPlayerHands(players)
