@@ -2,24 +2,58 @@ package blackjack.model
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class DeckTest {
-    val deck = Deck()
-
     @Test
-    fun `deck should contain 52 cards`() {
-        assertThat(deck.getCards().count()).isEqualTo(52)
+    fun `deck should start with 52 cards`() {
+        val deck = Deck()
+        assertThat(deck.countCards()).isEqualTo(52)
     }
 
     @Test
-    fun `deck should reduce its size when giving a card`() {
-        deck.giveCard()
-        assertThat(deck.getCards()).hasSize(51)
+    fun `drawing one card reduces deck size by 1`() {
+        val deck = Deck()
+        val card = deck.draw().first()
+        assertThat(card).isNotNull()
+        assertThat(deck.countCards()).isEqualTo(51)
     }
 
     @Test
-    fun `should give a single card`() {
-        val listOfCards = listOf(deck.giveCard())
-        assertThat(listOfCards).hasSize(1)
+    fun `drawing multiple cards returns correct number and updates deck size`() {
+        val deck = Deck()
+        val cards = deck.draw(5)
+        assertThat(cards).hasSize(5)
+        assertThat(deck.countCards()).isEqualTo(47)
+    }
+
+    @Test
+    fun `drawing more cards than deck has throws exception`() {
+        val deck = Deck()
+        assertThrows<IllegalArgumentException> {
+            deck.draw(60)
+        }
+    }
+
+    @Test
+    fun `drawing zero or negative number of cards throws exception`() {
+        val deck = Deck()
+        assertThrows<IllegalArgumentException> {
+            deck.draw(0)
+        }
+
+        assertThrows<IllegalArgumentException> {
+            deck.draw(-3)
+        }
+    }
+
+    @Test
+    fun `drawing a card from an empty deck throws exception`() {
+        val deck = Deck()
+        repeat(52) { deck.draw() }
+
+        assertThrows<IllegalArgumentException> {
+            deck.draw()
+        }
     }
 }
