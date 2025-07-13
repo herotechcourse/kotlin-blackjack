@@ -6,13 +6,12 @@ import blackjack.view.StatsView
 
 class StatsManager(players: List<Player>, dealer: Dealer) {
     private var _winStatistics = StatsView(players, dealer)
-    val winStatistics: StatsView = _winStatistics
+    val winStatistics: StatsView get() = _winStatistics
 
     fun processStatistics(
         players: List<Player>,
         dealer: Dealer,
     ) {
         _winStatistics = StatsView(players, dealer)
-        _winStatistics.updateDealerStats()
     }
 }

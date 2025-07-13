@@ -19,7 +19,9 @@ object GameManager {
         askPlayersToHit()
         drawDealerCards()
         OutputView.displayFinalState(playerManager.players, dealerManager.dealer)
+
         statsManager.processStatistics(playerManager.players, dealerManager.dealer)
+
         OutputView.displayFinalResults(statsManager.winStatistics, dealerManager.dealer)
     }
 

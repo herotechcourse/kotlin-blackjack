@@ -11,7 +11,9 @@ data class StatsView(val players: List<Player>, val dealer: Dealer) {
     private var _dealerStats = mapOf("win" to 0, "lose" to 0, "tie" to 0)
     val dealerStats: Map<String, Int> get() = _dealerStats
 
-    val dealerScore: Int get() = dealer.calculateHand()
+    init {
+        updateDealerStats()
+    }
 
     private fun initPlayerBoard(): Map<Player, Int> {
         val board = mutableMapOf<Player, Int>()
@@ -24,12 +26,13 @@ data class StatsView(val players: List<Player>, val dealer: Dealer) {
         board: MutableMap<Player, Int>,
     ) {
         val playerScore = player.calculateHand()
+        val dealerScore = dealer.calculateHand()
         when {
             player.isBust() -> board[player] = Constants.LOSE
             dealer.isBust() -> board[player] = Constants.WIN
+            playerScore == dealerScore -> board[player] = Constants.TIE
             playerScore > dealerScore -> board[player] = Constants.WIN
-            playerScore < dealerScore -> board[player] = Constants.LOSE
-            else -> board[player] = Constants.TIE
+            else -> board[player] = Constants.LOSE
         }
     }
 
