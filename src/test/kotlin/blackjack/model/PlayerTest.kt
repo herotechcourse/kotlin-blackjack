@@ -1,13 +1,20 @@
 package blackjack.model
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 
 class PlayerTest {
-    val player = Player("Alex")
+    @Test
+    fun `player should have given name`() {
+        val player = Player("Alex")
+        assertEquals("Alex", player.name)
+    }
 
     @Test
-    fun `should add cards to cardsInHand`() {
+    fun `draw method should add cards to cardsInHand`() {
+        val player = Player("Alex")
         val card = Card(Rank.KING, Suit.HEARTS)
         assertThat(player.cardsInHand).hasSize(0)
         player.drawCard(listOf(card))
@@ -15,31 +22,26 @@ class PlayerTest {
     }
 
     @Test
-    fun `should calculate right sum of values when contain ACEs in cards`() {
-        val card1 = Card(Rank.ACE, Suit.HEARTS)
-        val card2 = Card(Rank.ACE, Suit.DIAMONDS)
-        val card3 = Card(Rank.FIVE, Suit.DIAMONDS)
-        player.drawCard(listOf(card1))
-        player.drawCard(listOf(card2))
-        player.drawCard(listOf(card3))
-        player.calculateTotalValueOfCards()
-        assertThat(player.calculateTotalValueOfCards()).isEqualTo(17)
+    fun `player total calculates aces correctly`() {
+        val player = Player("Farhana")
+        player.drawCard(listOf(Card(Rank.ACE, Suit.HEARTS), Card(Rank.SIX, Suit.CLUBS)))
+        assertEquals(17, player.total()) // ace=11 + six=6, total =17
+
+        player.drawCard(listOf(Card(Rank.ACE, Suit.DIAMONDS)))
+        assertEquals(18, player.total()) // ace1=11 + six=6 + ace2=1, total =18
     }
 
     @Test
-    fun `should calculate sum of values of cards in hand`() {
-        val card1 = Card(Rank.TWO, Suit.HEARTS)
-        val card2 = Card(Rank.THREE, Suit.HEARTS)
-        player.drawCard(listOf(card1))
-        player.drawCard(listOf(card2))
-        assertThat(player.calculateTotalValueOfCards()).isEqualTo(5)
+    fun `player busts when total exceeds 21`() {
+        val player = Player("Alex")
+        player.drawCard(listOf(Card(Rank.TEN, Suit.HEARTS), Card(Rank.KING, Suit.SPADES), Card(Rank.TWO, Suit.CLUBS)))
+        assertTrue(player.isBusted()) // total = 22
     }
 
     @Test
-    fun `should change the activeStatus of player`() {
-        assertThat(player.isActive).isTrue
-        val totalValueOfCard = 25
-        player.updateActiveStatus(totalValueOfCard)
-        assertThat(player.isActive).isFalse
+    fun `player is still in game when total is 21 or less`() {
+        val player = Player("Farhana")
+        player.drawCard(listOf(Card(Rank.TEN, Suit.HEARTS), Card(Rank.ACE, Suit.SPADES)))
+        assertTrue(player.isStillInGame()) // total = 21
     }
 }
