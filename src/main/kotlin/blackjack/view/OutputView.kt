@@ -14,7 +14,7 @@ object OutputView {
     }
 
     fun printDealerDrawsCards(player: Player) {
-        println("Dealer draws ${player.numberInHand() - 1} more card due to having 16 or less.")
+        println("\nDealer draws ${player.numberInHand() - 1} more card due to having 16 or less.")
     }
 
     fun printOnePlayerFinalResult(player: Player) {
@@ -33,12 +33,14 @@ object OutputView {
     }
 
     fun printStatistics(statistics: Statistics) {
-        println("\n## Final Results")
-        println("Dealer: ${statistics.dealerWin} Win ${statistics.dealerLose} Lose")
-        statistics.calculatePlayersWinning().forEach {
-                (player, winnings) ->
-            println("${player.name}: ${printWinOrLose(winnings == 1)}")
-        }
+        val header = "\n## Final Results"
+        val dealerLine = "Dealer: ${statistics.dealerWin} Win ${statistics.dealerLose} Lose"
+        val playerLines =
+            statistics.calculatePlayersWinning()
+                .entries
+                .joinToString("\n") { "${it.key.name}: ${printWinOrLose(it.value == 1)}" }
+
+        println(listOf(header, dealerLine, playerLines).joinToString("\n"))
     }
 
     fun displayCard(card: Card): String {
