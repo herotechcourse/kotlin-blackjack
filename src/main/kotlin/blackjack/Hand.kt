@@ -17,4 +17,9 @@ class Hand() {
         println("cardValues: $cardValues")
         return cardValues.sum()
     }
+
+    override fun toString(): String {
+        val cards = cards.joinToString(",")
+        return cards
+    }
 }
