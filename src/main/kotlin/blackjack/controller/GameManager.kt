@@ -18,7 +18,7 @@ class GameManager(
 
     fun play(): PlayResult {
         setUp()
-        OutputView.showParticipants(participants)
+        OutputView.showPayersCards(participants)
         keepPlay(InputView::readUserAnswer)
         return PlayResult(participants)
     }

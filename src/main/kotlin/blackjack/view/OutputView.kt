@@ -2,6 +2,7 @@ package blackjack.view
 
 import blackjack.model.participant.Dealer
 import blackjack.model.participant.Participant
+import blackjack.model.participant.Participants
 
 import blackjack.model.PlayerBackup
 import blackjack.model.Statistics
@@ -59,4 +60,3 @@ object OutputView {
         const val GENERATE_NEW_CARD = " Card deck is empty... prepare for a new card deck."
     }
 }
-
