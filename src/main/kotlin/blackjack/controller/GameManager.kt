@@ -1,6 +1,6 @@
 package blackjack.controller
 
-import blackjack.model.PlayResult
+import blackjack.model.result.GameResult
 import blackjack.model.holder.Deck
 import blackjack.model.participant.Dealer
 import blackjack.model.participant.Participant
@@ -16,14 +16,15 @@ class GameManager(
     private val dealer = participants.getDealer()
     private val players = participants.getPlayers()
 
-    fun play(): PlayResult {
+    fun play(): GameResult {
         setUp()
-        OutputView.showPayersCards(participants)
+        OutputView.showCards(dealer)
+        OutputView.showAllPayersCards(participants)
         keepPlay(InputView::readUserAnswer)
-        return PlayResult(participants)
+        return GameResult(participants)
     }
 
-    private fun setUp() {
+    internal fun setUp() {
         players.forEach { cardDeck.hit(it, 2) }
         cardDeck.hit(dealer)
     }
@@ -59,7 +60,8 @@ class GameManager(
                 cardDeck.hit(participant)
                 OutputView.showCards(participant)
             } else {
-                participant.state == State.STAY
+                participant._state = State.STAY
+                break
             }
         }
     }
