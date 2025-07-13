@@ -18,7 +18,7 @@ Includes card dealing, drawing logic, and win/loss/draw result handling.
 - [ ] Dealer auto-draws when score ≤ 16
 - [ ] Ask players if they want to draw more cards
 - [ ] Check if a participant is busted
-- [ ] Calculate participant score with Ace logic
+- [x] Calculate participant score with Ace logic
 - [ ] Announce game results
 
 ### Game
