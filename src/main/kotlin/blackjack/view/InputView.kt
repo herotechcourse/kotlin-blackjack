@@ -22,7 +22,10 @@ object InputView {
         return when (choice) {
             "y", "Y" -> true
             "n", "N" -> false
-            else -> throw IllegalArgumentException("Input can only contain y for yes, n for no")
+            else -> {
+                println("Invalid input. Please enter 'y' or 'n'.")
+                askToDrawCard(name)
+            }
         }
     }
 }

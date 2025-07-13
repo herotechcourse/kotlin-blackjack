@@ -31,6 +31,7 @@ object OutputView {
         dealer: Dealer,
         players: List<Player>,
     ) {
+        println()
         val playerNames = players.joinToString(", ") { it.name }
         println("Dealing two cards to dealer, $playerNames.")
 
@@ -71,7 +72,8 @@ object OutputView {
         println("## Final Results")
         println("Dealer: $dealerWins Win $dealerLoses Lose")
         players.forEach { player ->
-            val result = if (player.isBusted() || (!dealer.isBusted() && dealer.total() >= player.total())) "Lose" else "Win"
+            val result =
+                if (player.isBusted() || (!dealer.isBusted() && dealer.total() >= player.total())) "Lose" else "Win"
             println("${player.name}: $result")
         }
     }
