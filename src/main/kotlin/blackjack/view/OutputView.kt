@@ -1,12 +1,22 @@
 package blackjack.view
 
+import blackjack.model.Card
 import blackjack.model.Dealer
 import blackjack.model.DealerResult
 import blackjack.model.Participant
 import blackjack.model.PlayerResult
 import blackjack.model.Players
+import blackjack.model.Suit
 
 object OutputView {
+
+    private val suitSymbol = mapOf(
+        Suit.HEARTS   to "♥",
+        Suit.DIAMONDS to "♦",
+        Suit.CLUBS    to "♣",
+        Suit.SPADES   to "♠",
+    )
+
     fun displayPlayerNames(players: Players) {
         println(players.players.joinToString())
     }
@@ -16,11 +26,12 @@ object OutputView {
     }
 
     fun displayAllCardsMessage(participant: Participant) {
-        println("${participant.name}'s cards: ${participant.cardsToString()}")
+        println("${participant.name}'s cards: ${cardsToString(participant.handCards.cards)}")
     }
 
     fun displayFirstCardMessage(participant: Participant) {
-        println("${participant.name}: ${participant.firstCardToString()}")
+        val firstCard = participant.handCards.cards.first()
+        println("${participant.name}: ${formatCard(firstCard)}")
     }
 
     fun displayDealerDrawMessage() {
@@ -31,8 +42,7 @@ object OutputView {
         if (participant is Dealer) {
             println()
         }
-        println("${participant.name}'s cards: ${participant.cardsToString()} – Total: ${participant.handCards.total}")
-    }
+        println("${participant.name}'s cards: ${cardsToString(participant.handCards.cards)} – Total: ${participant.handCards.total}")    }
 
     fun formatDealer(result: DealerResult): String =
         "Dealer: ${result.wins} wins, ${result.losses} losses, ${result.draws} draws"
@@ -55,4 +65,10 @@ object OutputView {
             """.trimMargin(),
         )
     }
+
+    private fun cardsToString(cards: List<Card>): String =
+        cards.joinToString(" ") { formatCard(it) }
+
+    private fun formatCard(card: Card): String =
+        "${card.rank.value}${suitSymbol.getValue(card.suit)}"
 }

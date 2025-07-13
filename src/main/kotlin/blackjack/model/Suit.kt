@@ -1,8 +1,3 @@
 package blackjack.model
 
-enum class Suit(val suit: String) {
-    HEARTS("♥"),
-    DIAMONDS("♦"),
-    CLUBS("♣"),
-    SPADES("♠"),
-}
+enum class Suit { HEARTS, DIAMONDS, CLUBS, SPADES }
