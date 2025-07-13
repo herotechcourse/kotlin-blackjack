@@ -27,6 +27,7 @@ class Dealer(name: String = "Dealer", internal val deck: Deck = Deck.generateADe
         showAllCards = true
     }
 
+
     override fun toString(): String {
         return name
     }

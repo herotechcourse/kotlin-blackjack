@@ -19,9 +19,10 @@ class PlayerTest {
 
     @Test
     fun `should return an string with the name + dealt cards`() {
-        val player = Player("Sebas")
+        val name = "Sebas"
+        val player = Player(name)
         player.addCard(Card(Card.Suit.DIAMONDS, Card.Rank.ACE))
         player.addCard(Card(Card.Suit.DIAMONDS, Card.Rank.ACE))
-        println(player)
+        assertThat(player.toString()).isEqualTo(name)
     }
 }

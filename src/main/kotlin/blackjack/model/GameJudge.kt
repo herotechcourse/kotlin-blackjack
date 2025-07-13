@@ -3,7 +3,7 @@ package blackjack.model
 import blackjack.model.participant.Dealer
 import blackjack.model.participant.Participants
 import blackjack.model.participant.Player
-import blackjack.model.result.Result
+import blackjack.model.participant.vs
 
 object GameJudge {
     fun evaluateAll(participants: Participants) {
@@ -18,14 +18,4 @@ object GameJudge {
         player.recordResult(result)
         dealer.recordResult(result.inverse)
     }
-
-    private infix fun Dealer.vs(player: Player): Result =
-        when {
-            player.isBusts() -> Result.LOSE
-            this.isBusts() -> Result.WIN
-            player.hasBlackJack() && !this.hasBlackJack() -> Result.WIN
-            player.getScore() > this.getScore() -> Result.WIN
-            player.getScore() < this.getScore() -> Result.LOSE
-            else -> Result.TIE
-        }
 }

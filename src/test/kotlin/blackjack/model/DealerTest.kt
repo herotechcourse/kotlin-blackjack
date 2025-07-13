@@ -55,28 +55,28 @@ class DealerTest {
     }
 
     @Test
-    fun `toString should show only first card if not all cards shown`() {
+    fun `should hand return a list of the first class if is only the first round`() {
         val card = Card(Card.Suit.DIAMONDS, Card.Rank.TWO)
         dealer.addCard(card)
         dealer.addCard(Card(Card.Suit.SPADES, Card.Rank.THREE))
-        val result = dealer.toString()
-        assertThat(result).contains("Dealer: $card") // Only first card visible
+        val result = dealer.hand
+        assertThat(result).isEqualTo(listOf(card))
     }
 
     @Test
-    fun `toString should reveal full hand if showAllCards is true`() {
+    fun `should return full hand if showAllCards is true`() {
         val card1 = Card(Card.Suit.DIAMONDS, Card.Rank.TWO)
         val card2 = Card(Card.Suit.SPADES, Card.Rank.THREE)
         dealer.addCard(card1)
         dealer.addCard(card2)
         dealer.showAllCards()
-        val result = dealer.toString()
-        assertThat(result).contains("Dealer's cards: $card1, $card2")
+        val result = dealer.hand
+        assertThat(result).isEqualTo(listOf(card1, card2))
     }
 
     @Test
-    fun `toString should show no cards message when hand is empty`() {
+    fun `toString should show the name`() {
         val result = dealer.toString()
-        assertThat(result).isEqualTo("Dealer has no cards yet.")
+        assertThat(result).isEqualTo("Dealer")
     }
 }
