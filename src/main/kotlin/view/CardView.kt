@@ -3,7 +3,7 @@ package view
 import model.Card
 
 object CardView {
-    fun render(card: Card): String {
+    private fun render(card: Card): String {
         return if (card.faceUp) {
             card.rank.value + SuiteView.from(card.suite).symbol
         } else ""
