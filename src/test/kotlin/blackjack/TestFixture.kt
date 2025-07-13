@@ -1,56 +1,75 @@
 package blackjack
 
+import blackjack.model.card.Card
 import blackjack.model.card.Rank
 import blackjack.model.card.Suit
 
 object TestFixture {
     object DoesNotHasAce {
+        val EXACTLY_21_FIVE_CARDS =
+            listOf(
+                Card(Suit.HEART, Rank.TWO),
+                Card(Suit.DIAMOND, Rank.THREE),
+                Card(Suit.SPADE, Rank.FOUR),
+                Card(Suit.CLUB, Rank.FIVE),
+                Card(Suit.HEART, Rank.SEVEN),
+            )
+
         val TOTAL_SUM_16 =
             listOf(
-                blackjack.model.card.Card(Suit.DIAMOND, Rank.TWO),
-                blackjack.model.card.Card(Suit.DIAMOND, Rank.QUEEN),
-                blackjack.model.card.Card(Suit.DIAMOND, Rank.FOUR),
+                Card(Suit.DIAMOND, Rank.TWO),
+                Card(Suit.DIAMOND, Rank.QUEEN),
+                Card(Suit.DIAMOND, Rank.FOUR),
             )
 
         val TOTAL_SUM_25 =
             listOf(
-                blackjack.model.card.Card(Suit.DIAMOND, Rank.TWO),
-                blackjack.model.card.Card(Suit.DIAMOND, Rank.QUEEN),
-                blackjack.model.card.Card(Suit.DIAMOND, Rank.FOUR),
-                blackjack.model.card.Card(Suit.DIAMOND, Rank.NINE),
+                Card(Suit.DIAMOND, Rank.TWO),
+                Card(Suit.DIAMOND, Rank.QUEEN),
+                Card(Suit.DIAMOND, Rank.FOUR),
+                Card(Suit.DIAMOND, Rank.NINE),
             )
     }
 
     object HasAce {
         val TOTAL_SUM_17 =
             listOf(
-                blackjack.model.card.Card(Suit.DIAMOND, Rank.ACE),
-                blackjack.model.card.Card(Suit.DIAMOND, Rank.TWO),
-                blackjack.model.card.Card(Suit.DIAMOND, Rank.QUEEN),
-                blackjack.model.card.Card(Suit.DIAMOND, Rank.FOUR),
+                Card(Suit.DIAMOND, Rank.ACE),
+                Card(Suit.DIAMOND, Rank.TWO),
+                Card(Suit.DIAMOND, Rank.QUEEN),
+                Card(Suit.DIAMOND, Rank.FOUR),
             )
     }
 
     object HasTripleAce {
         val TOTAL_SUM_20 =
             listOf(
-                blackjack.model.card.Card(Suit.DIAMOND, Rank.ACE),
-                blackjack.model.card.Card(Suit.HEART, Rank.ACE),
-                blackjack.model.card.Card(Suit.SPADE, Rank.ACE),
-                blackjack.model.card.Card(Suit.DIAMOND, Rank.SEVEN),
+                Card(Suit.DIAMOND, Rank.ACE),
+                Card(Suit.HEART, Rank.ACE),
+                Card(Suit.SPADE, Rank.ACE),
+                Card(Suit.DIAMOND, Rank.SEVEN),
             )
 
         val TOTAL_SUM_13 =
             listOf(
-                blackjack.model.card.Card(Suit.DIAMOND, Rank.ACE),
-                blackjack.model.card.Card(Suit.HEART, Rank.ACE),
-                blackjack.model.card.Card(Suit.SPADE, Rank.ACE),
-                blackjack.model.card.Card(Suit.DIAMOND, Rank.JACK),
+                Card(Suit.DIAMOND, Rank.ACE),
+                Card(Suit.HEART, Rank.ACE),
+                Card(Suit.SPADE, Rank.ACE),
+                Card(Suit.DIAMOND, Rank.JACK),
+            )
+    }
+
+    object BustedWithLastCard {
+        val TOTAL_SUM_WAS_20 =
+            listOf(
+                Card(Suit.DIAMOND, Rank.JACK),
+                Card(Suit.DIAMOND, Rank.QUEEN),
+                Card(Suit.DIAMOND, Rank.FOUR),
             )
     }
 
     object Card {
-        val DIAMOND_JACK = blackjack.model.card.Card(Suit.DIAMOND, Rank.JACK)
-        val HEART_ACE = blackjack.model.card.Card(Suit.HEART, Rank.ACE)
+        val DIAMOND_JACK = Card(Suit.DIAMOND, Rank.JACK)
+        val HEART_ACE = Card(Suit.HEART, Rank.ACE)
     }
 }

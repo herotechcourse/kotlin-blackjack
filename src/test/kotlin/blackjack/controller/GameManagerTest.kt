@@ -1,8 +1,10 @@
 package blackjack.controller
 
 import blackjack.TestFixture
+import blackjack.model.card.Card
 import blackjack.model.card.Rank
 import blackjack.model.card.Suit
+import blackjack.model.holder.Deck
 import blackjack.model.participant.Participants
 import blackjack.model.participant.Player
 import blackjack.model.state.State
@@ -45,8 +47,8 @@ class GameManagerTest {
     fun `player state is blackjack if score is exactly 21 with first two cards`() {
         val player = Player("test")
 
-        player.receive(blackjack.model.card.Card(Suit.HEART, Rank.ACE))
-        player.receive(blackjack.model.card.Card(Suit.SPADE, Rank.KING))
+        player.receive(Card(Suit.HEART, Rank.ACE))
+        player.receive(Card(Suit.SPADE, Rank.KING))
 
         assertThat(player.state).isEqualTo(State.BLACKJACK)
         assertThat(player.score).isEqualTo(21)
@@ -65,5 +67,68 @@ class GameManagerTest {
         val canReceive = player.receive(TestFixture.Card.DIAMOND_JACK)
         assertThat(canReceive).isEqualTo(false)
         assertThat(player.state).isEqualTo(State.BLACKJACK)
+    }
+
+    @Test
+    fun `round works correctly with Player Participant`() {
+        val participants = Participants.from(listOf("test"))
+        val gameManager = GameManager(participants)
+
+        val player = gameManager.getPlayers().first()
+        val cards = TestFixture.BustedWithLastCard.TOTAL_SUM_WAS_20.toMutableList()
+
+        gameManager.injectTestDeck(cards)
+
+        player.receive(cards.draw())
+        player.receive(cards.draw())
+
+        val prevScore = player.score
+
+        gameManager.round(player) { true }
+        assertThat(prevScore).isNotEqualTo(player.score)
+    }
+
+    @Test
+    fun `round works correctly with Player Participant - not busted, `() {
+        val participants = Participants.from(listOf("test"))
+        val gameManager = GameManager(participants)
+
+        val player = gameManager.getPlayers().first()
+        val cards = TestFixture.DoesNotHasAce.EXACTLY_21_FIVE_CARDS.toMutableList()
+
+        gameManager.injectTestDeck(cards)
+
+        val expect = cards.sumOf { it.rank.value }
+
+        gameManager.playPlayerRound(player) { true }
+        assertThat(player.score).isEqualTo(expect)
+    }
+
+    @Test
+    fun `round works correctly with Dealer Participant`() {
+        val participants = Participants.from(listOf("test"))
+        val gameManager = GameManager(participants)
+
+        val dealer = gameManager.getDealer()
+        val cards = TestFixture.BustedWithLastCard.TOTAL_SUM_WAS_20.toMutableList()
+        gameManager.injectTestDeck(cards)
+
+        dealer.receive(cards.draw())
+        dealer.receive(cards.draw())
+
+        val prevScore = dealer.score
+
+        gameManager.round(dealer) { true }
+        assertThat(prevScore).isNotEqualTo(dealer.score)
+    }
+
+    private fun GameManager.injectTestDeck(cards: List<Card>) {
+        repeat(Deck.FULL_DECK_SIZE - 1) { getDeck().draw() }
+        cards.forEach { getDeck().receive(it) }
+        getDeck().draw()
+    }
+
+    private fun MutableList<Card>.draw(): Card {
+        return this.removeFirst()
     }
 }
