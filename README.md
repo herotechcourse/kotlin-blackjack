@@ -5,30 +5,31 @@ The goal is to get as close to 21 as possible without going over.
 
 ## Features 
 - Input View 
-- [x] ask user inputs for player name
-- [x] get list of names from the user input
+- [x] Ask user inputs for player name
+- [x] Get list of names from the user input
+- [x] Ask player's choice to draw card or stay 
 
-- Card 
-- [x] Visibility of the card implemented by flipCard() 
-- [x] Determine the value of each card
+- Card
 - [x] Create Enum class - Ranks
-- [x] Create Class - Card
 - [x] Create Enum class - Suits
+- [x] Create Class - Card
+- [x] Determine the value of each card
 
 - Deck
-- [x] prepare deck
-- [x] shuffle cards
+- [x] Prepare deck
+- [x] Shuffle cards
 
-- Participant interface 
-- [x] drawCard()
-- [x] update status
+- Participant : abstract class 
+- [x] Draw card
+- [x] Calculate total value of the cards
+- [x] Update status of a participant
 
 - Dealer
-- [x] use Participant interface
-- [x] implement additional methods to draw card
+- [x] Use Participant abstract class
+- [x] Implement additional methods to draw card
 
 - Player
-- [x] use Participant interface
+- [x] Use Participant abstract class
 
 - Game (controller)
 - [x] Initialize Game
