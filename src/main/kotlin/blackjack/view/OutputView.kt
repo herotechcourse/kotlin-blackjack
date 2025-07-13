@@ -15,7 +15,7 @@ object OutputView {
         println("${player.name}'s cards: " + player.cardsToString())
     }
 
-    fun printDealerDrawsCards(dealer: Dealer) {
+    fun showDealerDraw(dealer: Dealer) {
         println("Dealer draws ${dealer.cardsCount() - 1} more card due to having 16 or less.")
     }
 
@@ -50,7 +50,7 @@ object OutputView {
         }
     }
 
-    fun printError(msg: String?) {
+    fun showError(msg: String?) {
         println("Error: $msg")
     }
 
@@ -59,3 +59,4 @@ object OutputView {
         const val GENERATE_NEW_CARD = " Card deck is empty... prepare for a new card deck."
     }
 }
+

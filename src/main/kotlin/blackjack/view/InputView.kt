@@ -18,7 +18,7 @@ object InputView {
 
     internal object Ask {
         fun playersName(): String {
-            OutputView.printEnterPlayerName()
+            OutputView.showEnterNames()
             return readlnOrNull() ?: throw IllegalArgumentException(Errors.INVALID_INPUT.message)
         }
 
@@ -38,7 +38,7 @@ object InputView {
                 try {
                     return parser(input)
                 } catch (exception: IllegalArgumentException) {
-                    OutputView.printError(exception.message)
+                    OutputView.showError(exception.message)
                 }
             }
         }

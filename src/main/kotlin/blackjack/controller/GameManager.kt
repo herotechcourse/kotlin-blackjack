@@ -4,7 +4,7 @@ import blackjack.model.holder.Deck
 import blackjack.model.participant.Dealer
 import blackjack.model.participant.Participant
 import blackjack.model.participant.Participants
-import blackjack.model.participant.Player
+import blackjack.model.state.State
 import blackjack.view.OutputView
 
 class GameManager(
@@ -31,39 +31,33 @@ class GameManager(
         askForCard: () -> Boolean = { true },
     ) {
         when (participant) {
-            is Dealer -> dealerPlay(participant)
-            is Player -> playersPlay(participant, askForCard)
+            is Dealer -> playDealerRound(participant)
+            else -> playPlayerRound(participant, askForCard)
         }
-        throw IllegalStateException()
+    }
+    private fun canReceiveCard(participant: Participant): Boolean {
+        return participant.state == State.HIT
     }
 
-    private fun ableToReceive(participant: Participant): Boolean {
-        when (participant) {
-            is Dealer -> return participant.points <= ABLE_TO_RECEIVE
-            is Player -> participant.points < BLACKJACK
-        }
-        throw IllegalStateException()
-    }
-
-    private fun playersPlay(
+    private fun playPlayerRound(
         participant: Participant,
         askForCard: () -> Boolean,
     ) {
-        while (ableToReceive(participant)) {
-            OutputView.printAskForCard(participant)
+        while (canReceiveCard(participant)) {
+            OutputView.askHit(participant)
             if (askForCard()) {
                 cardDeck.hit(participant)
-                OutputView.printOnePlayer(participant)
+                OutputView.showCards(participant)
             } else {
                 break
             }
         }
     }
 
-    private fun dealerPlay(dealer: Dealer) {
-        while (ableToReceive(dealer)) {
+    private fun playDealerRound(dealer: Dealer) {
+        while (canReceiveCard(dealer)) {
             cardDeck.hit(dealer)
         }
-        OutputView.printDealerDrawsCards(dealer)
+        OutputView.showDealerDraw(dealer)
     }
 }

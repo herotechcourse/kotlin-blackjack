@@ -12,7 +12,7 @@ object BlackJackGame {
             val participants = Participants.from(names)
 
         }.onFailure { exception ->
-            OutputView.printError(exception.message)
+            OutputView.showError(exception.message)
             exitProcess(1)
         }
     }
