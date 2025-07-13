@@ -15,6 +15,10 @@ object OutputView {
         println("${player.name}'s cards: ${player.displayHand()}")
     }
 
+    fun displayPlayerHands(players: List<Player>) {
+        players.forEach { println("${it.name}'s cards: ${it.displayHand()}") }
+    }
+
     fun displayDealerFirstTwoCards(cards: List<Card>) {
         println("Dealer: ${cards[0].display()}, ${cards[1].display()}")
     }
@@ -41,5 +45,9 @@ object OutputView {
 
     fun displayPlayerResult(name: String, result: String) {
         println("$name: $result")
+    }
+
+    fun displayLineBreak() {
+        println()
     }
 }

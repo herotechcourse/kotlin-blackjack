@@ -19,19 +19,20 @@ class Game {
                 dealer.giveCardTo(player)
             }
         }
-        OutputView.displayDealerFirstTwoCards(dealer.getHand().take(2))
-        players.forEach { OutputView.displayPlayerHand(it) }
 
-        println()
+        OutputView.displayDealerFirstTwoCards(dealer.getHand().take(2))
+        OutputView.displayPlayerHands(players)
+
+        OutputView.displayLineBreak()
 
         players.forEach { dealer.askPlayerDraw(it) }
 
-        println()
-        players.forEach { OutputView.displayPlayerHand(it) }
+        OutputView.displayLineBreak()
+        OutputView.displayPlayerHands(players)
 
         dealer.playDealerTurn()
 
-        println()
+        OutputView.displayLineBreak()
         OutputView.displayDealerStatus(dealer)
         players.forEach { OutputView.displayPlayerStatus(it) }
 
@@ -42,18 +43,17 @@ class Game {
         var dealerLosses = 0
 
         OutputView.displayFinalResultsHeader()
-          players.forEach { player ->
-              val playerScore = ScoreCalculator.calculate(player)
-              val isPlayerBusted = ScoreCalculator.isBusted(player)
+        players.forEach { player ->
+            val playerScore = ScoreCalculator.calculate(player)
+            val isPlayerBusted = ScoreCalculator.isBusted(player)
 
-              val result = GameLogic.getGameResult(playerScore, dealerScore, isPlayerBusted, isDealerBusted)
+            val result = GameLogic.getGameResult(playerScore, dealerScore, isPlayerBusted, isDealerBusted)
 
-              when (result) {
-                 GameResult.WIN -> dealerLosses++
-                 GameResult.LOSE -> dealerWins++
-                 GameResult.DRAW -> {}
-             }
-
+            when (result) {
+                GameResult.WIN -> dealerLosses++
+                GameResult.LOSE -> dealerWins++
+                GameResult.DRAW -> {}
+            }
 
             OutputView.displayPlayerResult(player.name, result.label)
         }
