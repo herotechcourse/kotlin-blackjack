@@ -9,13 +9,13 @@ import blackjack.model.Players
 import blackjack.model.Suit
 
 object OutputView {
-
-    private val suitSymbol = mapOf(
-        Suit.HEARTS   to "♥",
-        Suit.DIAMONDS to "♦",
-        Suit.CLUBS    to "♣",
-        Suit.SPADES   to "♠",
-    )
+    private val suitSymbol =
+        mapOf(
+            Suit.HEARTS to "♥",
+            Suit.DIAMONDS to "♦",
+            Suit.CLUBS to "♣",
+            Suit.SPADES to "♠",
+        )
 
     fun displayPlayerNames(players: Players) {
         println(players.players.joinToString())
@@ -38,20 +38,20 @@ object OutputView {
         println("\nDealer draws one more card due to having 16 or less.")
     }
 
-    fun displayParticipantStatus(participant: Participant)  {
+    fun displayParticipantStatus(participant: Participant) {
         if (participant is Dealer) {
             println()
         }
-        println("${participant.name}'s cards: ${cardsToString(participant.handCards.cards)} – Total: ${participant.handCards.total}")    }
+        println("${participant.name}'s cards: ${cardsToString(participant.handCards.cards)} – Total: ${participant.handCards.total}")
+    }
 
-    private fun formatDealer(result: DealerResult): String =
-        "Dealer: ${result.wins} wins, ${result.losses} losses, ${result.draws} draws"
+    private fun formatDealer(result: DealerResult): String = "Dealer: ${result.wins} wins, ${result.losses} losses, ${result.draws} draws"
 
     private fun formatPlayer(result: PlayerResult): String =
         when {
-            result.win  -> "${result.name}: win"
+            result.win -> "${result.name}: win"
             result.draw -> "${result.name}: draw"
-            else        -> "${result.name}: loss"
+            else -> "${result.name}: loss"
         }
 
     // TODO: refactor Pair to value class?
@@ -66,9 +66,7 @@ object OutputView {
         )
     }
 
-    private fun cardsToString(cards: List<Card>): String =
-        cards.joinToString(" ") { formatCard(it) }
+    private fun cardsToString(cards: List<Card>): String = cards.joinToString(" ") { formatCard(it) }
 
-    private fun formatCard(card: Card): String =
-        "${card.rank.title}${suitSymbol.getValue(card.suit)}"
+    private fun formatCard(card: Card): String = "${card.rank.title}${suitSymbol.getValue(card.suit)}"
 }

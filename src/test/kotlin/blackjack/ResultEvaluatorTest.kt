@@ -13,7 +13,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class ResultEvaluatorTest {
-
     private val deck = CardDeck()
 
     @Test
@@ -63,7 +62,12 @@ class ResultEvaluatorTest {
 
     @Test
     fun `test dealer is not busted, player is busted, DEALER WINS`() {
-        val playersCards = mutableListOf(Card(Rank.KING, Suit.HEARTS), Card(Rank.NINE, Suit.CLUBS), Card(Rank.FIVE, Suit.SPADES)) // total 24 busted
+        val playersCards =
+            mutableListOf(
+                Card(Rank.KING, Suit.HEARTS),
+                Card(Rank.NINE, Suit.CLUBS),
+                Card(Rank.FIVE, Suit.SPADES),
+            ) // total 24 busted
         val dealersCards = mutableListOf(Card(Rank.TEN, Suit.DIAMONDS), Card(Rank.NINE, Suit.DIAMONDS)) // total 19
         val player = Player("test", HandCards(playersCards))
         val players = Players(listOf(player))
@@ -79,7 +83,12 @@ class ResultEvaluatorTest {
     @Test
     fun `test dealer is busted, player is not busted, PLAYER WINS`() {
         val playersCards = mutableListOf(Card(Rank.NINE, Suit.CLUBS), Card(Rank.KING, Suit.SPADES)) // total 19
-        val dealersCards = mutableListOf(Card(Rank.KING, Suit.HEARTS), Card(Rank.NINE, Suit.DIAMONDS), Card(Rank.FIVE, Suit.CLUBS)) // total 24 busted
+        val dealersCards =
+            mutableListOf(
+                Card(Rank.KING, Suit.HEARTS),
+                Card(Rank.NINE, Suit.DIAMONDS),
+                Card(Rank.FIVE, Suit.CLUBS),
+            ) // total 24 busted
         val player = Player("test", HandCards(playersCards))
         val players = Players(listOf(player))
         val dealer = Dealer(deck = deck, players = players, handCards = HandCards(dealersCards))
@@ -93,8 +102,18 @@ class ResultEvaluatorTest {
 
     @Test
     fun `test dealer is busted, player is busted, LOSS FOR PLAYER, DEALER WINS`() {
-        val playersCards = mutableListOf(Card(Rank.KING, Suit.HEARTS), Card(Rank.NINE, Suit.CLUBS), Card(Rank.FIVE, Suit.SPADES)) // 24 busted
-        val dealersCards = mutableListOf(Card(Rank.KING, Suit.DIAMONDS), Card(Rank.NINE, Suit.HEARTS), Card(Rank.SIX, Suit.CLUBS)) // 25 busted
+        val playersCards =
+            mutableListOf(
+                Card(Rank.KING, Suit.HEARTS),
+                Card(Rank.NINE, Suit.CLUBS),
+                Card(Rank.FIVE, Suit.SPADES),
+            ) // 24 busted
+        val dealersCards =
+            mutableListOf(
+                Card(Rank.KING, Suit.DIAMONDS),
+                Card(Rank.NINE, Suit.HEARTS),
+                Card(Rank.SIX, Suit.CLUBS),
+            ) // 25 busted
         val player = Player("test", HandCards(playersCards))
         val players = Players(listOf(player))
         val dealer = Dealer(deck = deck, players = players, handCards = HandCards(dealersCards))

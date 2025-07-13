@@ -6,7 +6,6 @@ import blackjack.model.Rules
 import blackjack.model.validatePlayerName
 
 object InputView {
-
     private const val YES = "y"
     private const val NO = "n"
 

@@ -9,12 +9,11 @@ class Dealer(
     private val deck: CardDeck,
     private val players: Players,
 ) : Participant() {
-
     fun shouldDraw(): Boolean {
         return handCards.total <= Rules.DEALER_DRAW_THRESHOLD
     }
 
-    fun serviceParticipants () {
+    fun serviceParticipants() {
         serviceDealer()
         servicePlayers(players)
     }

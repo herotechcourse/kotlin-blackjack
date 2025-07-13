@@ -9,7 +9,6 @@ data class PlayerResult(var win: Boolean = false, var draw: Boolean = false, val
 }
 
 class ResultEvaluator(private val players: Players, private val dealer: Dealer) {
-
     fun calculateResults(): Pair<DealerResult, List<PlayerResult>> {
         return Pair(calculateDealerResults(), calculateAllPlayersResults())
     }
@@ -17,20 +16,24 @@ class ResultEvaluator(private val players: Players, private val dealer: Dealer) 
     private fun calculateDealerResults(): DealerResult {
         val dealerResult = DealerResult()
         if (dealer.isBusted()) {
-            dealerResult.losses = players.players.count() { it.isNotBusted() }
-            dealerResult.wins = players.players.count() { it.isBusted() }
+            dealerResult.losses = players.players.count { it.isNotBusted() }
+            dealerResult.wins = players.players.count { it.isBusted() }
             return dealerResult
         }
         players.forEach {
-            compareDealerToPlayer( it, dealerResult)
+            compareDealerToPlayer(it, dealerResult)
         }
         return dealerResult
     }
 
-    private fun compareDealerToPlayer(player: Player, dealerResult: DealerResult) {
-        if (player.isBusted()){
-            dealerResult.wins++
-        }
+    private fun compareDealerToPlayer(
+        player: Player,
+        dealerResult: DealerResult,
+    ) {
+        if (player.isBusted())
+            {
+                dealerResult.wins++
+            }
         if (player.isNotBusted()) {
             when {
                 player.handCards < dealer.handCards -> dealerResult.wins++
@@ -47,10 +50,12 @@ class ResultEvaluator(private val players: Players, private val dealer: Dealer) 
     }
 
     private fun calculatePlayerResult(player: Player): PlayerResult {
-        if (player.isBusted())
+        if (player.isBusted()) {
             return PlayerResult(name = player.name)
-        if (dealer.isBusted())
+        }
+        if (dealer.isBusted()) {
             return PlayerResult(win = true, name = player.name)
+        }
         return when {
             player.handCards < dealer.handCards -> PlayerResult(name = player.name)
             player.handCards > dealer.handCards -> PlayerResult(win = true, name = player.name)

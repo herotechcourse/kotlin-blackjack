@@ -15,7 +15,7 @@ class Controller {
     private lateinit var dealer: Dealer
 
     private val players: Players
-            get() = _players!!
+        get() = _players!!
 
     fun runGame() {
         _players = initializePlayers()
