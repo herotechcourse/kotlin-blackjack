@@ -6,51 +6,31 @@ import blackjack.model.participant.Participants
 import blackjack.model.result.GameResult
 import blackjack.model.result.Outcome
 
-import blackjack.model.PlayerBackup
-import blackjack.model.Statistics
-
 object OutputView {
-    fun printAllPlayers(players: List<PlayerBackup>) {
-        players.forEach { printOnePlayer(it) }
+
+    fun showAllPayersCards(participants: Participants) {
+        participants.getPlayers().forEach { showCards(it) }
+        println()
     }
 
-    fun printOnePlayer(player: PlayerBackup) {
-        println("${player.name}'s cards: " + player.cardsToString())
+    fun showCards(participant: Participant, extra: String = "") {
+        println("${participant.name}'s cards: " + participant.cards.joinToString() + extra)
     }
 
     fun showDealerDraw(dealer: Dealer) {
         println("\nDealer draws ${dealer.cardsCount() - 1} more card due to having 16 or less.\n")
     }
 
-    fun printAskForCard(player: PlayerBackup) {
-        println("Would ${player.name} like to draw another card? (y for yes, n for no)")
+    fun askHit(participant: Participant) {
+        println("\nWould ${participant.name} like to draw another card? (y for yes, n for no)")
     }
 
-    fun printOnePlayerFinalResult(player: PlayerBackup) {
-        println("${player.name}'s cards: " + "${player.cardsToString()} - Total: ${player.calculatePoints()}.")
+    fun showEnterNames() {
+        println(Message.ENTER_PLAYERS_NAMES)
     }
 
-    private fun printFinalResults(statistics: Statistics) {
-        val players = statistics.dealer + statistics.players
-        players.forEach { printOnePlayerFinalResult(it) }
-    }
-
-    private fun printWinOrLose(condition: Boolean): String {
-        return when (condition) {
-            true -> "Win"
-            false -> "Lose"
-        }
-    }
-
-    fun printStatistics(statistics: Statistics) {
-        printFinalResults(statistics)
-
-        println("\n## Final Results")
-        println("Dealer: ${statistics.dealerWin} Win ${statistics.dealerLose} Lose")
-        statistics.totalResult.forEach {
-                (player, winnings) ->
-            println("${player.name}: ${printWinOrLose(winnings == 1)}")
-        }
+    fun showNewCard() {
+        println(Message.GENERATE_NEW_CARD)
     }
 
     fun showError(msg: String?) {
