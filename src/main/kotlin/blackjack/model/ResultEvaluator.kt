@@ -1,17 +1,11 @@
 package blackjack.model
 
 data class DealerResult(var wins: Int = 0, var losses: Int = 0, var draws: Int = 0) {
-    override fun toString(): String {
-        return "Dealer: $wins wins, $losses losses, $draws draws"
-    }
+    override fun toString() = "DealerResult(w=$wins,l=$losses,d=$draws)"
 }
 
 data class PlayerResult(var win: Boolean = false, var draw: Boolean = false, val name: String = "") {
-    override fun toString(): String {
-        if (win) return "$name: win"
-        if (draw) return "$name: draw"
-        return "$name: loss"
-    }
+    override fun toString() = "PlayerResult($name,w=$win,d=$draw)"
 }
 
 class ResultEvaluator(val players: Players, val dealer: Dealer) {

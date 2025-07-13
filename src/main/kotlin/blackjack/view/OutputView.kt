@@ -34,14 +34,24 @@ object OutputView {
         println("${participant.name}'s cards: ${participant.cardsToString()} – Total: ${participant.handCards.total}")
     }
 
+    fun formatDealer(result: DealerResult): String =
+        "Dealer: ${result.wins} wins, ${result.losses} losses, ${result.draws} draws"
+
+    fun formatPlayer(result: PlayerResult): String =
+        when {
+            result.win  -> "${result.name}: win"
+            result.draw -> "${result.name}: draw"
+            else        -> "${result.name}: loss"
+        }
+
     // TODO: refactor Pair to value class?
     fun displayResults(results: Pair<DealerResult, List<PlayerResult>>) {
         println(
             """
             |
             |## Final Results:
-            |${results.component1()}
-            |${results.component2().joinToString("\n")}
+            |${formatDealer(results.component1())}
+            |${results.component2().joinToString("\n") { formatPlayer(it) }}
             """.trimMargin(),
         )
     }
