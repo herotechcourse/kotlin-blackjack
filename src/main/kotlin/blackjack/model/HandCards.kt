@@ -24,7 +24,7 @@ class HandCards(val cards: MutableList<Card> = mutableListOf()) {
             if (card.rank == Rank.ACE) numberOfAces++
         }
         repeat(numberOfAces) {
-            if (total - discount > 21) {
+            if (total - discount > Rules.BLACKJACK_TARGET) {
                 discount += 10
             }
         }

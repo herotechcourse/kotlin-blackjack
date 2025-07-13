@@ -6,7 +6,7 @@ class Dealer(
 ) : Participant() {
 
     fun shouldDraw(): Boolean {
-        return handCards.total <= 16
+        return handCards.total <= Rules.DEALER_DRAW_THRESHOLD
     }
 
     override fun toString(): String {
