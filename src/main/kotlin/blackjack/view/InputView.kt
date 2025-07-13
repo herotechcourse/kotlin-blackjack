@@ -4,6 +4,10 @@ import blackjack.model.ErrorMessage
 import blackjack.model.Player
 
 object InputView {
+
+    private const val YES = "y"
+    private const val NO = "n"
+
     fun readNames(): List<String> {
         println("\nEnter the names of the players (comma-separated):")
         val input = readln()
@@ -23,7 +27,4 @@ object InputView {
             else -> throw IllegalArgumentException(ErrorMessage.EMPTY_INPUT.toString())
         }
     }
-
-    private const val YES = "y"
-    private const val NO = "n"
 }
