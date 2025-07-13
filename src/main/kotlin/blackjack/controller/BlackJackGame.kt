@@ -1,5 +1,6 @@
 package blackjack.controller
 
+import blackjack.model.result.GameResult
 import blackjack.model.participant.Participants
 import blackjack.view.InputView
 import blackjack.view.OutputView
@@ -11,7 +12,10 @@ object BlackJackGame {
             val names = InputView.readPlayersNames()
             val participants = Participants.from(names)
 
-            val playResult = GameManager(participants).play()
+            GameManager(participants).play()
+
+            val gameResult = GameResult(participants)
+            OutputView.showGameResult(gameResult)
         }.onFailure { exception ->
             OutputView.showError(exception.message)
             exitProcess(1)
