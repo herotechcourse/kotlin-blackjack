@@ -33,7 +33,7 @@ class Game {
 
         println()
         OutputView.displayDealerStatus(dealer)
-        players.forEach { OutputView.displayPlayerStatus(it, dealer) }
+        players.forEach { OutputView.displayPlayerStatus(it) }
 
         val dealerScore = ScoreCalculator.calculate(dealer)
         val isDealerBusted = ScoreCalculator.isBusted(dealer)

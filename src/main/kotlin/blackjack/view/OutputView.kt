@@ -19,9 +19,6 @@ object OutputView {
         println("Dealer: ${cards[0].display()}, ${cards[1].display()}")
     }
 
-    fun displayInvalidInput() {
-        println("Invalid input. Please enter 'y' or 'n'.")
-    }
     fun displayDealerDraw() {
         println("Dealer draws one more card due to having 16 or less.")
     }
@@ -30,7 +27,7 @@ object OutputView {
         println("Dealer's cards: ${dealer.displayHand()} – Total: ${ScoreCalculator.calculate(dealer)}")
     }
 
-    fun displayPlayerStatus(player: Player, dealer: Dealer) {
+    fun displayPlayerStatus(player: Player) {
         println("${player.name}'s cards: ${player.displayHand()} – Total: ${ScoreCalculator.calculate(player)}")
     }
 
