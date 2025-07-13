@@ -7,7 +7,8 @@ import blackjack.model.state.State
 abstract class Participant(val name: String) : Hand() {
     val points get() = getPoints()
 
-    abstract var state: State
+    abstract var _state: State
+        val state get() = _state
 
     private fun getPoints(): Int {
         return when (cards.isEmpty()) {
