@@ -10,6 +10,10 @@ class Hit(override val hand: Hand) : State {
         return Hit(hand)
     }
 
+    fun stay(): State {
+        return Stay(hand)
+    }
+
     companion object {
         private const val BLACKJACK = 21
     }
