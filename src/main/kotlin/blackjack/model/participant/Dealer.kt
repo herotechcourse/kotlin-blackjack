@@ -13,8 +13,8 @@ class Dealer() : Participant("Dealer") {
         if (isFirstRound()) return blackOrHit()
         if (points > BLACKJACK_SCORE) return State.BUST
 
-        return if (cardsCount() > GameConstants.ABLE_TO_RECEIVE) State.STAY
-        else State.HIT
+        return if (points <= GameConstants.ABLE_TO_RECEIVE) State.HIT
+        else State.STAY
     }
 
     private fun isFirstRound(): Boolean {
