@@ -17,14 +17,17 @@ Includes card dealing, drawing logic, and win/loss/draw result handling.
 - [x] Draw card to any participant
 - [ ] Dealer auto-draws when score ≤ 16
 - [ ] Ask players if they want to draw more cards
-- [ ] Check if a participant is busted
+
+### Hand
 - [x] Calculate participant score with Ace logic
-- [ ] Announce game results
+- [x] Calculate participant score with J, Q and K logic
+- [ ] provide information for game results announce
 
 ### Game
 - [ ] Accept player names
 - [x] Deal two initial cards to all participants
 - [ ] Handle player turns
 - [ ] Handle dealer turn
+- [ ] Check if a participant is busted
 - [ ] Display final hands and scores
 - [ ] Determine and print winners using GameLogic.getGameResult()
