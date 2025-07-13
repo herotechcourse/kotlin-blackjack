@@ -16,30 +16,33 @@ object OutputView {
     }
 
     fun displayAllCardsMessage(participant: Participant) {
-    println("${participant.name}'s cards: ${participant.cardsToString()}")
-
+        println("${participant.name}'s cards: ${participant.cardsToString()}")
     }
 
     fun displayFirstCardMessage(participant: Participant) {
-        print(participant.name + ": ")
-        println(participant.firstCardToString())
+        println("${participant.name}: ${participant.firstCardToString()}")
     }
 
     fun displayDealerDrawMessage() {
         println("\nDealer draws one more card due to having 16 or less.")
     }
 
-    fun displayParticipantStatus(participant: Participant){
-        if (participant is Dealer)
+    fun displayParticipantStatus(participant: Participant)  {
+        if (participant is Dealer) {
             println()
-        print(participant.name + "'s cards: ")
-        print(participant.cardsToString())
-        println(" – Total: ${participant.handCards.total}")
+        }
+        println("${participant.name}'s cards: ${participant.cardsToString()} – Total: ${participant.handCards.total}")
     }
 
+    // TODO: refactor Pair to value class?
     fun displayResults(results: Pair<DealerResult, List<PlayerResult>>) {
-        println("\n## Final Results:")
-        println(results.component1())
-        results.component2().forEach { println(it) }
+        println(
+            """
+            |
+            |## Final Results:
+            |${results.component1()}
+            |${results.component2().joinToString("\n")}
+            """.trimMargin(),
+        )
     }
 }
