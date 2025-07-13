@@ -6,6 +6,7 @@ import blackjack.model.result.Result
 import blackjack.model.result.ResultTracker
 
 abstract class Participant(val name: String, protected val resultTracker: ResultTracker) {
+    @Suppress("PropertyName")
     protected val _hand = Hand()
 
     init {

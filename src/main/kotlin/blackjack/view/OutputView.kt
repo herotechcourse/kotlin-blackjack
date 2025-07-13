@@ -1,6 +1,5 @@
 package blackjack.view
 
-import blackjack.AnsiColor
 import blackjack.model.card.Card
 import blackjack.model.participant.Participants
 import blackjack.model.participant.Player

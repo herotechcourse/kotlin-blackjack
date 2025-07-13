@@ -1,4 +1,4 @@
-package blackjack
+package blackjack.view
 
 object AnsiColor {
     const val RED = "\u001B[31m"

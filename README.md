@@ -8,6 +8,7 @@
   - [x] Should Add a card to the hand.
   - [x] Should check for blackjack and busts
   - [x] The name should be not empty.
+  - [x] Update the hasBlackJack method to return true only if score is 21 and Hand size 2
 - [x] **Create Player Class inherit from a participant**
 - [x] **Create Dealer Class inherit from a participant**
   - [x] Should contain a Deck and manage it.
@@ -62,9 +63,6 @@
   - [x] Should print the final hands and score.
   - [x] Should print the Final Result.
   - [x] Add empty lines between each step on the game.
-
-### Todo
-
 - [x] Add constants to Input and Output Prompts
 - [x] Print cards with color (black and red)
-- [x] Update the hasBlackJack method to return true only if score is 21 and Hand size 2
+- [x] Add AnsiColor for the cards and error messages

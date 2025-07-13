@@ -5,7 +5,7 @@ data class Card(val suit: Suit, val rank: Rank) {
         DIAMONDS("♦"),
         HEARTS("♥"),
         CLUBS("♣"),
-        SPADES("♠");
+        SPADES("♠"),
     }
 
     enum class Rank(val symbol: String, val value: Int) {
