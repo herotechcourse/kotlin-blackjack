@@ -12,11 +12,12 @@ Includes card dealing, drawing logic, and win/loss/draw result handling.
 ### Participants:
 - [x] Create Participant abstract class and extend it as Player and Dealer classes
 - [x] Implement Card, Dealer and Deck
+- [x] Check its own scores and results
 
 ### Dealer
 - [x] Draw card to any participant
-- [ ] Dealer auto-draws when score ≤ 16
-- [ ] Ask players if they want to draw more cards
+- [x] Dealer auto-draws when score ≤ 16
+- [x] Ask players if they want to draw more cards
 
 ### Hand
 - [x] Calculate participant score with Ace logic
@@ -26,8 +27,8 @@ Includes card dealing, drawing logic, and win/loss/draw result handling.
 ### Game
 - [ ] Accept player names
 - [x] Deal two initial cards to all participants
-- [ ] Handle player turns
-- [ ] Handle dealer turn
+- [x] Handle player turns
+- [x] Handle dealer turn
 - [ ] Check if a participant is busted
 - [ ] Display final hands and scores
 - [ ] Determine and print winners using GameLogic.getGameResult()
