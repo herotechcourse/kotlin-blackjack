@@ -1,37 +1,31 @@
 package blackjack.model
 
-interface Participant {
-    val name: String
-    var isActive: Boolean
-    val cardsInHand: MutableList<Card>
+abstract class Participant(open val name: String) {
+    val cardsInHand: MutableList<Card> = mutableListOf()
 
     fun drawCard(cards: List<Card>) {
         cardsInHand.addAll(cards)
     }
 
-    private fun checkAces() = cardsInHand.count { card -> card.rank == Rank.ACE }
+    private fun checkAces() = cardsInHand.count { it.rank == Rank.ACE }
 
-    fun calculateTotalValueOfCards(): Int {
-        var totalValueOfCards = cardsInHand.sumOf { card -> card.rank.value }
+    private fun calculateTotalValueOfCards(): Int {
+        var total = cardsInHand.sumOf { it.rank.value }
         var aceCounter = checkAces()
-        while (totalValueOfCards > 21 && aceCounter > 0) {
-            totalValueOfCards -= 10
+        while (total > BUST_LIMIT && aceCounter > 0) {
+            total -= 10
             aceCounter--
         }
-        return totalValueOfCards
+        return total
     }
 
-    fun updateActiveStatus(totalValueOfCards: Int) {
-        if (totalValueOfCards > 21) {
-            isActive = false
-        }
-    }
+    fun total(): Int = calculateTotalValueOfCards()
 
-    fun storePlayerHand(): String {
-        val playerHand = "$name's cards: ${
-            cardsInHand
-                .joinToString(", ") { card -> (card.rank.face + card.suit.symbol) }
-        }"
-        return playerHand
+    fun isBusted(): Boolean = total() > BUST_LIMIT
+
+    fun isStillInGame(): Boolean = !isBusted()
+
+    companion object {
+        const val BUST_LIMIT = 21
     }
 }
