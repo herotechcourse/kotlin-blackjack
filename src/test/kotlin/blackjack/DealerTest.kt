@@ -8,13 +8,10 @@ class DealerTest {
 
     private lateinit var dealer: Dealer
     private lateinit var player: Player
-    private lateinit var deck: Deck
-
 
     @BeforeEach
     fun setUp() {
-        deck = Deck()
-        dealer = Dealer(deck)
+        dealer = Dealer()
         player = Player("TestPlayer")
     }
     @Test

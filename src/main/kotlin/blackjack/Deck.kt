@@ -5,8 +5,8 @@ class Deck {
     private val cards: MutableList<Card> = mutableListOf()
 
     init {
-        for (suit in Suit.values()) {
-            for (rank in Rank.values()) {
+        for (suit in Suit.entries) {
+            for (rank in Rank.entries) {
                 cards.add(Card(suit, rank))
             }
         }

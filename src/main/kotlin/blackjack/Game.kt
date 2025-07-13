@@ -8,8 +8,7 @@ class Game {
     fun run() {
         val playerNames = InputView.askPlayerNames()
         val players = playerNames.map { Player(it) }
-        val deck = Deck()
-        val dealer = Dealer(deck)
+        val dealer = Dealer()
 
         OutputView.displayDealing(playerNames)
 
