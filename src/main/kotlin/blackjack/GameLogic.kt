@@ -19,12 +19,12 @@ class GameLogic {
         })
     }
 
-    fun hasBlackJack(players: List<Player>, dealer: Dealer): Boolean {
-        val hand = Hand()
-        val results = hand.getScoreResults(players, dealer)
-        return when {
-            ResultTypes.BLACKJACK in results -> true
-            else -> false
+    fun otherTurnCards(players: List<Player>, dealer: Dealer) {
+        players.forEach { player ->
+            if(player.shouldHit()) player.addCard(dealer.drawCard())
         }
+        if(dealer.shouldHit()) dealer.addCard(dealer.drawCard())
     }
+
+
 }
