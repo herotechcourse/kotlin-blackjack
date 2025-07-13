@@ -11,7 +11,7 @@ object InputView {
             parsePlayerDecision(readln())
         }
 
-    fun requestPlayersBet(name: String): Double =
+    fun requestPlayersBet(name: String): String =
         retry("Enter $name’s betting amount:") {
             parsePlayerBetAmount(readln())
         }
@@ -29,11 +29,9 @@ object InputView {
         return input.trim()
     }
 
-    private fun parsePlayerBetAmount(input: String): Double {
+    private fun parsePlayerBetAmount(input: String): String {
         require(input.isNotEmpty() && input.isNotBlank()) { "Betting amount cannot be empty" }
-        val amount = input.trim().toDouble()
-        require(amount > 0) { "Betting amount should be greater than 0" }
-        return amount
+        return input.trim()
     }
 
     private fun <T> retry(
