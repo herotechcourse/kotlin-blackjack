@@ -7,22 +7,20 @@ import blackjack.view.InputView
 import blackjack.view.OutputView
 
 class Game(
-    private val inputView: InputView,
-    private val outputView: OutputView,
     private val deck: Deck,
     private val dealer: Dealer,
 ) {
     fun startGame() {
-        val playersName = inputView.askPlayerNames()
+        val playersName = InputView.askPlayerNames()
         val players = playersName.map { Player(it) }
         dealCardsToDealer()
         dealCardsToPlayer(players)
-        outputView.displayInitialCards(dealer, players)
+        OutputView.displayInitialCards(dealer, players)
         askPlayersToDraw(players)
         dealerDraws()
-        outputView.displayCardsWithTotalValue(dealer, players)
+        OutputView.displayCardsWithTotalValue(dealer, players)
         compareFinalCards(players)
-        outputView.displayFinalResults(dealer, players)
+        OutputView.displayFinalResults(dealer, players)
     }
 
     fun dealCardsToDealer() {
@@ -42,11 +40,11 @@ class Game(
     fun askPlayersToDraw(players: List<Player>) {
         players.forEach {
             do {
-                val answer = inputView.askToDrawCard(it.name)
+                val answer = InputView.askToDrawCard(it.name)
                 if (answer) {
                     it.drawCard(deck.giveCard())
                     it.updateActiveStatus(it.calculateTotalValueOfCards())
-                    outputView.displayHandCards(it)
+                    OutputView.displayHandCards(it)
                 }
             } while (answer && it.isActive)
         }
@@ -55,7 +53,7 @@ class Game(
     fun dealerDraws() {
         val mustDraw = dealer.mustDraw(dealer.calculateTotalValueOfCards())
         if (mustDraw) {
-            outputView.displayDealerDrawMessage()
+            OutputView.displayDealerDrawMessage()
             dealer.drawCard(deck.giveCard())
         }
     }

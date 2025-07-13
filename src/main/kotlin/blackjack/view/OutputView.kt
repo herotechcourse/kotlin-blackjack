@@ -4,7 +4,7 @@ import blackjack.model.Dealer
 import blackjack.model.Player
 import kotlin.collections.joinToString
 
-class OutputView {
+object OutputView {
     fun displayInitialCards(
         dealer: Dealer,
         players: List<Player>,
