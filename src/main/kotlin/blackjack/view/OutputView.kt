@@ -44,10 +44,10 @@ object OutputView {
         }
         println("${participant.name}'s cards: ${cardsToString(participant.handCards.cards)} – Total: ${participant.handCards.total}")    }
 
-    fun formatDealer(result: DealerResult): String =
+    private fun formatDealer(result: DealerResult): String =
         "Dealer: ${result.wins} wins, ${result.losses} losses, ${result.draws} draws"
 
-    fun formatPlayer(result: PlayerResult): String =
+    private fun formatPlayer(result: PlayerResult): String =
         when {
             result.win  -> "${result.name}: win"
             result.draw -> "${result.name}: draw"

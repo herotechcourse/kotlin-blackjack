@@ -19,7 +19,7 @@ object InputView {
         throw RuntimeException(ErrorMessage.MAX_TRIES.message)
     }
 
-    fun tryValidateNames(input: String?): Boolean {
+    private fun tryValidateNames(input: String?): Boolean {
         return try {
             if (input.isNullOrEmpty()) throw IllegalArgumentException(ErrorMessage.EMPTY_INPUT.toString())
             val names = input.split(",").map { it.trim() }

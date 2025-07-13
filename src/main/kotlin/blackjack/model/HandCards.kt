@@ -8,7 +8,7 @@ class HandCards(val cards: MutableList<Card> = mutableListOf()) {
         cards.add(card)
     }
 
-    fun calculateTotal(): Int {
+    private fun calculateTotal(): Int {
         var total = 0
         for (card in cards) {
             total += card.rank.value
@@ -17,7 +17,7 @@ class HandCards(val cards: MutableList<Card> = mutableListOf()) {
         return total
     }
 
-    fun discount(total: Int): Int {
+    private fun discount(total: Int): Int {
         var numberOfAces = 0
         var discount = 0
         for (card in cards) {

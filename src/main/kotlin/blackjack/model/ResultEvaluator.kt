@@ -8,7 +8,7 @@ data class PlayerResult(var win: Boolean = false, var draw: Boolean = false, val
     override fun toString() = "PlayerResult($name,w=$win,d=$draw)"
 }
 
-class ResultEvaluator(val players: Players, val dealer: Dealer) {
+class ResultEvaluator(private val players: Players, private val dealer: Dealer) {
 
     fun calculateResults(): Pair<DealerResult, List<PlayerResult>> {
         return Pair(calculateDealerResults(), calculateAllPlayersResults())
