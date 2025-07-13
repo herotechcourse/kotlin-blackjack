@@ -11,6 +11,7 @@ object BlackJackGame {
             val names = InputView.readPlayersNames()
             val participants = Participants.from(names)
 
+            val playResult = GameManager(participants).play()
         }.onFailure { exception ->
             OutputView.showError(exception.message)
             exitProcess(1)

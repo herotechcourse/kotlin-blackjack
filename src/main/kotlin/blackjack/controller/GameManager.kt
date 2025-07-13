@@ -6,6 +6,7 @@ import blackjack.model.participant.Dealer
 import blackjack.model.participant.Participant
 import blackjack.model.participant.Participants
 import blackjack.model.state.State
+import blackjack.view.InputView
 import blackjack.view.OutputView
 
 class GameManager(
@@ -15,12 +16,19 @@ class GameManager(
     private val dealer = participants.getDealer()
     private val players = participants.getPlayers()
 
-    fun setUp() {
+    fun play(): PlayResult {
+        setUp()
+        OutputView.showParticipants(participants)
+        keepPlay(InputView::readUserAnswer)
+        return PlayResult(participants)
+    }
+
+    private fun setUp() {
         players.forEach { cardDeck.hit(it, 2) }
         cardDeck.hit(dealer)
     }
 
-    fun playGame(
+    private fun keepPlay(
         askForCard: () -> Boolean = { true },
     ) {
         players.forEach { round(it, askForCard) }
