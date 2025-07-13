@@ -1,24 +1,15 @@
 package blackjack.model
 
-data class CardDeck(private val cards: Cards) {
+data class CardDeck(private val hold: List<Card>) {
     constructor() : this(initPokerCards())
 
+    val size
+        get() = cards.size
+
+    val cards
+        get() = hold.toList()
+
     companion object {
-        private fun initPokerCards() = Cards(Card.allCards().toSet())
-
-        private fun list(): List<Card> {
-            return Suit.entries.flatMap { suit -> Rank.entries.map { rank -> Card(suit, rank) } }
-        }
-    }
-
-    fun numberOfCards() = cards.cards.size
-
-    fun getCards() = cards.cards.toList()
-
-    fun hit(
-        player: Player,
-        repeat: Int = 1,
-    ) {
-        repeat(repeat) { cards.moveCard(player) }
+        private fun initPokerCards() = Card.allCards().shuffled()
     }
 }
