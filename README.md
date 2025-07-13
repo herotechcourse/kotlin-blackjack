@@ -17,29 +17,17 @@
 
 ### Card
 - [x] implement simple card class
-  - [x] has index
+  - [x] has Rank
   - [x] has symbol : enum class { hearts, spades , clubs, diamonds }
-
-### Hold
-- [x] implement Hold, wrapper class, Set<Card>
-- [x] provide all unique elements
+  - [x] patter object pool
 
 ### CardDeck
-- [x] cardDeck can hit cards to players
-- [x] implement CardDeck, wrapper class, Hold and Set<Card * 52> 
+- [x] implement CardDeck
 - [x] add shuffle logic when initialed
-
-### Player / Person
-- [x] implement class
 
 ### Rank
 - [x] Face cards (King, Queen, Jack) are each worth 10
 - [x] toString(): return symbol character with Rank()
-
-### Questions
-- How can we make testable private functions? What is the good practise?
-  1. internal
-  2. companion object
 
 ## State Pattern Feature Plan
 
@@ -61,3 +49,20 @@
 - [x] Stay
 - [x] BlackJack
 
+## Participant Architecture features
+- [ ] interface Participant 
+  - [ ] Expose the current State 
+  - [ ] Expose the current Hand (from the state)
+  - [ ] Handle the transition of turns through playTurn(deck)
+- [ ] Player
+  - [ ] Starts in FirstTurn state (receives initial 2 cards)
+  - [ ] Can draw cards (Hit) or stop (Stay)
+  - [ ] Transitions through states: FirstTurn → Hit → Stay | Bust | Blackjack
+  - [ ] Chooses actions based on external input (DecisionMaker??)
+  - [ ] Calculates profit()
+- Dealer
+  - [ ] Starts in FirstTurn state (just like Player)
+  - [ ] Automatically draws cards while total < 17
+  - [ ] Stops automatically when total ≥ 17 (calls stay())
+  - [ ] Transitions through states without external input
+  - [ ] Calculates profit() for comparison in result phase??
