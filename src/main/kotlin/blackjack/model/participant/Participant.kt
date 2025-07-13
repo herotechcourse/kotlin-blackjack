@@ -1,5 +1,6 @@
 package blackjack.model.participant
 
+import blackjack.model.GameConstants.BLACKJACK_SCORE
 import blackjack.model.card.Card
 import blackjack.model.card.Rank
 import blackjack.model.holder.Hand
@@ -27,8 +28,10 @@ abstract class Participant(val name: String) : Hand() {
 
     override fun receive(card: Card): Boolean {
         if (currentState != State.HIT) return false
-
         currentCards.add(card)
+        if (score == BLACKJACK_SCORE) {
+            currentState = State.STAY
+        }
         return true
     }
 }
