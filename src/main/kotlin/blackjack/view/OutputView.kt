@@ -1,4 +1,9 @@
-package blackjack
+package blackjack.view
+
+import blackjack.Card
+import blackjack.Dealer
+import blackjack.Player
+import blackjack.ScoreCalculator
 
 object OutputView {
 

@@ -1,5 +1,8 @@
 package blackjack
 
+import blackjack.view.InputView
+import blackjack.view.OutputView
+
 class Dealer(private val deck: Deck) : Participant("Dealer") {
 
     fun giveCardTo(participant: Participant) {
