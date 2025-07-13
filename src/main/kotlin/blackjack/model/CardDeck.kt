@@ -4,7 +4,7 @@ data class CardDeck(private val cards: Cards) {
     constructor() : this(initPokerCards())
 
     companion object {
-        private fun initPokerCards() = Cards(list().shuffled().toSet())
+        private fun initPokerCards() = Cards(Card.allCards().toSet())
 
         private fun list(): List<Card> {
             return Suit.entries.flatMap { suit -> Rank.entries.map { rank -> Card(suit, rank) } }
