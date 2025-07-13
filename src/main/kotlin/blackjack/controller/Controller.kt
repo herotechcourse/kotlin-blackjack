@@ -12,19 +12,19 @@ import blackjack.view.OutputView.displayInitialCardsMessage
 class Controller {
     private val deck = CardDeck()
     private var _players: Players? = null
-    private val dealer = Dealer()
+    private lateinit var dealer: Dealer
 
     private val players: Players
             get() = _players!!
 
     fun runGame() {
         _players = initializePlayers()
+        dealer = Dealer(deck = deck, players = players)
         OutputView.displayPlayerNames(players)
         drawInitialCards()
         OutputView.displayFirstCardMessage(dealer)
         players.forEach { OutputView.displayAllCardsMessage(it) }
-        players.dealCards()
-        dealer.dealCards()
+        dealer.serviceParticipants()
         displayCardsAndTotal()
         printResults()
     }
@@ -39,26 +39,6 @@ class Controller {
         OutputView.displayParticipantStatus(dealer)
         players.forEach { OutputView.displayParticipantStatus(it) }
     }
-
-    fun Dealer.dealCards() {
-        while (this.shouldDraw()) {
-            OutputView.displayDealerDrawMessage()
-            this.drawCard(deck)
-        }
-    }
-
-    private fun Players.dealCards() {
-        players.forEach { dealCards(it) }
-    }
-
-    private fun dealCards(player: Player) {
-        while (player.isNotBusted() && wantsToDraw(player)) {
-            player.drawCard(deck)
-            OutputView.displayAllCardsMessage(player)
-        }
-    }
-
-    private fun wantsToDraw(player: Player): Boolean = InputView.promptForDraw(player)
 
     private fun initializePlayers(): Players {
         val playerNames = InputView.readNames()
