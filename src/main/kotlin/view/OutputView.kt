@@ -44,6 +44,14 @@ object OutputView {
         }
     }
 
+    fun displayFinalEarnings(allPlayers: Players, dealer:Dealer) {
+        println("\n## Final Earnings")
+        println("Dealer: ${dealer.earnings.toInt()}")
+        for (i in allPlayers.players.indices) {
+            println("${allPlayers.players[i].name}: ${(allPlayers.players[i].earnings).toInt()}")
+        }
+    }
+
     private fun getDealersResult(playersResult: List<ResultStatus>): String {
         val wins = playersResult.count { it == ResultStatus.LOSS }
         val losses = playersResult.count { it == ResultStatus.WIN }

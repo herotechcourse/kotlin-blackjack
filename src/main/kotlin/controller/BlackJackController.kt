@@ -1,5 +1,6 @@
 package controller
 
+import model.Bet
 import model.Dealer
 import model.Player
 import model.Players
@@ -13,6 +14,7 @@ object BlackJackController {
         try {
             val players = Players(getPlayerNames().map { Player(it) })
             val dealer = Dealer()
+            startBetting(players)
             startGame(players, dealer)
             runTurns(players, dealer)
             showResults(players, dealer)
@@ -26,6 +28,11 @@ object BlackJackController {
         val players = InputView.requestPlayerNames()
         return players
     }
+
+    private fun startBetting(allPlayers: Players) {
+        allPlayers.players.forEach { player -> player.bet = Bet(InputView.requestPlayersBet(player.name)) }
+    }
+
 
     private fun startGame(
         players: Players,
@@ -62,5 +69,8 @@ object BlackJackController {
             dealer.getScore(),
         )
         OutputView.displayResults(result, allPlayers)
+        val earningResult = ResultCalculator.calculateEarning(allPlayers, dealer.getScore(), dealer.isBlackJack())
+        ResultCalculator.applyEarningResult(allPlayers, dealer, earningResult)
+        OutputView.displayFinalEarnings(allPlayers, dealer)
     }
 }

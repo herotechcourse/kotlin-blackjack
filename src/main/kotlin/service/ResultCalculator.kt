@@ -1,5 +1,7 @@
 package service
 
+import model.Dealer
+import model.Players
 import model.ResultStatus
 
 class ResultCalculator {
@@ -10,6 +12,32 @@ class ResultCalculator {
         ): List<ResultStatus> {
             return playersScores.map { playerScore ->
                 playerResult(playerScore, dealerScore)
+            }
+        }
+
+        fun calculateEarning(
+            allPlayers: Players, dealerScore: Int, dealerHasBlackJack: Boolean
+        ): List<PlayerEarningResult> {
+            return allPlayers.players.mapIndexed { index, player ->
+                val bet = player.bet.amount
+                val playerScore = player.getScore()
+                val playerHasBlackJack = player.isBlackJack()
+                val (playerEarning, dealerEarning) = when {
+                    playerHasBlackJack && dealerHasBlackJack -> bet to 0.0
+                    playerHasBlackJack -> bet * 1.5 to 0.0
+                    playerScore == dealerScore -> bet to 0.0
+                    dealerScore > 21 -> bet to 0.0
+                    playerScore > dealerScore && playerScore <= 21 -> bet to 0.0
+                    else -> -bet to bet
+                }
+                PlayerEarningResult(index, playerEarning, dealerEarning)
+            }
+        }
+
+        fun applyEarningResult(allPlayers: Players, dealer: Dealer, earnings: List<PlayerEarningResult>) {
+            earnings.forEach { earning ->
+                allPlayers.players[earning.playerId].earnings += earning.earningsChange
+                dealer.earnings += earning.dealerEarningChange
             }
         }
 

@@ -48,12 +48,12 @@
 
 ## betting
 
-- [ ] prompt each user for betting amount
+- [x] prompt each user for betting amount
     - amount > 0
-- [ ] Calculate final earnings after the game
+- [x] Calculate final earnings after the game
     - player score > 21 -> lose entire bet
     - player score = 21 (BlackJack) -> 1.5x their bet
     - player score = 21 (not blackJack) -> player’s bet is returned
     - player == dealer and < 21 -> player’s bet is returned.
     - dealer > 21 (bust) -> player’s bet is returned.
-- [ ] Display final earnings
+- [x] Display final earnings
