@@ -70,5 +70,5 @@ object OutputView {
         cards.joinToString(" ") { formatCard(it) }
 
     private fun formatCard(card: Card): String =
-        "${card.rank.value}${suitSymbol.getValue(card.suit)}"
+        "${card.rank.title}${suitSymbol.getValue(card.suit)}"
 }
