@@ -5,4 +5,5 @@ enum class Errors(val message: String) {
     INVALID_PLAYERS_NAMES("Invalid Players Names"),
     INVALID_CARD("Invalid Card"),
     INVALID_DRAW("Invalid draw Command"),
+    INVALID_STAY("Invalid stay Command"),
 }
