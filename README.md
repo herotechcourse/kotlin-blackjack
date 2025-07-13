@@ -43,20 +43,21 @@
 
 ## State Pattern Feature Plan
 
-- [ ] `interface State` -> interface for all states
-- [ ] FirstTurn -> First 2 cards are being drawn
-  - [ ] Accepts 0–2 cards
-  - [ ] If 2 cards and total is 21 → return Blackjack
-  - [ ] If 2 cards and total < 21 → return Hit
-  - [ ] Otherwise → stay in FirstTurn
-    - [ ]stay() throws → can’t stay before 2 cards
+- [x] `interface State` -> interface for all states
+- [x] FirstTurn -> First 2 cards are being drawn
+  - [x] Accepts 0–2 cards
+  - [x] If 2 cards and total is 21 → return Blackjack
+  - [x] If 2 cards and total < 21 → return Hit
+  - [x] Otherwise → stay in FirstTurn
+  - [x]stay() throws → can’t stay before 2 cards
 
-- [ ] Hit - Player has drawn 2+ cards
-  - [ ]  If new card makes total > 21 → return `Bust`
-  - [ ]  Else → remain in `Hit`
-  - [ ]  `stay()` returns `Stay`
-- [ ] Finished : State -> End state — can be Blackjack, Bust, or Stay
+- [x] Hit - Player has drawn 2+ cards
+  - [x]  If new card makes total > 21 → return `Bust`
+  - [x]  Else → remain in `Hit`
+  - [x]  `stay()` returns `Stay`
+- [x] Finished : State -> End state — can be Blackjack, Bust, or Stay
   - [ ]  `profit(money: Int)` returns correct payout
-- [ ] Bust
-- [ ] Stay
-- [ ] BlackJack
+- [x] Bust
+- [x] Stay
+- [x] BlackJack
+
