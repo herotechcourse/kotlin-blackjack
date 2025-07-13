@@ -45,8 +45,8 @@ class GameManagerTest {
     fun `player state is blackjack if score is exactly 21 with first two cards`() {
         val player = Player("test")
 
-        player.receive(blackjack.model.card.Card(Suit.HEARTS, Rank.ACE))
-        player.receive(blackjack.model.card.Card(Suit.SPADES, Rank.KING))
+        player.receive(blackjack.model.card.Card(Suit.HEART, Rank.ACE))
+        player.receive(blackjack.model.card.Card(Suit.SPADE, Rank.KING))
 
         assertThat(player.state).isEqualTo(State.BLACKJACK)
         assertThat(player.score).isEqualTo(21)
