@@ -15,4 +15,13 @@ class CardTest {
         assertThat(card1).isSameAs(card2)
         assertThat(card1).isEqualTo(card2)
     }
+
+    @Test
+    fun `should have exactly 52 cards in pool`() {
+        val allCards = Card.allCards()
+
+        assertThat(allCards)
+            .hasSize(52)
+            .doesNotHaveDuplicates()
+    }
 }
