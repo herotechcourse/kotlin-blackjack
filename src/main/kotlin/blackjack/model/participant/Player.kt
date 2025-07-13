@@ -9,7 +9,7 @@ class Player(name: String) : Participant(name) {
         get() =
             when {
                 score > BLACKJACK_SCORE -> State.BUST
-                isFirstRound() -> blackOrHit()
+                isFirstRound() -> blackjackOrHit()
                 else -> field
             }
 
@@ -17,7 +17,7 @@ class Player(name: String) : Participant(name) {
         return cardsCount() == PLAYER_FIRST_HIT_COUNT
     }
 
-    private fun blackOrHit(): State {
+    private fun blackjackOrHit(): State {
         return when (score) {
             BLACKJACK_SCORE -> State.BLACKJACK
             else -> State.HIT

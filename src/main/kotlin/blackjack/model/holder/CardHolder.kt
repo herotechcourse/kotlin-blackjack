@@ -12,8 +12,9 @@ abstract class CardHolder {
     /** fallback when cannot draw */
     abstract fun onDrawFailed(): Card
 
-    fun receive(card: Card) {
+    open fun receive(card: Card): Boolean {
         currentCards.add(card)
+        return true
     }
 
     fun first(): Card = cards.first()
