@@ -68,5 +68,6 @@ object OutputView {
         const val ENTER_PLAYERS_NAMES = "Enter the names of the players (comma-separated):"
         const val GENERATE_NEW_CARD = " Card deck is empty... prepare for a new card deck."
         const val FINAL_RESULTS_TITLE = "## Final Results"
+        const val INVALID_INPUT = "Invalid Input"
     }
 }

@@ -18,12 +18,12 @@ object InputView {
     internal object Ask {
         fun playersName(): String {
             OutputView.showEnterNames()
-            return readlnOrNull() ?: throw IllegalArgumentException(Errors.INVALID_INPUT.message)
+            return readlnOrNull() ?: throw IllegalArgumentException(OutputView.Message.INVALID_INPUT)
         }
 
         fun forCard(): String {
             while (true) {
-                return readlnOrNull() ?: throw IllegalArgumentException(Errors.INVALID_INPUT.message)
+                return readlnOrNull() ?: throw IllegalArgumentException(OutputView.Message.INVALID_INPUT)
             }
         }
 
@@ -50,7 +50,7 @@ object InputView {
                     .filterNot { it.isBlank() }
 
             if (names.isEmpty() || names.any { !it.all { char -> char.isLetterOrDigit() } }) {
-                throw IllegalArgumentException(Errors.INVALID_INPUT.message + ": $input")
+                throw IllegalArgumentException(OutputView.Message.INVALID_INPUT + ": $input")
             }
 
             return names
@@ -60,7 +60,7 @@ object InputView {
             return when (input) {
                 "y" -> true
                 "n" -> false
-                else -> throw IllegalArgumentException("${Errors.INVALID_INPUT.message}, try again.")
+                else -> throw IllegalArgumentException("${OutputView.Message.INVALID_INPUT}, try again.")
             }
         }
     }
