@@ -27,4 +27,11 @@ class FirstTurnTest {
         assertTrue(next is FirstTurn)
         assertThat(next.hand.cards).contains(TestCards.Ace)
     }
+
+    @Test
+    fun `after draw if two cards return Hit `() {
+        val state = FirstTurn()
+        val next = state.draw(TestCards.Ace).draw(TestCards.TWO)
+        assertTrue(next is Hit)
+    }
 }
