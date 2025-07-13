@@ -16,9 +16,33 @@
 
 ## Refactor, step 1
 
-### Participant package
+### Holder package
+
 ```
-Participant -> Player & Dealer -> Participants
+CardHoler -> Hand & Deck
+```
+### CardHolder
+CardHolder's child classes will have core logic:
+- "draw or receive card/s with own property `List<Card>`"
+- and "if `List<Card>` empty but try to draw, `do something`"
+
+- [x] Implement interface/abstract class CardHolder
+- [x] Implement `draw`/`receive` logic
+- [x] Implement `onDrawFailed()`
+
+### Deck
+- [x] has 52 unique cards at `List<Card>`
+- [x] Implement `onDrawFailed()`: if failed, generate a new card deck
+
+### Hand
+- [x] Implement `onDrawFailed()`: if failed, throw logic error!
+
+---
+
+### Participant package
+
+```
+Hand -> Participant -> Player & Dealer -> Participants
 ```
 
 **Think about this/check later**
@@ -28,7 +52,7 @@ Participant -> Player & Dealer -> Participants
 #### Participant
 - [x] Implement interface/abstract class `Participant` that can separate Player and Dealer
 - [x] Implement Parent class as `Participant` interface first, then change if needed
-- 
+-
 #### Player & Dealer
 - [x] Implement `Player`
   - [x] has `name`
@@ -41,24 +65,3 @@ Participant -> Player & Dealer -> Participants
   - [x] Implement contain/containsAll that can be used as test functions
 
 ---
-
-### Holder package
-
-```
-CardHoler -> Hand & Deck
-```
-### CardHolder
-CardHolder's child classes will have core logic:
-- "draw or receive card/s with own property `List<Card>`"
-- and "if `List<Card>` empty but try to draw, `do something`"
-
-- [x] Implement interface/abstract class CardHolder
-- [ ] Implement `draw`/`receive` logic
-- [ ] Implement `onDrawFailed()`
-
-### Deck
-- [ ] has 52 unique cards at `List<Card>`
-- [ ] Implement `onDrawFailed()`: if failed, generate a new card deck
-
-### Hand
-- [ ] Implement `onDrawFailed()`: if failed, throw logic error!
