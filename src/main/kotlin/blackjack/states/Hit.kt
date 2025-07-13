@@ -5,6 +5,12 @@ import blackjack.model.Hand
 
 class Hit(override val hand: Hand) : State {
     override fun draw(card: Card): State {
-        TODO("Not yet implemented")
+        val hand = this.hand + card
+        if (hand.calculatePoints() > BLACKJACK) return Bust(hand)
+        return Hit(hand)
+    }
+
+    companion object {
+        private const val BLACKJACK = 21
     }
 }
