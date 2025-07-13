@@ -16,8 +16,8 @@ object OutputView {
     }
 
     fun displayAllCardsMessage(participant: Participant) {
-        print(participant.name + "'s cards: ")
-        println(participant.cardsToString())
+    println("${participant.name}'s cards: ${participant.cardsToString()}")
+
     }
 
     fun displayFirstCardMessage(participant: Participant) {
