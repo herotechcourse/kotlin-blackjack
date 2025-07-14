@@ -66,14 +66,14 @@ class PlayerTest {
         val dealer = Dealer()
         val player = Player("pobi", 10000)
 
-        //initial draw
+        // initial draw
         player.drawCard(listOf(Card(Rank.SIX, Suit.SPADES), Card(Rank.KING, Suit.HEARTS))) // total = 16
-        dealer.drawCard(listOf(Card(Rank.FIVE, Suit.CLUBS), Card(Rank.FOUR, Suit.DIAMONDS))) //total = 9
+        dealer.drawCard(listOf(Card(Rank.FIVE, Suit.CLUBS), Card(Rank.FOUR, Suit.DIAMONDS))) // total = 9
 
-        //player draws again
+        // player draws again
         player.drawCard(cards = listOf(Card(Rank.FIVE, Suit.DIAMONDS))) // total = 21
 
-        //dealer draws again
+        // dealer draws again
         dealer.drawCard(listOf(Card(Rank.FIVE, Suit.SPADES))) // total = 14
 
         player.updateWinningMoney(dealer)
@@ -92,6 +92,4 @@ class PlayerTest {
 
         assertThat(player.returnWinningMoney()).isEqualTo(-10000)
     }
-
-
 }

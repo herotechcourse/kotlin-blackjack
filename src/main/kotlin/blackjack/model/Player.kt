@@ -8,19 +8,18 @@ class Player(name: String, val bet: Int) : Participant(name) {
     }
 
     fun updateWinningMoney(dealer: Dealer) {
-        winningMoney = when {
-            isBlackjack() && dealer.isBlackjack() -> 0
-            isBlackjack() -> (bet * 1.5).toInt()
-            dealer.isBusted() -> bet
-            total() > dealer.total() -> bet
-            total() == dealer.total() -> 0
-            else -> -bet
-        }
+        winningMoney =
+            when {
+                isBlackjack() && dealer.isBlackjack() -> 0
+                isBlackjack() -> (bet * 1.5).toInt()
+                dealer.isBusted() -> bet
+                total() > dealer.total() -> bet
+                total() == dealer.total() -> 0
+                else -> -bet
+            }
     }
 
-    fun returnWinningMoney(): Int{
+    fun returnWinningMoney(): Int {
         return winningMoney
     }
-
-
 }
