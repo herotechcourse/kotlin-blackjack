@@ -6,12 +6,6 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 class DealerTest {
-//    @Test
-//    fun `makeDecision returns true if score on hand is 16 or less`() {
-//        val dealer = Dealer()
-//
-//    }
-
     @ParameterizedTest
     @MethodSource("setCardProvider")
     fun `makeDecision returns true if score on hand is 16 or less`(
