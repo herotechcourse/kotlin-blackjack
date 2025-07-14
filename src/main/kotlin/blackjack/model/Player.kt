@@ -1,12 +1,12 @@
 package blackjack.model
 
 class Player(val gamblerInfo: GamblerInfo) {
-    private val _cards: MutableList<Card> = mutableListOf()
+    private val _cards = Cards()
     var score: Int = 0
         private set
 
     val cards: List<Card>
-        get() = _cards
+        get() = _cards.cards
 
     val name: String
         get() = gamblerInfo.name
@@ -17,8 +17,8 @@ class Player(val gamblerInfo: GamblerInfo) {
     }
 
     private fun updateScore() {
-        var aceCount = _cards.count { it -> it.rank == Rank.ACE }
-        var totalScore = _cards.sumOf { it -> it.rank.value }
+        var aceCount = _cards.cards.count { it -> it.rank == Rank.ACE }
+        var totalScore = _cards.cards.sumOf { it -> it.rank.value }
         while (totalScore > WINNING_SCORE && aceCount > 0) {
             totalScore -= 10
             aceCount--
