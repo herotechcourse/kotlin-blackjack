@@ -7,19 +7,6 @@ class Gambler(gamblerInfo: GamblerInfo) : Player(gamblerInfo) {
 
     fun hasCardCount(): Boolean = cards.size == INITIAL_CARD_COUNT
 
-    fun calculateAndSetWinnings(isWin: Boolean) {
-        if (!isWin) {
-            playerBet.winnings = -playerBet.betAmount
-            return
-        }
-
-        if (isBlackJack()) {
-            playerBet.winnings = playerBet.betAmount * WIN_BLACKJACK_RETURN
-        } else {
-            playerBet.winnings = playerBet.betAmount * WIN_SIMPLE_RETURN
-        }
-    }
-
     fun setWinnings(dealer: Dealer) {
         playerBet.winnings = playerBet.betAmount * calculateResult(dealer).multiplier
     }
@@ -34,10 +21,5 @@ class Gambler(gamblerInfo: GamblerInfo) : Player(gamblerInfo) {
             score > dealer.score -> Result.WIN
             else -> Result.LOOSE
         }
-    }
-
-    companion object {
-        private const val WIN_BLACKJACK_RETURN = 1.5
-        private const val WIN_SIMPLE_RETURN = 1.0
     }
 }
