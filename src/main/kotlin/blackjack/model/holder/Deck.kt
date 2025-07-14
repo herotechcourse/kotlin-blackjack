@@ -5,24 +5,17 @@ import blackjack.model.card.Card
 import blackjack.model.card.Rank
 import blackjack.model.card.Suit
 import blackjack.model.participant.Participant
-import blackjack.view.OutputView
 
 class Deck : CardHolder() {
     init {
         currentCards = initShuffledDeck().toMutableList()
     }
 
-    override fun onDrawFailed(): Card {
-        OutputView.showNewCard()
-        currentCards = initShuffledDeck().toMutableList()
-        return draw()
-    }
-
     fun hit(
         participant: Participant,
         count: Int = GameConstants.DEALER_FIRST_HIT_COUNT,
     ) {
-        repeat(count) { participant.receive(this.draw()) }
+        participant.receive(this.draw(count))
     }
 
     companion object {
