@@ -35,10 +35,12 @@
 ### class `Gambler` inherits `Player`
 - [x] fun `isPlayerBelowBlackJack`
   - [x] returns true if score is below 21
+- [x] `setWinnings(Boolean)`
 
 ### class `Dealer` inherits `Player`
 - [x] fun `isDealerBelowMinScore`
   - [x] returns true if score is below 16
+- [x] `setWinnings(Double)`
 
 ### class `Deck`
 - [x] contains function `generateCards()`
