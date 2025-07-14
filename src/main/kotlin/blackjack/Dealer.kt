@@ -25,7 +25,7 @@ class Dealer : Participant("Dealer") {
             if (wantsToDraw) {
                 giveCardTo(player)
                 OutputView.displayPlayerHand(player)
-                if (ScoreCalculator.calculate(player) >= 21) break
+                if (player.getScore() >= 21) break
             } else {
                 break
             }
@@ -41,6 +41,6 @@ class Dealer : Participant("Dealer") {
     }
 
     fun shouldDraw(): Boolean {
-        return ScoreCalculator.calculate(this) <= 16
+        return (this.getScore()) <= 16
     }
 }

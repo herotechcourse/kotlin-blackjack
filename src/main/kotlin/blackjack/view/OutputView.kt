@@ -3,7 +3,6 @@ package blackjack.view
 import blackjack.Card
 import blackjack.Dealer
 import blackjack.Player
-import blackjack.ScoreCalculator
 
 object OutputView {
 
@@ -28,11 +27,11 @@ object OutputView {
     }
 
     fun displayDealerStatus(dealer: Dealer) {
-        println("Dealer's cards: ${dealer.displayHand()} – Total: ${ScoreCalculator.calculate(dealer)}")
+        println("Dealer's cards: ${dealer.displayHand()} – Total: ${dealer.getScore()}")
     }
 
     fun displayPlayerStatus(player: Player) {
-        println("${player.name}'s cards: ${player.displayHand()} – Total: ${ScoreCalculator.calculate(player)}")
+        println("${player.name}'s cards: ${player.displayHand()} – Total: ${player.getScore()}")
     }
 
     fun displayFinalResultsHeader() {

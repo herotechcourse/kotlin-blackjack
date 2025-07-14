@@ -16,9 +16,9 @@ class DealerTest {
     }
     @Test
     fun `should give one card to player`() {
-        val initialSize = player.getHand().size
+        val initialSize = player.getNumberOfCardsInHand()
         dealer.giveCardTo(player)
-        val newSize = player.getHand().size
+        val newSize = player.getNumberOfCardsInHand()
         assertEquals(initialSize + 1, newSize)
     }
     @Test
