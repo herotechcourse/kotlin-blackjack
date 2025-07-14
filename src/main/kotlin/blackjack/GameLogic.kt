@@ -32,5 +32,4 @@ class GameLogic {
             output.printCurrentDealerCards(dealer)
         }
     }
-
 }
