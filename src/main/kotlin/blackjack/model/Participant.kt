@@ -3,6 +3,8 @@ package blackjack.model
 abstract class Participant {
     abstract val name: String
     abstract val handCards: HandCards
+    abstract val bet: Int
+    var earning: Int = 0
 
     fun drawCard(deck: CardDeck) {
         val card = deck.hit()
@@ -12,12 +14,4 @@ abstract class Participant {
     fun isNotBusted(): Boolean = (handCards.total <= Rules.BLACKJACK_TARGET)
 
     fun isBusted(): Boolean = (handCards.total > Rules.BLACKJACK_TARGET)
-
-    fun cardsToString(): String {
-        return handCards.cards.joinToString()
-    }
-
-    fun firstCardToString(): String {
-        return handCards.cards[0].toString()
-    }
 }

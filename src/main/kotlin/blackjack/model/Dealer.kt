@@ -13,6 +13,8 @@ class Dealer(
         return handCards.total <= Rules.DEALER_DRAW_THRESHOLD
     }
 
+    override val bet: Int = 0
+
     fun serviceParticipants() {
         serviceDealer()
         servicePlayers(players)

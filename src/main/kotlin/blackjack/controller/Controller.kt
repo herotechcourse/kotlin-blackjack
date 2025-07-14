@@ -42,7 +42,11 @@ class Controller {
 
     private fun initializePlayers(): Players {
         val playerNames = InputView.readNames()
-        return Players(playerNames.map { Player(it) })
+        val playerBets = InputView.readBets(playerNames)
+
+        val players = playerNames.zip(playerBets) { name, bet -> Player(name = name, bet = bet) }
+
+        return Players(players)
     }
 
     private fun drawInitialCards() {

@@ -51,7 +51,7 @@ jason: Lose
 - [x] display names
 
 ### Bets
-- [ ] get user input for player's bets
+- [x] get user input for player's bets
 
 ### Cards
 - [x] create card deck

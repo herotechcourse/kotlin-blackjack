@@ -9,13 +9,36 @@ object InputView {
     private const val YES = "y"
     private const val NO = "n"
 
+    fun readBets(playerNames: List<String>): List<Int> = playerNames.map { name -> readBet(name) }
+
+    private fun readBet(playerName: String): Int {
+        repeat(Rules.MAX_TRIES) {
+            println("\nEnter ${playerName}'s betting amount:")
+            val input = readlnOrNull()
+            if (tryValidateBet(input)) return input!!.toInt()
+        }
+        throw RuntimeException(ErrorMessage.MAX_TRIES.toString())
+    }
+
+    private fun tryValidateBet(input: String?): Boolean {
+        return try {
+            if (input.isNullOrEmpty()) throw IllegalArgumentException(ErrorMessage.EMPTY_INPUT.toString())
+            val bettingAmount = input.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessage.NOT_NUMBER.toString())
+            if (bettingAmount < 1000 ) throw IllegalArgumentException(ErrorMessage.MIN_BET.toString())
+            true
+        } catch (e: IllegalArgumentException) {
+            println(e.message)
+            false
+        }
+    }
+
     fun readNames(): List<String> {
         repeat(Rules.MAX_TRIES) {
             println("\nEnter the names of the players (comma-separated):")
             val input = readlnOrNull()
             if (tryValidateNames(input)) return input!!.split(",").map { it.trim() }
         }
-        throw RuntimeException(ErrorMessage.MAX_TRIES.message)
+        throw RuntimeException(ErrorMessage.MAX_TRIES.toString())
     }
 
     private fun tryValidateNames(input: String?): Boolean {
@@ -38,15 +61,15 @@ object InputView {
                 return input == YES
             }
         }
-        throw RuntimeException(ErrorMessage.MAX_TRIES.message)
+        throw RuntimeException(ErrorMessage.MAX_TRIES.toString())
     }
 
     private fun tryValidateDrawInput(input: String): Boolean {
         return try {
-            require(input.isNotEmpty()) { ErrorMessage.EMPTY_INPUT.message }
+            require(input.isNotEmpty()) { ErrorMessage.EMPTY_INPUT.toString() }
             when (input) {
                 YES, NO -> true
-                else -> throw IllegalArgumentException(ErrorMessage.INVALID_INPUT.message)
+                else -> throw IllegalArgumentException(ErrorMessage.INVALID_INPUT.toString())
             }
         } catch (e: IllegalArgumentException) {
             println(e.message)
