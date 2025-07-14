@@ -14,7 +14,7 @@ object OutputView {
     }
 
     fun displayPlayers(players: List<Player>) {
-        players.forEach { println("${it.name}'s cards: " + cardsText(it.state.hand.cards)) }
+        players.forEach { displayPlayer(it) }
     }
 
     fun displayDealerFirstCard(dealer: Dealer) {
@@ -23,5 +23,13 @@ object OutputView {
 
     private fun cardsText(cards: List<Card>): String {
         return cards.joinToString(", ") { it.rank.face + it.suit.symbol }
+    }
+
+    fun displayDealer(dealer: Dealer) {
+        println("${dealer.name}'s cards: " + cardsText(dealer.state.hand.cards))
+    }
+
+    fun displayPlayer(player: Player) {
+        println("${player.name}'s cards: " + cardsText(player.state.hand.cards))
     }
 }
