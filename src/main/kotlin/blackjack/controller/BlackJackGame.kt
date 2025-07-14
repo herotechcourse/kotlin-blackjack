@@ -20,11 +20,19 @@ class BlackJackGame {
         dealingDealersCards()
         OutputView.printFinalHands(players.toList(), dealer)
         players.calculateResults(dealer)
-        OutputView.printResults(players.toList(), dealer)
+        OutputView.printWinnings(players.toList(), dealer)
     }
 
     private fun createPlayers() {
-        val playerList = retryUntilSuccess { InputView.getPlayersNames() }.map { Player(it) }
+        val playerNames: List<String> = retryUntilSuccess { InputView.getPlayersNames() }
+        val playerList: List<Player> =
+            playerNames.map { playerName ->
+                val bettingAmount: Int =
+                    retryUntilSuccess {
+                        InputView.getBettingAmount(playerName)
+                    }
+                Player(playerName, bettingAmount)
+            }
         players = Players(playerList)
     }
 
