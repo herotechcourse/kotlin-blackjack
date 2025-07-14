@@ -14,7 +14,7 @@ class DealerTest {
     ) {
         val dealer = Dealer()
         cards.forEach { dealer.drawCard(it) }
-        assertThat(dealer.makeDecision()).isEqualTo(expectedDecision)
+        assertThat(dealer.makeDecision(dealer.getScore())).isEqualTo(expectedDecision)
     }
 
     companion object {
