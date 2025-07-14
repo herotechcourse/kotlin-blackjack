@@ -6,6 +6,12 @@ object InputView {
         val input = readln()
         return input.split(",").map { it.trim() }.filter { it.isNotEmpty() }
     }
+
+    fun getBettingAmount(playerName: String): Int {
+        println("Enter $playerName’s betting amount:")
+        return readLine()?.toIntOrNull() ?: throw IllegalArgumentException("Invalid betting amount")
+    }
+
     fun askPlayerWantsToDraw(playerName: String): Boolean {
         println("Would $playerName like to draw another card? (y for yes, n for no)")
         return when (readln().trim().lowercase()) {

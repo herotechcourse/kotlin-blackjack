@@ -10,11 +10,11 @@ import blackjack.view.OutputView
 class GameController {
 
     fun run() {
-        val playerNames = InputView.askPlayerNames()
-        val players = playerNames.map { Player(it) }
+        val bettingInfos = GameLogic.getBettingInfo()
+        val players = bettingInfos.map { Player(it.playerName) }
         val dealer = Dealer()
 
-        OutputView.displayDealing(playerNames)
+        OutputView.displayDealing(bettingInfos.map { it.playerName })
 
         dealer.giveTwoCardsTo(players)
 
