@@ -4,6 +4,7 @@ import blackjack.states.FirstTurn
 
 class Player(name: String) : Participant(name, FirstTurn(Hand(emptyList()))) {
     private var bettingAmount: Int = 0
+    val bettingMoney get() = bettingAmount
 
     fun draw(card: Card) {
         state = state.draw(card)
