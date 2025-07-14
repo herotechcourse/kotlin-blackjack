@@ -1,6 +1,11 @@
 package blackjack
 
-import blackjack.model.*
+import blackjack.model.Card
+import blackjack.model.Deck
+import blackjack.model.Gambler
+import blackjack.model.GamblerInfo
+import blackjack.model.Rank
+import blackjack.model.Suit
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -86,5 +91,42 @@ class PlayerTest {
         val player = Gambler(GamblerInfo("Player"))
         player.addCard(deck.drawCards(4))
         assertThat(player.name).isEqualTo("Player")
+    }
+
+    @Test
+    fun `return True for BlackJack`() {
+        val player = Gambler(GamblerInfo("Player"))
+        player.addCard(
+            listOf(
+                Card(Rank.ACE, Suit.SPADE),
+                Card(Rank.KING, Suit.SPADE),
+            ),
+        )
+        assertThat(player.isBlackJack()).isTrue
+    }
+
+    @Test
+    fun `return False if not score not 21`() {
+        val player = Gambler(GamblerInfo("Player"))
+        player.addCard(
+            listOf(
+                Card(Rank.ACE, Suit.SPADE),
+                Card(Rank.SEVEN, Suit.SPADE),
+            ),
+        )
+        assertThat(player.isBlackJack()).isFalse
+    }
+
+    @Test
+    fun `return False if card count greater than 2`() {
+        val player = Gambler(GamblerInfo("Player"))
+        player.addCard(
+            listOf(
+                Card(Rank.ACE, Suit.SPADE),
+                Card(Rank.SEVEN, Suit.SPADE),
+                Card(Rank.ACE, Suit.CLUB),
+            ),
+        )
+        assertThat(player.isBlackJack()).isFalse
     }
 }

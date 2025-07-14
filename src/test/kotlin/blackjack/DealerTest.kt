@@ -24,4 +24,11 @@ class DealerTest {
         dealer.addCard(cards)
         assertThat(dealer.isDealerBelowMinScore()).isFalse
     }
+
+    @Test
+    fun `returns the exact amount of winnings`() {
+        val dealer = Dealer(GamblerInfo("Dealer"))
+        dealer.setWinnings(10_00.0)
+        assertThat(dealer.winnings).isEqualTo(10_00.0)
+    }
 }

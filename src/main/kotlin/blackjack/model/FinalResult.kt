@@ -22,4 +22,3 @@ class FinalResult(val dealer: Dealer, players: List<Gambler>) {
         }
     }
 }
-

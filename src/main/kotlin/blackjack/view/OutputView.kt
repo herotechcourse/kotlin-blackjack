@@ -1,6 +1,11 @@
 package blackjack.view
 
-import blackjack.model.*
+import blackjack.model.Card
+import blackjack.model.Dealer
+import blackjack.model.Gambler
+import blackjack.model.Player
+import blackjack.model.Rank
+import blackjack.model.Suit
 
 object OutputView {
     fun displayErrorMessages(message: String?) {
@@ -66,7 +71,7 @@ object OutputView {
 
     private fun getCardsOfPlayers(player: Player): String {
         return "${player.name}'s card: " +
-                player.cards.joinToString(", ", transform = ::convertCardToString)
+            player.cards.joinToString(", ", transform = ::convertCardToString)
     }
 
     private fun convertCardToString(card: Card): String {
