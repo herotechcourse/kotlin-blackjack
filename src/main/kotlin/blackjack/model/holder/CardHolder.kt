@@ -17,10 +17,6 @@ abstract class CardHolder {
         return true
     }
 
-    fun first(): Card = cards.first()
-
-    fun last(): Card = cards.last()
-
     /**
      * @throws IllegalStateException if try failed and should throw error
      *
