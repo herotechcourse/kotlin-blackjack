@@ -2,6 +2,8 @@
 
 ## Features List
 
+## Step1
+
 ### Model
 
 Card
@@ -113,3 +115,18 @@ CardGenerator
 - [x] generateCard method create card with combination of 'A 1 2 ... 10 J Q K' * ♥, ♣, ♠, ♦
     - ex. A♥, 4♣, 9♠, 6♦
 - [x] generateCards method create 52 unique cards
+
+## Step2
+
+### Model
+- [x] players place a bet at the start of each game
+- [x] Introduced a new Bet data class:
+    - [x] validates that the bet amount is greater than zero
+    - [x] throws IllegalArgumentException if the amount is invalid
+    - [x] updated the Player class to require a Bet during construction
+
+
+
+### View
+
+- [x] "Enter $name’s betting amount:"

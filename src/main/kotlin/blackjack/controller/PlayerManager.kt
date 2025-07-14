@@ -1,5 +1,6 @@
 package blackjack.controller
 
+import blackjack.model.Bet
 import blackjack.model.Card
 import blackjack.model.Player
 
@@ -7,9 +8,12 @@ class PlayerManager {
     private var _players: List<Player> = emptyList()
     val players: List<Player> get() = _players
 
-    fun addPlayer(name: String) {
+    fun addPlayer(
+        name: String,
+        bet: Bet,
+    ) {
         val mutableList = _players.toMutableList()
-        val player = Player(name)
+        val player = Player(name, bet)
         mutableList.add(player)
         _players = mutableList.toList()
     }

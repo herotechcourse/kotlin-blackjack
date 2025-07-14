@@ -1,5 +1,6 @@
 package blackjack.controller
 
+import blackjack.model.Bet
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
@@ -27,7 +28,11 @@ object GameManager {
 
     private fun takePlayerNames() {
         val names = inputView.retryable { InputView.readPlayerNames() }
-        names.forEach { name -> playerManager.addPlayer(name) }
+        names.forEach { name ->
+            val betAmount = inputView.retryable { inputView.readBetAmount(name) }
+            val bet = Bet(betAmount)
+            playerManager.addPlayer(name, bet)
+        }
     }
 
     private fun askPlayersToHit() {

@@ -8,18 +8,19 @@ class StatsTest {
     @Test
     fun `playerBoard - Stats make good player board that represent state of player`() {
         // player1 -> bust
-        val player1 = Player("player1")
+        val bet = Bet(10000)
+        val player1 = Player("player1", bet)
         player1.drawCard(Card(Rank.TWO, Suit.DIAMONDS))
         player1.drawCard(Card(Rank.KING, Suit.DIAMONDS))
         player1.drawCard(Card(Rank.JACK, Suit.SPADES))
 
         // player2 -> win
-        val player2 = Player("player2")
+        val player2 = Player("player2", bet)
         player2.drawCard(Card(Rank.TEN, Suit.DIAMONDS))
         player2.drawCard(Card(Rank.ACE, Suit.DIAMONDS))
 
         // player3 -> tie
-        val player3 = Player("player3")
+        val player3 = Player("player3", bet)
         player3.drawCard(Card(Rank.NINE, Suit.DIAMONDS))
         player3.drawCard(Card(Rank.JACK, Suit.DIAMONDS))
 
@@ -38,18 +39,19 @@ class StatsTest {
     @Test
     fun `updateDealerStats() - method update dealer's stats`() {
         // player1 -> bust
-        val player1 = Player("player1")
+        val bet = Bet(10000)
+        val player1 = Player("player1", bet)
         player1.drawCard(Card(Rank.QUEEN, Suit.DIAMONDS))
         player1.drawCard(Card(Rank.KING, Suit.DIAMONDS))
         player1.drawCard(Card(Rank.JACK, Suit.SPADES))
 
         // player2 -> win
-        val player2 = Player("player2")
+        val player2 = Player("player2", bet)
         player2.drawCard(Card(Rank.TEN, Suit.DIAMONDS))
         player2.drawCard(Card(Rank.ACE, Suit.DIAMONDS))
 
         // player3 -> tie
-        val player3 = Player("player3")
+        val player3 = Player("player3", bet)
         player3.drawCard(Card(Rank.NINE, Suit.DIAMONDS))
         player3.drawCard(Card(Rank.JACK, Suit.DIAMONDS))
 
