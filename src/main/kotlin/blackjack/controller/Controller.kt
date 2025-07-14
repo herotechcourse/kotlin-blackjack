@@ -15,7 +15,10 @@ class Controller() {
             readBetAmount()
             firstDraw()
             finalDraw()
-            showResults(FinalResult(dealer, players))
+            val finalResult = FinalResult(dealer, players)
+            showResults(finalResult)
+            calculateWinnings(finalResult)
+            showWinnings()
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
         }
@@ -69,6 +72,13 @@ class Controller() {
         }
     }
 
+    private fun calculateWinnings(finalResult: FinalResult) {
+        finalResult.lose.forEach { it.setWinnings(false) }
+        finalResult.win.forEach { it.setWinnings(true) }
+
+        dealer.setWinnings(players.sumOf { it.winnings })
+    }
+
     private fun showResults(finalResult: FinalResult) {
         OutputView.displayPlayerResult(
             finalResult.lose.size,
@@ -84,6 +94,10 @@ class Controller() {
         finalResult.draw.forEach {
             OutputView.displayPlayerResult(it.name, false)
         }
+    }
+
+    private fun showWinnings() {
+        OutputView.displayFinalEarning(players)
     }
 
     private fun processPlayerNames(): List<GamblerInfo> {
@@ -111,7 +125,7 @@ class Controller() {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    private fun processBetAmount(name: String): Int {
+    private fun processBetAmount(name: String): Double {
         repeat(MAX_ATTEMPTS) {
             try {
                 return InputView.getBetAmount(name)
