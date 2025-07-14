@@ -56,8 +56,8 @@ The goal is to get as close to 21 as possible without going over.
 - [x] If player is busted, loses their bet.
 
 ## Example output
-
-`Enter the names of the players (comma-separated):
+```
+Enter the names of the players (comma-separated):
 pobi,jason
 
 Enter pobi’s betting amount:
@@ -89,4 +89,5 @@ jason's cards: 7♣, K♠ – Total: 17
 \## Final Earnings
 Dealer: 10000  
 pobi: 10000  
-jason: -20000`
+jason: -20000
+```
