@@ -1,9 +1,9 @@
 package blackjack.model
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
 
 class PlayerTest {
     @Test
@@ -59,6 +59,16 @@ class PlayerTest {
         dealer.drawCard(listOf(Card(Rank.FIVE, Suit.CLUBS), Card(Rank.FOUR, Suit.DIAMONDS)))
         player.updateWinningMoney(dealer)
         assertThat(player.returnWinningMoneyForPlayer()).isEqualTo(15000)
+    }
+
+    @Test
+    fun `should calculate correct winning money if player and dealer both have blackjack`() {
+        val dealer = Dealer()
+        val player = Player("pobi", 10000)
+        player.drawCard(listOf(Card(Rank.ACE, Suit.SPADES), Card(Rank.KING, Suit.HEARTS)))
+        dealer.drawCard(listOf(Card(Rank.ACE, Suit.CLUBS), Card(Rank.KING, Suit.DIAMONDS)))
+        player.updateWinningMoney(dealer)
+        assertThat(player.returnWinningMoneyForPlayer()).isEqualTo(10000)
     }
 
     @Test
