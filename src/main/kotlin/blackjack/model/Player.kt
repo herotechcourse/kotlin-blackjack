@@ -10,7 +10,7 @@ class Player(name: String, val bet: Int) : Participant(name) {
     fun updateWinningMoney(dealer: Dealer) {
         winningMoney =
             when {
-                isBlackjack() && dealer.isBlackjack() -> 0
+                isBlackjack() && dealer.isBlackjack() -> bet
                 isBlackjack() -> (bet * 1.5).toInt()
                 dealer.isBusted() -> bet
                 total() > dealer.total() -> bet
