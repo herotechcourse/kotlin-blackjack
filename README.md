@@ -18,8 +18,8 @@
   - [x] should not be empty
 
 ### data class `PlayerBet`
-- [x] betAmount
-- [x] winnings
+- [x] Double: `betAmount`
+- [x] Double: `winnings`
 
 ### abstract class `Player`
 - [x] for representing 'Player1', 'Player2', ..., 'PlayerN', and 'Dealer'
