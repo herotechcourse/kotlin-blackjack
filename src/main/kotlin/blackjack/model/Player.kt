@@ -1,30 +1,28 @@
 package blackjack.model
 
+import blackjack.controller.Controller.Companion.INITIAL_CARD_COUNT
+
 abstract class Player(val gamblerInfo: GamblerInfo) {
     private val _cards: MutableList<Card> = mutableListOf()
-    private val playerBet = PlayerBet()
+    val playerBet = PlayerBet()
 
     var score: Int = 0
         private set
     val cards: List<Card>
         get() = _cards
+    val winnings: Double
+        get() = playerBet.winnings
 
     val name: String
         get() = gamblerInfo.name
 
-    val betAmount:Int
-        get() = playerBet.betAmount
-
-    val winnings: Int
-        get() = playerBet.winnings
-
-    fun setBetAmount(amount: Int) {
+    fun setBetAmount(amount: Double) {
         playerBet.betAmount = amount
     }
 
-    fun setWinnings(amount: Int) {
-        playerBet.winnings = amount
-    }
+    fun isBlackJack(): Boolean = _cards.size == INITIAL_CARD_COUNT && score == WINNING_SCORE
+
+    fun isBusted(): Boolean = score > WINNING_SCORE
 
     fun addCard(cards: List<Card>) {
         _cards.addAll(cards)

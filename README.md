@@ -28,8 +28,9 @@
 - [x] contains list<Card>
 - [x] `addCard()` to add card
   - [x] private fun `updateScore` to update score on each insertion
+- [x] `isBusted` if score > 21
+- [x] `isBlackJack` if score == 21
 - [x] `setBetAmount`
-- [x] `setWinnings`
 
 ### class `Gambler` inherits `Player`
 - [x] fun `isPlayerBelowBlackJack`
