@@ -50,14 +50,17 @@ jason: Lose
   - [x] comma separated
 - [x] display names
 
+### Bets
+- [ ] get user input for player's bets
+
 ### Cards
 - [x] create card deck
 - [x] Card values follow standard Blackjack rules:
   - [x] Number cards are counted by their face value.
   - [x] Face cards (King, Queen, Jack) are each worth 10.
   - [x] Aces can be worth either 1 or 11.
-#### Deck
-#### Card
+
+### Deck
 - [x] suit
 - [x] rank
 - [x] value
@@ -82,10 +85,13 @@ jason: Lose
 - [x] display cards
 - [x] display sum
 
-- [x] calculate results
-  - [x] player 
-  - [x] dealer 
-- [x] display results
+### Results
+- [ ] calculate earnings (= difference of before and after round ~ profit)
+  - [ ] player busts: lose their bet
+  - [ ] player blackjack (21 with first two cards): receive 1.5x their bet
+  - [ ] player and dealer blackjack: bet returned
+  - [ ] dealer busts: remaining players receive 1.0x their bet
+- [ ] display earnings
 
 ## Considerations
 Q1: How should we name players inside the Players class? </br>
