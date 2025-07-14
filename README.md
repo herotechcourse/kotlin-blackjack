@@ -4,32 +4,54 @@
 
 ### Model
 - [x] **Create Participant Class**
-  - [x] Should contain a name, hand
-  - [x] Should Add a card to the hand.
-  - [x] Should check for blackjack and busts
+  - [x] Should contain a name and `handState`.
+  - [x] Should add a card to the hand.
+  - [x] Should check for blackjack and busts.
   - [x] The name should be not empty.
 - [x] **Create Player Class inherit from a participant**
+  - [ ] Should contain a betting amount.
+  - [ ] Should store the final profit/loss amount.
 - [x] **Create Dealer Class inherit from a participant**
   - [x] Should contain a Deck and manage it.
   - [x] Should be able to automatically add cards to the hand.
   - [x] Should give a card to the player from the deck.
-  - [x] Should check if the score is less or equal to 16. 
-- [x] **Create Card Class**
-  - [x] It contains Suit and Rank Properties
-  - [x] Suit is an enum class containing the values: Diamonds, hearts, clubs, spades
-  - [x] Rank is an enum class containing the symbols and values from the cards
-  - [x] Card could contain toString() to simplify when a card is printed
+  - [x] Should check if the score is less or equal to 16.
+- [x] **Create Card Hierarchy (Polymorphism)**
+  - [x] abstract class Card: Base class with Suit and Rank properties.
+  - [x] enum class Suit: Contains values: Diamonds, Hearts, Clubs, Spades.
+  - [x] enum class Rank: Contains symbols and base values for all card ranks (Ace value is 1).
+  - [x] class NumberCard: Concrete Card for ranks 2-10, derives score from Rank.value.
+  - [x] class FaceCard: Concrete Card for Jack, Queen, King, fixed score of 10.
+  - [x] class AceCard: Concrete Card for Ace, fixed base score of 1.
+  - [x] Card and its subclasses should contain toString() to simplify printing.
 - [x] **Create Deck value Class**
   - [x] Should contain an ImmutableList<Card>
   - [x] The list is created from 52
+  - [x] Should shuffle the cards.
+  - [x] Should draw a card from the deck.
 - [x] **Create a Hand Class**
   - [x] contain an Immutable list of dealtCards
   - [x] calculate the current score
-  - [x] check for blackjack and busts
+  - [x] Provides operator fun plus to create a new Hand with an additional card.
+  - [x] Note: Hand no longer directly checks for blackjack or busts; this logic is now handled by the State classes.
   - [x] toString() return a nice formatted string
+- [x] **Implement State Design Pattern for Hand Management**
+  - [x] interface State: Defines common actions (draw, stay, profit).
+  - [x] abstract class Running: Base for active states (e.g., FirstTurn, Hit).
+  - [x] abstract class Finished: Base for resolved states (e.g., Blackjack, Stay, Bust).
+  - [x] class FirstTurn: Initial state, handles first two card draws.
+  - [x] class Hit: Player drawing cards, can transition to Bust or remain Hit.
+  - [x] class Blackjack: Player achieved 21 on initial two cards.
+  - [x] class Stay: Player chose to stop drawing.
+  - [x] class Bust: Player's hand exceeded 21.
+  - [x] All state classes are top-level declarations within the model package.
+- [x] **Create GameResults Class**
+  - [x] Stores wins, loses, and ties count.
+  - [ ] Should track Dealer's total earnings.
 ### Controller
 - [x] Create Game Controller
   - [x] Should call the InputView to get the player names
+  - [ ] Calls the InputView to get betting amounts for each player.
   - [x] Create the necessary Players and add to a List<Player>
   - [x] Should create Dealer("Dealer")
   - [x] Initialize the game by having the Dealer deal two cards to each player and two to themselves, one card at a time.
@@ -37,22 +59,19 @@
   - [x] If all the players finish, then the Dealer drawCards automatically for themselves.
   - [x] Print a final Hand from each participant
   - [x] Call the dealer to calculate the final hand for each player and set the results
-  - [x] Print final results
+  - [ ] Calculates final earnings for each player and the dealer.
+  - [ ] Prints final earnings.
   - [x] Add a try catch with a retry template function for the validation of the user input.
 ### View
 - [x] InputView
   - [x] Should accept the names of the players
-    - [x] Should be comma separated names
-    - [x] Should contain a minimum of one player.
-    - [x] The names should be unique.
+  - [ ] Should accept betting amounts for each player (should be a positive integer).
+  - [x] Should be comma separated names
+  - [x] Should contain a minimum of one player.
+  - [x] The names should be unique.
 - [x] OutputView
   - [x] Should print the list of all participants and their hands.
   - [x] Should print the final hands and score.
   - [x] Should print the Final Result.
+  - [ ] Prints the final earnings for each player and the dealer.
   - [x] Add empty lines between each step on the game.
-
-### Todo
-  - [ ] Add customize exception messages
-  - [ ] Add constants to Input and Output Prompts
-  - [ ] Print cards with color (black and red)
-  - [ ] Update the hasBlackJack method to return true only in the first hand
