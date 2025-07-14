@@ -44,7 +44,7 @@ class PlayerTest {
         player.drawCard(card1)
         player.drawCard(card2)
         player.drawCard(card3)
-        player.updatePlayingStatus(player.cardsInHand.checkIfIsBustHand())
+        player.updatePlayingStatus(player.cardsInHand.isBustHand())
         assertThat(player.isPlaying).isFalse
     }
 

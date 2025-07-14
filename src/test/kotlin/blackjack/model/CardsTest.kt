@@ -7,7 +7,7 @@ class CardsTest {
     @Test
     fun `should return true when cards in hand have condition for BlackJack`() {
         val cardsInHand = Cards(mutableListOf(Card(Rank.ACE, Suit.HEARTS), Card(Rank.JACK, Suit.DIAMONDS)))
-        assertThat(cardsInHand.checkIfHasBlackJack()).isTrue()
+        assertThat(cardsInHand.hasBlackJack()).isTrue()
     }
 
     @Test
@@ -19,6 +19,6 @@ class CardsTest {
                 Card(Rank.ACE, Suit.DIAMONDS)
             )
         )
-        assertThat(cardsInHand.checkIfHasBlackJack()).isFalse()
+        assertThat(cardsInHand.hasBlackJack()).isFalse()
     }
 }

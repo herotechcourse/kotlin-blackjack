@@ -46,7 +46,7 @@ class Game(
                 val answer = InputView.askToHit(it.name)
                 if (answer) {
                     dealer.dealCardToPlayer(it)
-                    it.updatePlayingStatus(it.cardsInHand.checkIfIsBustHand())
+                    it.updatePlayingStatus(it.cardsInHand.isBustHand())
                     println(OutputView.showHandCards(it, false))
                 }
             } while (answer && it.isPlaying)
@@ -60,7 +60,7 @@ class Game(
             dealer.selfDrawCard()
             mustDraw = dealer.mustDraw(dealer.cardsInHand.calculateTotalValueOfCards())
         }
-        dealer.updatePlayingStatus(dealer.cardsInHand.checkIfIsBustHand())
+        dealer.updatePlayingStatus(dealer.cardsInHand.isBustHand())
     }
 
     private fun compareFinalCards(players: List<Player>) {
