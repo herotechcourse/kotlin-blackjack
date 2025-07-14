@@ -30,7 +30,6 @@ object BlackJackController {
     }
 
     private fun startBetting(allPlayers: Players) {
-
         allPlayers.players.forEach { player ->
             val betInput = InputView.requestPlayersBet(player.name)
             player.bet = Bet.parseToBet(betInput)

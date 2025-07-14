@@ -26,11 +26,12 @@ class ResultCalculator {
                 val playerHasBlackJack = player.isBlackJack()
                 val (playerEarning, dealerEarning) =
                     when {
-                        playerHasBlackJack && dealerHasBlackJack -> bet to 0.0
-                        playerHasBlackJack -> bet * 1.5 to 0.0
-                        playerScore == dealerScore -> bet to 0.0
-                        dealerScore > 21 -> bet to 0.0
-                        playerScore > dealerScore && playerScore <= 21 -> bet to 0.0
+                        dealerScore > 21 -> bet to -bet
+                        dealerHasBlackJack && !playerHasBlackJack -> -bet to bet
+                        playerHasBlackJack && dealerHasBlackJack -> 0.0 to 0.0
+                        playerScore == dealerScore -> 0.0 to 0.0
+                        playerHasBlackJack -> bet * 1.5 to (-bet * 1.5)
+                        playerScore > dealerScore && playerScore <= 21 -> bet to -bet
                         else -> -bet to bet
                     }
                 PlayerEarningResult(index, playerEarning, dealerEarning)
