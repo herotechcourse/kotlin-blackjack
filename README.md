@@ -79,31 +79,37 @@ player1, player2, player3
 
 Dealing two cards to dealer, player1, player2, player3.
 Enter player1’s betting amount:
-10
+100
 Enter player2’s betting amount:
-20
+200
 Enter player3’s betting amount:
-30
-Dealer: 9♣
-player1's card: Q♦, 10♦
-player2's card: K♣, 9♦
-player3's card: 2♣, 9♥
+100
+Dealer: 3♦
+player1's card: 4♥, 5♥
+player2's card: Q♠, A♠
+player3's card: 3♥, 5♠
 
 Would player1 like to draw another card? (y for yes, n for no)
-n
-player1's card: Q♦, 10♦
-Would player2 like to draw another card? (y for yes, n for no)
-n
-player2's card: K♣, 9♦
+y
+player1's card: 4♥, 5♥, 6♠
+Would player1 like to draw another card? (y for yes, n for no)
+y
+player1's card: 4♥, 5♥, 6♠, 6♦
+player2's card: Q♠, A♠
 Would player3 like to draw another card? (y for yes, n for no)
 y
-player3's card: 2♣, 9♥, K♦
+player3's card: 3♥, 5♠, 9♦
+Would player3 like to draw another card? (y for yes, n for no)
+n
 
 Dealer draws one more card due to having 16 or less.
-Dealer's card: 9♣, 6♣, 8♣ – Total: 23
-player1's card: Q♦, 10♦ – Total: 20
-player2's card: K♣, 9♦ – Total: 19
-player3's card: 2♣, 9♥, K♦ – Total: 21
+Dealer draws one more card due to having 16 or less.
+Dealer draws one more card due to having 16 or less.
+
+Dealer's card: 3♦, 3♠, 2♣, 8♥, 10♣ – Total: 26
+player1's card: 4♥, 5♥, 6♠, 6♦ – Total: 21
+player2's card: Q♠, A♠ – Total: 21
+player3's card: 3♥, 5♠, 9♦ – Total: 17
 
 ## Final Results
 Dealer: 0 Win 0 Draw 3 Lose
@@ -112,8 +118,8 @@ player2: Win
 player3: Win
 
 ## Final Earnings
-Dealer: -60
-player1: 10
-player2: 20
-player3: 30
+Dealer: -500
+player1: 100
+player2: 300
+player3: 100
 ```
