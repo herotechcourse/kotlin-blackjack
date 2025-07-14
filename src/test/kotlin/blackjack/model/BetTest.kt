@@ -1,5 +1,6 @@
 package blackjack.model
 
+import blackjack.utils.Constants
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -26,5 +27,33 @@ class BetTest {
         assertThrows<IllegalArgumentException> {
             Bet(0)
         }
+    }
+
+    @Test
+    fun `earningsAgainstDealer returns bet on WIN`() {
+        val player = Player("player", Bet(10000))
+        val result = Constants.WIN
+        assertEquals(10000, player.earnings(result))
+    }
+
+    @Test
+    fun `earningsAgainstDealer returns 0 on TIE`() {
+        val player = Player("player", Bet(10000))
+        val result = Constants.TIE
+        assertEquals(0, player.earnings(result))
+    }
+
+    @Test
+    fun `earningsAgainstDealer returns -bet on LOSE`() {
+        val player = Player("player", Bet(10000))
+        val result = Constants.LOSE
+        assertEquals(-10000, player.earnings(result))
+    }
+
+    @Test
+    fun `earningsAgainstDealer returns 1_5x bet on BLACKJACK`() {
+        val player = Player("player", Bet(10000))
+        val result = Constants.WIN_BLACK_JACK
+        assertEquals(15000, player.earnings(result))
     }
 }

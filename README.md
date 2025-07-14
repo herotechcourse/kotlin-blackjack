@@ -119,14 +119,26 @@ CardGenerator
 ## Step2
 
 ### Model
+
+Player
+
 - [x] players place a bet at the start of each game
+- [x] updated the Player class to require a Bet during construction
+- [x] earnings(result: Int): Int
+  - [x] WIN → Player wins: returns +bet
+  - [x] BLACKJACK → Player has blackjack: returns +1.5 × bet
+  - [x] TIE → Player ties with dealer: returns 0 (no gain or loss)
+  - [x] LOSE → Player loses: returns -bet
+
+Bet
+
 - [x] Introduced a new Bet data class:
     - [x] validates that the bet amount is greater than zero
     - [x] throws IllegalArgumentException if the amount is invalid
-    - [x] updated the Player class to require a Bet during construction
-
-
+    
 
 ### View
+
+InputView
 
 - [x] "Enter $name’s betting amount:"

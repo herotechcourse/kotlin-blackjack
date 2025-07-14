@@ -8,4 +8,5 @@ object Constants {
     const val LOSE = 0
     const val WIN = 1
     const val TIE = 2
+    const val WIN_BLACK_JACK = 3
 }
