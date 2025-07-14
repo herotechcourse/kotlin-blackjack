@@ -31,10 +31,6 @@ object OutputView {
         println(Message.ENTER_PLAYERS_NAMES)
     }
 
-    fun showNewCard() {
-        println(Message.GENERATE_NEW_CARD)
-    }
-
     fun showError(msg: String?) {
         println("Error: $msg")
     }
@@ -66,8 +62,9 @@ object OutputView {
 
     object Message {
         const val ENTER_PLAYERS_NAMES = "Enter the names of the players (comma-separated):"
-        const val GENERATE_NEW_CARD = " Card deck is empty... prepare for a new card deck."
+        const val GENERATE_NEW_CARD = "Card deck is empty..."
         const val FINAL_RESULTS_TITLE = "## Final Results"
         const val INVALID_INPUT = "Invalid Input"
+        const val EMPTY_BUT_TRY_TO_DRAW = "Logic error: can not draw empty or less then tried to draw."
     }
 }
