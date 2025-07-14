@@ -1,10 +1,8 @@
 package blackjack.controller
 
-import blackjack.controller.GameLogic
 import blackjack.model.GameResult
 import blackjack.model.Dealer
 import blackjack.model.Player
-import blackjack.view.InputView
 import blackjack.view.OutputView
 
 class GameController {
@@ -41,11 +39,16 @@ class GameController {
         var dealerLosses = 0
 
         OutputView.displayFinalResultsHeader()
-        players.forEach { player ->
+
+        players.forEachIndexed { index, player ->
             val playerScore = player.getScore()
             val isPlayerBusted = player.isBusted()
+            val isBlackjack = playerScore == 21 && player.getNumberOfCardsInHand() == 2
+            val bet = bettingInfos[index].amount
 
             val result = GameLogic.getGameResult(playerScore, dealerScore, isPlayerBusted, isDealerBusted)
+            val earnings = GameLogic.calculateEarnings(result, playerScore, isBlackjack, bet)
+            player.earnings = earnings
 
             when (result) {
                 GameResult.WIN -> dealerLosses++
@@ -57,5 +60,8 @@ class GameController {
         }
 
         OutputView.displayDealerResult(dealerWins, dealerLosses)
+
+        val dealerEarnings = players.sumOf { -it.earnings }
+        OutputView.displayFinalEarnings(players, dealerEarnings)
     }
 }

@@ -49,4 +49,11 @@ object OutputView {
     fun displayLineBreak() {
         println()
     }
+
+    fun displayFinalEarnings(players: List<Player>, dealerEarnings: Int) {
+        println("\n## Final Earnings")
+        println("Dealer: $dealerEarnings")
+        players.forEach { println("${it.name}: ${it.earnings}") }
+    }
+
 }

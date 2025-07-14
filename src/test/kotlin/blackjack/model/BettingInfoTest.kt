@@ -7,9 +7,9 @@ class BettingInfoTest {
 
     @Test
     fun `should store player name and betting amount`() {
-        val bettingInfo = BettingInfo("pobi", 10000)
+        val bettingInfo = BettingInfo("jason", 10000)
 
-        assertEquals("pobi", bettingInfo.playerName)
+        assertEquals("jason", bettingInfo.playerName)
         assertEquals(10000, bettingInfo.amount)
     }
 }

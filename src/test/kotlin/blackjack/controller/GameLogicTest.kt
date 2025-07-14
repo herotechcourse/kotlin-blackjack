@@ -3,6 +3,7 @@ package blackjack.controller
 import blackjack.model.GameResult
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
 
 class GameLogicTest {
 
@@ -37,5 +38,33 @@ class GameLogicTest {
             isDealerBusted = false
         )
         Assertions.assertEquals(GameResult.DRAW, result)
+    }
+
+    @Test
+    fun `should calculate earnings for regular win`() {
+        val result = GameResult.WIN
+        val earnings = GameLogic.calculateEarnings(result, 20, isBlackjack = false, bet = 10000)
+        assertEquals(10000, earnings)
+    }
+
+    @Test
+    fun `should calculate earnings for blackjack win`() {
+        val result = GameResult.WIN
+        val earnings = GameLogic.calculateEarnings(result, 21, isBlackjack = true, bet = 10000)
+        assertEquals(15000, earnings)
+    }
+
+    @Test
+    fun `should calculate earnings for loss`() {
+        val result = GameResult.LOSE
+        val earnings = GameLogic.calculateEarnings(result, 18, isBlackjack = false, bet = 10000)
+        assertEquals(-10000, earnings)
+    }
+
+    @Test
+    fun `should calculate earnings for draw`() {
+        val result = GameResult.DRAW
+        val earnings = GameLogic.calculateEarnings(result, 19, isBlackjack = false, bet = 10000)
+        assertEquals(0, earnings)
     }
 }
