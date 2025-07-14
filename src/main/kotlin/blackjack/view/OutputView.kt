@@ -66,15 +66,10 @@ object OutputView {
         dealer: Dealer,
         players: List<Player>,
     ) {
-        val dealerWins = players.count { it.isBusted() || it.total() < dealer.total() }
-        val dealerLoses = players.size - dealerWins
-
-        println("## Final Results")
-        println("Dealer: $dealerWins Win $dealerLoses Lose")
-        players.forEach { player ->
-            val result =
-                if (player.isBusted() || (!dealer.isBusted() && dealer.total() >= player.total())) "Lose" else "Win"
-            println("${player.name}: $result")
+        println("\n## Final Earnings")
+        println("Dealer: ${dealer.returnWinningMoneyForDealer(players)}")
+        players.forEach {
+            println("${it.name}: ${it.returnWinningMoneyForPlayer()}")
         }
     }
 }
