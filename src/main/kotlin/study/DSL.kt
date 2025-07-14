@@ -61,12 +61,12 @@ class SkillsBuilder {
     private val softSkills = mutableListOf<String>()
     private val hardSkills = mutableListOf<String>()
 
-    fun soft(value: String) {
-        softSkills += value
+    fun soft(vararg values: String) {
+        softSkills += values
     }
 
-    fun hard(value: String) {
-        hardSkills += value
+    fun hard(vararg values: String) {
+        hardSkills += values
     }
 
     fun build(): Skills = Skills(softSkills, hardSkills)

@@ -33,13 +33,13 @@ class DSLTest {
         val person = introduce {
             name("Jason")
             skills {
-                soft("Teamwork")
-                hard("Kotlin")
+                soft("Teamwork", "Speech", "Leadership")
+                hard("Kotlin", "Gradle")
             }
         }
 
-        assertThat(person.skills.soft).containsExactly("Teamwork")
-        assertThat(person.skills.hard).containsExactly("Kotlin")
+        assertThat(person.skills.soft).containsExactly("Teamwork", "Speech", "Leadership")
+        assertThat(person.skills.hard).containsExactly("Kotlin", "Gradle")
     }
 
     @ParameterizedTest
