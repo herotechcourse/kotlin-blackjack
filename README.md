@@ -7,13 +7,13 @@
 - [] Player loses entire bet when busting (total > 21)
 
 ### Betting System Infrastructure
-- [] Add `betAmount` property to `Player` class
-- [] Update `InputView` to get betting amounts from users
-  - [] Validate: not empty, greater than 0, numeric input
-  - [] Add `getBettingAmount(playerName: String): Int` method
-- [] Update `Controller` to handle betting phase after player creation
-  - [] Add `getBettingAmounts()` method to collect bets from all players
-  - [] Call betting phase in main game flow
+- [x] Add `betAmount` property to `Player` class
+- [x] Update `InputView` to get betting amounts from users
+  - [x] Validate: not empty, greater than 0, numeric input
+  - [x] Add `getBetAmount(playerName: String): Int` method
+- [x] Update `Controller` to handle betting phase after player creation
+  - [x] Add `getBetAmounts()` method to collect bets from all players
+  - [x] Call betting phase in main game flow
 
 ### Payout System
 - [] Create `Payout` class for earnings calculations only
@@ -37,6 +37,11 @@
 
 ## Updates : Step1 (after implementing step2)
 - [] implement abstract class and inheritance for players and dealer
+- [] refactor `Controller`
+  - [] extract some methods in `Controller` for better readability
+- [] remove abundant `it` from the line `.map { it -> ...}` in `Controller.kt`
+  - [] of `fun run()` 
+  - [] of `private fun playerTakesTurn()`
 
 ## Features : Step1 
 ### Data class `Card`

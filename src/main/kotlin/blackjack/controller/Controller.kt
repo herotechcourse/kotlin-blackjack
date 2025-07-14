@@ -2,14 +2,13 @@ package blackjack.controller
 
 import blackjack.model.Deck
 import blackjack.model.FinalResult
-import blackjack.model.GamblerInfo
 import blackjack.model.Player
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
 class Controller() {
     private var players: List<Player> = mutableListOf()
-    private val dealer: Player = Player(GamblerInfo("dealer"))
+    private val dealer: Player = Player("dealer")
     private val deck = Deck()
 
     fun run() {
@@ -33,24 +32,40 @@ class Controller() {
         }
     }
 
-    private fun createPlayers() {
+    //internal fun: allows testing, while still hiding it from external consumers
+    internal fun createPlayers() {
         players =
-            processPlayerNames().map { Player(it) }
+            processPlayerNames().map { Player(it, processBetAmount(it)) }
     }
+
+    // For testing purposes
+    internal fun getPlayers(): List<Player> = players
 
     private fun roundOne() {
         dealer.addCard(deck.drawCard(2))
         players.forEach { it.addCard(deck.drawCard(2)) }
     }
 
-    fun processPlayerNames(): List<GamblerInfo> {
+    fun processPlayerNames(): List<String> {
         repeat(MAX_ATTEMPTS) {
             try {
                 val names = InputView.getNamesOfPlayers()
                 return names
                     .split(",")
                     .map(String::trim)
-                    .map { it -> GamblerInfo(it) } // to avoid abundant function: caller
+                    .filter { it.isNotBlank() }
+            } catch (err: IllegalArgumentException) {
+                OutputView.displayErrorMessages(err.message)
+            }
+        }
+        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
+    }
+
+    fun processBetAmount(name: String): Int {
+        repeat(MAX_ATTEMPTS) {
+            try {
+                val betAmount = InputView.getBetAmount(name)
+                return betAmount
             } catch (err: IllegalArgumentException) {
                 OutputView.displayErrorMessages(err.message)
             }
@@ -107,7 +122,15 @@ class Controller() {
         }
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
-
+/*
+    private fun String.isHitOrStand(): Boolean {
+        return when (this) {
+            "y" -> true
+            "n" -> false
+            else -> throw IllegalArgumentException("The answer must be y or n.")
+        }
+    }
+*/
     companion object {
         private const val MAX_ATTEMPTS = 5
         const val BLACKJACK_SCORE = 21

@@ -2,70 +2,70 @@ package blackjack
 
 import blackjack.model.Card
 import blackjack.model.Deck
-import blackjack.model.GamblerInfo
 import blackjack.model.Player
 import blackjack.model.Rank
 import blackjack.model.Suit
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 class PlayerTest {
     @Test
-    fun `should be equal result`() {
+    fun `should calculate correct score for single card`() {
         val card = Card(Rank.TEN, Suit.SPADE)
-        val player = Player(GamblerInfo("Player"))
+        val player = Player("Player")
         player.addCard(listOf(card))
         assertEquals(10, player.score)
     }
 
     @Test
-    fun `Ace card is considered one if score crosses 21`() {
+    fun `should treat Ace as 1 when two Aces would exceed 21`() {
         val cards = listOf(Card(Rank.ACE, Suit.SPADE), Card(Rank.ACE, Suit.HEART))
-        val player = Player(GamblerInfo("Player"))
+        val player = Player("Player")
         player.addCard(cards)
         assertEquals(12, player.score)
     }
 
     @Test
-    fun `Ace card is considered 11 if the new score is less than 21`() {
+    fun `should treat Ace as 11 when total stays under 21`() {
         val cards = listOf(Card(Rank.FOUR, Suit.SPADE), Card(Rank.ACE, Suit.HEART))
-        val player = Player(GamblerInfo("Player"))
+        val player = Player("Player")
         player.addCard(cards)
         assertEquals(15, player.score)
     }
 
     @Test
-    fun `should return 13 - Ace's rank is converted to 1 if score greater than 21`() {
+    fun `should convert Ace from 11 to 1 to avoid bust`() {
         val cards =
             listOf(
                 Card(Rank.TWO, Suit.SPADE),
                 Card(Rank.ACE, Suit.HEART),
                 Card(Rank.KING, Suit.HEART),
             )
-        val player = Player(GamblerInfo("Player"))
+        val player = Player("Player")
         player.addCard(cards)
         assertEquals(13, player.score)
     }
 
     @Test
-    fun `should return 12 - both Ace's rank is converted to 1 if score greater than 21`() {
+    fun `should convert both Aces to 1 when needed to avoid bust`() {
         val cards =
             listOf(
                 Card(Rank.ACE, Suit.SPADE),
                 Card(Rank.ACE, Suit.HEART),
                 Card(Rank.KING, Suit.HEART),
             )
-        val player = Player(GamblerInfo("Player"))
+        val player = Player("Player")
         player.addCard(cards)
         assertEquals(12, player.score)
     }
 
     @Test
-    fun `should return 22 - each Ace rank is converted to 1 if score greater than 21`() {
+    fun `should convert all Aces to 1 but still bust with multiple Aces`() {
         val cards =
             listOf(
                 Card(Rank.NINE, Suit.SPADE),
@@ -75,31 +75,70 @@ class PlayerTest {
                 Card(Rank.ACE, Suit.CLUB),
                 Card(Rank.ACE, Suit.DIAMOND),
             )
-        val player = Player(GamblerInfo("Player"))
+        val player = Player("Player")
         player.addCard(cards)
         assertEquals(22, player.score)
     }
 
     @Test
-    fun `should asser that - get cards properly`() {
+    fun `should track card count correctly when adding multiple cards`() {
         val deck = Deck()
-        val player = Player(GamblerInfo("Jin"))
+        val player = Player("Jin")
         player.addCard(deck.drawCard(4))
         assertThat(player.cards.size).isEqualTo(4)
     }
 
     @ParameterizedTest
     @MethodSource("provideCardCombinations")
-    fun `should asser that - blackjack and bust detection works correctly`(
+    fun `should correctly detect blackjack and bust conditions`(
         cards: List<Card>,
         expectedBlackjack: Boolean,
         expectedBust: Boolean,
     ) {
-        val player = Player(GamblerInfo("TestPlayer"))
+        val player = Player("TestPlayer")
         player.addCard(cards)
 
         assertThat(player.isBlackJack()).isEqualTo(expectedBlackjack)
         assertThat(player.isBusted()).isEqualTo(expectedBust)
+    }
+
+    @Test
+    fun `should validate bet amount correctly`() {
+        val player = Player("TestPlayer")
+
+        assertThrows<IllegalArgumentException> { player.updateBetAmount(-1) }
+        assertThrows<IllegalArgumentException> { player.updateBetAmount(0) }
+    }
+
+    fun `should update variable 'betAmount' right away`() {
+        val player = Player("TestPlayer")
+        player.updateBetAmount(100)
+        assertThat(player.betAmount).isEqualTo(100)
+
+        player.updateBetAmount(500)
+        assertThat(player.betAmount).isEqualTo(500)
+    }
+
+    @Test
+    fun `should initialize with zero bet amount`() {
+        val player = Player("TestPlayer")
+        assertThat(player.betAmount).isEqualTo(0)
+    }
+
+    @Test
+    fun `should correctly identify player name`() {
+        val playerName = "Alice"
+        val player = Player(playerName)
+        assertThat(player.name).isEqualTo(playerName)
+    }
+
+    @Test
+    fun `should initialize with empty cards and zero score`() {
+        val player = Player("TestPlayer")
+        assertThat(player.cards).isEmpty()
+        assertThat(player.score).isEqualTo(0)
+        assertThat(player.isBlackJack()).isFalse()
+        assertThat(player.isBusted()).isFalse()
     }
 
     companion object {
