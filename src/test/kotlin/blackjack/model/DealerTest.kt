@@ -1,10 +1,10 @@
 package blackjack.model
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
 
 class DealerTest {
     @Test
@@ -38,7 +38,7 @@ class DealerTest {
     }
 
     @Test
-    fun `should return positive amount when players lose`() {
+    fun `should return correct amount when players lose`() {
         val dealer = Dealer()
         val player = Player("pobi", 10000)
 
@@ -53,7 +53,7 @@ class DealerTest {
     }
 
     @Test
-    fun `should return negative amount when player wins`() {
+    fun `should return correct amount when player wins`() {
         val dealer = Dealer()
         val player = Player("jason", 10000)
 
@@ -65,6 +65,7 @@ class DealerTest {
         val result = dealer.returnWinningMoneyForDealer(listOf(player))
         assertThat(result).isEqualTo(-10000) // Dealer pays 1 player's win
     }
+
 
     @Test
     fun `should return 0 when tie`() {
