@@ -1,4 +1,4 @@
-package blackjack.controller
+package blackjack.blackjackgame
 
 import blackjack.model.GameResult
 import org.junit.jupiter.api.Assertions.assertEquals

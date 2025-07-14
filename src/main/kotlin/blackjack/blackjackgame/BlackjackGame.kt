@@ -1,4 +1,4 @@
-package blackjack.controller
+package blackjack.blackjackgame
 
 import blackjack.model.Dealer
 import blackjack.model.GameResult
@@ -6,7 +6,7 @@ import blackjack.model.Player
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
-class GameController {
+class BlackjackGame {
     fun run() {
         val players = createPlayers()
         val dealer = Dealer()

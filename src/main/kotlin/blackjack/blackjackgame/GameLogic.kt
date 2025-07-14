@@ -1,4 +1,4 @@
-package blackjack.controller
+package blackjack.blackjackgame
 
 import blackjack.model.Dealer
 import blackjack.model.GameResult
