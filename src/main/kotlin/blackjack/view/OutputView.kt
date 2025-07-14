@@ -10,10 +10,10 @@ object OutputView {
         players: List<Player>,
     ) {
         displayDealerFirstCard(dealer)
-        displayPlayers(players)
+        displayPlayersSetUp(players)
     }
 
-    fun displayPlayers(players: List<Player>) {
+    fun displayPlayersSetUp(players: List<Player>) {
         players.forEach { displayPlayer(it) }
     }
 
@@ -25,11 +25,21 @@ object OutputView {
         return cards.joinToString(", ") { it.rank.face + it.suit.symbol }
     }
 
-    fun displayDealer(dealer: Dealer) {
-        println("${dealer.name}'s cards: " + cardsText(dealer.state.hand.cards))
-    }
-
     fun displayPlayer(player: Player) {
         println("${player.name}'s cards: " + cardsText(player.state.hand.cards))
+    }
+
+    fun displayDealerStats(dealer: Dealer) {
+        println(" Dealer draws ${dealer.state.hand.size - 2} more card due to having 16 or less")
+    }
+
+    fun displayFinalResult(
+        dealer: Dealer,
+        players: List<Player>,
+    ) {
+        println("${dealer.name}'s cards: " + "${cardsText(dealer.state.hand.cards)} - Total: ${dealer.points}.")
+        players.forEach {
+            println("${it.name}'s cards: " + "${cardsText(it.state.hand.cards)} - Total: ${it.points}.")
+        }
     }
 }

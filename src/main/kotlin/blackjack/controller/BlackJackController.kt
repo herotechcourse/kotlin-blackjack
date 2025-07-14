@@ -22,8 +22,8 @@ class BlackJackController() {
 
             OutputView.displayTableSetUp(dealer, players)
             blackjackGame.play()
-            OutputView.displayDealer(dealer)
-            OutputView.displayPlayers(players)
+            OutputView.displayDealerStats(dealer)
+            OutputView.displayFinalResult(dealer, players)
         } catch (e: Exception) {
             println("Error starting the game: ${e.message}")
         }
