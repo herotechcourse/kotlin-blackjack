@@ -16,6 +16,15 @@ object InputView {
         }
     }
 
+    fun askPlayerBet(name: String): Int {
+        println("Enter $name’s betting amount:")
+        return try {
+            readLine()?.toIntOrNull()?.takeIf { it > 0 } ?: askPlayerBet(name)
+        } catch (e: IllegalArgumentException) {
+            throw IllegalArgumentException("Betting amount must be greater than 0")
+        }
+    }
+
     fun askToDrawCard(name: String): Boolean {
         println("Would $name like to draw another card? (y for yes, n for no)")
         val choice = readln()
