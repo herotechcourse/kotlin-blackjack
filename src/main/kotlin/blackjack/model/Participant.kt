@@ -1,20 +1,28 @@
 package blackjack.model
 
 abstract class Participant(val name: String) {
-    protected val hand = Hand()
+    var handState: State = FirstTurn()
     val gameResults: GameResults = GameResults()
 
     init {
         require(name.isNotBlank()) { "Wrong name: $name. Participant name should not be blank." }
     }
 
-    fun hasBlackJack(): Boolean = hand.hasBlackJack()
+    fun addCard(newCard: Card) {
+        handState = handState.draw(newCard)
+    }
 
-    fun isBusts(): Boolean = hand.isBusts()
+    fun stay() {
+        handState = handState.stay()
+    }
 
-    fun addCard(newCard: Card) = hand.addCard(newCard)
+    fun isBusts(): Boolean = handState is Bust
 
-    fun getScore(): Int = hand.getScore()
+    fun hasBlackJack(): Boolean = handState is Blackjack
+
+    fun isFinished(): Boolean = handState is Finished
+
+    fun getScore(): Int = handState.hand.getScore()
 
     fun setWin() = gameResults.wins++
 
@@ -22,4 +30,7 @@ abstract class Participant(val name: String) {
 
     fun setTie() = gameResults.ties++
 
+    override fun toString(): String {
+        return "$name: ${handState.hand}"
+    }
 }

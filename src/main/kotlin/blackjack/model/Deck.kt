@@ -12,12 +12,16 @@ class Deck() {
     }
 
     private fun create() {
-        val symbols = Card.Suit.entries
-        val cardValues = Card.Rank.entries
+        val suits = Suit.entries
+        val ranks = Rank.entries
 
-        symbols.forEach { symbol ->
-            cardValues.forEach { value ->
-                _cards.add(Card(symbol, value))
+        suits.forEach { suit ->
+            ranks.forEach { rank ->
+                when (rank) {
+                    Rank.ACE -> _cards.add(AceCard(suit))
+                    Rank.JACK, Rank.QUEEN, Rank.KING -> _cards.add(FaceCard(suit, rank))
+                    else -> _cards.add(NumberCard(suit, rank))
+                }
             }
         }
     }

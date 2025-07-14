@@ -3,7 +3,6 @@ package blackjack.model
 import blackjack.view.InputView
 
 class Players(private val players: List<Player>) : Iterable<Player> {
-
     override fun iterator(): Iterator<Player> = players.iterator()
 
     fun dealFirstCards(dealer: Dealer) {
@@ -13,14 +12,18 @@ class Players(private val players: List<Player>) : Iterable<Player> {
         }
     }
 
-    fun dealingPlayersCards(retry: (() -> String) -> String, dealer: Dealer) {
+    fun dealingPlayersCards(
+        retry: (() -> String) -> String,
+        dealer: Dealer,
+    ) {
         for (player in players) {
-            while (!player.hasBlackJack() && !player.isBusts()) {
+            while (!player.isFinished()) {
                 val answer = retry { InputView.getAnswer(player.name) }
                 if (answer == "y") {
                     player.addCard(dealer.dealCard())
                     println(player)
                 } else {
+                    player.stay()
                     break
                 }
             }
@@ -34,5 +37,4 @@ class Players(private val players: List<Player>) : Iterable<Player> {
     fun toList(): List<Player> = players
 
     fun size() = players.size
-
 }

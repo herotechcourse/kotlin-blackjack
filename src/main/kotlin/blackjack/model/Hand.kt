@@ -1,34 +1,24 @@
 package blackjack.model
 
-class Hand {
-    val dealtCards: MutableList<Card> = mutableListOf()
+class Hand(val cards: List<Card>) {
+    val size get() = cards.size
 
-    fun addCard(card: Card) {
-        if (!isBusts()) dealtCards.add(card)
-    }
+    constructor(vararg cards: Card) : this(cards.toList())
 
-    fun hasBlackJack(): Boolean = dealtCards.isNotEmpty() && getScore() == BLACK_JACK
-
-    fun isBusts(): Boolean = dealtCards.isNotEmpty() && getScore() > BLACK_JACK
+    operator fun plus(card: Card): Hand = Hand(cards + card)
 
     fun getScore(): Int {
-        var aceCount = 0
-        var score = 0
-        dealtCards.forEach {
-            if (it.rank == Card.Rank.ACE) aceCount += 1
+        val hasAce = cards.any { it.isAce }
+        var totalScore = cards.sumOf { it.score }
 
-            score += it.rank.value
-            if (score > BLACK_JACK && aceCount > 0) {
-                score -= 10
-                aceCount -= 1
-            }
+        if (hasAce && totalScore <= 11) {
+            totalScore += 10
         }
-
-        return score
+        return totalScore
     }
 
     override fun toString(): String {
-        return dealtCards.joinToString(", ")
+        return cards.joinToString(", ")
     }
 
     companion object {

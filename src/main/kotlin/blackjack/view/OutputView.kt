@@ -20,16 +20,16 @@ object OutputView {
     }
 
     fun printDealerHand(dealer: Dealer) {
-        val output = if (dealer.isShowingAllCards()) {
-            "${dealer.name}'s cards: ${dealer.getDealtCards()}"
-        } else if (dealer.getDealtCards().isEmpty()) {
-            "${dealer.name} has no cards yet."
-        } else {
-            "${dealer.name}: ${dealer.getDealtCards()[0]}"
-        }
+        val output =
+            if (dealer.isShowingAllCards()) {
+                "${dealer.name}'s cards: ${dealer.getDealtCards()}"
+            } else if (dealer.getDealtCards().isEmpty()) {
+                "${dealer.name} has no cards yet."
+            } else {
+                "${dealer.name}: ${dealer.getDealtCards()[0]}"
+            }
         println(output)
     }
-
 
     private fun getPlayersNames(players: List<Player>): String {
         return players.joinToString(", ") { it.name }
@@ -57,11 +57,12 @@ object OutputView {
 
     fun printPlayersResults(players: List<Player>) {
         players.forEach { player ->
-            val results = when {
-                player.gameResults.wins > 0 -> "${player.name} Win"
-                player.gameResults.loses > 0 -> "${player.name}: Lose"
-                else -> "${player.name}: Tie"
-            }
+            val results =
+                when {
+                    player.gameResults.wins > 0 -> "${player.name} Win"
+                    player.gameResults.loses > 0 -> "${player.name}: Lose"
+                    else -> "${player.name}: Tie"
+                }
             println(results)
         }
     }

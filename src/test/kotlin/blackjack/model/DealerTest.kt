@@ -60,11 +60,12 @@ class DealerTest {
 
     @Test
     fun `should handle setResultFor when player busts`() {
-        val player = Player("bo").apply {
-            addCard(Card(Card.Suit.SPADES, Card.Rank.KING))
-            addCard(Card(Card.Suit.HEARTS, Card.Rank.QUEEN))
-            addCard(Card(Card.Suit.CLUBS, Card.Rank.TWO))
-        }
+        val player =
+            Player("bo").apply {
+                addCard(Card(Card.Suit.SPADES, Card.Rank.KING))
+                addCard(Card(Card.Suit.HEARTS, Card.Rank.QUEEN))
+                addCard(Card(Card.Suit.CLUBS, Card.Rank.TWO))
+            }
 
         dealer.setResultFor(player)
 
@@ -74,10 +75,11 @@ class DealerTest {
 
     @Test
     fun `should handle setResultFor when dealer busts`() {
-        val player = Player("bo").apply {
-            addCard(Card(Card.Suit.DIAMONDS, Card.Rank.EIGHT))
-            addCard(Card(Card.Suit.CLUBS, Card.Rank.EIGHT))
-        }
+        val player =
+            Player("bo").apply {
+                addCard(Card(Card.Suit.DIAMONDS, Card.Rank.EIGHT))
+                addCard(Card(Card.Suit.CLUBS, Card.Rank.EIGHT))
+            }
         dealer.apply {
             addCard(Card(Card.Suit.HEARTS, Card.Rank.KING))
             addCard(Card(Card.Suit.SPADES, Card.Rank.QUEEN))
@@ -92,10 +94,11 @@ class DealerTest {
 
     @Test
     fun `should handle setResultFor when it is a tie`() {
-        val player = Player("bo").apply {
-            addCard(Card(Card.Suit.CLUBS, Card.Rank.NINE))
-            addCard(Card(Card.Suit.HEARTS, Card.Rank.NINE))
-        }
+        val player =
+            Player("bo").apply {
+                addCard(Card(Card.Suit.CLUBS, Card.Rank.NINE))
+                addCard(Card(Card.Suit.HEARTS, Card.Rank.NINE))
+            }
         dealer.apply {
             addCard(Card(Card.Suit.SPADES, Card.Rank.NINE))
             addCard(Card(Card.Suit.DIAMONDS, Card.Rank.NINE))
@@ -109,10 +112,11 @@ class DealerTest {
 
     @Test
     fun `should handle setResultFor when player has blackjack and dealer doesn't`() {
-        val player = Player("bo").apply {
-            addCard(Card(Card.Suit.CLUBS, Card.Rank.ACE))
-            addCard(Card(Card.Suit.HEARTS, Card.Rank.KING))
-        }
+        val player =
+            Player("bo").apply {
+                addCard(Card(Card.Suit.CLUBS, Card.Rank.ACE))
+                addCard(Card(Card.Suit.HEARTS, Card.Rank.KING))
+            }
         dealer.addCard(Card(Card.Suit.SPADES, Card.Rank.EIGHT))
         dealer.addCard(Card(Card.Suit.DIAMONDS, Card.Rank.NINE))
 
@@ -121,5 +125,4 @@ class DealerTest {
         assertThat(player.gameResults.wins).isEqualTo(1)
         assertThat(dealer.gameResults.loses).isEqualTo(1)
     }
-
 }

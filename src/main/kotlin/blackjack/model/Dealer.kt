@@ -8,7 +8,7 @@ class Dealer(name: String = "Dealer") : Participant(name) {
         return deck.drawCard()
     }
 
-    fun shouldNotStand(): Boolean = hand.getScore() <= DEALER_STAND
+    fun shouldNotStand(): Boolean = !isFinished() && getScore() <= DEALER_STAND
 
     fun showAllCards() {
         showAllCards = true
@@ -16,11 +16,12 @@ class Dealer(name: String = "Dealer") : Participant(name) {
 
     fun isShowingAllCards() = showAllCards
 
-    fun getDealtCards() = hand.dealtCards.toList()
+    fun getDealtCards() = handState.hand.cards.toList()
 
     fun setResultFor(player: Player) {
         val playerScore = player.getScore()
         val dealerScore = this.getScore()
+
         when {
             player.isBusts() -> {
                 player.setLose()
