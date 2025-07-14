@@ -13,7 +13,7 @@ class Dealer() : Participant("Dealer") {
         if (isFirstRound()) return blackOrHit()
         if (score > BLACKJACK_SCORE) return State.BUST
 
-        return if (score <= GameConstants.ABLE_TO_RECEIVE) {
+        return if (score <= GameConstants.DEALER_MUST_HIT_LIMIT) {
             State.HIT
         } else {
             State.STAY
