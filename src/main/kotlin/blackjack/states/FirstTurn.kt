@@ -16,4 +16,11 @@ class FirstTurn(override val hand: Hand = Hand(emptyList())) : Running {
     override fun stay(): State {
         throw IllegalStateException(Errors.INVALID_STAY.message)
     }
+
+    override fun profit(
+        state: State,
+        betMoney: Int,
+    ): Double {
+        throw IllegalStateException(Errors.INVALID_PROFIT.message)
+    }
 }
