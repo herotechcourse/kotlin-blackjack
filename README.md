@@ -153,3 +153,8 @@ StatsView
   - [x] dealer with BlackJack wins if the player does not have it
 - [x] updated recordPlayerBoard() logic
   - [x] Count WIN_BLACK_JACK as a dealer loss
+- [x] Added updateEarnings() method to calculate player and dealer earnings after each game round
+
+OutputView
+- [x] Updated OutputView to print final earnings for all participants
+- [x] Added basic formatting for earnings display

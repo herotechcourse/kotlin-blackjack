@@ -23,7 +23,7 @@ object GameManager {
 
         statsManager.processStatistics(playerManager.players, dealerManager.dealer)
 
-        OutputView.displayFinalResults(statsManager.winStatistics, dealerManager.dealer)
+        OutputView.displayFinalResults(statsManager.winStatistics)
     }
 
     private fun takePlayerNames() {

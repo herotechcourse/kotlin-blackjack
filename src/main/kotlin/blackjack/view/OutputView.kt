@@ -2,7 +2,6 @@ package blackjack.view
 
 import blackjack.model.Dealer
 import blackjack.model.Player
-import blackjack.utils.Constants
 
 object OutputView {
     fun displayInitialState(
@@ -35,32 +34,15 @@ object OutputView {
         }
     }
 
-    fun displayFinalResults(
-        winStatistics: StatsView,
-        dealer: Dealer,
-    ) {
-        val playersResult = winStatistics.playerBoard
-        val dealerResult = winStatistics.dealerStats
-        println("\n## Final Results")
-        when (dealerResult["tie"]) {
-            0 -> println("${dealer.name}: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose")
-            else -> println("${dealer.name}: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose ${dealerResult["tie"]} Tie")
-        }
-        playersResult.keys.forEach { player ->
-            val result = givePlayerResult(player, playersResult)
-            println("${player.name}: $result")
+    fun displayFinalResults(winStatistics: StatsView) {
+        println("\n## Final Earnings")
+        val earnings = winStatistics.earnings
+        earnings.forEach { (player, amount) ->
+            println("${player.name}: ${formatEarning(amount)}")
         }
     }
 
-    private fun givePlayerResult(
-        player: Player,
-        playersResult: Map<Player, Int>,
-    ): String {
-        return when (playersResult[player]) {
-            Constants.LOSE -> "Lose"
-            Constants.WIN -> "Win"
-            Constants.TIE -> "Tie"
-            else -> "Error"
-        }
+    private fun formatEarning(amount: Int): String {
+        return amount.toString()
     }
 }
