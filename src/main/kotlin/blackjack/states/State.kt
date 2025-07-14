@@ -9,4 +9,12 @@ interface State {
     fun draw(card: Card): State
 
     fun stay(): State
+
+    val isBlackjack: Boolean
+        get() = false
+
+    fun profit(
+        state: State,
+        betMoney: Int,
+    ): Double
 }
