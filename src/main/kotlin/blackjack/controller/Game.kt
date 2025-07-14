@@ -13,7 +13,11 @@ class Game {
 
     fun startGame() {
         val names = InputView.askPlayerNames()
-        val players = Players(names.map { Player(it) })
+        val players = Players(names.map {
+            val bet = InputView.askPlayerBet(it)
+            Player(it, bet)
+        })
+
         val dealer = Dealer()
         val participants = Participants(players, dealer)
 
