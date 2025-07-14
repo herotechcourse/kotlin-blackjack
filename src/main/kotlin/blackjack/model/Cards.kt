@@ -17,4 +17,6 @@ class Cards(val cards: MutableList<Card>) {
         }
         return totalValueOfCards
     }
+
+    fun checkIfIsBustHand() = calculateTotalValueOfCards() > BlackJackValues.HAND_VALUE_LIMIT
 }
