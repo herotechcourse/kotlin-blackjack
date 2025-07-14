@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class BettingInfoTest {
-
     @Test
     fun `should store player name and betting amount`() {
         val bettingInfo = BettingInfo("jason", 10000)

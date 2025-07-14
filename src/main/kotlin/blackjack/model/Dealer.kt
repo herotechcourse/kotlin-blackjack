@@ -4,7 +4,6 @@ import blackjack.view.InputView
 import blackjack.view.OutputView
 
 class Dealer : Participant("Dealer") {
-
     private val deck = Deck()
 
     fun giveTwoCardsTo(participants: List<Participant>) {
