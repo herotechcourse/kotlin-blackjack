@@ -8,8 +8,14 @@ object InputView {
     }
 
     fun getBettingAmount(playerName: String): Int {
-        println("Enter $playerName’s betting amount:")
-        return readLine()?.toIntOrNull() ?: throw IllegalArgumentException("Invalid betting amount")
+        println("Enter $playerName’s betting amount (multiple of 1000):")
+        val input = readLine()?.toIntOrNull()
+        return if (input != null && input % 1000 == 0 && input > 0) {
+            input
+        } else {
+            println("Invalid amount. Please enter a positive number that is a multiple of 1000.")
+            getBettingAmount(playerName)
+        }
     }
 
     fun askPlayerWantsToDraw(playerName: String): Boolean {
