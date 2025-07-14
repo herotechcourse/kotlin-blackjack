@@ -1,55 +1,22 @@
 package model
 
-import view.InputView
-import view.OutputView
+class BlackJack(names: List<String>) {
+    val players = names.map { Player(it) }
+    val dealer = Dealer()
 
-class BlackJack {
-    companion object {
-        fun getPlayerNames(): List<String> {
-            val players = InputView.requestPlayerNames()
-            require(players.size <= 6) { "Maximum player names must be 6" }
-            return players
-        }
+    init {
+        require(players.size <= 6) { "Maximum player names must be 6" }
+        initGame()
+    }
 
-        fun initGame(
-            players: List<Player>,
-            dealer: Dealer,
-        ) {
-            players.forEach { player ->
-                repeat(2) {
-                    player.drawCard(dealer.dealCard())
-                }
-            }
+    private fun initGame() {
+        players.forEach { player ->
             repeat(2) {
-                dealer.drawCard(dealer.dealCard())
+                player.drawCard(dealer.dealCard())
             }
         }
-
-        fun runGame(
-            players: List<Player>,
-            dealer: Dealer,
-        ) {
-            playersTurn(players, dealer)
-            dealersTurn(dealer)
-        }
-
-        private fun playersTurn(
-            players: List<Player>,
-            dealer: Dealer,
-        ) {
-            players.forEach { player ->
-                while (player.makeDecision()) {
-                    player.drawCard(dealer.dealCard())
-                    OutputView.displayPlayersTurn(player)
-                }
-            }
-        }
-
-        private fun dealersTurn(dealer: Dealer) {
-            while (dealer.makeDecision()) {
-                dealer.drawCard(dealer.dealCard())
-                OutputView.displayDealersGame()
-            }
+        repeat(2) {
+            dealer.drawCard(dealer.dealCard())
         }
     }
 }

@@ -19,9 +19,9 @@ abstract class BasePlayer(val name: String) {
         return hand.getCards()
     }
 
-    abstract fun makeDecision(): Boolean
-
     fun drawCard(card: Card) {
         hand.addCard(card)
     }
+
+    abstract fun makeDecision(value: Int): Boolean
 }
