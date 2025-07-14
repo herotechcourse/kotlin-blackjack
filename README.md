@@ -9,8 +9,8 @@
   - [x] Should check for blackjack and busts.
   - [x] The name should be not empty.
 - [x] **Create Player Class inherit from a participant**
-  - [ ] Should contain a betting amount.
-  - [ ] Should store the final profit/loss amount.
+  - [x] Should contain a betting amount.
+  - [x] Should store the final profit/loss amount.
 - [x] **Create Dealer Class inherit from a participant**
   - [x] Should contain a Deck and manage it.
   - [x] Should be able to automatically add cards to the hand.
@@ -47,11 +47,11 @@
   - [x] All state classes are top-level declarations within the model package.
 - [x] **Create GameResults Class**
   - [x] Stores wins, loses, and ties count.
-  - [ ] Should track Dealer's total earnings.
+  - [x] Should track Dealer's total earnings.
 ### Controller
 - [x] Create Game Controller
   - [x] Should call the InputView to get the player names
-  - [ ] Calls the InputView to get betting amounts for each player.
+  - [x] Calls the InputView to get betting amounts for each player.
   - [x] Create the necessary Players and add to a List<Player>
   - [x] Should create Dealer("Dealer")
   - [x] Initialize the game by having the Dealer deal two cards to each player and two to themselves, one card at a time.
@@ -59,13 +59,13 @@
   - [x] If all the players finish, then the Dealer drawCards automatically for themselves.
   - [x] Print a final Hand from each participant
   - [x] Call the dealer to calculate the final hand for each player and set the results
-  - [ ] Calculates final earnings for each player and the dealer.
-  - [ ] Prints final earnings.
+  - [x] Calculates final earnings for each player and the dealer.
+  - [x] Prints final earnings.
   - [x] Add a try catch with a retry template function for the validation of the user input.
 ### View
 - [x] InputView
   - [x] Should accept the names of the players
-  - [ ] Should accept betting amounts for each player (should be a positive integer).
+  - [x] Should accept betting amounts for each player (should be a positive integer).
   - [x] Should be comma separated names
   - [x] Should contain a minimum of one player.
   - [x] The names should be unique.
@@ -73,5 +73,5 @@
   - [x] Should print the list of all participants and their hands.
   - [x] Should print the final hands and score.
   - [x] Should print the Final Result.
-  - [ ] Prints the final earnings for each player and the dealer.
+  - [x] Prints the final earnings for each player and the dealer.
   - [x] Add empty lines between each step on the game.
