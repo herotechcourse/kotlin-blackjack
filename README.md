@@ -42,16 +42,15 @@
 - [x] fun `display names of players`
 - [x] fun `display the first draw`(parameter: List<Player>)
   - [x] private fun `display message for first draw`(parameter: Player)
-  - [] private fun `display cards and score`
+  - [x] private fun `display cards and score`
 
 ### object `Controller`
-- [] has function `startRound()`
-- [] has function `TakesTurn()`
-  - [] has function `askDrawOrNot()` : until score is greater than 21 or user says 'n'
+- [x] has function `startRound()`
+- [x] has function `TakesTurn()`
+  - [x] has function `askDrawOrNot()` : until score is greater than 21 or user says 'n'
 
 ### class `Statistic`
-- [] will use List<Player> as parameter
-
-
+- [x] will use List<Player> as parameter
 
 ### class `Application`
+- [x] fun main() to and use `run` from controller
