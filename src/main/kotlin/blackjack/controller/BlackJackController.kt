@@ -12,6 +12,11 @@ class BlackJackController() {
             val players = ParticipantsFactory.generatePlayers(playersNames)
             val dealer = ParticipantsFactory.generateDealer()
 
+            players.forEach {
+                val bettingAmount = InputView.bettingAmountInput(it)
+                it.setBettingAmount(bettingAmount)
+            }
+
             val blackjackGame =
                 BlackjackGame(
                     dealer,
