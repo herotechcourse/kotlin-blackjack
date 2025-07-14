@@ -1,4 +1,3 @@
-// src/main/kotlin/blackjack/view/RankView.kt
 package blackjack.view
 
 import blackjack.model.Rank
