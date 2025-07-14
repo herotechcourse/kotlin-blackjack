@@ -29,4 +29,12 @@ class CardDeckTest {
             .containsExactlyInAnyOrderElementsOf(deck2.cards)
             .isNotEqualTo(deck2.cards)
     }
+
+    @Test
+    fun `should draw a card`() {
+        val cardDeck = CardDeck()
+        val card = cardDeck.drawCard()
+
+        assertThat(cardDeck.cards).hasSize(51)
+    }
 }
