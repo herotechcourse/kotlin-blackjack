@@ -1,8 +1,7 @@
 package blackjack.model.result
 
 class PlayerResultTracker : ResultTracker {
-    var result: Result? = null
-        private set
+    override var result: Result? = null
 
     override fun toString(): String {
         return result?.description ?: "No result recorded."

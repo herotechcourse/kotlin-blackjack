@@ -20,7 +20,7 @@ class Player(name: String) : Participant(name, PlayerResultTracker()) {
 
     fun addProfit() {
         profit =
-            when ((resultTracker as PlayerResultTracker).result) {
+            when (resultTracker.result) {
                 Result.BLACKJACK -> bet.blackjack()
                 Result.WIN -> bet
                 Result.LOSE -> bet.lose()
