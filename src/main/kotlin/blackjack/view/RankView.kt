@@ -1,7 +1,7 @@
 // src/main/kotlin/blackjack/view/RankView.kt
 package blackjack.view
 
-import blackjack.Rank
+import blackjack.model.Rank
 
 enum class RankView(val rank: Rank, val symbol: String) {
     TWO(Rank.TWO, "2"),

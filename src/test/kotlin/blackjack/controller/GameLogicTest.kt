@@ -1,6 +1,7 @@
-package blackjack
+package blackjack.controller
 
-import org.junit.jupiter.api.Assertions.assertEquals
+import blackjack.model.GameResult
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class GameLogicTest {
@@ -13,7 +14,7 @@ class GameLogicTest {
             isPlayerBusted = false,
             isDealerBusted = false
         )
-        assertEquals(GameResult.WIN, result)
+        Assertions.assertEquals(GameResult.WIN, result)
     }
 
     @Test
@@ -24,7 +25,7 @@ class GameLogicTest {
             isPlayerBusted = true,
             isDealerBusted = false
         )
-        assertEquals(GameResult.LOSE, result)
+        Assertions.assertEquals(GameResult.LOSE, result)
     }
 
     @Test
@@ -35,6 +36,6 @@ class GameLogicTest {
             isPlayerBusted = false,
             isDealerBusted = false
         )
-        assertEquals(GameResult.DRAW, result)
+        Assertions.assertEquals(GameResult.DRAW, result)
     }
 }

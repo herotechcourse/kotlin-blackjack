@@ -1,8 +1,8 @@
 package blackjack.view
 
-import blackjack.Card
-import blackjack.Dealer
-import blackjack.Player
+import blackjack.model.Card
+import blackjack.model.Dealer
+import blackjack.model.Player
 
 object OutputView {
 

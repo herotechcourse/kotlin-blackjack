@@ -1,4 +1,4 @@
-package blackjack
+package blackjack.model
 
 abstract class Participant(val name: String) {
     private val hand = Hand()

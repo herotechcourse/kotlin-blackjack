@@ -1,7 +1,7 @@
 // src/main/kotlin/blackjack/view/SuitView.kt
 package blackjack.view
 
-import blackjack.Suit
+import blackjack.model.Suit
 
 enum class SuitView(val suit: Suit, val symbol: String) {
     HEART(Suit.HEART, "♥"),

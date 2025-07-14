@@ -1,4 +1,6 @@
-package blackjack
+package blackjack.controller
+
+import blackjack.model.GameResult
 
 object GameLogic {
 

@@ -1,9 +1,13 @@
-package blackjack
+package blackjack.controller
 
+import blackjack.controller.GameLogic
+import blackjack.model.GameResult
+import blackjack.model.Dealer
+import blackjack.model.Player
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
-class Game {
+class GameController {
 
     fun run() {
         val playerNames = InputView.askPlayerNames()
