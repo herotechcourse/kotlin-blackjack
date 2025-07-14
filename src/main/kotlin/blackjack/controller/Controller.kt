@@ -33,7 +33,7 @@ class Controller {
          * val evaluator = ResultEvaluator(players, dealer)
          * val results = evaluator.calculateResults()
          * OutputView.displayResults(results)
-        */
+         */
         dealer.settleRound()
         OutputView.displayEarnings(dealer, players)
     }

@@ -8,18 +8,24 @@ import blackjack.model.Player
 import blackjack.model.Players
 import blackjack.model.Rank
 import blackjack.model.Suit
-import org.junit.jupiter.api.Test
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 
 class ParticipantTest {
-
     private val deck = CardDeck()
 
-    private fun createPlayer(name: String, cards: List<Card>, bet: Int): Player {
+    private fun createPlayer(
+        name: String,
+        cards: List<Card>,
+        bet: Int,
+    ): Player {
         return Player(name, HandCards(cards.toMutableList()), bet)
     }
 
-    private fun createDealer(cards: List<Card>, players: Players): Dealer {
+    private fun createDealer(
+        cards: List<Card>,
+        players: Players,
+    ): Dealer {
         return Dealer(deck = deck, players = players, handCards = HandCards(cards.toMutableList()))
     }
 
@@ -135,5 +141,3 @@ class ParticipantTest {
         assertThat(dealer.earning).isEqualTo(0)
     }
 }
-
-

@@ -15,7 +15,7 @@ object InputView {
 
     private fun readBet(playerName: String): Int {
         repeat(Rules.MAX_TRIES) {
-            println("\nEnter ${playerName}'s betting amount:")
+            println("\nEnter $playerName's betting amount:")
             val input = readlnOrNull()
             if (tryValidateBet(input)) return input!!.toInt()
         }
@@ -26,7 +26,7 @@ object InputView {
         return try {
             if (input.isNullOrEmpty()) throw IllegalArgumentException(ErrorMessage.EMPTY_INPUT.toString())
             val bettingAmount = input.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessage.NOT_NUMBER.toString())
-            if (bettingAmount < MIN_BET_AMOUNT ) throw IllegalArgumentException(ErrorMessage.MIN_BET.toString())
+            if (bettingAmount < MIN_BET_AMOUNT) throw IllegalArgumentException(ErrorMessage.MIN_BET.toString())
             if (bettingAmount % BET_AMOUNT_UNIT != 0) throw IllegalArgumentException(ErrorMessage.UNIT_BET.toString())
             true
         } catch (e: IllegalArgumentException) {

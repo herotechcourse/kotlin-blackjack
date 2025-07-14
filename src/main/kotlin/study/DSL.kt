@@ -11,12 +11,12 @@ data class Person(
     val name: String,
     val company: String?,
     val skills: Skills,
-    val languages: List<Language>
+    val languages: List<Language>,
 )
 
 data class Skills(
     val soft: List<String>,
-    val hard: List<String>
+    val hard: List<String>,
 )
 
 data class Language(val name: String, val level: Int)

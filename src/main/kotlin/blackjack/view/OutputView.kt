@@ -65,11 +65,17 @@ object OutputView {
         )
     }
 
-    fun displayEarnings(dealer: Dealer, players: Players){
+    fun displayEarnings(
+        dealer: Dealer,
+        players: Players,
+    )  {
         println(formatFinalEarnings(dealer, players))
     }
 
-    private fun formatFinalEarnings(dealer: Dealer, players: Players): String {
+    private fun formatFinalEarnings(
+        dealer: Dealer,
+        players: Players,
+    ): String {
         val dealerLine = "${dealer.name}: ${dealer.earning}"
         val playerLines = players.players.joinToString("\n") { "${it.name}: ${it.earning}" }
 

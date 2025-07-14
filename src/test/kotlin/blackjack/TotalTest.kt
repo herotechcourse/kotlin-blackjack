@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 
 class TotalTest {
     @Test
-    fun `test if one of two aces are reduced`()  {
+    fun `test if one of two aces are reduced`() {
         val handCards = HandCards()
         handCards.add(Card(Rank.ACE, Suit.DIAMONDS))
         assertEquals(handCards.total, 11)
@@ -18,7 +18,7 @@ class TotalTest {
     }
 
     @Test
-    fun `test if one ace is reduced`()  {
+    fun `test if one ace is reduced`() {
         val handCards = HandCards()
         handCards.add(Card(Rank.ACE, Suit.DIAMONDS))
         assertEquals(handCards.total, 11)
@@ -29,7 +29,7 @@ class TotalTest {
     }
 
     @Test
-    fun `test if many aces are reduced`()  {
+    fun `test if many aces are reduced`() {
         val handCards = HandCards()
         handCards.add(Card(Rank.ACE, Suit.DIAMONDS))
         assertEquals(handCards.total, 11)
@@ -44,7 +44,7 @@ class TotalTest {
     }
 
     @Test
-    fun `test if burned after ace reduced`()  {
+    fun `test if burned after ace reduced`() {
         val handCards = HandCards()
         handCards.add(Card(Rank.ACE, Suit.DIAMONDS))
         assertEquals(handCards.total, 11)
@@ -61,7 +61,7 @@ class TotalTest {
     }
 
     @Test
-    fun `test if no aces reduced`()  {
+    fun `test if no aces reduced`() {
         val handCards = HandCards()
         handCards.add(Card(Rank.QUEEN, Suit.DIAMONDS))
         assertEquals(handCards.total, 10)

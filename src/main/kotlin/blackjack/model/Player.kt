@@ -11,7 +11,7 @@ fun validatePlayerName(name: String) {
 class Player(
     override val name: String,
     override var handCards: HandCards = HandCards(),
-    override val bet: Int
+    override val bet: Int,
 ) : Participant() {
     init {
         validatePlayerName(name)

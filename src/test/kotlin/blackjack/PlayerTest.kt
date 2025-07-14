@@ -19,7 +19,7 @@ class PlayerTest {
     @ParameterizedTest
     @ValueSource(strings = ["abcdef", "blackjacker", "pobi"])
     fun `test good names`(name: String) {
-        assertDoesNotThrow { Player(name, HandCards(),1000) }
+        assertDoesNotThrow { Player(name, HandCards(), 1000) }
     }
 
     @Test
