@@ -103,4 +103,46 @@ class FinalResultTest {
         val finalResult = FinalResult(dealer, listOf(player))
         assertThat(finalResult.win.size).isEqualTo(1)
     }
+
+    @Test
+    fun `Dealer is below and equal with player`() {
+        val dealer = Dealer(GamblerInfo("Dealer"))
+        dealer.addCard(
+            listOf(
+                Card(Rank.KING, Suit.SPADE),
+                Card(Rank.THREE, Suit.HEART),
+            ),
+        )
+
+        val player = Gambler(GamblerInfo("Player"))
+        player.addCard(
+            listOf(
+                Card(Rank.KING, Suit.SPADE),
+                Card(Rank.THREE, Suit.HEART),
+            ),
+        )
+        val finalResult = FinalResult(dealer, listOf(player))
+        assertThat(finalResult.draw.size).isEqualTo(1)
+    }
+
+    @Test
+    fun `Dealer is below 21 but greater than PLayer`() {
+        val dealer = Dealer(GamblerInfo("Dealer"))
+        dealer.addCard(
+            listOf(
+                Card(Rank.KING, Suit.SPADE),
+                Card(Rank.KING, Suit.HEART),
+            ),
+        )
+
+        val player = Gambler(GamblerInfo("Player"))
+        player.addCard(
+            listOf(
+                Card(Rank.KING, Suit.SPADE),
+                Card(Rank.THREE, Suit.HEART),
+            ),
+        )
+        val finalResult = FinalResult(dealer, listOf(player))
+        assertThat(finalResult.lose.size).isEqualTo(1)
+    }
 }
