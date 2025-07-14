@@ -4,20 +4,15 @@ abstract class Participant(
     val name: String,
     val cardsInHand: Cards = Cards(mutableListOf())
 ) {
-    var isBusted: Boolean = false
+    var isPlaying: Boolean = true
         private set
 
     fun drawCard(card: Card) {
         cardsInHand.addCard(card)
     }
 
-    fun updateBustedStatus() {
-            isBusted = true
+    fun updatePlayingStatus(condition : Boolean) {
+        if (condition)
+            isPlaying = false
     }
-
-    fun checkCardsValueLimit() {
-        if (cardsInHand.calculateTotalValueOfCards() > BlackJackValues.HAND_VALUE_LIMIT)
-            updateBustedStatus()
-    }
-
 }

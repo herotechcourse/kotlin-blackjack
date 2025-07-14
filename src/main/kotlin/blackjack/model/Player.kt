@@ -4,9 +4,6 @@ class Player(
     name: String,
 ) : Participant(name) {
 
-    fun comparePointsAgainstDealer(dealerPoints: Int) {
-        if (cardsInHand.calculateTotalValueOfCards() <= dealerPoints) {
-            updateBustedStatus()
-        }
-    }
+    fun hasLessPointsThanDealer(dealerPoints: Int) = cardsInHand.calculateTotalValueOfCards() <= dealerPoints
+
 }
