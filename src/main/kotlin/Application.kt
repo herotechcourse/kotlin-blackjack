@@ -1,15 +1,15 @@
-import model.BackJack
+import model.BlackJack
 import model.Dealer
 import model.Player
 import service.ResultCalculator
 import view.OutputView
 
 fun main() {
-    val players = BackJack.getPlayerNames().map { Player(it) }
+    val players = BlackJack.getPlayerNames().map { Player(it) }
     val dealer = Dealer()
-    BackJack.initGame(players, dealer)
+    BlackJack.initGame(players, dealer)
     OutputView.displayInitialCards(players, dealer)
-    BackJack.runGame(players, dealer)
+    BlackJack.runGame(players, dealer)
     OutputView.displayFinalCardsOnHand(players, dealer)
     OutputView.displayResults(
         ResultCalculator.getResult(

@@ -3,7 +3,7 @@ package model
 import view.InputView
 import view.OutputView
 
-class BackJack() {
+class BlackJack {
     companion object {
         fun getPlayerNames(): List<String> {
             val players = InputView.requestPlayerNames()
