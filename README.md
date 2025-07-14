@@ -40,6 +40,10 @@
 - [x] **Create GameJudge Object**
   - [x] Should contain a method to calculate the final hand of each player and dealer.
   - [x] Should set the result of the game for each player and dealer.
+- [ ] **Create Bet value Class**
+  - [ ] Should contain a Double with the bet value.
+  - [ ] The Class should be immutable.
+  - [ ] Implement methods to execute operations on the class and return a new Instance to promote immutability
 ### Controller
 - [x] Create Game Controller
   - [x] Should call the InputView to get the player names
@@ -58,6 +62,7 @@
     - [x] Should be comma separated names
     - [x] Should contain a minimum of one player.
     - [x] The names should be unique.
+  - [ ] Should accept an amount for the Bet bigger than 0.
 - [x] OutputView
   - [x] Should print the list of all participants and their hands.
   - [x] Should print the final hands and score.
@@ -68,4 +73,7 @@
 - [x] Add AnsiColor for the cards and error messages
 
 ### TODO
-- [ ] Check all the internal methods and change to private if they are not using for testing
+- [x] Check all the internal methods and change to private if they are not using for testing
+- [x] Only override toString() in Card class because is the complete representation of the data contained in the structure, for the other classes leave the this logic to the View.
+- [x] Update Card Class to not be a data class.
+- [x] Override compareTo() and extend the class from Comparable to add the feature to sort the cardUpdate Card Class to not be a data class, and override compareTo() and inherite from Comparable to have the feature to sort the cards.
