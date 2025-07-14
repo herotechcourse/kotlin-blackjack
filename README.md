@@ -135,6 +135,9 @@ Bet
 - [x] Introduced a new Bet data class:
     - [x] validates that the bet amount is greater than zero
     - [x] throws IllegalArgumentException if the amount is invalid
+
+Playable
+- add `hasBlackJack(): Boolean` for calculate blackjack
     
 
 ### View
@@ -142,3 +145,11 @@ Bet
 InputView
 
 - [x] "Enter $name’s betting amount:"
+
+StatsView
+
+- [x] Updated `recordPlayerBoard()` logic
+  - [x] player with a natural BlackJack wins (WIN_BLACK_JACK) if the dealer does not have BlackJack
+  - [x] dealer with BlackJack wins if the player does not have it
+- [x] updated recordPlayerBoard() logic
+  - [x] Count WIN_BLACK_JACK as a dealer loss

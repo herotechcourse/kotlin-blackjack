@@ -29,4 +29,8 @@ abstract class Playable {
     fun canContinue(): Boolean {
         return calculateHand() <= Constants.BLACK_JACK
     }
+
+    fun hasBlackJack(): Boolean {
+        return hand.cards.size == 2 && calculateHand() == Constants.BLACK_JACK
+    }
 }

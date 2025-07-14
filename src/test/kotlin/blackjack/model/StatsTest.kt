@@ -32,7 +32,7 @@ class StatsTest {
         val stats = StatsView(listOf(player1, player2, player3), dealer)
         val board = stats.playerBoard
         assertEquals(0, board[player1])
-        assertEquals(1, board[player2])
+        assertEquals(3, board[player2])
         assertEquals(2, board[player3])
     }
 

@@ -27,7 +27,11 @@ data class StatsView(val players: List<Player>, val dealer: Dealer) {
     ) {
         val playerScore = player.calculateHand()
         val dealerScore = dealer.calculateHand()
+        val playerHasBlackJack = player.hasBlackJack()
+        val dealerHasBlackJack = dealer.hasBlackJack()
         when {
+            playerHasBlackJack && !dealerHasBlackJack -> board[player] = Constants.WIN_BLACK_JACK
+            dealerHasBlackJack && !playerHasBlackJack -> board[player] = Constants.LOSE
             player.isBust() -> board[player] = Constants.LOSE
             dealer.isBust() -> board[player] = Constants.WIN
             playerScore == dealerScore -> board[player] = Constants.TIE
@@ -39,7 +43,7 @@ data class StatsView(val players: List<Player>, val dealer: Dealer) {
     fun updateDealerStats() {
         val stats = _dealerStats.toMutableMap()
         val winCount = playerBoard.values.count { it == Constants.LOSE }
-        val loseCount = playerBoard.values.count { it == Constants.WIN }
+        val loseCount = playerBoard.values.count { it == Constants.WIN || it == Constants.WIN_BLACK_JACK }
         val tieCount = playerBoard.values.count { it == Constants.TIE }
         stats["win"] = winCount
         stats["lose"] = loseCount
