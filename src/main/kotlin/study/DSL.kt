@@ -2,7 +2,7 @@ package study
 
 // Purpose: This Kotlin DSL is designed to create a Person object in a declarative format.
 
-// THe "block" term is common in Kotlin for a code lambda passed to a DSL.
+// The "block" term is common in Kotlin for a code lambda passed to a DSL.
 fun introduce(block: PersonBuilder.() -> Unit): Person {
     return PersonBuilder().apply(block).build()
 }

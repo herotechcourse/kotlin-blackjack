@@ -3,6 +3,8 @@ package blackjack.view
 import blackjack.model.ErrorMessage
 import blackjack.model.Player
 import blackjack.model.Rules
+import blackjack.model.Rules.BET_AMOUNT_UNIT
+import blackjack.model.Rules.MIN_BET_AMOUNT
 import blackjack.model.validatePlayerName
 
 object InputView {
@@ -24,8 +26,8 @@ object InputView {
         return try {
             if (input.isNullOrEmpty()) throw IllegalArgumentException(ErrorMessage.EMPTY_INPUT.toString())
             val bettingAmount = input.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessage.NOT_NUMBER.toString())
-            if (bettingAmount < 1000 ) throw IllegalArgumentException(ErrorMessage.MIN_BET.toString())
-            if (bettingAmount % 100 != 0) throw IllegalArgumentException(ErrorMessage.UNIT_BET.toString())
+            if (bettingAmount < MIN_BET_AMOUNT ) throw IllegalArgumentException(ErrorMessage.MIN_BET.toString())
+            if (bettingAmount % BET_AMOUNT_UNIT != 0) throw IllegalArgumentException(ErrorMessage.UNIT_BET.toString())
             true
         } catch (e: IllegalArgumentException) {
             println(e.message)
