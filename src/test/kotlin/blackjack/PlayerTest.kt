@@ -1,11 +1,6 @@
 package blackjack
 
-import blackjack.model.Card
-import blackjack.model.Deck
-import blackjack.model.Gambler
-import blackjack.model.GamblerInfo
-import blackjack.model.Rank
-import blackjack.model.Suit
+import blackjack.model.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -83,5 +78,13 @@ class PlayerTest {
         val player = Gambler(GamblerInfo("Jin"))
         player.addCard(deck.drawCards(4))
         assertThat(player.cards.size).isEqualTo(4)
+    }
+
+    @Test
+    fun `should get name`() {
+        val deck = Deck()
+        val player = Gambler(GamblerInfo("Player"))
+        player.addCard(deck.drawCards(4))
+        assertThat(player.name).isEqualTo("Player")
     }
 }

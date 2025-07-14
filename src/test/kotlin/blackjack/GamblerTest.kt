@@ -24,4 +24,12 @@ class GamblerTest {
         gambler.addCard(cards)
         assertThat(gambler.isPlayerBelowBlackJack()).isFalse
     }
+
+    @Test
+    fun `return true if Player has two cards`() {
+        val gambler = Gambler(GamblerInfo("Player"))
+        val cards = listOf(Card(Rank.ACE, Suit.SPADE), Card(Rank.KING, Suit.SPADE))
+        gambler.addCard(cards)
+        assertThat(gambler.hasCardCount()).isTrue
+    }
 }
