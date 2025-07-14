@@ -30,6 +30,7 @@ class BlackjackGame(
                 it.draw(cardDeck.drawCard())
                 output(it)
             }
+            if (it.state is Running) it.stay()
         }
     }
 }
