@@ -17,6 +17,18 @@ object InputView {
         return playersNames
     }
 
+    fun getBettingAmount(playerName: String): Double {
+        println(betPrompt(playerName))
+        val input = readLine()?.trim() ?: ""
+        return try {
+            input.toDouble().also {
+                require(it > 0.0) { "Betting amount be greater than zero." }
+            }
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException("Invalid betting amount: $input. Please enter a valid positive number")
+        }
+    }
+
     fun getAnswer(playerName: String): String {
         println(shouldDrawAnotherCardPrompt(playerName))
         val input = readLine()?.trim()?.lowercase() ?: ""
@@ -25,6 +37,8 @@ object InputView {
         }
         return input
     }
+
+    private fun betPrompt(playerName: String): String = "Enter $playerName's betting amount:"
 
     private fun shouldDrawAnotherCardPrompt(playerName: String): String =
         "Would $playerName like to draw another card? (y for yes, n for no)"

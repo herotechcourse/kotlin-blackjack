@@ -17,6 +17,7 @@ object BlackJackGame {
     fun start() {
         val participants = Participants(Dealer(), createPlayers())
         participants.dealer.shuffleDeck()
+        placeBets(participants)
         dealFirstCards(participants)
         dealingPlayersCards(participants)
         dealingDealersCards(participants.dealer)
@@ -25,6 +26,13 @@ object BlackJackGame {
 
     private fun createPlayers(): List<Player> {
         return retryUntilSuccess { InputView.getPlayersNames() }.map { Player(it) }
+    }
+
+    private fun placeBets(participants: Participants) {
+        participants.players.forEach { player ->
+            val bettingAmount = retryUntilSuccess { InputView.getBettingAmount(player.name) }
+            player.placeBet(bettingAmount)
+        }
     }
 
     private fun dealFirstCards(participants: Participants) {
