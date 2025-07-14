@@ -20,8 +20,8 @@ data class Card(val suit: Suit, val rank: Rank) {
             return cardPool[Pair(suit, rank)] ?: error(Errors.INVALID_CARD.message)
         }
 
-        fun allCards(): List<Card> {
-            return cardPool.values.toList()
+        fun allCards(): MutableList<Card> {
+            return cardPool.values.toMutableList()
         }
     }
 }

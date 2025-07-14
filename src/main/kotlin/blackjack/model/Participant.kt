@@ -4,5 +4,5 @@ import blackjack.states.State
 
 abstract class Participant(
     val name: String,
-    val state: State,
+    var state: State,
 )
