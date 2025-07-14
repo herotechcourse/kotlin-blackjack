@@ -7,7 +7,7 @@ object InputView {
     }
 
     private fun readString(): String {
-        val string = readlnOrNull() ?: throw IllegalArgumentException("")
+        val string = readlnOrNull() ?: throw IllegalArgumentException(ErrorPrompt.INPUT_EMPTY)
         return string.trim()
     }
 
