@@ -55,34 +55,22 @@ object OutputView {
         players.forEach { println("$it - Total: ${it.getScore()}") }
     }
 
-    fun printPlayersResults(players: List<Player>) {
-        players.forEach { player ->
-            val results =
-                when {
-                    player.gameResults.wins > 0 -> "${player.name} Win"
-                    player.gameResults.loses > 0 -> "${player.name}: Lose"
-                    else -> "${player.name}: Tie"
-                }
-            println(results)
-        }
+    fun printPlayersWinnings(players: List<Player>) {
+        players.forEach { player -> println("${player.name}: ${player.finalEarnings}") }
     }
 
-    fun printDealerResults(dealer: Dealer) {
-        val winText = if (dealer.gameResults.wins > 0) "${dealer.gameResults.wins} Win" else ""
-        val loseText = if (dealer.gameResults.loses > 0) "${dealer.gameResults.loses} Lose" else ""
-        val tieText = if (dealer.gameResults.ties > 0) "${dealer.gameResults.ties} Tie" else ""
-
-        println("${dealer.name}: $winText $loseText $tieText")
+    fun printDealersWinnings(dealer: Dealer) {
+        println("${dealer.name}: ${dealer.finalEarnings}")
     }
 
-    fun printResults(
+    fun printWinnings(
         players: List<Player>,
         dealer: Dealer,
     ) {
         printEmptyLine()
-        println("## Final Results")
-        printDealerResults(dealer)
-        printPlayersResults(players)
+        println("## Final Earnings ")
+        printDealersWinnings(dealer)
+        printPlayersWinnings(players)
     }
 
     private fun printEmptyLine() {

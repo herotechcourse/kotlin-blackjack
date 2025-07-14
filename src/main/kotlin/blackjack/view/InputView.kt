@@ -26,4 +26,14 @@ object InputView {
         }
         return input
     }
+
+    fun getBettingAmount(playerName: String): Int {
+        println("Enter $playerName's betting amount:")
+        val inputString = readLine()?.trim() ?: ""
+        val amount = inputString.toIntOrNull()
+        require(amount != null && amount > 0) {
+            "Input cannot be empty."
+        }
+        return amount
+    }
 }
