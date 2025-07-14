@@ -7,7 +7,7 @@ import blackjack.model.participant.Player
 object OutputView {
     private const val DEALER_DREW_MESSAGE = "Dealer draws one more card due to having 16 or less."
     private const val DEALER_STAND_MESSAGE = "Dealer stands directly."
-    private const val RESULTS_HEAD = "## Final Results"
+    private const val RESULTS_HEAD = "## Final Earnings"
 
     fun printParticipantsHands(participants: Participants) {
         printEmptyLine()
@@ -45,8 +45,8 @@ object OutputView {
     fun printResults(participants: Participants) {
         printEmptyLine()
         println(RESULTS_HEAD)
-        println("${participants.dealerName}: ${participants.dealerResult}")
-        participants.players.forEach { println("${it.name}: ${it.result}") }
+        println("${participants.dealerName}: ${participants.dealerProfit}")
+        participants.players.forEach { println("${it.name}: ${it.profit}") }
     }
 
     fun printErrorMessage(message: String) {
