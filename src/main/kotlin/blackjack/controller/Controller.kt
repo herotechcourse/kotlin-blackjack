@@ -1,12 +1,6 @@
 package blackjack.controller
 
-import blackjack.model.Card
-import blackjack.model.Dealer
-import blackjack.model.Deck
-import blackjack.model.FinalResult
-import blackjack.model.Gambler
-import blackjack.model.GamblerInfo
-import blackjack.model.Player
+import blackjack.model.*
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
@@ -18,6 +12,7 @@ class Controller() {
     fun run() {
         try {
             createPlayers()
+            readBetAmount()
             firstDraw()
             finalDraw()
             showResults(FinalResult(dealer, players))
@@ -44,6 +39,10 @@ class Controller() {
         dealerTakesTurn()
         OutputView.displayCardsOfPlayersWithScore(listOf(dealer) + players)
         OutputView.displayFinalResultsHeading()
+    }
+
+    private fun readBetAmount() {
+        players.forEach { it.setBetAmount(processBetAmount(it.name)) }
     }
 
     private fun getInitialCards(): List<Card> = deck.drawCards(INITIAL_CARD_COUNT)
@@ -105,6 +104,17 @@ class Controller() {
         repeat(MAX_ATTEMPTS) {
             try {
                 return isHitOrStand(InputView.getHitOrStand(player.name))
+            } catch (err: IllegalArgumentException) {
+                OutputView.displayErrorMessages(err.message)
+            }
+        }
+        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
+    }
+
+    private fun processBetAmount(name: String): Int {
+        repeat(MAX_ATTEMPTS) {
+            try {
+                return InputView.getBetAmount(name)
             } catch (err: IllegalArgumentException) {
                 OutputView.displayErrorMessages(err.message)
             }
