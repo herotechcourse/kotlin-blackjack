@@ -16,7 +16,7 @@ class HandTest {
     fun `throw if hand is empty, but try to draw`() {
         val emptyHand = Hand()
         assertThrows<IllegalStateException> {
-            emptyHand.draw()
+            emptyHand.draw(1)
         }
     }
 
@@ -25,7 +25,7 @@ class HandTest {
         val hand = Hand()
         val card = TestFixture.Card.HEART_ACE
 
-        hand.receive(card)
+        hand.receive(listOf(card))
         assertEquals(card, hand.first())
     }
 
@@ -34,8 +34,8 @@ class HandTest {
         val hand = Hand()
         val card = TestFixture.Card.HEART_ACE
 
-        hand.receive(card)
-        val drawCard = hand.draw()
-        assertEquals(drawCard, card)
+        hand.receive(listOf(card))
+        val drawCard = hand.draw(1)
+        assertEquals(drawCard[0], card)
     }
 }

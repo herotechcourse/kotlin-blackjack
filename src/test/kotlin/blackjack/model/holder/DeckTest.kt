@@ -3,6 +3,7 @@ package blackjack.model.holder
 import blackjack.model.holder.Deck.Companion.initDeck
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class DeckTest {
     @Test
@@ -12,12 +13,11 @@ class DeckTest {
     }
 
     @Test
-    fun `empty deck generate new deck`() {
+    fun `throw if deck is empty but try to draw`() {
         val deck = Deck()
-        val oldDeck = deck.cards
 
-        repeat(Deck.FULL_DECK_SIZE + 1) { deck.draw() }
-        assertThat(deck.cardsCount()).isEqualTo(Deck.FULL_DECK_SIZE - 1)
-        assertThat(deck.cards).isNotSameAs(oldDeck)
+        assertThrows<IllegalStateException> {
+            deck.draw(Deck.FULL_DECK_SIZE + 1)
+        }
     }
 }

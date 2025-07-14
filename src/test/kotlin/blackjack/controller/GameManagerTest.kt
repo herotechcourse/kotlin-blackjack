@@ -27,7 +27,7 @@ class GameManagerTest {
         val player = Player("test")
 
         val cards = TestFixture.DoesNotHasAce.TOTAL_SUM_25
-        cards.forEach { player.receive(it) }
+        player.receive(cards)
 
         assertThat(player.state).isEqualTo(State.BUST)
     }
@@ -37,7 +37,7 @@ class GameManagerTest {
         val player = Player("test")
 
         val cards = TestFixture.DoesNotHasAce.TOTAL_SUM_16
-        cards.forEach { player.receive(it) }
+        player.receive(cards)
 
         assertThat(player.state).isEqualTo(State.HIT)
         assertThat(player.score).isEqualTo(16)
@@ -47,8 +47,8 @@ class GameManagerTest {
     fun `player state is blackjack if score is exactly 21 with first two cards`() {
         val player = Player("test")
 
-        player.receive(Card(Suit.HEART, Rank.ACE))
-        player.receive(Card(Suit.SPADE, Rank.KING))
+        player.receive(listOf(Card(Suit.HEART, Rank.ACE)))
+        player.receive(listOf(Card(Suit.SPADE, Rank.KING)))
 
         assertThat(player.state).isEqualTo(State.BLACKJACK)
         assertThat(player.score).isEqualTo(21)
@@ -58,13 +58,13 @@ class GameManagerTest {
     fun `player state calculation works correctly with different card combinations`() {
         val player = Player("test")
 
-        player.receive(TestFixture.Card.HEART_ACE)
+        player.receive(listOf(TestFixture.Card.HEART_ACE))
         assertThat(player.state).isEqualTo(State.HIT)
 
-        player.receive(TestFixture.Card.DIAMOND_JACK)
+        player.receive(listOf(TestFixture.Card.DIAMOND_JACK))
         assertThat(player.state).isEqualTo(State.BLACKJACK)
 
-        val canReceive = player.receive(TestFixture.Card.DIAMOND_JACK)
+        val canReceive = player.receive(listOf(TestFixture.Card.DIAMOND_JACK))
         assertThat(canReceive).isEqualTo(false)
         assertThat(player.state).isEqualTo(State.BLACKJACK)
     }
@@ -79,8 +79,7 @@ class GameManagerTest {
 
         gameManager.injectTestDeck(cards)
 
-        player.receive(cards.draw())
-        player.receive(cards.draw())
+        player.receive(cards.draw(2))
 
         val prevScore = player.score
 
@@ -98,10 +97,8 @@ class GameManagerTest {
 
         gameManager.injectTestDeck(cards)
 
-        val expect = cards.sumOf { it.rank.value }
-
         gameManager.playPlayerRound(player) { true }
-        assertThat(player.score).isEqualTo(expect)
+        assertThat(player.score).isEqualTo(21)
     }
 
     @Test
@@ -113,8 +110,7 @@ class GameManagerTest {
         val cards = TestFixture.BustedWithLastCard.TOTAL_SUM_WAS_20.toMutableList()
         gameManager.injectTestDeck(cards)
 
-        dealer.receive(cards.draw())
-        dealer.receive(cards.draw())
+        dealer.receive(cards.draw(2))
 
         val prevScore = dealer.score
 
@@ -123,12 +119,14 @@ class GameManagerTest {
     }
 
     private fun GameManager.injectTestDeck(cards: List<Card>) {
-        repeat(Deck.FULL_DECK_SIZE - 1) { getDeck().draw() }
-        cards.forEach { getDeck().receive(it) }
-        getDeck().draw()
+        getDeck().draw(Deck.FULL_DECK_SIZE - 1)
+        getDeck().receive(cards)
+        getDeck().draw(1)
     }
 
-    private fun MutableList<Card>.draw(): Card {
-        return this.removeFirst()
+    private fun MutableList<Card>.draw(count: Int): List<Card> {
+        val cards = this.take(count)
+        repeat(count) { this.removeFirst() }
+        return cards
     }
 }
