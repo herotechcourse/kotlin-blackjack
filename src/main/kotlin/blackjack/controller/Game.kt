@@ -48,7 +48,7 @@ class Game(
                 if (answer) {
                     dealer.dealCardToPlayer(it)
                     it.updatePlayingStatus(it.cardsInHand.isBustHand())
-                    println(OutputView.showHandCards(it, false))
+                    OutputView.displayCardsAfterHit(it)
                 }
             } while (answer && it.isPlaying)
         }

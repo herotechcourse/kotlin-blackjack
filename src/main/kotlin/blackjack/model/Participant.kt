@@ -14,12 +14,12 @@ abstract class Participant(
         cardsInHand.addCard(card)
     }
 
-    fun updatePlayingStatus(condition : Boolean) {
+    fun updatePlayingStatus(condition: Boolean) {
         if (condition)
             isPlaying = false
     }
 
-    fun updateEarnings(newEarnings : Int) {
+    fun updateEarnings(newEarnings: Int) {
         earnings += newEarnings
     }
 }
