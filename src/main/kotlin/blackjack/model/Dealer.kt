@@ -9,11 +9,11 @@ class Dealer(
     private val deck: CardDeck,
     private val players: Players,
 ) : Participant() {
+    override val bet: Int = 0 //TODO: check whether bet should be removed from Dealer and Participant
+
     fun shouldDraw(): Boolean {
         return handCards.total <= Rules.DEALER_DRAW_THRESHOLD
     }
-
-    override val bet: Int = 0
 
     fun serviceParticipants() {
         serviceDealer()
@@ -40,5 +40,13 @@ class Dealer(
 
     override fun toString(): String {
         return name
+    }
+
+    fun addEarning(value: Int) {
+        earning += value
+    }
+
+    fun settleRound() {
+        players.forEach { it.settlePlayerAndDealer(this) }
     }
 }

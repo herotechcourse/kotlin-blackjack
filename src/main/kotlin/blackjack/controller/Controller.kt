@@ -4,7 +4,6 @@ import blackjack.model.CardDeck
 import blackjack.model.Dealer
 import blackjack.model.Player
 import blackjack.model.Players
-import blackjack.model.ResultEvaluator
 import blackjack.view.InputView
 import blackjack.view.OutputView
 import blackjack.view.OutputView.displayInitialCardsMessage
@@ -30,9 +29,12 @@ class Controller {
     }
 
     private fun printResults() {
-        val evaluator = ResultEvaluator(players, dealer)
-        val results = evaluator.calculateResults()
-        OutputView.displayResults(results)
+        //TODO: remove step1 result calculation?
+//        val evaluator = ResultEvaluator(players, dealer)
+//        val results = evaluator.calculateResults()
+//        OutputView.displayResults(results)
+        dealer.settleRound()
+        OutputView.displayEarnings(dealer, players)
     }
 
     private fun displayCardsAndTotal() {

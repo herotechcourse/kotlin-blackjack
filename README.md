@@ -86,12 +86,12 @@ jason: Lose
 - [x] display sum
 
 ### Results
-- [ ] calculate earnings (= difference of before and after round ~ profit)
-  - [ ] player busts: lose their bet
-  - [ ] player blackjack (21 with first two cards): receive 1.5x their bet
-  - [ ] player and dealer blackjack: bet returned
-  - [ ] dealer busts: remaining players receive 1.0x their bet
-- [ ] display earnings
+- [x] calculate earnings (= difference of before and after round ~ profit)
+  - [x] player busts: lose their bet
+  - [x] player blackjack (21 with first two cards): receive 1.5x their bet
+  - [x] player and dealer blackjack: bet returned
+  - [x] dealer busts: remaining players receive 1.0x their bet
+- [x] display earnings
 
 ## Considerations
 Q1: How should we name players inside the Players class? </br>

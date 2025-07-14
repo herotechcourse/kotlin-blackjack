@@ -54,7 +54,8 @@ object OutputView {
             else -> "${result.name}: loss"
         }
 
-    // TODO: refactor Pair to value class?
+    //TODO: remove as not used for step2 anymore?
+    //TODO: refactor Pair to value class?
     fun displayResults(results: Pair<DealerResult, List<PlayerResult>>) {
         println(
             """
@@ -64,6 +65,17 @@ object OutputView {
             |${results.component2().joinToString("\n") { formatPlayer(it) }}
             """.trimMargin(),
         )
+    }
+
+    fun displayEarnings(dealer: Dealer, players: Players){
+        println(formatFinalEarnings(dealer, players))
+    }
+
+    private fun formatFinalEarnings(dealer: Dealer, players: Players): String {
+        val dealerLine = "${dealer.name}: ${dealer.earning}"
+        val playerLines = players.players.joinToString("\n") { "${it.name}: ${it.earning}" }
+
+        return "\n## Final Earnings\n$dealerLine\n$playerLines"
     }
 
     private fun cardsToString(cards: List<Card>): String = cards.joinToString(" ") { formatCard(it) }
