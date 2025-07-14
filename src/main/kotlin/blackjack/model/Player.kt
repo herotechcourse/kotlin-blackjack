@@ -4,7 +4,7 @@ import blackjack.controller.Controller.Companion.INITIAL_CARD_COUNT
 
 abstract class Player(val gamblerInfo: GamblerInfo) {
     private val _cards: MutableList<Card> = mutableListOf()
-    val playerBet = PlayerBet()
+    val playerBet: PlayerBet = PlayerBet()
 
     var score: Int = 0
         private set

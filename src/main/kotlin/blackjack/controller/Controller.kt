@@ -21,10 +21,7 @@ class Controller() {
             readBetAmount()
             firstDraw()
             finalDraw()
-            val finalResult = FinalResult(dealer, players)
-            showResults(finalResult)
-            calculateWinnings(finalResult)
-            showWinnings()
+            showResultsAndEarnings(FinalResult(dealer, players))
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
         }
@@ -83,6 +80,13 @@ class Controller() {
         finalResult.win.forEach { it.calculateAndSetWinnings(true) }
 
         dealer.calculateAndSetWinnings(players.map { it.winnings })
+
+        OutputView.displayFinalEarning(listOf(dealer) + players)
+    }
+
+    fun showResultsAndEarnings(finalResult: FinalResult) {
+        showResults(finalResult)
+        calculateWinnings(finalResult)
     }
 
     private fun showResults(finalResult: FinalResult) {
@@ -100,10 +104,6 @@ class Controller() {
         finalResult.draw.forEach {
             OutputView.displayDrawPlayerResult(it.name)
         }
-    }
-
-    private fun showWinnings() {
-        OutputView.displayFinalEarning(listOf(dealer) + players)
     }
 
     private fun processPlayerNames(): List<GamblerInfo> {
