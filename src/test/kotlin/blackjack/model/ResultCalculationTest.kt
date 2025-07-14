@@ -7,6 +7,7 @@ class ResultCalculationTest {
 
     val player1 = Player("Pobi")
     val dealer = Dealer()
+
     @Test
     fun `dealer should get bet of the player when is only with Blackjack`() {
         player1.setBet(30000)
@@ -22,6 +23,6 @@ class ResultCalculationTest {
         val dealerPoints = dealer.cardsInHand.calculateTotalValueOfCards()
         player1.updatePlayingStatus(player1.hasLessPointsThanDealer(dealerPoints))
         player1.updateEarnings(ResultCalculation.calculatePlayerEarnings(player1, dealer))
-        assertThat(ResultCalculation.calculateDealerEarnings(dealer, listOf(player1))).isEqualTo(30000)
+        assertThat(ResultCalculation.calculateDealerEarnings(dealer, Players(listOf(player1)))).isEqualTo(30000)
     }
 }
