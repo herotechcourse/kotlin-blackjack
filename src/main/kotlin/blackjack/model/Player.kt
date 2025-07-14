@@ -29,7 +29,7 @@ class Player(val gamblerInfo: GamblerInfo) {
     }
 
     fun isBlackJack(): Boolean {
-        return score == BLACKJACK_SCORE
+        return score == BLACKJACK_SCORE && _cards.size == 2
     }
 
     fun isBusted(): Boolean {

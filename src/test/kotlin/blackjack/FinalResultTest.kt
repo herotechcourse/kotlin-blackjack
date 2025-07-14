@@ -10,7 +10,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
-import java.util.stream.Stream
 
 class FinalResultTest {
     @ParameterizedTest
@@ -37,8 +36,8 @@ class FinalResultTest {
 
     companion object {
         @JvmStatic
-        fun provideTestCases(): Stream<Arguments> {
-            return Stream.of(
+        fun provideTestCases(): List<Arguments> {
+            return listOf(
                 // Dealer busts (25), player wins (19)
                 Arguments.of(
                     listOf(Card(Rank.KING, Suit.SPADE), Card(Rank.QUEEN, Suit.HEART), Card(Rank.FIVE, Suit.DIAMOND)),

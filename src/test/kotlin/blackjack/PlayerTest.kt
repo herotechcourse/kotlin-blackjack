@@ -9,6 +9,9 @@ import blackjack.model.Suit
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
 
 class PlayerTest {
     @Test
@@ -78,10 +81,62 @@ class PlayerTest {
     }
 
     @Test
-    fun `should get cards`() {
+    fun `should asser that - get cards properly`() {
         val deck = Deck()
         val player = Player(GamblerInfo("Jin"))
         player.addCard(deck.drawCard(4))
         assertThat(player.cards.size).isEqualTo(4)
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideCardCombinations")
+    fun `should asser that - blackjack and bust detection works correctly`(
+        cards: List<Card>,
+        expectedBlackjack: Boolean,
+        expectedBust: Boolean,
+    ) {
+        val player = Player(GamblerInfo("TestPlayer"))
+        player.addCard(cards)
+
+        assertThat(player.isBlackJack()).isEqualTo(expectedBlackjack)
+        assertThat(player.isBusted()).isEqualTo(expectedBust)
+    }
+
+    companion object {
+        @JvmStatic
+        fun provideCardCombinations(): List<Arguments> {
+            return listOf(
+                // Blackjack: Ace + 10-value card (exactly 2 cards, total 21)
+                Arguments.of(
+                    listOf(Card(Rank.ACE, Suit.SPADE), Card(Rank.KING, Suit.HEART)),
+                    true,
+                    false,
+                ),
+                // Blackjack: Ace + Queen
+                Arguments.of(
+                    listOf(Card(Rank.ACE, Suit.HEART), Card(Rank.QUEEN, Suit.SPADE)),
+                    true,
+                    false,
+                ),
+                // Not blackjack: 21 with 3 cards
+                Arguments.of(
+                    listOf(Card(Rank.SEVEN, Suit.SPADE), Card(Rank.SEVEN, Suit.HEART), Card(Rank.SEVEN, Suit.CLUB)),
+                    false,
+                    false,
+                ),
+                // Bust: over 21
+                Arguments.of(
+                    listOf(Card(Rank.KING, Suit.SPADE), Card(Rank.QUEEN, Suit.HEART), Card(Rank.FIVE, Suit.DIAMOND)),
+                    false,
+                    true,
+                ),
+                // Normal hand: under 21, not blackjack
+                Arguments.of(
+                    listOf(Card(Rank.NINE, Suit.SPADE), Card(Rank.EIGHT, Suit.HEART)),
+                    false,
+                    false,
+                ),
+            )
+        }
     }
 }

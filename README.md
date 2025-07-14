@@ -3,7 +3,7 @@
 ## Features : Step2 (Updates from Step1)
 
 ### Enhanced Blackjack Rules
-- [] Update `Player.isBlackJack()` to check exactly 2 cards with total score 21
+- [x] Update `Player.isBlackJack()` to check exactly 2 cards with total score 21
 - [] Player loses entire bet when busting (total > 21)
 
 ### Betting System Infrastructure
@@ -34,12 +34,6 @@
   - [] Add `displayFinalEarnings()` method
   - [] Format: "## Final Earnings"
   - [] Show dealer and player earnings amounts
-
-### Testing Updates
-- [] Update `FinalResultTest` for betting scenarios
-- [] Create `PayoutTest` class for payout calculations
-- [] Test betting input validation in `InputView`
-- [] Test all payout scenarios (blackjack, normal wins, losses, ties)
 
 ## Updates : Step1 (after implementing step2)
 - [] implement abstract class and inheritance for players and dealer
