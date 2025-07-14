@@ -24,7 +24,7 @@ class Dealer(name: String = "Dealer") : Participant(name) {
         val dealerScore = this.getScore()
 
         val playerRawProfit = player.handState.profit(player.bettingAmount)
-
+        
         when {
             player.isBusts() -> {
                 player.setLose()
@@ -36,6 +36,7 @@ class Dealer(name: String = "Dealer") : Participant(name) {
             this.isBusts() -> {
                 player.setWin()
                 this.setLose()
+
                 player.finalEarnings = playerRawProfit - player.bettingAmount
                 finalEarnings -= playerRawProfit
             }

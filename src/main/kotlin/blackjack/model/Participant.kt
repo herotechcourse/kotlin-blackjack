@@ -1,12 +1,15 @@
 package blackjack.model
 
 abstract class Participant(val name: String) {
+
     var handState: State = FirstTurn()
+
     val gameResults: GameResults = GameResults()
 
     init {
         require(name.isNotBlank()) { "Wrong name: $name. Participant name should not be blank." }
     }
+
 
     fun addCard(newCard: Card) {
         handState = handState.draw(newCard)

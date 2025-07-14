@@ -94,6 +94,7 @@ class DealerTest {
 
     @Test
     fun `should handle setResultFor when it is a tie`() {
+
         val player =
             Player("bo").apply {
                 addCard(Card(Card.Suit.CLUBS, Card.Rank.NINE))
@@ -112,11 +113,13 @@ class DealerTest {
 
     @Test
     fun `should handle setResultFor when player has blackjack and dealer doesn't`() {
+
         val player =
             Player("bo").apply {
                 addCard(Card(Card.Suit.CLUBS, Card.Rank.ACE))
                 addCard(Card(Card.Suit.HEARTS, Card.Rank.KING))
             }
+
         dealer.addCard(Card(Card.Suit.SPADES, Card.Rank.EIGHT))
         dealer.addCard(Card(Card.Suit.DIAMONDS, Card.Rank.NINE))
 
