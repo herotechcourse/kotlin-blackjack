@@ -1,5 +1,7 @@
 package blackjack.view
 
+import kotlin.math.abs
+
 object InputView {
     fun askPlayerNames(): List<String> {
         println("Enter the names of the players (comma-separated):")
@@ -13,6 +15,18 @@ object InputView {
             return names
         } catch (e: IllegalArgumentException) {
             throw IllegalArgumentException("Input can not be empty.")
+        }
+    }
+
+    fun askPlayerBet(name: String): Int {
+        println("Enter $name’s betting amount: ")
+        try {
+            val bet =
+                readln()
+                    .toInt()
+            return abs(bet)
+        } catch (e: IllegalArgumentException) {
+            throw IllegalArgumentException("Input must be a valid number.")
         }
     }
 
