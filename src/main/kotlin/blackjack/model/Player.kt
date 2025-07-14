@@ -19,7 +19,7 @@ class Player(name: String, val bet: Int) : Participant(name) {
             }
     }
 
-    fun returnWinningMoney(): Int {
+    fun returnWinningMoneyForPlayer(): Int {
         return winningMoney
     }
 }

@@ -58,7 +58,7 @@ class PlayerTest {
         player.drawCard(listOf(Card(Rank.ACE, Suit.SPADES), Card(Rank.KING, Suit.HEARTS)))
         dealer.drawCard(listOf(Card(Rank.FIVE, Suit.CLUBS), Card(Rank.FOUR, Suit.DIAMONDS)))
         player.updateWinningMoney(dealer)
-        assertThat(player.returnWinningMoney()).isEqualTo(15000)
+        assertThat(player.returnWinningMoneyForPlayer()).isEqualTo(15000)
     }
 
     @Test
@@ -77,7 +77,7 @@ class PlayerTest {
         dealer.drawCard(listOf(Card(Rank.FIVE, Suit.SPADES))) // total = 14
 
         player.updateWinningMoney(dealer)
-        assertThat(player.returnWinningMoney()).isEqualTo(10000)
+        assertThat(player.returnWinningMoneyForPlayer()).isEqualTo(10000)
     }
 
     @Test
@@ -90,6 +90,6 @@ class PlayerTest {
 
         player.updateWinningMoney(dealer)
 
-        assertThat(player.returnWinningMoney()).isEqualTo(-10000)
+        assertThat(player.returnWinningMoneyForPlayer()).isEqualTo(-10000)
     }
 }
