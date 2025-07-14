@@ -20,6 +20,22 @@ class Gambler(gamblerInfo: GamblerInfo) : Player(gamblerInfo) {
         }
     }
 
+    fun setWinnings(dealer: Dealer) {
+        playerBet.winnings = playerBet.betAmount * calculateResult(dealer).multiplier
+    }
+
+    private fun calculateResult(dealer: Dealer): Result {
+        return when {
+            isBusted() -> Result.LOOSE
+            isBlackJack() && dealer.isBlackJack() -> Result.TIE
+            isBlackJack() -> Result.BLACKJACK
+            dealer.isBusted() -> Result.WIN
+            score == dealer.score -> Result.TIE
+            score > dealer.score -> Result.WIN
+            else -> Result.LOOSE
+        }
+    }
+
     companion object {
         private const val WIN_BLACKJACK_RETURN = 1.5
         private const val WIN_SIMPLE_RETURN = 1.0

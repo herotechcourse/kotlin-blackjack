@@ -3,7 +3,6 @@ package blackjack.controller
 import blackjack.model.Card
 import blackjack.model.Dealer
 import blackjack.model.Deck
-import blackjack.model.FinalResult
 import blackjack.model.Gambler
 import blackjack.model.GamblerInfo
 import blackjack.model.Player
@@ -21,7 +20,7 @@ class Controller() {
             readBetAmount()
             firstDraw()
             finalDraw()
-            showResultsAndEarnings(FinalResult(dealer, players))
+            calculateAndShowWinnings()
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
         }
@@ -44,7 +43,6 @@ class Controller() {
         players.forEach { playerTakesTurn(it) }
         dealerTakesTurn()
         OutputView.displayCardsOfPlayersWithScore(listOf(dealer) + players)
-        OutputView.displayFinalResultsHeading()
     }
 
     private fun readBetAmount() {
@@ -75,35 +73,10 @@ class Controller() {
         }
     }
 
-    private fun calculateWinnings(finalResult: FinalResult) {
-        finalResult.lose.forEach { it.calculateAndSetWinnings(false) }
-        finalResult.win.forEach { it.calculateAndSetWinnings(true) }
-
+    private fun calculateAndShowWinnings() {
+        players.forEach { it.setWinnings(dealer) }
         dealer.calculateAndSetWinnings(players.map { it.winnings })
-
         OutputView.displayFinalEarning(listOf(dealer) + players)
-    }
-
-    fun showResultsAndEarnings(finalResult: FinalResult) {
-        showResults(finalResult)
-        calculateWinnings(finalResult)
-    }
-
-    private fun showResults(finalResult: FinalResult) {
-        OutputView.displayPlayerResult(
-            finalResult.lose.size,
-            finalResult.win.size,
-            finalResult.draw.size,
-        )
-        finalResult.win.forEach {
-            OutputView.displayPlayerResult(it.name, true)
-        }
-        finalResult.lose.forEach {
-            OutputView.displayPlayerResult(it.name, false)
-        }
-        finalResult.draw.forEach {
-            OutputView.displayDrawPlayerResult(it.name)
-        }
     }
 
     private fun processPlayerNames(): List<GamblerInfo> {
