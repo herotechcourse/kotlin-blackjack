@@ -73,10 +73,4 @@ class DealerTest {
         val result = dealer.hand
         assertThat(result).isEqualTo(listOf(card1, card2))
     }
-
-    @Test
-    fun `toString should show the name`() {
-        val result = dealer.toString()
-        assertThat(result).isEqualTo("Dealer")
-    }
 }

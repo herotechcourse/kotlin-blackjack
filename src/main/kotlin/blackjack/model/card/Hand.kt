@@ -28,10 +28,6 @@ class Hand(private val dealtCards: MutableList<Card> = mutableListOf()) {
         return score
     }
 
-    override fun toString(): String {
-        return dealtCards.joinToString(", ")
-    }
-
     companion object {
         const val MAX_SCORE = 21
         const val ACE_ADJUSTMENT = 10

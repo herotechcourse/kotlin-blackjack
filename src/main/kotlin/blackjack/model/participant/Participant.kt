@@ -22,8 +22,4 @@ abstract class Participant(val name: String, protected val resultTracker: Result
     fun isBusts(): Boolean = _hand.isBusts()
 
     fun recordResult(result: Result) = resultTracker.record(result)
-
-    override fun toString(): String {
-        return name
-    }
 }

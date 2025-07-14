@@ -11,16 +11,16 @@ object OutputView {
 
     fun printParticipantsHands(participants: Participants) {
         printEmptyLine()
-        println("Dealing two cards to ${participants.dealer.name}, ${getPlayersNames(participants.players)}.")
+        println("Dealing two cards to ${participants.dealerName}, ${getPlayersNames(participants.players)}.")
 
-        println("${participants.dealer}'s cards: ${getColorizedCards(participants.dealer.hand)}")
-        participants.players.forEach { println("$it's cards: ${getColorizedCards(it.hand)}") }
+        println("${participants.dealerName}'s cards: ${getColorizedCards(participants.dealer.hand)}")
+        participants.players.forEach { println("${it.name}'s cards: ${getColorizedCards(it.hand)}") }
 
         printEmptyLine()
     }
 
     fun printPlayerInfo(player: Player) {
-        println("$player's cards: ${getColorizedCards(player.hand)}")
+        println("${player.name}'s cards: ${getColorizedCards(player.hand)}")
     }
 
     fun printDealersDrawMessage() {
@@ -35,10 +35,10 @@ object OutputView {
     }
 
     fun printFinalHands(participants: Participants) {
-        print("${participants.dealer}'s cards: ${getColorizedCards(participants.dealer.hand)} ")
+        print("${participants.dealerName}'s cards: ${getColorizedCards(participants.dealer.hand)} ")
         println("- Total: ${participants.dealerScore}")
         participants.players.forEach {
-            println("$it's cards: ${getColorizedCards(it.hand)} - Total: ${it.getScore()}")
+            println("${it.name}'s cards: ${getColorizedCards(it.hand)} - Total: ${it.getScore()}")
         }
     }
 

@@ -16,13 +16,4 @@ class PlayerTest {
     fun `should throw an error if player name is empty`() {
         assertThrows<IllegalArgumentException> { Player("") }
     }
-
-    @Test
-    fun `should return an string with the name + dealt cards`() {
-        val name = "Sebas"
-        val player = Player(name)
-        player.addCard(Card(Card.Suit.DIAMONDS, Card.Rank.ACE))
-        player.addCard(Card(Card.Suit.DIAMONDS, Card.Rank.ACE))
-        assertThat(player.toString()).isEqualTo(name)
-    }
 }
