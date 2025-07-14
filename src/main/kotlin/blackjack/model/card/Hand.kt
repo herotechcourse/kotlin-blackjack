@@ -28,6 +28,10 @@ class Hand(private val dealtCards: MutableList<Card> = mutableListOf()) {
         return score
     }
 
+    fun sortCards() {
+        dealtCards.sortedDescending()
+    }
+
     companion object {
         const val MAX_SCORE = 21
         const val ACE_ADJUSTMENT = 10

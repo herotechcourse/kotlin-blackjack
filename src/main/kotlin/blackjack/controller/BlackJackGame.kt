@@ -29,6 +29,7 @@ object BlackJackGame {
 
     private fun dealFirstCards(participants: Participants) {
         repeat(INITIAL_DEALER_CARDS) { participants.dealOneCardToAll() }
+        participants.sortAllHands()
         OutputView.printParticipantsHands(participants)
     }
 

@@ -12,4 +12,8 @@ class Participants(val dealer: Dealer, val players: List<Player>) {
         players.forEach { it.addCard(dealer.dealCard()) }
         dealer.addCard(dealer.dealCard())
     }
+
+    fun sortAllHands() {
+        players.forEach { it.sortHand() }
+    }
 }

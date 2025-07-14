@@ -22,4 +22,8 @@ abstract class Participant(val name: String, protected val resultTracker: Result
     fun isBusts(): Boolean = _hand.isBusts()
 
     fun recordResult(result: Result) = resultTracker.record(result)
+
+    fun sortHand() {
+        _hand.sortCards()
+    }
 }
