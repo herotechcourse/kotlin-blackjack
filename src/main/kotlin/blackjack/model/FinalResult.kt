@@ -1,24 +1,28 @@
 package blackjack.model
 
+
 class FinalResult(val dealer: Dealer, players: List<Gambler>) {
-    var lose = players.filter { it.isBusted() }
-    var draw: List<Gambler>
-    var win: List<Gambler>
+    var lose: List<Gambler> = emptyList()
+    var draw: List<Gambler> = emptyList()
+    var win: List<Gambler> = emptyList()
 
     init {
-        val validPlayers = players - lose
+        when {
+            dealer.isBusted() -> {
+                win = players.filterNot { it.isBusted() }
+                lose = players.filter { it.isBusted() }
+            }
 
-        if (dealer.isBusted()) {
-            draw = emptyList()
-            win = validPlayers
-        } else if (dealer.isBlackJack()) {
-            draw = validPlayers.filter { it.isBlackJack() }
-            lose += validPlayers - draw
-            win = emptyList()
-        } else {
-            draw = validPlayers.filter { it.score == dealer.score }
-            lose += validPlayers.filter { it.score < dealer.score }
-            win = validPlayers - draw - lose
+            dealer.isBlackJack() -> {
+                draw = players.filter { it.isBlackJack() }
+                lose = players - draw
+            }
+
+            else -> {
+                draw = players.filter { it.score == dealer.score }
+                lose = players.filter { it.score < dealer.score }
+                win = players - draw - lose
+            }
         }
     }
 }
