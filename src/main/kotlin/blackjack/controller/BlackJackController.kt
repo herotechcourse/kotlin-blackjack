@@ -1,6 +1,7 @@
 package blackjack.controller
 
 import blackjack.model.BlackjackGame
+import blackjack.model.GameLogic
 import blackjack.model.ParticipantsFactory
 import blackjack.view.InputView
 import blackjack.view.OutputView
@@ -29,6 +30,9 @@ class BlackJackController() {
             blackjackGame.play()
             OutputView.displayDealerStats(dealer)
             OutputView.displayFinalResult(dealer, players)
+
+            val result = GameLogic.calculateProfitRates(dealer, players)
+            OutputView.printFinalRates(result)
         } catch (e: Exception) {
             println("Error starting the game: ${e.message}")
         }
