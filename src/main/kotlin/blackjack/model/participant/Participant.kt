@@ -1,5 +1,6 @@
 package blackjack.model.participant
 
+import blackjack.model.Money
 import blackjack.model.card.Card
 import blackjack.model.card.Hand
 import blackjack.model.result.Result
@@ -8,6 +9,7 @@ import blackjack.model.result.ResultTracker
 abstract class Participant(val name: String, protected val resultTracker: ResultTracker) {
     @Suppress("PropertyName")
     protected val _hand = Hand()
+    var profit: Money = Money.zero()
 
     init {
         require(name.isNotBlank()) { "Wrong name: $name. Participant name should not be blank." }
