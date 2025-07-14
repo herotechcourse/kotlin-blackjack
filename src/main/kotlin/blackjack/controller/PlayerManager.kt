@@ -18,7 +18,6 @@ class PlayerManager {
         _players = mutableList.toList()
     }
 
-    // TODO: resolve indent depth
     fun askPlayerHit(
         player: Player,
         receiveCard: () -> Card,
