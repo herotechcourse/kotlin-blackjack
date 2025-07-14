@@ -16,7 +16,7 @@ class BlackJackGame {
         createPlayers()
         players.dealFirstCards(dealer)
         OutputView.printParticipantsHands(players.toList(), dealer)
-        players.dealingPlayersCards(::retryUntilSuccess, dealer)
+        dealingPlayersCards()
         dealingDealersCards()
         OutputView.printFinalHands(players.toList(), dealer)
         players.calculateResults(dealer)
@@ -26,6 +26,21 @@ class BlackJackGame {
     private fun createPlayers() {
         val playerList = retryUntilSuccess { InputView.getPlayersNames() }.map { Player(it) }
         players = Players(playerList)
+    }
+
+    fun dealingPlayersCards() {
+        for (player in players.dealingPlayersCards()) {
+            while (!player.isFinished()) {
+                val answer = retryUntilSuccess { InputView.getAnswer(player.name) }
+                if (answer == "y") {
+                    player.addCard(dealer.dealCard())
+                    println(player)
+                } else {
+                    player.stay()
+                    break
+                }
+            }
+        }
     }
 
     private fun dealingDealersCards() {
