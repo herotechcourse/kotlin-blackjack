@@ -7,7 +7,7 @@ class ParticipantsTest {
     @Test
     fun `should deal 2 cards to each participant`() {
         val deck = Deck()
-        val players = Players(listOf(Player("P1"), Player("P2")))
+        val players = Players(listOf(Player("P1", 100000), Player("P2",200000)))
         val dealer = Dealer()
         val participants = Participants(players, dealer)
 
