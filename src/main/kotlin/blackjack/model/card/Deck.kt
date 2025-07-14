@@ -1,6 +1,7 @@
 package blackjack.model.card
 
-class Deck(private val _cards: MutableList<Card> = mutableListOf()) {
+class Deck(initialCards: List<Card> = emptyList()) {
+    private val _cards: MutableList<Card> = initialCards.toMutableList()
     val cards: List<Card>
         get() = _cards.toList()
 
@@ -24,10 +25,6 @@ class Deck(private val _cards: MutableList<Card> = mutableListOf()) {
     }
 
     companion object {
-        fun generateADeck(): Deck {
-            val deck = Deck()
-            deck.create()
-            return deck
-        }
+        fun generateADeck(): Deck = Deck().apply { create() }
     }
 }

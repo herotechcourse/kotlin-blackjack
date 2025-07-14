@@ -12,7 +12,7 @@ class Player(name: String) : Participant(name, PlayerResultTracker()) {
     val result: String
         get() = resultTracker.toString()
     val hand: List<Card>
-        get() = _hand.cards
+        get() = participantHand.cards.toList()
 
     fun placeBet(amount: Double) {
         bet = Chips(amount)
@@ -20,7 +20,7 @@ class Player(name: String) : Participant(name, PlayerResultTracker()) {
 
     fun addProfit() {
         profit =
-            when ((resultTracker as PlayerResultTracker).lastResult) {
+            when ((resultTracker as PlayerResultTracker).result) {
                 Result.BLACKJACK -> bet.blackjack()
                 Result.WIN -> bet
                 Result.LOSE -> bet.lose()

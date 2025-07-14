@@ -11,9 +11,9 @@ class Dealer(name: String = "Dealer", internal val deck: Deck = Deck.generateADe
     val hand: List<Card>
         get() {
             if (showAllCards) {
-                return _hand.cards
+                return participantHand.cards.toList()
             }
-            return _hand.cards.takeIf { it.isNotEmpty() }?.let { listOf(it.first()) } ?: emptyList()
+            return participantHand.cards.takeIf { it.isNotEmpty() }?.let { listOf(it.first()) } ?: emptyList()
         }
     val result: String
         get() = resultTracker.toString()
@@ -22,7 +22,7 @@ class Dealer(name: String = "Dealer", internal val deck: Deck = Deck.generateADe
 
     fun dealCard(): Card = deck.drawCard()
 
-    fun shouldNotStand(): Boolean = _hand.getScore() <= DEALER_STAND
+    fun shouldNotStand(): Boolean = participantHand.getScore() <= DEALER_STAND
 
     fun showAllCards() {
         showAllCards = true
