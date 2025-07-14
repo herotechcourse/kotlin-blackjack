@@ -12,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class GameJudgeTest {
-
     private lateinit var dealer: Dealer
     private lateinit var player1: Player
     private lateinit var player2: Player
