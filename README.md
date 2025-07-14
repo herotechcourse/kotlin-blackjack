@@ -1,7 +1,50 @@
 # Kotlin Blackjack
 
-## Features
+## Features : Step2 (Updates from Step1)
 
+### Enhanced Blackjack Rules
+- [] Update `Player.isBlackJack()` to check exactly 2 cards with total score 21
+- [] Player loses entire bet when busting (total > 21)
+
+### Betting System Infrastructure
+- [] Add `betAmount` property to `Player` class
+- [] Update `InputView` to get betting amounts from users
+  - [] Validate: not empty, greater than 0, numeric input
+  - [] Add `getBettingAmount(playerName: String): Int` method
+- [] Update `Controller` to handle betting phase after player creation
+  - [] Add `getBettingAmounts()` method to collect bets from all players
+  - [] Call betting phase in main game flow
+
+### Payout System
+- [] Create `Payout` class for earnings calculations only
+  - [] Method to calculate individual player earnings
+  - [] Blackjack payouts (1.5x bet)
+  - [] Normal wins (1x bet)
+  - [] Losses (-1x bet)
+  - [] Ties/Push (0x bet)
+- [] Calculate dealer earnings (negative sum of all player earnings)
+
+### Update Game Results
+- [] Replace `FinalResult` class logic
+  - [] Remove `win`, `draw`, and `lose` lists
+  - [] Add earnings calculation using `Payout` class
+  - [] Add `earnings: Map<Player, Int>` property
+  - [] Add `dealerEarnings: Int` property
+- [] Update `OutputView` to display earnings instead of win/lose
+  - [] Add `displayFinalEarnings()` method
+  - [] Format: "## Final Earnings"
+  - [] Show dealer and player earnings amounts
+
+### Testing Updates
+- [] Update `FinalResultTest` for betting scenarios
+- [] Create `PayoutTest` class for payout calculations
+- [] Test betting input validation in `InputView`
+- [] Test all payout scenarios (blackjack, normal wins, losses, ties)
+
+## Updates : Step1 (after implementing step2)
+- [] implement abstract class and inheritance for players and dealer
+
+## Features : Step1 
 ### Data class `Card`
 - [x] has `Rank`
 - [x] has `Suit`
@@ -37,7 +80,7 @@
 #### `InputView`
 - [x] fun `get names of the player`
 - [x] fun `read String`
-- [] fun `get hit or stand
+- [x] fun `get hit or stand`
 #### `OutputView`
 - [x] fun `display names of players`
 - [x] fun `display the first draw`(parameter: List<Player>)
