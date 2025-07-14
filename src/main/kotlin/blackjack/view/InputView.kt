@@ -1,7 +1,5 @@
 package blackjack.view
 
-import kotlin.math.abs
-
 object InputView {
     fun askPlayerNames(): List<String> {
         println("Enter the names of the players (comma-separated):")
@@ -24,9 +22,10 @@ object InputView {
             val bet =
                 readln()
                     .toInt()
-            return abs(bet)
+            require(bet > 0) { "Bet must be a positive number." }
+            return bet
         } catch (e: IllegalArgumentException) {
-            throw IllegalArgumentException("Input must be a valid number.")
+            throw IllegalArgumentException(e.message)
         }
     }
 
