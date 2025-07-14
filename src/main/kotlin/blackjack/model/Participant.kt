@@ -25,6 +25,8 @@ abstract class Participant(open val name: String) {
 
     fun isStillInGame(): Boolean = !isBusted()
 
+    fun isBlackjack(): Boolean = cardsInHand.size == 2 && total() == 21
+
     companion object {
         const val BUST_LIMIT = 21
     }
