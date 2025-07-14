@@ -1,15 +1,20 @@
 package blackjack.controller
 
-import blackjack.model.GameResult
+import blackjack.model.BettingInfo
 import blackjack.model.Dealer
+import blackjack.model.GameResult
 import blackjack.model.Player
+import blackjack.view.InputView
 import blackjack.view.OutputView
 
 class GameController {
-
     fun run() {
-        val bettingInfos = GameLogic.getBettingInfo()
-        val players = bettingInfos.map { Player(it.playerName) }
+        val playerNames = InputView.askPlayerNames()
+        val bettingInfos =
+            playerNames.map { name ->
+                BettingInfo(name, InputView.getBettingAmount(name))
+            }
+        val players = playerNames.map { Player(it) }
         val dealer = Dealer()
 
         OutputView.displayDealing(bettingInfos.map { it.playerName })
@@ -21,7 +26,9 @@ class GameController {
 
         OutputView.displayLineBreak()
 
-        players.forEach { dealer.askPlayerDraw(it) }
+        players.forEach { player ->
+            GameLogic.handlePlayerTurn(dealer, player)
+        }
 
         OutputView.displayLineBreak()
         OutputView.displayPlayerHands(players)
@@ -40,14 +47,12 @@ class GameController {
 
         OutputView.displayFinalResultsHeader()
 
-        players.forEachIndexed { index, player ->
+        players.forEach { player ->
             val playerScore = player.getScore()
             val isPlayerBusted = player.isBusted()
-            val isBlackjack = playerScore == 21 && player.getNumberOfCardsInHand() == 2
-            val bet = bettingInfos[index].amount
-
+            val bet = player.bet
             val result = GameLogic.getGameResult(playerScore, dealerScore, isPlayerBusted, isDealerBusted)
-            val earnings = GameLogic.calculateEarnings(result, playerScore, isBlackjack, bet)
+            val earnings = BettingLogic.calculateEarnings(result, player.isBlackJack(), bet)
             player.earnings = earnings
 
             when (result) {

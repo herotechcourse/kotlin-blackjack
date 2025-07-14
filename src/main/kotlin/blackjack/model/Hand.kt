@@ -21,6 +21,8 @@ class Hand {
         return total
     }
 
+    fun isBlackjack(playerScore: Int) = playerScore == 21 && getNumberOfCards() == 2
+
     fun isBusted(): Boolean = getScore() > 21
 
     fun firstTwoCards(): List<Card> = cards.take(2)
