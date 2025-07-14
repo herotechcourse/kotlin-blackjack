@@ -19,10 +19,10 @@
 ---
 
 ### approach, from review
-- [ ] empty deck() handling, avoid: `validating it's own size before a hit`
+- [x] empty deck() handling, avoid: `validating it's own size before a hit`
 - [ ] modify Suit enum so that it doesn't interfere with symbol printing
-- [ ] CardHolder draw multi cards
-- [ ] CardHolder receive multi cards
+- [x] CardHolder draw multi cards
+- [x] CardHolder receive multi cards
 - 
 ### Feature list
 - [ ]  Each player must place a bet at the start of the game.
