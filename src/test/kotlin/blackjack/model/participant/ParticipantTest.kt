@@ -1,5 +1,6 @@
 package blackjack.model.participant
 
+import blackjack.TestFixture.last
 import blackjack.model.holder.Deck
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test

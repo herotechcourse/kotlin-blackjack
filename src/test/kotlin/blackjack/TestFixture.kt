@@ -3,6 +3,9 @@ package blackjack
 import blackjack.model.card.Card
 import blackjack.model.card.Rank
 import blackjack.model.card.Suit
+import blackjack.model.holder.CardHolder
+import kotlin.collections.first
+import kotlin.collections.last
 
 object TestFixture {
     object DoesNotHasAce {
@@ -72,4 +75,8 @@ object TestFixture {
         val DIAMOND_JACK = Card(Suit.DIAMOND, Rank.JACK)
         val HEART_ACE = Card(Suit.HEART, Rank.ACE)
     }
+
+    fun CardHolder.first(): blackjack.model.card.Card = cards.first()
+
+    fun CardHolder.last(): blackjack.model.card.Card = cards.last()
 }

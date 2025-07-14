@@ -1,6 +1,7 @@
 package blackjack.model.holder
 
 import blackjack.TestFixture
+import blackjack.TestFixture.first
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
