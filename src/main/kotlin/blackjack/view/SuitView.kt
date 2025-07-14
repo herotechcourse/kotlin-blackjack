@@ -1,4 +1,3 @@
-// src/main/kotlin/blackjack/view/SuitView.kt
 package blackjack.view
 
 import blackjack.model.Suit
