@@ -54,8 +54,6 @@ object OutputView {
             else -> "${result.name}: loss"
         }
 
-    //TODO: remove as not used for step2 anymore?
-    //TODO: refactor Pair to value class?
     fun displayResults(results: Pair<DealerResult, List<PlayerResult>>) {
         println(
             """

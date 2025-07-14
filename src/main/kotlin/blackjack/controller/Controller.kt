@@ -29,10 +29,11 @@ class Controller {
     }
 
     private fun printResults() {
-        //TODO: remove step1 result calculation?
-//        val evaluator = ResultEvaluator(players, dealer)
-//        val results = evaluator.calculateResults()
-//        OutputView.displayResults(results)
+        /* step1 calculations
+         * val evaluator = ResultEvaluator(players, dealer)
+         * val results = evaluator.calculateResults()
+         * OutputView.displayResults(results)
+        */
         dealer.settleRound()
         OutputView.displayEarnings(dealer, players)
     }
