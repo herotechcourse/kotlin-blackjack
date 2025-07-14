@@ -6,7 +6,7 @@ class Gambler(gamblerInfo: GamblerInfo) : Player(gamblerInfo) {
     fun isPlayerBelowBlackJack(): Boolean = score < WINNING_SCORE
     fun hasCardCount(): Boolean = cards.size == INITIAL_CARD_COUNT
 
-    fun setWinnings(isWin: Boolean) {
+    fun calculateAndSetWinnings(isWin: Boolean) {
         if (!isWin) {
             playerBet.winnings = -playerBet.betAmount
             return

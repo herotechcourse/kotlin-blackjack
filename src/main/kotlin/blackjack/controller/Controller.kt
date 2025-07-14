@@ -73,8 +73,8 @@ class Controller() {
     }
 
     private fun calculateWinnings(finalResult: FinalResult) {
-        finalResult.lose.forEach { it.setWinnings(false) }
-        finalResult.win.forEach { it.setWinnings(true) }
+        finalResult.lose.forEach { it.calculateAndSetWinnings(false) }
+        finalResult.win.forEach { it.calculateAndSetWinnings(true) }
 
         dealer.setWinnings(players.sumOf { it.winnings })
     }
