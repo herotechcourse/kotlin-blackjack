@@ -10,6 +10,6 @@ class Dealer() : BasePlayer("Dealer") {
     }
 
     override fun makeDecision(value: Int): Boolean {
-        return value >= 16
+        return value <= 16
     }
 }
