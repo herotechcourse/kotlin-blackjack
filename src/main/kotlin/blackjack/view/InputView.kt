@@ -7,7 +7,7 @@ object InputView {
     }
 
     private fun readString(): String {
-        val string = readLine() ?: throw IllegalArgumentException("")
+        val string = readlnOrNull() ?: throw IllegalArgumentException("")
         return string.trim()
     }
 
