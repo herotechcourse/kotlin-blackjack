@@ -5,7 +5,10 @@ import blackjack.model.GameResult
 import blackjack.model.Player
 
 object GameLogic {
-    fun handlePlayerTurn(dealer: Dealer, player: Player) {
+    fun handlePlayerTurn(
+        dealer: Dealer,
+        player: Player,
+    ) {
         if (player.isBlackJack()) {
             println("${player.name} has Blackjack!")
             return
@@ -32,5 +35,4 @@ object GameLogic {
             else -> GameResult.DRAW
         }
     }
-
 }

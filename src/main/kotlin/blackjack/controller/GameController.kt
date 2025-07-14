@@ -9,10 +9,11 @@ import blackjack.view.OutputView
 class GameController {
     fun run() {
         val playerNames = InputView.askPlayerNames()
-        val players = playerNames.map { name ->
-            val bet = InputView.getBettingAmount(name)
-            Player(name = name, bet = bet)
-        }
+        val players =
+            playerNames.map { name ->
+                val bet = InputView.getBettingAmount(name)
+                Player(name = name, bet = bet)
+            }
         val dealer = Dealer()
 
         OutputView.displayDealing(players.map { it.name })
@@ -49,14 +50,15 @@ class GameController {
             val playerScore = player.getScore()
             val isPlayerBusted = player.isBusted()
             val bet = player.bet
-            val result = GameLogic.getGameResult(
-                playerScore = playerScore,
-                dealerScore = dealerScore,
-                isPlayerBusted = isPlayerBusted,
-                isDealerBusted = isDealerBusted,
-                isPlayerBlackjack = player.isBlackJack(),
-                isDealerBlackjack = dealer.isBlackJack()
-            )
+            val result =
+                GameLogic.getGameResult(
+                    playerScore = playerScore,
+                    dealerScore = dealerScore,
+                    isPlayerBusted = isPlayerBusted,
+                    isDealerBusted = isDealerBusted,
+                    isPlayerBlackjack = player.isBlackJack(),
+                    isDealerBlackjack = dealer.isBlackJack(),
+                )
             val earnings = BettingLogic.calculateEarnings(result, player.isBlackJack(), bet)
             player.earnings = earnings
 
