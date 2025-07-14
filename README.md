@@ -50,19 +50,26 @@
 - [x] BlackJack
 
 ## Participant Architecture features
-- [ ] interface Participant 
-  - [ ] Expose the current State 
-  - [ ] Expose the current Hand (from the state)
-  - [ ] Handle the transition of turns through playTurn(deck)
-- [ ] Player
-  - [ ] Starts in FirstTurn state (receives initial 2 cards)
-  - [ ] Can draw cards (Hit) or stop (Stay)
-  - [ ] Transitions through states: FirstTurn → Hit → Stay | Bust | Blackjack
+- [x] interface Participant 
+  - [x] Expose the current State 
+  - [x] Expose the current Hand (from the state)
+  - [x] Handle the transition of turns through playTurn(deck)
+- [x] Player
+  - [x] Starts in FirstTurn state (receives initial 2 cards)
+  - [x] Can draw cards (Hit) or stop (Stay)
+  - [x] Transitions through states: FirstTurn → Hit → Stay | Bust | Blackjack
   - [ ] Chooses actions based on external input (DecisionMaker??)
   - [ ] Calculates profit()
 - Dealer
-  - [ ] Starts in FirstTurn state (just like Player)
-  - [ ] Automatically draws cards while total < 17
-  - [ ] Stops automatically when total ≥ 17 (calls stay())
-  - [ ] Transitions through states without external input
+  - [x] Starts in FirstTurn state (just like Player)
+  - [x] Automatically draws cards while total < 17
+  - [x] Stops automatically when total ≥ 17 (calls stay())
+  - [x] Transitions through states without external input
   - [ ] Calculates profit() for comparison in result phase??
+
+
+## Features for step2
+- [ ] Each player must place a bet at the start of the game.
+- [ ] If a player hits 21 with the initial two cards (Blackjack), they receive 1.5x their bet.
+- [ ] If both the player and dealer have Blackjack, the player’s bet is returned.
+- [ ] If the dealer busts (exceeds 21), all remaining players automatically win and receive payouts based on their bets.
