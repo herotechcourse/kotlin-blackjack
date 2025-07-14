@@ -1,14 +1,9 @@
 package blackjack.model
 
-import blackjack.controller.Controller.Companion.BLACKJACK_SCORE
-
-class FinalResult(val dealer: Dealer, players: List<Player>) {
-    var win: List<Player> = listOf()
-        private set
-    var lose: List<Player> = listOf()
-        private set
-    var draw: List<Player> = listOf()
-        private set
+class FinalResult(dealer: Dealer, players: List<Player>) {
+    var win: List<Player>
+    var lose: List<Player>
+    var draw: List<Player>
 
     init {
         if (dealer.score > BLACKJACK_SCORE) {
@@ -20,5 +15,9 @@ class FinalResult(val dealer: Dealer, players: List<Player>) {
             draw = players.filter { it.score == dealer.score }
             lose = players - win - draw
         }
+    }
+
+    companion object {
+        private const val BLACKJACK_SCORE = 21
     }
 }

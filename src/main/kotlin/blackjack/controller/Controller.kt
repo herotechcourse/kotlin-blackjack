@@ -1,6 +1,12 @@
 package blackjack.controller
 
-import blackjack.model.*
+import blackjack.model.Card
+import blackjack.model.Dealer
+import blackjack.model.Deck
+import blackjack.model.FinalResult
+import blackjack.model.Gambler
+import blackjack.model.GamblerInfo
+import blackjack.model.Player
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
@@ -49,18 +55,18 @@ class Controller() {
         }
     }
 
-    private fun playerTakesTurn(player: Gambler) {
+    private fun playerTakesTurn(gambler: Gambler) {
         var answer = false
-        while (player.isPlayerBelowBlackJack()) {
-            answer = processHitOrStay(player)
+        while (gambler.isPlayerBelowBlackJack()) {
+            answer = processHitOrStay(gambler)
             if (!answer) {
                 break
             }
-            player.addCard(deck.drawCards())
-            OutputView.displayCardsOfPlayers(player)
+            gambler.addCard(deck.drawCards())
+            OutputView.displayCardsOfPlayers(gambler)
         }
-        if (!answer && player.cards.size == INITIAL_CARD_COUNT) {
-            OutputView.displayCardsOfPlayers(player)
+        if (!answer && gambler.hasCardCount()) {
+            OutputView.displayCardsOfPlayers(gambler)
         }
     }
 
@@ -115,9 +121,8 @@ class Controller() {
     }
 
     companion object {
-        private const val MAX_ATTEMPTS = 5
-        const val BLACKJACK_SCORE = 21
         const val INITIAL_CARD_COUNT = 2
+        private const val MAX_ATTEMPTS = 5
         private const val MAX_ATTEMPT_MESSAGE = "Too many attempts"
     }
 }
