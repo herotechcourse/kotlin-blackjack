@@ -1,5 +1,6 @@
 package blackjack.model.participant
 
+import blackjack.model.Chips
 import blackjack.model.card.Card
 import blackjack.model.card.Deck
 import blackjack.model.result.DealerResultTracker
@@ -25,6 +26,10 @@ class Dealer(name: String = "Dealer", internal val deck: Deck = Deck.generateADe
 
     fun showAllCards() {
         showAllCards = true
+    }
+
+    fun addProfit(playerProfit: Chips) {
+        profit = profit + playerProfit
     }
 
     companion object {

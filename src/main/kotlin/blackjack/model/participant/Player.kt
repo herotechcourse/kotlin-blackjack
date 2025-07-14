@@ -1,11 +1,12 @@
 package blackjack.model.participant
 
-import blackjack.model.Money
+import blackjack.model.Chips
 import blackjack.model.card.Card
 import blackjack.model.result.PlayerResultTracker
+import blackjack.model.result.Result
 
 class Player(name: String) : Participant(name, PlayerResultTracker()) {
-    var bet: Money = Money.zero()
+    var bet: Chips = Chips.zero()
         private set
 
     val result: String
@@ -14,6 +15,15 @@ class Player(name: String) : Participant(name, PlayerResultTracker()) {
         get() = _hand.cards
 
     fun placeBet(amount: Double) {
-        bet = Money(amount)
+        bet = Chips(amount)
+    }
+
+    fun addProfit() {
+        profit = when ((resultTracker as PlayerResultTracker).lastResult) {
+            Result.BLACKJACK -> bet.blackjack()
+            Result.WIN -> bet
+            Result.LOSE -> bet.lose()
+            else -> Chips.zero()
+        }
     }
 }

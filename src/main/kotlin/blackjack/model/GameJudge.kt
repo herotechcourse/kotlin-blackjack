@@ -17,5 +17,7 @@ object GameJudge {
         val result = dealer vs player
         player.recordResult(result)
         dealer.recordResult(result.inverse)
+        player.addProfit()
+        dealer.addProfit(-player.profit)
     }
 }
