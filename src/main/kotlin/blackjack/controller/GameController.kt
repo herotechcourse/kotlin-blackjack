@@ -1,6 +1,5 @@
 package blackjack.controller
 
-import blackjack.model.BettingInfo
 import blackjack.model.Dealer
 import blackjack.model.GameResult
 import blackjack.model.Player
@@ -10,14 +9,13 @@ import blackjack.view.OutputView
 class GameController {
     fun run() {
         val playerNames = InputView.askPlayerNames()
-        val bettingInfos =
-            playerNames.map { name ->
-                BettingInfo(name, InputView.getBettingAmount(name))
-            }
-        val players = playerNames.map { Player(it) }
+        val players = playerNames.map { name ->
+            val bet = InputView.getBettingAmount(name)
+            Player(name = name, bet = bet)
+        }
         val dealer = Dealer()
 
-        OutputView.displayDealing(bettingInfos.map { it.playerName })
+        OutputView.displayDealing(players.map { it.name })
 
         dealer.giveTwoCardsTo(players)
 
