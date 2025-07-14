@@ -18,17 +18,19 @@ object GameLogic {
         dealerScore: Int,
         isPlayerBusted: Boolean,
         isDealerBusted: Boolean,
-        playerBlackjack: Boolean,
-        dealerBlackjack: Boolean,
+        isPlayerBlackjack: Boolean,
+        isDealerBlackjack: Boolean,
     ): GameResult {
         return when {
-            playerBlackjack && dealerBlackjack -> GameResult.DRAW
-            playerBlackjack -> GameResult.WIN
             isPlayerBusted -> GameResult.LOSE
             isDealerBusted -> GameResult.WIN
+            isPlayerBlackjack && isDealerBlackjack -> GameResult.DRAW
+            isPlayerBlackjack -> GameResult.WIN
+            isDealerBlackjack -> GameResult.LOSE
             playerScore > dealerScore -> GameResult.WIN
             playerScore < dealerScore -> GameResult.LOSE
             else -> GameResult.DRAW
         }
     }
+
 }

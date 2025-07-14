@@ -54,8 +54,8 @@ class GameController {
                 dealerScore = dealerScore,
                 isPlayerBusted = isPlayerBusted,
                 isDealerBusted = isDealerBusted,
-                playerBlackjack = player.isBlackJack(),
-                dealerBlackjack = dealer.isBlackJack()
+                isPlayerBlackjack = player.isBlackJack(),
+                isDealerBlackjack = dealer.isBlackJack()
             )
             val earnings = BettingLogic.calculateEarnings(result, player.isBlackJack(), bet)
             player.earnings = earnings

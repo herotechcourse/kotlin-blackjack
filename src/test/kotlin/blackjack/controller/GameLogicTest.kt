@@ -13,6 +13,8 @@ class GameLogicTest {
                 dealerScore = 18,
                 isPlayerBusted = false,
                 isDealerBusted = false,
+                isPlayerBlackjack = false,
+                isDealerBlackjack = false,
             )
         assertEquals(GameResult.WIN, result)
     }
@@ -25,6 +27,8 @@ class GameLogicTest {
                 dealerScore = 17,
                 isPlayerBusted = true,
                 isDealerBusted = false,
+                isPlayerBlackjack = false,
+                isDealerBlackjack = false,
             )
         assertEquals(GameResult.LOSE, result)
     }
@@ -37,6 +41,22 @@ class GameLogicTest {
                 dealerScore = 20,
                 isPlayerBusted = false,
                 isDealerBusted = false,
+                isPlayerBlackjack = false,
+                isDealerBlackjack = false,
+            )
+        assertEquals(GameResult.DRAW, result)
+    }
+
+    @Test
+    fun `returns DRAW when both player and dealer have Blackjack`() {
+        val result =
+            GameLogic.getGameResult(
+                playerScore = 21,
+                dealerScore = 21,
+                isPlayerBusted = false,
+                isDealerBusted = false,
+                isPlayerBlackjack = true,
+                isDealerBlackjack = true,
             )
         assertEquals(GameResult.DRAW, result)
     }
