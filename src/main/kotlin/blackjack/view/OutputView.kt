@@ -1,11 +1,6 @@
 package blackjack.view
 
-import blackjack.model.Card
-import blackjack.model.Dealer
-import blackjack.model.Gambler
-import blackjack.model.Player
-import blackjack.model.Rank
-import blackjack.model.Suit
+import blackjack.model.*
 
 object OutputView {
     fun displayErrorMessages(message: String?) {
@@ -48,6 +43,11 @@ object OutputView {
         println("## Final Results")
     }
 
+    fun displayFinalEarning(players: List<Player>) {
+        println("\n## Final Earnings")
+        players.forEach { println("${it.name}: ${it.winnings.toInt()}") }
+    }
+
     fun displayPlayerResult(
         win: Int,
         lose: Int,
@@ -66,7 +66,7 @@ object OutputView {
 
     private fun getCardsOfPlayers(player: Player): String {
         return "${player.name}'s card: " +
-            player.cards.joinToString(", ", transform = ::convertCardToString)
+                player.cards.joinToString(", ", transform = ::convertCardToString)
     }
 
     private fun convertCardToString(card: Card): String {

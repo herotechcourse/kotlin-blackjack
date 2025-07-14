@@ -11,9 +11,9 @@ object InputView {
         return readString()
     }
 
-    fun getBetAmount(name: String): Int {
+    fun getBetAmount(name: String): Double {
         println(askBetAmount(name))
-        return readln().trim().toIntOrNull() ?: throw IllegalArgumentException(BET_ERROR_MESSAGE)
+        return readln().trim().toDoubleOrNull() ?: throw IllegalArgumentException(BET_ERROR_MESSAGE)
     }
 
     private fun readString(): String {
