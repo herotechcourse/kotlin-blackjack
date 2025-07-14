@@ -42,4 +42,14 @@ object OutputView {
             println("${it.name}'s cards: " + "${cardsText(it.state.hand.cards)} - Total: ${it.points}.")
         }
     }
+
+    fun printFinalRates(result: Map<Player, Double>) {
+        val header = "\n## Final Earning"
+        val playerLines =
+            result
+                .entries
+                .joinToString("\n") { (player, profit) -> "${player.name}: ${profit.toString().format("%.2f")}" }
+
+        println(listOf(header, playerLines).joinToString("\n"))
+    }
 }
