@@ -1,10 +1,29 @@
 package blackjack.controller
 
-class BlackJackController {
+import blackjack.model.BlackjackGame
+import blackjack.model.ParticipantsFactory
+import blackjack.view.InputView
+import blackjack.view.OutputView
+
+class BlackJackController() {
     fun startGame() {
         try {
-//            val playersNames = InputView.getPlayersName()
-//            val players = ParticipantsFactory.generatePlayers(playersNames)
+            val playersNames = InputView.getPlayersName()
+            val players = ParticipantsFactory.generatePlayers(playersNames)
+            val dealer = ParticipantsFactory.generateDealer()
+
+            val blackjackGame =
+                BlackjackGame(
+                    dealer,
+                    players,
+                    InputView::askForCard,
+                    OutputView::displayPlayer,
+                )
+
+            OutputView.displayTableSetUp(dealer, players)
+            blackjackGame.play()
+            OutputView.displayDealer(dealer)
+            OutputView.displayPlayers(players)
         } catch (e: Exception) {
             println("Error starting the game: ${e.message}")
         }
