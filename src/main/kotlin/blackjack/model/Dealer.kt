@@ -3,8 +3,8 @@ package blackjack.model
 class Dealer(gamblerInfo: GamblerInfo) : Player(gamblerInfo) {
     fun isDealerBelowMinScore(): Boolean = score <= DEALER_MIN_SCORE
 
-    fun setWinnings(winnings: Double) {
-        playerBet.winnings = winnings
+    fun calculateAndSetWinnings(winnings: List<Double>) {
+        playerBet.winnings = winnings.sumOf { -it }
     }
 
     companion object {

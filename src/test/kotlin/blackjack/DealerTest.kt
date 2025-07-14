@@ -28,7 +28,7 @@ class DealerTest {
     @Test
     fun `returns the exact amount of winnings`() {
         val dealer = Dealer(GamblerInfo("Dealer"))
-        dealer.setWinnings(10_00.0)
+        dealer.calculateAndSetWinnings(listOf(-20_00.0, 10_00.0))
         assertThat(dealer.winnings).isEqualTo(10_00.0)
     }
 }
