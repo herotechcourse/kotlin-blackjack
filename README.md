@@ -40,10 +40,11 @@
 - [x] **Create GameJudge Object**
   - [x] Should contain a method to calculate the final hand of each player and dealer.
   - [x] Should set the result of the game for each player and dealer.
-- [ ] **Create Bet value Class**
-  - [ ] Should contain a Double with the bet value.
-  - [ ] The Class should be immutable.
-  - [ ] Implement methods to execute operations on the class and return a new Instance to promote immutability
+- [x] **Create Chips value Class**
+  - [x] Should contain a Double with the bet value.
+  - [x] The Class should be immutable.
+  - [x] Implement methods to execute operations on the class and return a new Instance to promote immutability
+  - [x] The class should return as a string a Int conversion.
 ### Controller
 - [x] Create Game Controller
   - [x] Should call the InputView to get the player names
