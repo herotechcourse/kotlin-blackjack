@@ -32,4 +32,11 @@ class GamblerTest {
         gambler.addCard(cards)
         assertThat(gambler.hasCardCount()).isTrue
     }
+
+    @Test
+    fun `return false if Player does not have two cards`() {
+        val gambler = Gambler(GamblerInfo("Player"))
+        gambler.addCard(listOf(Card(Rank.ACE, Suit.SPADE)))
+        assertThat(gambler.hasCardCount()).isFalse
+    }
 }
