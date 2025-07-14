@@ -3,7 +3,7 @@ package blackjack.view
 import blackjack.model.Card
 import blackjack.model.Dealer
 import blackjack.model.Participant
-import blackjack.model.Player
+import blackjack.model.Players
 
 object OutputView {
 
@@ -28,13 +28,13 @@ object OutputView {
 
     fun displayInitialCards(
         dealer: Dealer,
-        players: List<Player>,
+        players: Players,
         isFirstRound: Boolean = true
     ) {
-        val playerNames = players.joinToString(", ") { it.name }
+        val playerNames = players.getPlayers().joinToString(", ") { it.name }
         println("\nDealing two cards to ${dealer.name}, $playerNames.")
         println(showHandCards(dealer, isFirstRound))
-        players.forEach { player ->
+        players.getPlayers().forEach { player ->
             println(showHandCards(player, isFirstRound))
         }
         println()
@@ -63,11 +63,11 @@ object OutputView {
 
     fun displayFinalResults(
         dealer: Dealer,
-        players: List<Player>,
+        players: Players,
     ) {
         println("\n## Final Earnings")
         println("${dealer.name}: ${dealer.earnings}")
-        players.forEach {
+        players.getPlayers().forEach {
             println("${it.name}: ${it.earnings}")
         }
     }

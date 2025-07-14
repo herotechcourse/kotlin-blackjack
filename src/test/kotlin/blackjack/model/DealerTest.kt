@@ -24,7 +24,7 @@ class DealerTest {
         val dealer = Dealer()
         val player = listOf<Player>(Player("Loli"))
         assertThat(player[0].cardsInHand.cards.size).isEqualTo(0)
-        dealer.dealInitialCardsToPlayers(player)
+        dealer.dealInitialCardsToPlayers(Players(player))
         assertThat(player[0].cardsInHand.cards.size).isEqualTo(2)
     }
 

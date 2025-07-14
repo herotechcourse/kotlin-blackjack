@@ -2,6 +2,7 @@ package blackjack.controller
 
 import blackjack.model.Dealer
 import blackjack.model.Player
+import blackjack.model.Players
 import blackjack.model.ResultCalculation
 import blackjack.view.InputView
 import blackjack.view.OutputView
@@ -11,7 +12,7 @@ class Game(
 ) {
     fun startGame() {
         val playersName = InputView.askPlayerNames()
-        val players = playersName.map { Player(it) }
+        val players = Players(playersName.map { Player(it) })
 
         collectBets(players)
 
@@ -22,27 +23,27 @@ class Game(
         compareFinalCards(players)
     }
 
-    private fun collectBets(players: List<Player>) {
-        players.forEach { player ->
+    private fun collectBets(players: Players) {
+        players.getPlayers().forEach { player ->
             player.setBet(InputView.askPlayerBet(player.name))
         }
     }
 
-    private fun assignInitialCards(players: List<Player>) {
+    private fun assignInitialCards(players: Players) {
         dealer.selfDrawInitialCards()
         dealer.dealInitialCardsToPlayers(players)
         OutputView.displayInitialCards(dealer, players)
     }
 
-    private fun hitOrStay(players: List<Player>) {
+    private fun hitOrStay(players: Players) {
         askPlayersToHit(players)
         dealerDraws()
         OutputView.displayCardsWithTotalValue(dealer)
-        players.forEach { player -> OutputView.displayCardsWithTotalValue(player) }
+        players.getPlayers().forEach { player -> OutputView.displayCardsWithTotalValue(player) }
     }
 
-    private fun askPlayersToHit(players: List<Player>) {
-        players.forEach {
+    private fun askPlayersToHit(players: Players) {
+        players.getPlayers().forEach {
             do {
                 val answer = InputView.askToHit(it.name)
                 if (answer) {
@@ -64,10 +65,10 @@ class Game(
         dealer.updatePlayingStatus(dealer.cardsInHand.isBustHand())
     }
 
-    private fun compareFinalCards(players: List<Player>) {
+    private fun compareFinalCards(players: Players) {
         if (dealer.isPlaying) {
             val dealerPoints = dealer.cardsInHand.calculateTotalValueOfCards()
-            players.forEach {
+            players.getPlayers().forEach {
                 it.updatePlayingStatus(it.hasLessPointsThanDealer(dealerPoints))
             }
         }
@@ -75,8 +76,8 @@ class Game(
         OutputView.displayFinalResults(dealer, players)
     }
 
-    private fun calculateEarnings(players: List<Player>) {
-        players.forEach { player -> player.updateEarnings(ResultCalculation.calculatePlayerEarnings(player, dealer)) }
+    private fun calculateEarnings(players: Players) {
+        players.getPlayers().forEach { player -> player.updateEarnings(ResultCalculation.calculatePlayerEarnings(player, dealer)) }
         dealer.updateEarnings(ResultCalculation.calculateDealerEarnings(dealer, players))
     }
 }

@@ -12,12 +12,13 @@ object ResultCalculation {
         }
     }
 
-    fun calculateDealerEarnings(dealer: Dealer, players: List<Player>): Int {
-        val totalPlayersEarnings = players.sumOf { player -> player.earnings }
+    fun calculateDealerEarnings(dealer: Dealer, players: Players): Int {
+        val playersEarnings = players.calculateTotalPlayersEarning()
         return when {
-            dealer.cardsInHand.hasBlackJack() && players.any { player -> player.cardsInHand.hasBlackJack() } -> 0
-            dealer.cardsInHand.hasBlackJack() -> -totalPlayersEarnings
-            !dealer.isPlaying -> -totalPlayersEarnings
+            dealer.cardsInHand.hasBlackJack() && players.getPlayers().any { player -> player.cardsInHand.hasBlackJack() } -> 0
+            dealer.cardsInHand.hasBlackJack() -> - playersEarnings
+            dealer.isPlaying && playersEarnings < 0 -> - playersEarnings
+            !dealer.isPlaying -> - playersEarnings
             else -> 0
         }
     }

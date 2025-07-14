@@ -19,9 +19,9 @@ class Dealer(name: String = "Dealer") : Participant(name) {
         }
     }
 
-    fun dealInitialCardsToPlayers(players: List<Player>) {
+    fun dealInitialCardsToPlayers(players: Players) {
         repeat(BlackJackValues.FIRST_HAND_CARDS) {
-            players.forEach { it -> dealCardToPlayer(it) }
+            players.getPlayers().forEach { it -> dealCardToPlayer(it) }
         }
     }
 }
