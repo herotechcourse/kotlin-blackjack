@@ -2,6 +2,7 @@ package blackjack.controller
 
 import blackjack.model.Dealer
 import blackjack.model.Player
+import blackjack.model.ResultCalculation
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
@@ -70,6 +71,12 @@ class Game(
                 it.updatePlayingStatus(it.hasLessPointsThanDealer(dealerPoints))
             }
         }
+        calculateEarnings(players)
         OutputView.displayFinalResults(dealer, players)
+    }
+
+    private fun calculateEarnings(players: List<Player>) {
+        players.forEach { player -> player.updateEarnings(ResultCalculation.calculatePlayerEarnings(player, dealer)) }
+        dealer.updateEarnings(ResultCalculation.calculateDealerEarnings(dealer, players))
     }
 }

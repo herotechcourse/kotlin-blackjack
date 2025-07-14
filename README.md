@@ -51,9 +51,9 @@ The goal is to get as close to 21 as possible without going over.
 
 - Player bet
 - [x] Get bet from every player
-- [ ] If initial hand is equal 21, player wins 1.5 bet
-- [ ] If initial hand is equal 21, but dealer has also 21. Bet is returned
-- [ ] If player is busted, loses their bet.
+- [x] If initial hand is equal 21, player wins 1.5 bet
+- [x] If initial hand is equal 21, but dealer has also 21. Bet is returned
+- [x] If player is busted, loses their bet.
 
 ## Example output
 

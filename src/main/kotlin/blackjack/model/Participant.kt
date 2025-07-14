@@ -7,6 +7,9 @@ abstract class Participant(
     var isPlaying: Boolean = true
         private set
 
+    var earnings: Int = 0
+        private set
+
     fun drawCard(card: Card) {
         cardsInHand.addCard(card)
     }
@@ -14,5 +17,9 @@ abstract class Participant(
     fun updatePlayingStatus(condition : Boolean) {
         if (condition)
             isPlaying = false
+    }
+
+    fun updateEarnings(newEarnings : Int) {
+        earnings += newEarnings
     }
 }

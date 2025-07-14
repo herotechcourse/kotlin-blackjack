@@ -6,4 +6,5 @@ object BlackJackValues {
     const val ACE_DIFFERENCE = 10
     const val FIRST_HAND_CARDS = 2
     const val DEALER_STAND_CONDITION = 17
+    const val BET_MULTIPLICATOR = 1.5
 }

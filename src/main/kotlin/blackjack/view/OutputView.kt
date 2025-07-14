@@ -1,9 +1,6 @@
 package blackjack.view
 
-import blackjack.model.Card
-import blackjack.model.Dealer
-import blackjack.model.Participant
-import blackjack.model.Player
+import blackjack.model.*
 
 object OutputView {
 
@@ -58,23 +55,14 @@ object OutputView {
         )
     }
 
-    fun getFinalResultForDealer(dealer: Dealer, players: List<Player>): String {
-        val lose = players.count { it.isPlaying }
-        if (!dealer.isPlaying)
-            return "0 Win $lose Lose"
-        val win = players.count { !it.isPlaying }
-        return "$win Win $lose Lose"
-    }
-
     fun displayFinalResults(
         dealer: Dealer,
         players: List<Player>,
     ) {
-        println("\n## Final Results")
-        println("${dealer.name}: ${getFinalResultForDealer(dealer, players)}")
+        println("\n## Final Earnings")
+        println("${dealer.name}: ${dealer.earnings}")
         players.forEach {
-            print("${it.name}: ")
-            if (it.isPlaying) println("Win") else println("Lose")
+            println("${it.name}: ${it.earnings}")
         }
     }
 }
