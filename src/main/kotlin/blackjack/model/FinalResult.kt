@@ -1,7 +1,5 @@
 package blackjack.model
 
-import blackjack.controller.Controller.Companion.BLACKJACK_SCORE
-
 class FinalResult(val dealer: Player, players: List<Player>) {
     var win: List<Player> = listOf()
         private set
@@ -11,14 +9,14 @@ class FinalResult(val dealer: Player, players: List<Player>) {
         private set
 
     init {
-        if (dealer.score > BLACKJACK_SCORE) {
-            lose = players.filter { it.score > BLACKJACK_SCORE }
-            win = players - lose
+        if (dealer.isBusted()) {
+            win = players.filter { !it.isBusted() }
+            lose = players.filter { it.isBusted() }
             draw = emptyList()
         } else {
-            win = players.filter { it.score <= BLACKJACK_SCORE && it.score > dealer.score }
-            draw = players.filter { it.score == dealer.score }
-            lose = players - win - draw
+            win = players.filter { !it.isBusted() && it.score > dealer.score }
+            lose = players.filter { it.isBusted() || it.score < dealer.score }
+            draw = players.filter { !it.isBusted() && it.score == dealer.score }
         }
     }
 }

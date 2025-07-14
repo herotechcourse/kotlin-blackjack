@@ -13,5 +13,4 @@ class Cards(
     fun removeAll(cardsToRemove: List<Card>) = cardsToRemove.forEach { _cards.remove(it) }
 
     fun shuffle() = _cards.shuffle()
-
 }

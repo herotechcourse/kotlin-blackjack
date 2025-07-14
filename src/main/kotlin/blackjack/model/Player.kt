@@ -1,5 +1,7 @@
 package blackjack.model
 
+import blackjack.controller.Controller.Companion.BLACKJACK_SCORE
+
 class Player(val gamblerInfo: GamblerInfo) {
     private val _cards = Cards()
     var score: Int = 0
@@ -24,6 +26,14 @@ class Player(val gamblerInfo: GamblerInfo) {
             aceCount--
         }
         score = totalScore
+    }
+
+    fun isBlackJack(): Boolean {
+        return score == BLACKJACK_SCORE
+    }
+
+    fun isBusted(): Boolean {
+        return score > BLACKJACK_SCORE
     }
 
     companion object {
