@@ -1,7 +1,6 @@
 package blackjack.model
 
 abstract class Participant(
-    val name: String,
     val cardsInHand: Cards = Cards(mutableListOf())
 ) {
     var isPlaying: Boolean = true

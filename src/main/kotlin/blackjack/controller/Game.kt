@@ -38,7 +38,7 @@ class Game(
     private fun hitOrStay(players: Players) {
         askPlayersToHit(players)
         dealerDraws()
-        OutputView.displayCardsWithTotalValue(dealer)
+        OutputView.displayDealersCardsWithTotalValue(dealer)
         players.getPlayers().forEach { player -> OutputView.displayCardsWithTotalValue(player) }
     }
 
@@ -58,7 +58,7 @@ class Game(
     private fun dealerDraws() {
         var mustDraw = dealer.mustDraw(dealer.cardsInHand.calculateTotalValueOfCards())
         while (mustDraw) {
-            OutputView.displayDealerDrawMessage(dealer)
+            OutputView.displayDealerDrawMessage()
             dealer.selfDrawCard()
             mustDraw = dealer.mustDraw(dealer.cardsInHand.calculateTotalValueOfCards())
         }
@@ -77,7 +77,8 @@ class Game(
     }
 
     private fun calculateEarnings(players: Players) {
-        players.getPlayers().forEach { player -> player.updateEarnings(ResultCalculation.calculatePlayerEarnings(player, dealer)) }
+        players.getPlayers()
+            .forEach { player -> player.updateEarnings(ResultCalculation.calculatePlayerEarnings(player, dealer)) }
         dealer.updateEarnings(ResultCalculation.calculateDealerEarnings(dealer, players))
     }
 }

@@ -1,8 +1,8 @@
 package blackjack.model
 
 class Player(
-    name: String,
-) : Participant(name) {
+    val name: String,
+) : Participant() {
     var bet: Int = 0
         private set
 
