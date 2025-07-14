@@ -10,7 +10,7 @@ object GameJudge {
         participants.players.forEach { evaluate(participants.dealer, it) }
     }
 
-    internal fun evaluate(
+    private fun evaluate(
         dealer: Dealer,
         player: Player,
     ) {

@@ -66,3 +66,6 @@
 - [x] Add constants to Input and Output Prompts
 - [x] Print cards with color (black and red)
 - [x] Add AnsiColor for the cards and error messages
+
+### TODO
+- [ ] Check all the internal methods and change to private if they are not using for testing
