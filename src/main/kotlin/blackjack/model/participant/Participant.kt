@@ -10,6 +10,7 @@ abstract class Participant(val name: String) : Hand() {
     val score get() = getCurrentPoints()
 
     abstract var currentState: State
+
     val state get() = currentState
 
     private fun getCurrentPoints(): Int {
@@ -26,9 +27,9 @@ abstract class Participant(val name: String) : Hand() {
         return sum
     }
 
-    override fun receive(card: Card): Boolean {
+    override fun receive(cards: List<Card>): Boolean {
         if (currentState != State.HIT) return false
-        currentCards.add(card)
+        currentCards.addAll(cards)
         if (score == BLACKJACK_SCORE) {
             currentState = State.STAY
         }
