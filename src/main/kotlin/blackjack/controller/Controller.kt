@@ -122,15 +122,15 @@ class Controller() {
         }
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
-/*
-    private fun String.isHitOrStand(): Boolean {
+
+    fun String.isHitOrStand(): Boolean {
         return when (this) {
             "y" -> true
             "n" -> false
             else -> throw IllegalArgumentException("The answer must be y or n.")
         }
     }
-*/
+
     companion object {
         private const val MAX_ATTEMPTS = 5
         const val BLACKJACK_SCORE = 21
