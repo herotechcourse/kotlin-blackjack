@@ -18,12 +18,19 @@
 - [x] contains value `name`
   - [x] should not be empty
 
+### data class `PlayerBet`
+- [x] betAmount
+- [x] winnings
+
 ### abstract class `Player`
-- [x] contains class `GamblerInfo`
-- [x] contains list<Card>
 - [x] for representing 'Player1', 'Player2', ..., 'PlayerN', and 'Dealer'
+- [x] contains class `GamblerInfo`
+- [x] contains PlayerBet
+- [x] contains list<Card>
 - [x] `addCard()` to add card
   - [x] private fun `updateScore` to update score on each insertion
+- [x] `setBetAmount`
+- [x] `setWinnings`
 
 ### class `Gambler` inherits `Player`
 - [x] fun `isPlayerBelowBlackJack`
