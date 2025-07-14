@@ -50,7 +50,7 @@ The goal is to get as close to 21 as possible without going over.
 ## Step 2 new features
 
 - Player bet
-- [ ] Get bet from every player
+- [x] Get bet from every player
 - [ ] If initial hand is equal 21, player wins 1.5 bet
 - [ ] If initial hand is equal 21, but dealer has also 21. Bet is returned
 - [ ] If player is busted, loses their bet.

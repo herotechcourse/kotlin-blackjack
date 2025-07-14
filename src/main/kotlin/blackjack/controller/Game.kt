@@ -12,11 +12,19 @@ class Game(
         val playersName = InputView.askPlayerNames()
         val players = playersName.map { Player(it) }
 
+        collectBets(players)
+
         assignInitialCards(players)
 
         hitOrStay(players)
 
         compareFinalCards(players)
+    }
+
+    private fun collectBets(players: List<Player>) {
+        players.forEach { player ->
+            player.setBet(InputView.askPlayerBet(player.name))
+        }
     }
 
     private fun assignInitialCards(players: List<Player>) {
