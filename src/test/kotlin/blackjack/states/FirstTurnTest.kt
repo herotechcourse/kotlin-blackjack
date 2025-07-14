@@ -15,7 +15,7 @@ class FirstTurnTest {
     @Test
     fun `draw one card keeps state in FirstTurn`() {
         val state = FirstTurn()
-        val next = state.draw(TestCards.Ace)
+        state.draw(TestCards.Ace)
         assertThat(state).isInstanceOf(FirstTurn::class.java)
     }
 

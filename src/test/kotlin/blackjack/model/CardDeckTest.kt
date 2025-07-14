@@ -33,7 +33,7 @@ class CardDeckTest {
     @Test
     fun `should draw a card`() {
         val cardDeck = CardDeck()
-        val card = cardDeck.drawCard()
+        cardDeck.drawCard()
 
         assertThat(cardDeck.cards).hasSize(51)
     }
