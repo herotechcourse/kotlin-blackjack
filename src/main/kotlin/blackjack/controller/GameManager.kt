@@ -1,27 +1,28 @@
 package blackjack.controller
 
 import blackjack.model.Bet
+import blackjack.model.Dealer
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
 object GameManager {
     val deck = Deck()
     val playerManager = PlayerManager()
-    val dealerManager = DealerManager()
-    val statsManager = StatsManager(playerManager.players, dealerManager.dealer)
+    val dealer = Dealer()
+    val statsManager = StatsManager(playerManager.players, dealer)
     val inputView = InputView
     val outputView = OutputView
 
     fun run() {
         takePlayerNames()
-        dealerManager.dealer.giveInitCardsToPlayers(playerManager.players, deck)
-        dealerManager.dealer.selfDrawInitCards(deck)
-        OutputView.displayInitialState(playerManager.players, dealerManager.dealer)
+        dealer.giveInitCardsToPlayers(playerManager.players, deck)
+        dealer.selfDrawInitCards(deck)
+        OutputView.displayInitialState(playerManager.players, dealer)
         askPlayersToHit()
         drawDealerCards()
-        OutputView.displayFinalState(playerManager.players, dealerManager.dealer)
+        OutputView.displayFinalState(playerManager.players, dealer)
 
-        statsManager.processStatistics(playerManager.players, dealerManager.dealer)
+        statsManager.processStatistics(playerManager.players, dealer)
 
         OutputView.displayFinalResults(statsManager.winStatistics)
     }
@@ -42,9 +43,9 @@ object GameManager {
     }
 
     private fun drawDealerCards() {
-        while (dealerManager.dealer.shouldDrawCardOrNot()) {
-            dealerManager.dealer.drawCard(deck.drawCard())
-            OutputView.displayDealerDrawsCard(dealerManager.dealer)
+        while (dealer.shouldDrawCardOrNot()) {
+            dealer.drawCard(deck.drawCard())
+            OutputView.displayDealerDrawsCard(dealer)
         }
     }
 }
