@@ -1,7 +1,5 @@
 package blackjack.view
 
-import kotlin.text.trim
-
 object InputView {
     fun readPlayerNames(): List<String> {
         println("Enter the names of the players (comma-separated):")
@@ -16,8 +14,23 @@ object InputView {
 
     fun readBetAmount(name: String): Int {
         println("Enter $name’s betting amount:")
-        val input = readln().trim()
-        return input.toInt()
+        while (true) {
+            val input = readln().trim()
+            if (input.isEmpty()) {
+                println("Please enter a valid betting amount.")
+                continue
+            }
+            val amount = input.toIntOrNull()
+            if (amount == null) {
+                println("Please enter a valid integer for the betting amount.")
+                continue
+            }
+            if (amount <= 0) {
+                println("Bet must be positive. Please enter a valid betting amount.")
+                continue
+            }
+            return amount
+        }
     }
 
     fun readYesOrNo(name: String): Boolean {
