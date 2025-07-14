@@ -60,10 +60,6 @@
 - [x] fun `printEmptyLine`
 - [x] fun `getCardsOfPlayers`
 
-#### `InputPrompt`
-- [x] `GET_NAME_OF_PLAYER`
-- [x] fun `askHitOrStand`
-
 
 ## Sample Output
 ```
