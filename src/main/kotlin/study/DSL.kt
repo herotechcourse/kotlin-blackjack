@@ -21,6 +21,7 @@ data class Skills(
 
 data class Language(val name: String, val level: Int)
 
+@PersonDSL
 class PersonBuilder {
     private lateinit var name: String
     private var company: String? = null
@@ -46,6 +47,7 @@ class PersonBuilder {
     fun build(): Person = Person(name, company, skills, languages)
 }
 
+@PersonDSL
 class LanguageBuilder {
     private val languages = mutableListOf<Language>()
 
@@ -57,6 +59,7 @@ class LanguageBuilder {
     fun build(): List<Language> = languages
 }
 
+@PersonDSL
 class SkillsBuilder {
     private val softSkills = mutableListOf<String>()
     private val hardSkills = mutableListOf<String>()

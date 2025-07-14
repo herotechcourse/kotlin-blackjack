@@ -86,4 +86,22 @@ class DSLTest {
             )
         )
     }
+
+    @Test
+    fun testOuterScopeNotAccessibleInsideInnerScope() {
+        val builder = PersonBuilder()
+
+        builder.skills {
+            soft("Communication")
+            // The following line does NOT compile because name is inaccessible due to DSL marker
+            // name("Jason")
+        }
+    }
+
+    @Test
+    fun testFunctionsFromCurrentReceiverAreAccessible() {
+        val skillsBuilder = SkillsBuilder()
+        skillsBuilder.soft("Teamwork")
+        skillsBuilder.hard("Kotlin")
+    }
 }
