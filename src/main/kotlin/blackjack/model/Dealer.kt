@@ -9,7 +9,7 @@ class Dealer(
     private val deck: CardDeck,
     private val players: Players,
 ) : Participant() {
-    override val bet: Int = 0 //TODO: check whether bet should be removed from Dealer and Participant
+    override val bet: Int = 0
 
     fun shouldDraw(): Boolean {
         return handCards.total <= Rules.DEALER_DRAW_THRESHOLD

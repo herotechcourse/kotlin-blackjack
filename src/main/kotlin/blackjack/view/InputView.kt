@@ -11,7 +11,6 @@ object InputView {
 
     fun readBets(playerNames: List<String>): List<Int> = playerNames.map { name -> readBet(name) }
 
-    //TODO: accept only multiple of 1000 as bet otherwise might become float when multiplying with factor and also represents Korean won
     private fun readBet(playerName: String): Int {
         repeat(Rules.MAX_TRIES) {
             println("\nEnter ${playerName}'s betting amount:")
@@ -26,6 +25,7 @@ object InputView {
             if (input.isNullOrEmpty()) throw IllegalArgumentException(ErrorMessage.EMPTY_INPUT.toString())
             val bettingAmount = input.toIntOrNull() ?: throw IllegalArgumentException(ErrorMessage.NOT_NUMBER.toString())
             if (bettingAmount < 1000 ) throw IllegalArgumentException(ErrorMessage.MIN_BET.toString())
+            if (bettingAmount % 100 != 0) throw IllegalArgumentException(ErrorMessage.UNIT_BET.toString())
             true
         } catch (e: IllegalArgumentException) {
             println(e.message)

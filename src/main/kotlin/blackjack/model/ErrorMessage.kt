@@ -8,6 +8,7 @@ enum class ErrorMessage(val message: String) {
     NAME_BLANK("Name cannot be blank."),
     NAME_LENGTH("Name cannot be longer than 15 characters."),
     MIN_BET("Bet must be at least 1000."),
+    UNIT_BET("Bet must be multiple of 100."),
     NOT_NUMBER("Bet must be number."),
     NAME_LETTERS("Names must contain only letters."),
     ;
