@@ -18,7 +18,7 @@ class ResultCalculator {
             dealerScore: Int,
         ): ResultStatus {
             if (dealerScore > 21) return ResultStatus.WIN
-            if (playerScore > dealerScore && playerScore <= 21) return ResultStatus.WIN
+            if (playerScore in (dealerScore + 1)..21) return ResultStatus.WIN
             if (playerScore == dealerScore) return ResultStatus.DRAW
             return ResultStatus.LOSS
         }
