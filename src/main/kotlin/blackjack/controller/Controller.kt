@@ -12,7 +12,7 @@ import blackjack.view.OutputView
 
 class Controller() {
     private var players: List<Gambler> = mutableListOf()
-    private val dealer: Dealer = Dealer(GamblerInfo("dealer"))
+    private val dealer: Dealer = Dealer(GamblerInfo("Dealer"))
     private val deck = Deck()
 
     fun run() {
@@ -82,7 +82,7 @@ class Controller() {
         finalResult.lose.forEach { it.calculateAndSetWinnings(false) }
         finalResult.win.forEach { it.calculateAndSetWinnings(true) }
 
-        dealer.setWinnings(players.sumOf { it.winnings })
+        dealer.setWinnings(players.sumOf { -it.winnings })
     }
 
     private fun showResults(finalResult: FinalResult) {
@@ -98,12 +98,12 @@ class Controller() {
             OutputView.displayPlayerResult(it.name, false)
         }
         finalResult.draw.forEach {
-            OutputView.displayPlayerResult(it.name, false)
+            OutputView.displayDrawPlayerResult(it.name)
         }
     }
 
     private fun showWinnings() {
-        OutputView.displayFinalEarning(players)
+        OutputView.displayFinalEarning(listOf(dealer) + players)
     }
 
     private fun processPlayerNames(): List<GamblerInfo> {

@@ -69,6 +69,11 @@ object OutputView {
         println(printableString)
     }
 
+    fun displayDrawPlayerResult(name: String) {
+        val printableString = "$name: Draw"
+        println(printableString)
+    }
+
     private fun getCardsOfPlayers(player: Player): String {
         return "${player.name}'s card: " +
             player.cards.joinToString(", ", transform = ::convertCardToString)
