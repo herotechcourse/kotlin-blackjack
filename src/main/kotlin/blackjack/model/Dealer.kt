@@ -1,6 +1,6 @@
 package blackjack.model
 
-class Dealer() : Participant() {
+class Dealer : Participant() {
     private val deck = Deck()
 
     fun mustDraw(totalValueOfCards: Int) = totalValueOfCards < BlackJackValues.DEALER_STAND_CONDITION
