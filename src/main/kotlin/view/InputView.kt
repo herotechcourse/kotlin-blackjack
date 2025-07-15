@@ -1,6 +1,6 @@
 package view
 
-object InputView {
+class InputView {
     fun requestPlayerNames(): List<String> =
         retry("Enter the names of the players (comma-separated):") {
             parsePlayerNames(readln())

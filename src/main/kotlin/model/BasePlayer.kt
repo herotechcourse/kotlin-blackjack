@@ -23,5 +23,9 @@ abstract class BasePlayer(val name: String) {
         hand.addCard(card)
     }
 
-    abstract fun makeDecision(value: Int): Boolean
+    abstract fun turn(
+        deck: Deck,
+        doAfter: (String) -> (Unit),
+        decision: () -> Boolean,
+    )
 }

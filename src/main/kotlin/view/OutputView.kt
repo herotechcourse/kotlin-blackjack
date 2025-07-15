@@ -5,7 +5,7 @@ import model.Dealer
 import model.Player
 import model.ResultStatus
 
-object OutputView {
+class OutputView {
     fun displayInitialCards(
         players: List<Player>,
         dealer: Dealer,
@@ -15,11 +15,11 @@ object OutputView {
         players.forEach { println("${it.name}'s cards: ${displayCards(it.showCards(), true)} ") }
     }
 
-    fun displayPlayersTurn(player: Player) {
+    fun displayPlayerTurn(player: Player) {
         println(player)
     }
 
-    fun displayDealersGame() {
+    fun displayDealerGame() {
         println("Dealer draws one more card due to having 16 or less.")
     }
 
@@ -38,13 +38,13 @@ object OutputView {
         players: List<Player>,
     ) {
         println("\n## Final Results")
-        println(getDealersResult(results))
+        println(getDealerResult(results))
         for (i in players.indices) {
             println("${players[i].name}: ${ResultStatus.toText(results[i])}")
         }
     }
 
-    private fun getDealersResult(playersResult: List<ResultStatus>): String {
+    private fun getDealerResult(playersResult: List<ResultStatus>): String {
         val wins = playersResult.count { it == ResultStatus.LOSS }
         val losses = playersResult.count { it == ResultStatus.WIN }
         val draws = playersResult.count { it == ResultStatus.DRAW }
