@@ -1,7 +1,4 @@
-package service
-
-import model.Card
-import model.Rank
+package model
 
 class ScoreCalculator {
     companion object {

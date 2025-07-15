@@ -1,5 +1,6 @@
 package service
 
+import model.ResultCalculator
 import model.ResultStatus
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest

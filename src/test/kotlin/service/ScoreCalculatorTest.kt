@@ -2,6 +2,7 @@ package service
 
 import model.Card
 import model.Rank
+import model.ScoreCalculator
 import model.Suite
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.params.ParameterizedTest

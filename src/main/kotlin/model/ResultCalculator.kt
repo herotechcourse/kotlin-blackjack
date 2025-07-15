@@ -1,6 +1,4 @@
-package service
-
-import model.ResultStatus
+package model
 
 class ResultCalculator {
     companion object {
