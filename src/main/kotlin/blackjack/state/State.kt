@@ -7,6 +7,8 @@ interface State {
     val hand: Hand
 
     fun draw(card: Card): State
+
     fun stand(): State
+
     fun profit(money: Int): Double
 }

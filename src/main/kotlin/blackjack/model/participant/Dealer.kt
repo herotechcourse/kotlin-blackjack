@@ -4,13 +4,12 @@ import blackjack.model.Chips
 import blackjack.model.card.Card
 import blackjack.model.card.Deck
 import blackjack.model.result.DealerResultTracker
-import blackjack.model.result.PlayerResultTracker
 import blackjack.model.result.Result
 
 class Dealer(
     name: String = "Dealer",
     internal val deck: Deck = Deck.generateADeck(),
-    private val resultTracker: DealerResultTracker = DealerResultTracker()
+    private val resultTracker: DealerResultTracker = DealerResultTracker(),
 ) :
     Participant(name) {
     private var showAllCards = false

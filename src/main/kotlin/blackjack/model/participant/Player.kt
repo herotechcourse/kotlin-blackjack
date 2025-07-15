@@ -4,7 +4,6 @@ import blackjack.model.Chips
 import blackjack.model.card.Card
 import blackjack.model.result.PlayerResultTracker
 import blackjack.model.result.Result
-import blackjack.model.result.ResultTracker
 
 class Player(name: String, private val resultTracker: PlayerResultTracker = PlayerResultTracker()) : Participant(name) {
     var bet: Chips = Chips.zero

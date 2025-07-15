@@ -1,6 +1,6 @@
 package blackjack.state
 
-abstract class Running: State {
+abstract class Running : State {
     override fun profit(money: Int): Double {
         throw IllegalArgumentException()
     }

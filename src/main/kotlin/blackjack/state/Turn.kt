@@ -4,7 +4,6 @@ import blackjack.model.card.Card
 import blackjack.model.card.Hand
 
 class Turn(override val hand: Hand = Hand(emptyList())) : Running() {
-    constructor(cards: List<Card>) : this(Hand(cards))
 
     override fun draw(card: Card): State {
         this.hand.addCard(card)
