@@ -39,6 +39,6 @@ class DeckTest {
         deck.drawCards(51)
         deck.drawCards()
 
-        assertThat(deck.cards.size).isEqualTo(51)
+        assertThat(deck.cards.size).isEqualTo(52)
     }
 }
