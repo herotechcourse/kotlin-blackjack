@@ -6,18 +6,18 @@ import blackjack.model.Deck
 import blackjack.model.Gambler
 import blackjack.model.GamblerInfo
 import blackjack.model.Player
+import blackjack.model.PlayerBet
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
 class Controller() {
-    private var players: List<Gambler> = mutableListOf()
-    private val dealer: Dealer = Dealer(GamblerInfo("Dealer"))
+    private val players: MutableList<Gambler> = mutableListOf()
+    private val dealer: Dealer = Dealer(GamblerInfo("Dealer"), PlayerBet())
     private val deck = Deck()
 
     fun run() {
         try {
             createPlayers()
-            readBetAmount()
             firstDraw()
             finalDraw()
             calculateAndShowWinnings()
@@ -27,9 +27,17 @@ class Controller() {
     }
 
     private fun createPlayers() {
-        players =
-            processPlayerNames().map { Gambler(it) }
-        OutputView.displayNamesOfPlayers(players)
+        val names = processPlayerNames()
+        OutputView.displayNamesOfPlayers(names)
+        val bets = names.map { processBetAmount(it) }
+        names.forEachIndexed { index, name ->
+            players.add(
+                Gambler(
+                    GamblerInfo(name),
+                    PlayerBet(bets[index]),
+                ),
+            )
+        }
     }
 
     private fun firstDraw() {
@@ -43,10 +51,6 @@ class Controller() {
         players.forEach { playerTakesTurn(it) }
         dealerTakesTurn()
         OutputView.displayCardsOfPlayersWithScore(listOf(dealer) + players)
-    }
-
-    private fun readBetAmount() {
-        players.forEach { it.setBetAmount(processBetAmount(it.name)) }
     }
 
     private fun getInitialCards(): List<Card> = deck.drawCards(INITIAL_CARD_COUNT)
@@ -79,13 +83,11 @@ class Controller() {
         OutputView.displayFinalEarning(listOf(dealer) + players)
     }
 
-    private fun processPlayerNames(): List<GamblerInfo> {
+    private fun processPlayerNames(): List<String> {
         repeat(MAX_ATTEMPTS) {
             try {
                 val names = InputView.getNamesOfPlayers()
-                return names
-                    .parseCommaString()
-                    .map(::GamblerInfo)
+                return names.parseCommaString()
             } catch (err: IllegalArgumentException) {
                 OutputView.displayErrorMessages(err.message)
             }

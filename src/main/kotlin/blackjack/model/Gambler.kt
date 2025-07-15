@@ -2,7 +2,10 @@ package blackjack.model
 
 import blackjack.controller.Controller.Companion.INITIAL_CARD_COUNT
 
-class Gambler(gamblerInfo: GamblerInfo) : Player(gamblerInfo) {
+class Gambler(
+    gamblerInfo: GamblerInfo,
+    playerBet: PlayerBet,
+) : Player(gamblerInfo, playerBet) {
     fun isPlayerBelowBlackJack(): Boolean = score < WINNING_SCORE
 
     fun hasCardCount(): Boolean = cards.size == INITIAL_CARD_COUNT

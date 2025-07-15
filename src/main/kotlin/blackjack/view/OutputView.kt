@@ -12,8 +12,8 @@ object OutputView {
         println("[Error]::${message ?: ""}")
     }
 
-    fun displayNamesOfPlayers(players: List<Player>) {
-        val nameList = players.joinToString(", ") { it.name }
+    fun displayNamesOfPlayers(names: List<String>) {
+        val nameList = names.joinToString(", ") { it }
         println("\nDealing two cards to dealer, $nameList.")
     }
 
@@ -44,34 +44,9 @@ object OutputView {
         println()
     }
 
-    fun displayFinalResultsHeading() {
-        println("## Final Results")
-    }
-
     fun displayFinalEarning(players: List<Player>) {
         println("\n## Final Earnings")
         players.forEach { println("${it.name}: ${it.winnings.toInt()}") }
-    }
-
-    fun displayPlayerResult(
-        win: Int,
-        lose: Int,
-        draw: Int,
-    ) {
-        println("Dealer: $win Win $draw Draw $lose Lose")
-    }
-
-    fun displayPlayerResult(
-        name: String,
-        result: Boolean,
-    ) {
-        val printableString = "$name: " + if (result) "Win" else "Lose"
-        println(printableString)
-    }
-
-    fun displayDrawPlayerResult(name: String) {
-        val printableString = "$name: Draw"
-        println(printableString)
     }
 
     private fun getCardsOfPlayers(player: Player): String {
