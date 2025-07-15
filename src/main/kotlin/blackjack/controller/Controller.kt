@@ -29,15 +29,12 @@ class Controller() {
     private fun createPlayers() {
         val names = processPlayerNames()
         OutputView.displayNamesOfPlayers(names)
-        val bets = names.map { processBetAmount(it) }
-        names.forEachIndexed { index, name ->
-            players.add(
-                Gambler(
-                    GamblerInfo(name),
-                    PlayerBet(bets[index]),
-                ),
-            )
-        }
+        val playersToAdd =
+            names.map {
+                val bet = processBetAmount(it)
+                Gambler(GamblerInfo(it), PlayerBet(bet))
+            }
+        players.addAll(playersToAdd)
     }
 
     private fun firstDraw() {
