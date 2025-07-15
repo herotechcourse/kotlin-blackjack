@@ -32,7 +32,7 @@ class Deck {
                 Rank.entries.map { rank ->
                     Card(rank, suit)
                 }
-            }
+            },
         )
     }
 }
