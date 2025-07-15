@@ -95,7 +95,7 @@ class PlayerTest {
     }
 
     @Test
-    fun `return True for BlackJack`() {
+    fun `isBlackJack return True for BlackJack`() {
         val player = Gambler(GamblerInfo("Player"), PlayerBet())
         player.addCard(
             listOf(
@@ -107,7 +107,7 @@ class PlayerTest {
     }
 
     @Test
-    fun `return False if not score not 21`() {
+    fun `isBlackJack return False if not score not 21`() {
         val player = Gambler(GamblerInfo("Player"), PlayerBet())
         player.addCard(
             listOf(
@@ -119,7 +119,7 @@ class PlayerTest {
     }
 
     @Test
-    fun `return False if card count greater than 2`() {
+    fun `isBlackJack return False if card count greater than 2`() {
         val player = Gambler(GamblerInfo("Player"), PlayerBet())
         player.addCard(
             listOf(
