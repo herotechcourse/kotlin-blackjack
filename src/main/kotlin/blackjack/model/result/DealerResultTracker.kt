@@ -1,7 +1,6 @@
 package blackjack.model.result
 
 class DealerResultTracker : ResultTracker {
-    override var result: Result? = null
     private val resultMap =
         mutableMapOf<Result, Int>(
             Result.WIN to 0,

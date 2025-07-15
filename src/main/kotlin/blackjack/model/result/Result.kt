@@ -5,6 +5,7 @@ enum class Result(val description: String) {
     LOSE("Lose"),
     TIE("Tie"),
     BLACKJACK("Win"),
+    UNKNOWN("Unknown"),
     ;
 
     val inverse: Result
@@ -14,5 +15,6 @@ enum class Result(val description: String) {
                 LOSE -> WIN
                 TIE -> TIE
                 BLACKJACK -> LOSE
+                UNKNOWN -> UNKNOWN
             }
 }

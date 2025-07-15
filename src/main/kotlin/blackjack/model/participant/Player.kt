@@ -4,9 +4,10 @@ import blackjack.model.Chips
 import blackjack.model.card.Card
 import blackjack.model.result.PlayerResultTracker
 import blackjack.model.result.Result
+import blackjack.model.result.ResultTracker
 
-class Player(name: String) : Participant(name, PlayerResultTracker()) {
-    var bet: Chips = Chips.zero()
+class Player(name: String, private val resultTracker: PlayerResultTracker = PlayerResultTracker()) : Participant(name) {
+    var bet: Chips = Chips.zero
         private set
 
     val result: String
@@ -18,13 +19,15 @@ class Player(name: String) : Participant(name, PlayerResultTracker()) {
         bet = Chips(amount)
     }
 
+    fun recordResult(result: Result) = resultTracker.record(result)
+
     fun addProfit() {
         profit =
             when (resultTracker.result) {
                 Result.BLACKJACK -> bet.blackjack()
                 Result.WIN -> bet
                 Result.LOSE -> bet.lose()
-                else -> Chips.zero()
+                else -> Chips.zero
             }
     }
 }

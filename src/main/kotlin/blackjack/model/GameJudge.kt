@@ -18,6 +18,6 @@ object GameJudge {
         player.recordResult(result)
         dealer.recordResult(result.inverse)
         player.addProfit()
-        dealer.addProfit(-player.profit)
+        dealer.deductFromProfit(player.profit)
     }
 }

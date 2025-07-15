@@ -6,10 +6,10 @@ import blackjack.model.card.Hand
 import blackjack.model.result.Result
 import blackjack.model.result.ResultTracker
 
-abstract class Participant(val name: String, protected val resultTracker: ResultTracker) {
+abstract class Participant(val name: String) {
     @Suppress("PropertyName")
     protected val participantHand = Hand()
-    var profit: Chips = Chips.zero()
+    var profit: Chips = Chips.zero
         protected set
 
     init {
@@ -23,8 +23,6 @@ abstract class Participant(val name: String, protected val resultTracker: Result
     fun hasBlackJack(): Boolean = participantHand.hasBlackJack()
 
     fun isBusts(): Boolean = participantHand.isBusts()
-
-    fun recordResult(result: Result) = resultTracker.record(result)
 
     fun sortHand() {
         participantHand.sortCards()
