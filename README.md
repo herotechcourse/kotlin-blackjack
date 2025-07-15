@@ -63,7 +63,7 @@
     - [x] Should be comma separated names
     - [x] Should contain a minimum of one player.
     - [x] The names should be unique.
-  - [ ] Should accept an amount for the Bet bigger than 0.
+  - [x] Should accept an amount for the Bet bigger than 0.
 - [x] OutputView
   - [x] Should print the list of all participants and their hands.
   - [x] Should print the final hands and score.
