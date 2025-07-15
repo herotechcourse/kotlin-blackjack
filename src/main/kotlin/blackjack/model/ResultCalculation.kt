@@ -6,7 +6,7 @@ object ResultCalculation {
 
     private fun hasPlayerBJ(player: Player) = player.cardsInHand.hasBlackJack()
 
-    private fun hasAnyPlayerBJ(players: Players) = players.getPlayers().any { player -> player.cardsInHand.hasBlackJack() }
+    private fun hasAnyPlayerBJ(players: Players) = players.members.any { player -> player.cardsInHand.hasBlackJack() }
 
     fun calculatePlayerEarnings(player: Player, dealer: Dealer): Int {
         return when {

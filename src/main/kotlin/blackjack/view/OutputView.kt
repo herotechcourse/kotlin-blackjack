@@ -41,10 +41,10 @@ object OutputView {
         dealer: Dealer,
         players: Players
     ) {
-        val playerNames = players.getPlayers().joinToString(", ") { it.name }
+        val playerNames = players.members.joinToString(", ") { it.name }
         println("\nDealing two cards to Dealer, $playerNames.")
         println(showDealerFirstHandCards(dealer))
-        players.getPlayers().forEach { player ->
+        players.members.forEach { player ->
             println(showHandCards(player))
         }
         println()
@@ -86,7 +86,7 @@ object OutputView {
     ) {
         println("\n## Final Earnings")
         println("Dealer: ${dealer.earnings}")
-        players.getPlayers().forEach {
+        players.members.forEach {
             println("${it.name}: ${it.earnings}")
         }
     }

@@ -21,7 +21,7 @@ class Dealer : Participant() {
 
     fun dealInitialCardsToPlayers(players: Players) {
         repeat(BlackJackValues.FIRST_HAND_CARDS) {
-            players.getPlayers().forEach { it -> dealCardToPlayer(it) }
+            players.members.forEach { it -> dealCardToPlayer(it) }
         }
     }
 }
