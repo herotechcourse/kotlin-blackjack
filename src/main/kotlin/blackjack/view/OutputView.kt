@@ -45,8 +45,8 @@ object OutputView {
     fun printResults(participants: Participants) {
         printEmptyLine()
         println(RESULTS_HEAD)
-        println("${participants.dealerName}: ${participants.dealerProfit}")
-        participants.players.forEach { println("${it.name}: ${it.profit}") }
+        println("${participants.dealerName}: ${participants.dealerProfit.value.toInt()}")
+        participants.players.forEach { println("${it.name}: ${it.profit.value.toInt()}") }
     }
 
     fun printErrorMessage(message: String) {
