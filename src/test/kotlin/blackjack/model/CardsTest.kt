@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test
 
 class CardsTest {
     @Test
-    fun `should return true when cards in hand have condition for BlackJack`() {
+    fun `should be BlackJack when cards are exactly 2 and total value is 21`() {
         val cardsInHand = Cards(mutableListOf(Card(Rank.ACE, Suit.HEARTS), Card(Rank.JACK, Suit.DIAMONDS)))
         assertThat(cardsInHand.hasBlackJack()).isTrue()
     }
 
     @Test
-    fun `should return false when cards in hand dont fulfil condition for BlackJack`() {
+    fun `should not be BlackJack when total value is 21 but number of cards is different than 2`() {
         val cardsInHand = Cards(
             mutableListOf(
                 Card(Rank.ACE, Suit.HEARTS),
