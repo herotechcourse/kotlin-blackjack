@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 
 class GamblerTest {
     @Test
-    fun `return true if Player below Blackjack`() {
+    fun `isPlayerBelowBlackJack() return true if Player below Blackjack`() {
         val gambler = Gambler(GamblerInfo("Player"))
         val cards = listOf(Card(Rank.ACE, Suit.SPADE), Card(Rank.NINE, Suit.SPADE))
         gambler.addCard(cards)
@@ -19,7 +19,7 @@ class GamblerTest {
     }
 
     @Test
-    fun `return false if Player above or equal Blackjack`() {
+    fun `isPlayerBelowBlackJack() return false if Player above or equal Blackjack`() {
         val gambler = Gambler(GamblerInfo("Player"))
         val cards = listOf(Card(Rank.ACE, Suit.SPADE), Card(Rank.KING, Suit.SPADE))
         gambler.addCard(cards)
@@ -27,7 +27,7 @@ class GamblerTest {
     }
 
     @Test
-    fun `return true if Player has two cards`() {
+    fun `hasCardCount() return true if Player has two cards`() {
         val gambler = Gambler(GamblerInfo("Player"))
         val cards = listOf(Card(Rank.ACE, Suit.SPADE), Card(Rank.KING, Suit.SPADE))
         gambler.addCard(cards)
@@ -35,7 +35,7 @@ class GamblerTest {
     }
 
     @Test
-    fun `return false if Player does not have two cards`() {
+    fun `hasCardCount() return false if Player does not have two cards`() {
         val gambler = Gambler(GamblerInfo("Player"))
         gambler.addCard(listOf(Card(Rank.ACE, Suit.SPADE)))
         assertThat(gambler.hasCardCount()).isFalse
