@@ -31,9 +31,8 @@ object OutputView {
         dealer: Dealer,
         players: List<Player>,
     ) {
-        println()
         val playerNames = players.joinToString(", ") { it.name }
-        println("Dealing two cards to dealer, $playerNames.")
+        println("\nDealing two cards to dealer, $playerNames.")
 
         println("Dealer: ${formatCard(dealer.cardsInHand[0])}")
 

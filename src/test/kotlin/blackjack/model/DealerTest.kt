@@ -66,7 +66,6 @@ class DealerTest {
         assertThat(result).isEqualTo(-10000) // Dealer pays 1 player's win
     }
 
-
     @Test
     fun `should return 0 when tie`() {
         val dealer = Dealer()

@@ -17,8 +17,7 @@ object InputView {
     }
 
     fun askPlayerBet(name: String): Int {
-        println()
-        println("Enter $name’s betting amount:")
+        println("\nEnter $name’s betting amount:")
         return try {
             readLine()?.toIntOrNull()?.takeIf { it > 0 } ?: askPlayerBet(name)
         } catch (e: IllegalArgumentException) {
