@@ -209,7 +209,7 @@ class GamblerTest {
             ),
         )
 
-        val player = Gambler(GamblerInfo("Player"), PlayerBet())
+        val player = Gambler(GamblerInfo("Player"), PlayerBet(10.0))
         player.addCard(
             listOf(
                 Card(Rank.KING, Suit.SPADE),
