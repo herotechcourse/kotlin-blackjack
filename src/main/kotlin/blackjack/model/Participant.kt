@@ -7,4 +7,8 @@ abstract class Participant(
     var state: State,
 ) {
     val points get() = state.hand.calculatePoints()
+
+    fun hitTwoCards(cardDeck: CardDeck) {
+        while (state.isFirstTurn()) state = state.draw(cardDeck.drawCard())
+    }
 }
