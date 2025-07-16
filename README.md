@@ -32,9 +32,6 @@
   - [x] Show dealer and player earnings amounts
 
 ## Updates : Step1 (after implementing step2)
-- [] implement abstract class and inheritance for players and dealer
-- [] refactor `Controller`
-  - [] extract some methods in `Controller` for better readability
 - [x] remove abundant `it` from the line `.map { it -> ...}` in `Controller.kt`
   - [x] of `fun run()` 
   - [x] of `private fun playerTakesTurn()`
@@ -92,3 +89,9 @@
 
 ### class `Application`
 - [x] fun main() to and use `run` from controller
+
+---
+### for later update
+- [] implement abstract class and inheritance for players and dealer
+- [] refactor `Controller`
+  - [] extract some methods in `Controller` for better readability
