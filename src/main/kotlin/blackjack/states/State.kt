@@ -17,4 +17,6 @@ interface State {
         state: State,
         betMoney: Int,
     ): Double
+
+    fun isRunning(): Boolean
 }
