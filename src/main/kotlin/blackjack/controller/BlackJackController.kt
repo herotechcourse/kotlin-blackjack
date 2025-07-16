@@ -6,7 +6,7 @@ import blackjack.model.ParticipantsFactory
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
-class BlackJackController() {
+class BlackJackController {
     fun startGame() {
         try {
             val playersNames = InputView.getPlayersName()
