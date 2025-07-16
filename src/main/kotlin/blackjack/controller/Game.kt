@@ -24,7 +24,7 @@ class Game(
     }
 
     private fun collectBets(players: Players) {
-        players.members.forEach { player ->
+        players.values.forEach { player ->
             player.setBet(InputView.askPlayerBet(player.name))
         }
     }
@@ -39,11 +39,11 @@ class Game(
         askPlayersToHit(players)
         dealerDraws()
         OutputView.displayDealersCardsWithTotalValue(dealer)
-        players.members.forEach { player -> OutputView.displayCardsWithTotalValue(player) }
+        players.values.forEach { player -> OutputView.displayCardsWithTotalValue(player) }
     }
 
     private fun askPlayersToHit(players: Players) {
-        players.members.forEach {
+        players.values.forEach {
             do {
                 val answer = InputView.askToHit(it.name)
                 if (answer) {
@@ -69,7 +69,7 @@ class Game(
     }
 
     private fun calculateEarnings(players: Players) {
-        players.members
+        players.values
             .forEach { player -> player.updateEarnings(ResultCalculation.calculatePlayerResult(player, dealer)) }
         dealer.updateEarnings(players.calculateTotalPlayersEarning())
     }
