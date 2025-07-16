@@ -15,7 +15,7 @@ class BlackJackController {
 
             players.forEach {
                 val bettingAmount = InputView.bettingAmountInput(it)
-                it.setBettingAmount(bettingAmount)
+                it.bettingAmount = bettingAmount
             }
 
             val blackjackGame =

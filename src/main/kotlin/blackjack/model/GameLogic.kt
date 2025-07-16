@@ -5,6 +5,6 @@ object GameLogic {
         dealer: Dealer,
         players: List<Player>,
     ): Map<Player, Double> {
-        return players.associateWith { it.state.profit(dealer.state, it.bettingMoney) }
+        return players.associateWith { it.state.profit(dealer.state, it.bettingAmount) }
     }
 }
