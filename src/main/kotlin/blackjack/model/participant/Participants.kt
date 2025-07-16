@@ -7,8 +7,6 @@ class Participants(val dealer: Dealer, val players: List<Player>) {
         get() = dealer.getScore()
     val dealerName: String
         get() = dealer.name
-    val dealerResult: String
-        get() = dealer.result
     val dealerProfit: Chips
         get() = dealer.profit
 
