@@ -8,7 +8,15 @@ abstract class Participant(
 ) {
     val points get() = state.hand.calculatePoints()
 
+    fun draw(card: Card) {
+        state = state.draw(card)
+    }
+
+    fun stay() {
+        state = state.stay()
+    }
+
     fun hitTwoCards(cardDeck: CardDeck) {
-        while (state.isFirstTurn()) state = state.draw(cardDeck.drawCard())
+        while (state.isFirstTurn()) draw(cardDeck.drawCard())
     }
 }
