@@ -3,10 +3,10 @@ package blackjack
 import blackjack.model.Bet
 import blackjack.model.Card
 import blackjack.model.Dealer
+import blackjack.model.EarningsResult
 import blackjack.model.Player
 import blackjack.model.Rank
 import blackjack.model.Suit
-import blackjack.utils.Constants
 import blackjack.view.StatsView
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -24,7 +24,7 @@ class BlackJackTest {
 
         val stats = StatsView(listOf(player), dealer)
 
-        assertEquals(Constants.WIN, stats.playerBoard[player])
+        assertEquals(EarningsResult.WIN_BET, stats.playerBoard[player])
         assertEquals(10000, stats.earnings[player])
         assertEquals(-10000, stats.earnings[dealer])
     }
@@ -42,7 +42,7 @@ class BlackJackTest {
 
         val stats = StatsView(listOf(player), dealer)
 
-        assertEquals(Constants.LOSE, stats.playerBoard[player])
+        assertEquals(EarningsResult.LOSE_BET, stats.playerBoard[player])
         assertEquals(-20000, stats.earnings[player])
         assertEquals(20000, stats.earnings[dealer])
     }
@@ -59,7 +59,7 @@ class BlackJackTest {
 
         val stats = StatsView(listOf(player), dealer)
 
-        assertEquals(Constants.TIE, stats.playerBoard[player])
+        assertEquals(EarningsResult.TIE_BET, stats.playerBoard[player])
         assertEquals(0, stats.earnings[player])
         assertEquals(0, stats.earnings[dealer])
     }
@@ -76,7 +76,7 @@ class BlackJackTest {
 
         val stats = StatsView(listOf(player), dealer)
 
-        assertEquals(Constants.WIN_BLACK_JACK, stats.playerBoard[player])
+        assertEquals(EarningsResult.WIN_BLACK_JACK_BET, stats.playerBoard[player])
         assertEquals(15000, stats.earnings[player])
         assertEquals(-15000, stats.earnings[dealer])
     }
@@ -94,7 +94,7 @@ class BlackJackTest {
 
         val stats = StatsView(listOf(player), dealer)
 
-        assertEquals(Constants.WIN, stats.playerBoard[player])
+        assertEquals(EarningsResult.WIN_BET, stats.playerBoard[player])
         assertEquals(5000, stats.earnings[player])
         assertEquals(-5000, stats.earnings[dealer])
     }
@@ -111,7 +111,7 @@ class BlackJackTest {
 
         val stats = StatsView(listOf(player), dealer)
 
-        assertEquals(Constants.TIE, stats.playerBoard[player])
+        assertEquals(EarningsResult.TIE_BET, stats.playerBoard[player])
         assertEquals(0, stats.earnings[player])
         assertEquals(0, stats.earnings[dealer])
     }
@@ -134,8 +134,8 @@ class BlackJackTest {
 
         val stats = StatsView(listOf(player1, player2), dealer)
 
-        assertEquals(Constants.LOSE, stats.playerBoard[player1])
-        assertEquals(Constants.LOSE, stats.playerBoard[player2])
+        assertEquals(EarningsResult.LOSE_BET, stats.playerBoard[player1])
+        assertEquals(EarningsResult.LOSE_BET, stats.playerBoard[player2])
         assertEquals(-10000, stats.earnings[player1])
         assertEquals(-20000, stats.earnings[player2])
         assertEquals(30000, stats.earnings[dealer])

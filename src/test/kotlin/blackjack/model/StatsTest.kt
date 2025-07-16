@@ -31,9 +31,9 @@ class StatsTest {
 
         val stats = StatsView(listOf(player1, player2, player3), dealer)
         val board = stats.playerBoard
-        assertEquals(0, board[player1])
-        assertEquals(3, board[player2])
-        assertEquals(2, board[player3])
+        assertEquals(EarningsResult.LOSE_BET, board[player1])
+        assertEquals(EarningsResult.WIN_BLACK_JACK_BET, board[player2])
+        assertEquals(EarningsResult.TIE_BET, board[player3])
     }
 
     @Test
