@@ -23,4 +23,8 @@ class FirstTurn(override val hand: Hand = Hand(emptyList())) : Running {
     ): Double {
         throw IllegalStateException(Errors.INVALID_PROFIT.message)
     }
+
+    override fun isFirstTurn(): Boolean {
+        return true
+    }
 }

@@ -22,6 +22,10 @@ class Hit(override val hand: Hand) : Running {
         throw IllegalStateException(Errors.INVALID_PROFIT.message)
     }
 
+    override fun isFirstTurn(): Boolean {
+        return false
+    }
+
     companion object {
         private const val BLACKJACK = 21
     }

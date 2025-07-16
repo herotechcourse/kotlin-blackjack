@@ -19,4 +19,6 @@ interface State {
     ): Double
 
     fun isRunning(): Boolean
+
+    fun isFirstTurn(): Boolean
 }

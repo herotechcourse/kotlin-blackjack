@@ -15,4 +15,8 @@ interface Finished : State {
     override fun isRunning(): Boolean {
         return false
     }
+
+    override fun isFirstTurn(): Boolean {
+        return false
+    }
 }
