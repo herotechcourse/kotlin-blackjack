@@ -12,7 +12,7 @@ abstract class Participant(open val name: String) {
     private fun calculateTotalValueOfCards(): Int {
         var total = cardsInHand.sumOf { it.rank.value }
         var aceCounter = checkAces()
-        while (total > BUST_LIMIT && aceCounter > 0) {
+        while (total > IS_BLACKJACK && aceCounter > 0) {
             total -= 10
             aceCounter--
         }
@@ -21,11 +21,13 @@ abstract class Participant(open val name: String) {
 
     fun total(): Int = calculateTotalValueOfCards()
 
-    fun isBusted(): Boolean = total() > BUST_LIMIT
+    fun isBusted(): Boolean = total() > IS_BLACKJACK
 
     fun isStillInGame(): Boolean = !isBusted()
 
+    fun isBlackjack(): Boolean = cardsInHand.size == 2 && total() == IS_BLACKJACK
+
     companion object {
-        const val BUST_LIMIT = 21
+        const val IS_BLACKJACK = 21
     }
 }

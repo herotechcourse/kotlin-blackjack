@@ -13,7 +13,14 @@ class Game {
 
     fun startGame() {
         val names = InputView.askPlayerNames()
-        val players = Players(names.map { Player(it) })
+        val players =
+            Players(
+                names.map {
+                    val bet = InputView.askPlayerBet(it)
+                    Player(it, bet)
+                },
+            )
+
         val dealer = Dealer()
         val participants = Participants(players, dealer)
 
@@ -27,12 +34,15 @@ class Game {
             }
         }
 
-        if (dealer.mustDraw()) {
+        while (dealer.mustDraw()) {
             OutputView.showDealerDrawsCard()
+            dealer.drawCard(deck.draw())
         }
         participants.dealerTurn(deck)
 
         OutputView.showFinalHands(dealer, players.toList())
+
+        participants.evaluateResults()
         OutputView.showFinalResults(dealer, players.toList())
     }
 }

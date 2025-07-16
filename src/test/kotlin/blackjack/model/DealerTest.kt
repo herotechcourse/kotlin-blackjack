@@ -1,9 +1,10 @@
 package blackjack.model
 
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
 
 class DealerTest {
     @Test
@@ -34,5 +35,48 @@ class DealerTest {
 
         dealer.drawCard(listOf(Card(Rank.ACE, Suit.DIAMONDS)))
         assertEquals(18, dealer.total()) // ace1=11 + six=6 + ace2=1, total =18
+    }
+
+    @Test
+    fun `should return correct amount when players lose`() {
+        val dealer = Dealer()
+        val player = Player("pobi", 10000)
+
+        // simulate dealer win: dealer has higher total
+        dealer.drawCard(listOf(Card(Rank.TEN, Suit.SPADES), Card(Rank.NINE, Suit.CLUBS))) // 19
+        player.drawCard(listOf(Card(Rank.TEN, Suit.HEARTS), Card(Rank.EIGHT, Suit.DIAMONDS))) // 18
+
+        player.updateWinningMoney(dealer)
+
+        val result = dealer.returnWinningMoneyForDealer(listOf(player))
+        assertThat(result).isEqualTo(10000) // Dealer earns 1 player's loss
+    }
+
+    @Test
+    fun `should return correct amount when player wins`() {
+        val dealer = Dealer()
+        val player = Player("jason", 10000)
+
+        dealer.drawCard(listOf(Card(Rank.FIVE, Suit.SPADES), Card(Rank.SIX, Suit.CLUBS))) // 11
+        player.drawCard(listOf(Card(Rank.TEN, Suit.HEARTS), Card(Rank.KING, Suit.DIAMONDS))) // 20
+
+        player.updateWinningMoney(dealer)
+
+        val result = dealer.returnWinningMoneyForDealer(listOf(player))
+        assertThat(result).isEqualTo(-10000) // Dealer pays 1 player's win
+    }
+
+    @Test
+    fun `should return 0 when tie`() {
+        val dealer = Dealer()
+        val player = Player("alex", 10000)
+
+        dealer.drawCard(listOf(Card(Rank.NINE, Suit.SPADES), Card(Rank.TWO, Suit.HEARTS))) // 11
+        player.drawCard(listOf(Card(Rank.SIX, Suit.DIAMONDS), Card(Rank.FIVE, Suit.CLUBS))) // 11
+
+        player.updateWinningMoney(dealer)
+
+        val result = dealer.returnWinningMoneyForDealer(listOf(player))
+        assertThat(result).isEqualTo(0)
     }
 }
