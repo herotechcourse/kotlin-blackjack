@@ -24,4 +24,8 @@ class Dealer : Participant() {
             players.members.forEach { it -> dealCardToPlayer(it) }
         }
     }
+
+    override fun updateEarnings(newEarnings: Int) {
+        earnings -= newEarnings
+    }
 }
