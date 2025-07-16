@@ -13,4 +13,8 @@ abstract class Participant(
     open fun updateEarnings(newEarnings: Int) {
         earnings += newEarnings
     }
+
+    fun isAbleToHit(): Boolean {
+        return cardsInHand.isLowHand()
+    }
 }
