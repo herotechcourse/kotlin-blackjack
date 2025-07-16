@@ -48,10 +48,9 @@ class Game(
                 val answer = InputView.askToHit(it.name)
                 if (answer) {
                     dealer.dealCardToPlayer(it)
-                    it.updatePlayingStatus(it.cardsInHand.isBustHand())
                     OutputView.displayCardsAfterHit(it)
                 }
-            } while (answer && it.isPlaying)
+            } while (answer && it.cardsInHand.isAbleToHit())
         }
     }
 
@@ -62,23 +61,16 @@ class Game(
             dealer.selfDrawCard()
             mustDraw = dealer.mustDraw(dealer.cardsInHand.calculateTotalValueOfCards())
         }
-        dealer.updatePlayingStatus(dealer.cardsInHand.isBustHand())
     }
 
     private fun compareFinalCards(players: Players) {
-        if (dealer.isPlaying) {
-            val dealerPoints = dealer.cardsInHand.calculateTotalValueOfCards()
-            players.members.forEach {
-                it.updatePlayingStatus(it.hasLessPointsThanDealer(dealerPoints))
-            }
-        }
         calculateEarnings(players)
         OutputView.displayFinalResults(dealer, players)
     }
 
     private fun calculateEarnings(players: Players) {
         players.members
-            .forEach { player -> player.updateEarnings(ResultCalculation.calculatePlayerEarnings(player, dealer)) }
-        dealer.updateEarnings(ResultCalculation.calculateDealerEarnings(dealer, players))
+            .forEach { player -> player.updateEarnings(ResultCalculation.calculatePlayerResult(player, dealer)) }
+        dealer.updateEarnings(players.calculateTotalPlayersEarning())
     }
 }

@@ -20,9 +20,9 @@ class ResultCalculationTest {
         player1.drawCard(card3)
         player1.drawCard(card4)
 
-        val dealerPoints = dealer.cardsInHand.calculateTotalValueOfCards()
-        player1.updatePlayingStatus(player1.hasLessPointsThanDealer(dealerPoints))
-        player1.updateEarnings(ResultCalculation.calculatePlayerEarnings(player1, dealer))
-        assertThat(ResultCalculation.calculateDealerEarnings(dealer, Players(listOf(player1)))).isEqualTo(30000)
+        player1.updateEarnings(ResultCalculation.calculatePlayerResult(player1, dealer))
+        val listOfPlayer = Players(listOf(player1))
+        dealer.updateEarnings(listOfPlayer.calculateTotalPlayersEarning())
+        assertThat(dealer.earnings).isEqualTo(30000)
     }
 }

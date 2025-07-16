@@ -21,4 +21,6 @@ class Cards(val cards: MutableList<Card>) {
     fun hasBlackJack() = cards.size == 2 && calculateTotalValueOfCards() == BlackJackValues.BLACK_JACK
 
     fun isBustHand() = calculateTotalValueOfCards() > BlackJackValues.HAND_VALUE_LIMIT
+
+    fun isAbleToHit() = calculateTotalValueOfCards() < BlackJackValues.HAND_VALUE_LIMIT
 }
