@@ -6,8 +6,8 @@ import blackjack.view.Errors
 class FirstTurn(override val hand: Hand = Hand(emptyList())) : Running {
     override fun draw(card: Card): State {
         val hand = this.hand + card
-        if (hand.size == 2) {
-            if (hand.calculatePoints() == 21) return Blackjack(hand)
+        if (hand.size == TWO_CARDS) {
+            if (hand.calculatePoints() == BLACKJACK) return Blackjack(hand)
             return Hit(hand)
         }
         return FirstTurn(hand)
@@ -26,5 +26,10 @@ class FirstTurn(override val hand: Hand = Hand(emptyList())) : Running {
 
     override fun isFirstTurn(): Boolean {
         return true
+    }
+
+    companion object {
+        const val BLACKJACK = 21
+        const val TWO_CARDS = 2
     }
 }
