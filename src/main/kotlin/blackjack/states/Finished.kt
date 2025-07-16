@@ -11,4 +11,8 @@ interface Finished : State {
     override fun stay(): State {
         throw IllegalStateException(Errors.INVALID_STAY.message)
     }
+
+    override fun isRunning(): Boolean {
+        return false
+    }
 }

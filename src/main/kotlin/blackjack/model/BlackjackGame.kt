@@ -1,7 +1,5 @@
 package blackjack.model
 
-import blackjack.states.Running
-
 class BlackjackGame(
     private val dealer: Dealer,
     private val players: List<Player>,
@@ -26,11 +24,11 @@ class BlackjackGame(
     fun play() {
         dealer.playTurn(cardDeck)
         players.forEach {
-            while (it.state is Running && askForCard(it)) {
+            while (it.state.isRunning() && askForCard(it)) {
                 it.draw(cardDeck.drawCard())
                 output(it)
             }
-            if (it.state is Running) it.stay()
+            if (it.state.isRunning()) it.stay()
         }
     }
 }
