@@ -1,14 +1,19 @@
 package blackjack.view
 
-import blackjack.model.*
+import blackjack.model.Card
+import blackjack.model.Dealer
+import blackjack.model.Gambler
+import blackjack.model.Player
+import blackjack.model.Rank
+import blackjack.model.Suit
 
 object OutputView {
     fun displayErrorMessages(message: String?) {
         println("[Error]::${message ?: ""}")
     }
 
-    fun displayNamesOfPlayers(players: List<Player>) {
-        val nameList = players.joinToString(", ") { it.name }
+    fun displayNamesOfPlayers(names: List<String>) {
+        val nameList = names.joinToString(", ") { it }
         println("\nDealing two cards to dealer, $nameList.")
     }
 
@@ -39,24 +44,9 @@ object OutputView {
         println()
     }
 
-    fun displayFinalResultsHeading() {
-        println("## Final Results")
-    }
-
-    fun displayPlayerResult(
-        win: Int,
-        lose: Int,
-        draw: Int,
-    ) {
-        println("Dealer: $win Win $draw Draw $lose Lose")
-    }
-
-    fun displayPlayerResult(
-        name: String,
-        result: Boolean,
-    ) {
-        val printableString = "$name: " + if (result) "Win" else "Lose"
-        println(printableString)
+    fun displayFinalEarning(players: List<Player>) {
+        println("\n## Final Earnings")
+        players.forEach { println("${it.name}: ${it.winnings.toInt()}") }
     }
 
     private fun getCardsOfPlayers(player: Player): String {

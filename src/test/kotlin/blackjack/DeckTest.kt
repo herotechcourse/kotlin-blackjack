@@ -32,4 +32,13 @@ class DeckTest {
 
         assertThat(deck.cards.contains(card)).isFalse()
     }
+
+    @Test
+    fun `Generated new cards if one card left`() {
+        val deck = Deck()
+        deck.drawCards(51)
+        deck.drawCards()
+
+        assertThat(deck.cards.size).isEqualTo(52)
+    }
 }

@@ -1,6 +1,12 @@
 package blackjack
 
-import blackjack.model.*
+import blackjack.model.Card
+import blackjack.model.Deck
+import blackjack.model.Gambler
+import blackjack.model.GamblerInfo
+import blackjack.model.PlayerBet
+import blackjack.model.Rank
+import blackjack.model.Suit
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -9,7 +15,7 @@ class PlayerTest {
     @Test
     fun `should be equal result`() {
         val card = Card(Rank.TEN, Suit.SPADE)
-        val player = Gambler(GamblerInfo("Player"))
+        val player = Gambler(GamblerInfo("Player"), PlayerBet())
         player.addCard(listOf(card))
         assertEquals(10, player.score)
     }
@@ -17,7 +23,7 @@ class PlayerTest {
     @Test
     fun `Ace card is considered one if score crosses 21`() {
         val cards = listOf(Card(Rank.ACE, Suit.SPADE), Card(Rank.ACE, Suit.HEART))
-        val player = Gambler(GamblerInfo("Player"))
+        val player = Gambler(GamblerInfo("Player"), PlayerBet())
         player.addCard(cards)
         assertEquals(12, player.score)
     }
@@ -25,7 +31,7 @@ class PlayerTest {
     @Test
     fun `Ace card is considered 11 if the new score is less than 21`() {
         val cards = listOf(Card(Rank.FOUR, Suit.SPADE), Card(Rank.ACE, Suit.HEART))
-        val player = Gambler(GamblerInfo("Player"))
+        val player = Gambler(GamblerInfo("Player"), PlayerBet())
         player.addCard(cards)
         assertEquals(15, player.score)
     }
@@ -38,7 +44,7 @@ class PlayerTest {
                 Card(Rank.ACE, Suit.HEART),
                 Card(Rank.KING, Suit.HEART),
             )
-        val player = Gambler(GamblerInfo("Player"))
+        val player = Gambler(GamblerInfo("Player"), PlayerBet())
         player.addCard(cards)
         assertEquals(13, player.score)
     }
@@ -51,7 +57,7 @@ class PlayerTest {
                 Card(Rank.ACE, Suit.HEART),
                 Card(Rank.KING, Suit.HEART),
             )
-        val player = Gambler(GamblerInfo("Player"))
+        val player = Gambler(GamblerInfo("Player"), PlayerBet())
         player.addCard(cards)
         assertEquals(12, player.score)
     }
@@ -67,7 +73,7 @@ class PlayerTest {
                 Card(Rank.ACE, Suit.CLUB),
                 Card(Rank.ACE, Suit.DIAMOND),
             )
-        val player = Gambler(GamblerInfo("Player"))
+        val player = Gambler(GamblerInfo("Player"), PlayerBet())
         player.addCard(cards)
         assertEquals(22, player.score)
     }
@@ -75,8 +81,53 @@ class PlayerTest {
     @Test
     fun `should get cards`() {
         val deck = Deck()
-        val player = Gambler(GamblerInfo("Jin"))
+        val player = Gambler(GamblerInfo("Jin"), PlayerBet())
         player.addCard(deck.drawCards(4))
         assertThat(player.cards.size).isEqualTo(4)
+    }
+
+    @Test
+    fun `should get name`() {
+        val deck = Deck()
+        val player = Gambler(GamblerInfo("Player"), PlayerBet())
+        player.addCard(deck.drawCards(4))
+        assertThat(player.name).isEqualTo("Player")
+    }
+
+    @Test
+    fun `isBlackJack return True for BlackJack`() {
+        val player = Gambler(GamblerInfo("Player"), PlayerBet())
+        player.addCard(
+            listOf(
+                Card(Rank.ACE, Suit.SPADE),
+                Card(Rank.KING, Suit.SPADE),
+            ),
+        )
+        assertThat(player.isBlackJack()).isTrue
+    }
+
+    @Test
+    fun `isBlackJack return False if not score not 21`() {
+        val player = Gambler(GamblerInfo("Player"), PlayerBet())
+        player.addCard(
+            listOf(
+                Card(Rank.ACE, Suit.SPADE),
+                Card(Rank.SEVEN, Suit.SPADE),
+            ),
+        )
+        assertThat(player.isBlackJack()).isFalse
+    }
+
+    @Test
+    fun `isBlackJack return False if card count greater than 2`() {
+        val player = Gambler(GamblerInfo("Player"), PlayerBet())
+        player.addCard(
+            listOf(
+                Card(Rank.ACE, Suit.SPADE),
+                Card(Rank.SEVEN, Suit.SPADE),
+                Card(Rank.ACE, Suit.CLUB),
+            ),
+        )
+        assertThat(player.isBlackJack()).isFalse
     }
 }

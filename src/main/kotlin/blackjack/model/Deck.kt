@@ -1,8 +1,10 @@
 package blackjack.model
 
 class Deck {
-    var cards: MutableList<Card> = mutableListOf()
-        private set
+    private val _cards: MutableList<Card> = mutableListOf()
+
+    val cards: List<Card>
+        get() = _cards
 
     init {
         generateShuffledCards()
@@ -17,19 +19,20 @@ class Deck {
 
     private fun generateShuffledCards() {
         generateCards()
-        cards.shuffle()
+        _cards.shuffle()
     }
 
     private fun removeCards(element: List<Card>) {
-        cards -= element
+        _cards -= element
     }
 
     private fun generateCards() {
-        cards =
-            Suit.entries.map { suit ->
+        _cards.addAll(
+            Suit.entries.flatMap { suit ->
                 Rank.entries.map { rank ->
                     Card(rank, suit)
                 }
-            }.flatten().toMutableList()
+            },
+        )
     }
 }
