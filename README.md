@@ -16,12 +16,12 @@
   - [x] Call betting phase in main game flow
 
 ### Payout System
-- [] Create `Payout` class for earnings calculations only
+- [x] Update `FinalResult` class for earnings calculations 
   - [] Method to calculate individual player earnings
-  - [] Blackjack payouts (1.5x bet)
-  - [] Normal wins (1x bet)
-  - [] Losses (-1x bet)
-  - [] Ties/Push (0x bet)
+    - [x] Blackjack winners: when dealer doesn't have Blackjack (1.5x bet)
+    - [x] Normal winners: player/dealer both has Blackjack (1x bet)
+    - [] Losses (-1x bet)
+    - [] Ties: player neither wins nor loses (0x bet: push)
 - [] Calculate dealer earnings (negative sum of all player earnings)
 
 ### Update Game Results

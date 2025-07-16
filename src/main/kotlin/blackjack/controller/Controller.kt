@@ -8,7 +8,7 @@ import blackjack.view.OutputView
 
 class Controller() {
     private var players: List<Player> = mutableListOf()
-    private val dealer: Player = Player("dealer")
+    private val dealer: Player = createDummyPlayer("dealer")
     private val deck = Deck()
 
     fun run() {
@@ -32,10 +32,10 @@ class Controller() {
         }
     }
 
-    //internal fun: allows testing, while still hiding it from external consumers
+    // internal fun: allows testing, while still hiding it from external consumers
     internal fun createPlayers() {
         players =
-            processPlayerNames().map { Player(it, processBetAmount(it)) }
+            processPlayerNames().map { createPlayerWithStatus(it, processBetAmount(it)) }
     }
 
     // For testing purposes
@@ -96,20 +96,6 @@ class Controller() {
     }
 
     private fun showResults(finalResult: FinalResult) {
-        OutputView.displayPlayerResult(
-            finalResult.lose.size,
-            finalResult.win.size,
-            finalResult.draw.size,
-        )
-        finalResult.win.forEach {
-            OutputView.displayPlayerResult(it.name, true)
-        }
-        finalResult.lose.forEach {
-            OutputView.displayPlayerResult(it.name, false)
-        }
-        finalResult.draw.forEach {
-            OutputView.displayPlayerResult(it.name, false)
-        }
     }
 
     fun processHitOrStay(player: Player): Boolean {
@@ -129,6 +115,17 @@ class Controller() {
             "n" -> false
             else -> throw IllegalArgumentException("The answer must be y or n.")
         }
+    }
+
+    private fun createDummyPlayer(name: String): Player {
+        return Player(name)
+    }
+
+    private fun createPlayerWithStatus(
+        name: String,
+        betAmount: Int,
+    ): Player {
+        return Player(name, betAmount)
     }
 
     companion object {

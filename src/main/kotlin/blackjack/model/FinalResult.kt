@@ -1,22 +1,46 @@
 package blackjack.model
 
-class FinalResult(val dealer: Player, players: List<Player>) {
-    var win: List<Player> = listOf()
-        private set
-    var lose: List<Player> = listOf()
-        private set
-    var draw: List<Player> = listOf()
-        private set
+class FinalResult(val dealer: Player, private val players: List<Player>) {
+    internal fun updateEarnings() {
+        var sumOfPlayerEarning = 0.0
+        for (player in players) {
+            var newEarning = player.betAmount * getPayoutRate(player, this.dealer)
+            player.updateEarning(newEarning)
+            sumOfPlayerEarning += newEarning
+        }
+        this.dealer.updateEarning(-sumOfPlayerEarning)
+    }
 
-    init {
-        if (dealer.isBusted()) {
-            win = players.filter { !it.isBusted() }
-            lose = players.filter { it.isBusted() }
-            draw = emptyList()
+    private fun getPayoutRate(
+        player: Player,
+        dealer: Player,
+    ): Double {
+        player.updateStatus()
+        dealer.updateStatus()
+        return if ((player.status.isBusted || player.status.isBlackjack) && !player.status.isBlackjack) {
+            -1.0
+        } else if ((dealer.status.isBlackjack && player.status.isBlackjack) ||
+            (dealer.status.isBlackjack && player.status.isNeitherBlackjackNorBusted)
+        ) {
+            1.0
+        } else if (player.status.isNeitherBlackjackNorBusted && dealer.status.isNeitherBlackjackNorBusted) {
+            getRateWithBenchMarkScore(player, dealer)
         } else {
-            win = players.filter { !it.isBusted() && it.score > dealer.score }
-            lose = players.filter { it.isBusted() || it.score < dealer.score }
-            draw = players.filter { !it.isBusted() && it.score == dealer.score }
+            1.5
+        }
+    }
+
+    private fun getRateWithBenchMarkScore(
+        player: Player,
+        dealer: Player,
+    ): Double {
+        val benchMarkScore = dealer.score
+        return if (player.score == benchMarkScore) {
+            0.0
+        } else if (player.score > benchMarkScore) {
+            1.0
+        } else {
+            -1.0
         }
     }
 }

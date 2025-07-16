@@ -4,12 +4,17 @@ import blackjack.controller.Controller.Companion.BLACKJACK_SCORE
 import blackjack.view.ErrorPrompt.INPUT_INVALID_INTEGER
 import blackjack.view.OutputPrompt.INVALID_NAME_EMPTY
 
-class Player(val name: String, var betAmount: Int = 0) {
+class Player(
+    val name: String,
+    var betAmount: Int = 0,
+    var earning: Double = 0.0,
+    var status: Status = Status(),
+) {
     init {
         require(name.isNotBlank()) { INVALID_NAME_EMPTY }
         require(betAmount >= 0) { INPUT_INVALID_INTEGER }
     }
-    
+
     private val _cards = Cards()
     var score: Int = 0
         private set
@@ -37,12 +42,19 @@ class Player(val name: String, var betAmount: Int = 0) {
         betAmount = newAmount
     }
 
-    fun isBlackJack(): Boolean {
-        return score == BLACKJACK_SCORE && _cards.size == 2
+    fun updateEarning(newEarning: Double) {
+        require(newEarning > 0) { INPUT_INVALID_INTEGER }
+        earning = newEarning
     }
 
-    fun isBusted(): Boolean {
-        return score > BLACKJACK_SCORE
+    fun updateStatus() {
+        if (score == BLACKJACK_SCORE && _cards.size == 2) {
+            status.isBlackjack = true
+            status.isNeitherBlackjackNorBusted = false
+        } else if (score > BLACKJACK_SCORE) {
+            status.isBusted = true
+            status.isNeitherBlackjackNorBusted = false
+        }
     }
 
     companion object {
