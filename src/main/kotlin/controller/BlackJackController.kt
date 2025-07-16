@@ -19,7 +19,7 @@ object BlackJackController {
             runTurns(players, dealer)
             showResults(players, dealer)
         } catch (e: IllegalArgumentException) {
-            println(e.message)
+            OutputView.displayErrorMessage(e)
             playGame()
         }
     }
@@ -50,7 +50,7 @@ object BlackJackController {
         dealer: Dealer,
     ) {
         allPlayers.players.forEach { player ->
-            while (InputView.requestPlayerDecision(player.name).isYes()) {
+            while (player.getScore() <= 21 && InputView.requestPlayerDecision(player.name).isYes()) {
                 player.requestCardFromDealer(dealer)
                 OutputView.displayPlayersTurn(player)
             }

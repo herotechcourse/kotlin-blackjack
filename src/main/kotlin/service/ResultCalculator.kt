@@ -43,10 +43,7 @@ class ResultCalculator {
             dealer: Dealer,
             earnings: List<PlayerEarningResult>,
         ) {
-            earnings.forEach { earning ->
-                allPlayers.players[earning.playerId].earnings += earning.earningsChange
-                dealer.earnings += earning.dealerEarningChange
-            }
+            allPlayers.appendEarnings(earnings, dealer)
         }
 
         private fun playerResult(

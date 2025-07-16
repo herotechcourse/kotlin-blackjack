@@ -31,6 +31,7 @@ object InputView {
 
     private fun parsePlayerBetAmount(input: String): String {
         require(input.isNotEmpty() && input.isNotBlank()) { "Betting amount cannot be empty" }
+        input.trim().toDoubleOrNull() ?: throw IllegalArgumentException("Bet must be a valid number")
         return input.trim()
     }
 

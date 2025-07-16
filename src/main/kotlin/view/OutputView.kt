@@ -61,4 +61,8 @@ object OutputView {
         val draws = playersResult.count { it == ResultStatus.DRAW }
         return "Dealer: $wins Wins $losses Losses $draws draws"
     }
+
+    fun displayErrorMessage(e: Exception) {
+        println(e.message)
+    }
 }

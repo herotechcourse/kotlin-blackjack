@@ -1,6 +1,6 @@
 package model
 
-class Dealer() : BasePlayer() {
+class Dealer : BasePlayer() {
     private val deck = Deck()
 
     fun giveInitialCardsToPlayers(allPlayers: Players) {

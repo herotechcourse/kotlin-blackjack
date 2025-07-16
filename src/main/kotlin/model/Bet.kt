@@ -1,10 +1,14 @@
 package model
 
-data class Bet(val amount: Double) {
+@JvmInline
+value class Bet(val amount: Double) {
+    init {
+        require(amount >= 0) { "Amount should be greater than 0" }
+    }
+
     companion object {
         fun parseToBet(input: String): Bet {
-            val amount = input.trim().toDoubleOrNull() ?: throw IllegalArgumentException("Bet must be a valid number")
-            if (amount < 0) throw IllegalArgumentException("Amount should be greater than 0")
+            val amount = input.trim().toDouble()
             return Bet(amount)
         }
     }
