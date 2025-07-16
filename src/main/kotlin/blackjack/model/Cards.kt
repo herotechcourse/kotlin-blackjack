@@ -1,7 +1,6 @@
 package blackjack.model
 
 class Cards(val cards: MutableList<Card>) {
-
     private fun checkAces() = cards.count { card -> card.rank == Rank.ACE }
 
     fun addCard(card: Card) {

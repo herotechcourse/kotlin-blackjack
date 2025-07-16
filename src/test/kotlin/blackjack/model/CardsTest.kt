@@ -12,13 +12,14 @@ class CardsTest {
 
     @Test
     fun `should not be BlackJack when total value is 21 but number of cards is different than 2`() {
-        val cardsInHand = Cards(
-            mutableListOf(
-                Card(Rank.ACE, Suit.HEARTS),
-                Card(Rank.NINE, Suit.DIAMONDS),
-                Card(Rank.ACE, Suit.DIAMONDS)
+        val cardsInHand =
+            Cards(
+                mutableListOf(
+                    Card(Rank.ACE, Suit.HEARTS),
+                    Card(Rank.NINE, Suit.DIAMONDS),
+                    Card(Rank.ACE, Suit.DIAMONDS),
+                ),
             )
-        )
         assertThat(cardsInHand.hasBlackJack()).isFalse()
     }
 }

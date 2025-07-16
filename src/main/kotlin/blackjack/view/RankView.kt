@@ -15,7 +15,8 @@ enum class RankView(val rank: Rank, val face: String) {
     JACK(Rank.JACK, "J"),
     QUEEN(Rank.QUEEN, "Q"),
     KING(Rank.KING, "K"),
-    ACE(Rank.ACE, "A");
+    ACE(Rank.ACE, "A"),
+    ;
 
     companion object {
         fun fromRank(rank: Rank): RankView = RankView.entries.first { it.rank == rank }

@@ -9,11 +9,10 @@ enum class SuitView(
     HEARTS(Suit.HEARTS, "♥"),
     DIAMONDS(Suit.DIAMONDS, "♦"),
     CLUBS(Suit.CLUBS, "♣"),
-    SPADES(Suit.SPADES, "♠");
+    SPADES(Suit.SPADES, "♠"),
+    ;
 
     companion object {
         fun fromSuit(suit: Suit): SuitView = entries.first { it.suit == suit }
     }
 }
-
-

@@ -6,11 +6,10 @@ import blackjack.model.Player
 import blackjack.model.Players
 
 object OutputView {
-
     private fun showCardFaceAndSymbol(card: Card): String {
         val face = RankView.fromRank(card.rank).face
         val symbol = SuitView.fromSuit(card.suit).symbol
-        return "${face}${symbol}"
+        return "${face}$symbol"
     }
 
     fun showDealerFirstHandCards(dealer: Dealer): String {
@@ -18,28 +17,32 @@ object OutputView {
     }
 
     fun showDealerHandCards(dealer: Dealer): String {
-        return ("Dealer: ${
-            dealer.cardsInHand.cards.joinToString(", ") { card ->
-                showCardFaceAndSymbol(
-                    card
-                )
-            }
-        }")
+        return (
+            "Dealer: ${
+                dealer.cardsInHand.cards.joinToString(", ") { card ->
+                    showCardFaceAndSymbol(
+                        card,
+                    )
+                }
+            }"
+        )
     }
 
     fun showHandCards(player: Player): String {
-        return ("${player.name}´s cards: ${
-            player.cardsInHand.cards.joinToString(", ") { card ->
-                showCardFaceAndSymbol(
-                    card
-                )
-            }
-        }")
+        return (
+            "${player.name}´s cards: ${
+                player.cardsInHand.cards.joinToString(", ") { card ->
+                    showCardFaceAndSymbol(
+                        card,
+                    )
+                }
+            }"
+        )
     }
 
     fun displayInitialCards(
         dealer: Dealer,
-        players: Players
+        players: Players,
     ) {
         val playerNames = players.values.joinToString(", ") { it.name }
         println("\nDealing two cards to Dealer, $playerNames.")
@@ -62,21 +65,19 @@ object OutputView {
         println(
             "${
                 showDealerHandCards(
-                    dealer
+                    dealer,
                 )
-            } - Total: ${dealer.cardsInHand.calculateTotalValueOfCards()}"
+            } - Total: ${dealer.cardsInHand.calculateTotalValueOfCards()}",
         )
     }
 
-    fun displayCardsWithTotalValue(
-        player: Player
-    ) {
+    fun displayCardsWithTotalValue(player: Player) {
         println(
             "${
                 showHandCards(
-                    player
+                    player,
                 )
-            } - Total: ${player.cardsInHand.calculateTotalValueOfCards()}"
+            } - Total: ${player.cardsInHand.calculateTotalValueOfCards()}",
         )
     }
 
@@ -85,9 +86,9 @@ object OutputView {
         players: Players,
     ) {
         println("\n## Final Earnings")
-        println("Dealer: ${dealer.earnings}")
+        println("Dealer: ${dealer.balance}")
         players.values.forEach {
-            println("${it.name}: ${it.earnings}")
+            println("${it.name}: ${it.wallet.balance}")
         }
     }
 }

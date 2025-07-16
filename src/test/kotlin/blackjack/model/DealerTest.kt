@@ -27,5 +27,4 @@ class DealerTest {
         dealer.dealInitialCardsToPlayers(Players(player))
         assertThat(player[0].cardsInHand.cards.size).isEqualTo(2)
     }
-
 }

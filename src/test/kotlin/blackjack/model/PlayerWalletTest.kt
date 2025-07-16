@@ -5,7 +5,6 @@ import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 
 class PlayerWalletTest {
-
     @Test
     fun `should place a valid bet`() {
         val wallet = PlayerWallet()
