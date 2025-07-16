@@ -22,10 +22,9 @@ object InputView {
             val bet =
                 readln()
                     .toInt()
-            require(bet > 0) { "Bet must be a positive number." }
             return bet
         } catch (e: IllegalArgumentException) {
-            throw IllegalArgumentException(e.message)
+            throw IllegalArgumentException("Bet must be a number.")
         }
     }
 
