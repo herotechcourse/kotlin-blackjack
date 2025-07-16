@@ -25,7 +25,7 @@ class Game(
 
     private fun collectBets(players: Players) {
         players.values.forEach { player ->
-            player.setBet(InputView.askPlayerBet(player.name))
+            player.placeBet(InputView.askPlayerBet(player.name))
         }
     }
 
@@ -70,7 +70,7 @@ class Game(
 
     private fun calculateEarnings(players: Players) {
         players.values
-            .forEach { player -> player.updateEarnings(ResultCalculation.calculatePlayerResult(player, dealer)) }
-        dealer.updateEarnings(players.calculateTotalPlayersEarning())
+            .forEach { player -> player.receiveEarningsOrLoses(ResultCalculation.calculatePlayerResult(player, dealer)) }
+        dealer.calculateBalance(players.calculateTotalPlayersEarning())
     }
 }

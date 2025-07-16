@@ -2,6 +2,8 @@ package blackjack.model
 
 class Dealer : Participant() {
     private val deck = Deck()
+    var balance: Int = 0
+        private set
 
     fun mustDraw(totalValueOfCards: Int) = totalValueOfCards < BlackJackValues.DEALER_STAND_CONDITION
 
@@ -25,7 +27,7 @@ class Dealer : Participant() {
         }
     }
 
-    override fun updateEarnings(newEarnings: Int) {
-        earnings -= newEarnings
+    fun calculateBalance(playerEarnings: Int) {
+        balance = -playerEarnings
     }
 }

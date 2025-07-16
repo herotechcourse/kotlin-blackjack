@@ -3,11 +3,13 @@ package blackjack.model
 class Player(
     val name: String,
 ) : Participant() {
-    var bet: Int = 0
-        private set
+    val wallet = PlayerWallet()
 
-    fun setBet(bet: Int) {
-        require(bet > 0) { "Bet must be a positive number." }
-        this.bet = bet
+    fun placeBet(amount: Int) {
+        wallet.placeBet(amount)
+    }
+
+    fun receiveEarningsOrLoses(amount: Int) {
+        wallet.updateBalance(amount)
     }
 }
