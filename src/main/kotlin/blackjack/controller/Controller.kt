@@ -29,11 +29,6 @@ class Controller {
     }
 
     private fun printResults() {
-        /* step1 calculations
-         * val evaluator = ResultEvaluator(players, dealer)
-         * val results = evaluator.calculateResults()
-         * OutputView.displayResults(results)
-         */
         dealer.settleRound()
         OutputView.displayEarnings(dealer, players)
     }

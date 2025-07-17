@@ -12,7 +12,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class ParticipantTest {
-    private val deck = CardDeck()
 
     private fun createPlayer(
         name: String,
@@ -26,7 +25,7 @@ class ParticipantTest {
         cards: List<Card>,
         players: Players,
     ): Dealer {
-        return Dealer(deck = deck, players = players, handCards = HandCards(cards.toMutableList()))
+        return Dealer(deck = CardDeck(), players = players, handCards = HandCards(cards.toMutableList()))
     }
 
     @Test
