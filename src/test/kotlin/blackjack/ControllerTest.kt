@@ -11,12 +11,7 @@ class ControllerTest {
 
     @ParameterizedTest
     @MethodSource("providePlayerInputs")
-    fun `test player creation structure`(
-        namesInput: String,
-        betAmounts: List<Int>,
-        expectedCount: Int,
-        expectedNames: List<String>,
-    ) {
+    fun `test player creation structure`() {
         val players = controller.getPlayers()
         assertThat(players).hasSize(0)
     }
