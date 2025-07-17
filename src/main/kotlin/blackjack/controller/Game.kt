@@ -50,7 +50,7 @@ class Game(
                     dealer.dealCardToPlayer(it)
                     OutputView.displayCardsAfterHit(it)
                 }
-            } while (answer && it.isAbleToHit())
+            } while (answer && it.canHit())
         }
     }
 
