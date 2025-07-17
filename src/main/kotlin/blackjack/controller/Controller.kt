@@ -17,13 +17,13 @@ class Controller() {
             OutputView.displayNamesOfPlayers(players)
             roundOne()
             OutputView.displayCardsOfDealer(dealer)
-            players.forEach { OutputView.displayCardsOfPlayers(it) }
+            players.forEach(OutputView::displayCardsOfPlayers)
             OutputView.printEmptyLine()
-            players.forEach { playerTakesTurn(it) }
+            players.forEach(::playerTakesTurn)
             dealerTakesTurn()
             OutputView.printEmptyLine()
             OutputView.displayCardsOfPlayersWithScore(dealer)
-            players.forEach { OutputView.displayCardsOfPlayersWithScore(it) }
+            players.forEach(OutputView::displayCardsOfPlayersWithScore)
             OutputView.printEmptyLine()
             val finalResult = FinalResult(dealer, players)
             finalResult.updateEarnings()
@@ -51,10 +51,11 @@ class Controller() {
         repeat(MAX_ATTEMPTS) {
             try {
                 val names = InputView.getNamesOfPlayers()
-                val validNames = names
-                    .split(",")
-                    .map(String::trim)
-                    .filter { it.isNotBlank() }
+                val validNames =
+                    names
+                        .split(",")
+                        .map(String::trim)
+                        .filter { it.isNotBlank() }
                 if (validNames.isEmpty()) {
                     throw IllegalArgumentException("Player names cannot be empty")
                 }
