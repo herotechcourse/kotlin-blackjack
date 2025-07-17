@@ -35,9 +35,9 @@
 - [] implement abstract class and inheritance for players and dealer
 - [] refactor `Controller`
   - [] extract some methods in `Controller` for better readability
-- [] remove abundant `it` from the line `.map { it -> ...}` in `Controller.kt`
-  - [] of `fun run()` 
-  - [] of `private fun playerTakesTurn()`
+- [x] remove abundant `it` from the line `.map { it -> ...}` in `Controller.kt`
+  - [x] of `fun run()` 
+  - [x] of `private fun playerTakesTurn()`
 
 ## Features : Step1 
 ### Data class `Card`
