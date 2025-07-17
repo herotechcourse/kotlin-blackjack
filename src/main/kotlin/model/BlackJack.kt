@@ -23,8 +23,8 @@ class BlackJack(names: List<String>) {
 
     fun dealerTurn(
         deck: Deck,
-        doAfter: (String) -> Unit,
-        decision: () -> Boolean = { dealer.getScore() <= 16 },
+        doAfter: (BasePlayer) -> Unit,
+        decision: (BasePlayer) -> Boolean = { dealer.getScore() <= 16 },
     ) {
         dealer.turn(
             deck,
@@ -33,16 +33,13 @@ class BlackJack(names: List<String>) {
         )
     }
 
-    fun playerTurn(
-        player: Player,
-        doAfter: (String) -> Unit,
-        decision: () -> Boolean = { true },
+    fun playersTurn(
+        doAfter: (BasePlayer) -> Unit,
+        decision: (BasePlayer) -> Boolean = { true },
     ) {
-        player.turn(
-            deck,
-            doAfter,
-            decision,
-        )
+        players.forEach { player ->
+            player.turn(deck, doAfter, decision)
+        }
     }
 
     fun result(): List<ResultStatus> {

@@ -1,13 +1,15 @@
 package view
 
+import model.BasePlayer
+
 class InputView {
     fun requestPlayerNames(): List<String> =
         retry("Enter the names of the players (comma-separated):") {
             parsePlayerNames(readln())
         }
 
-    fun requestPlayerDecision(name: String): String =
-        retry("Would $name like to draw another card? (y for yes, n for no)") {
+    fun requestPlayerDecision(player: BasePlayer): Boolean =
+        retry("Would ${player.name} like to draw another card? (y for yes, n for no)") {
             parsePlayerDecision(readln())
         }
 
@@ -18,10 +20,10 @@ class InputView {
         return input.split(",").map { it.trim() }
     }
 
-    private fun parsePlayerDecision(input: String): String {
+    private fun parsePlayerDecision(input: String): Boolean {
         require(input.isNotEmpty() && input.isNotBlank()) { "Decision cannot be empty" }
         require(input == "y" || input == "n") { "Decision has to be 'y' or 'n'" }
-        return input.trim()
+        return input.trim() == "y"
     }
 
     private fun <T> retry(

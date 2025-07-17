@@ -7,12 +7,12 @@ class Dealer() : BasePlayer("Dealer") {
 
     override fun turn(
         deck: Deck,
-        doAfter: (String) -> Unit,
-        decision: () -> Boolean,
+        doAfter: (BasePlayer) -> Unit,
+        decision: (BasePlayer) -> Boolean,
     ) {
-        while (decision()) {
+        while (decision(this)) {
             drawCard(deck.pop())
-            doAfter(name)
+            doAfter(this)
         }
     }
 }

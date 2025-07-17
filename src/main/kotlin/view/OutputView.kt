@@ -15,7 +15,7 @@ class OutputView {
         players.forEach { println("${it.name}'s cards: ${displayCards(it.showCards(), true)} ") }
     }
 
-    fun displayPlayerTurn(player: Player) {
+    fun displayPlayerTurn(player: BasePlayer) {
         println(player)
     }
 

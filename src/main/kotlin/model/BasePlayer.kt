@@ -25,7 +25,7 @@ abstract class BasePlayer(val name: String) {
 
     abstract fun turn(
         deck: Deck,
-        doAfter: (String) -> (Unit),
-        decision: () -> Boolean,
+        doAfter: (BasePlayer) -> Unit,
+        decision: (BasePlayer) -> Boolean,
     )
 }
