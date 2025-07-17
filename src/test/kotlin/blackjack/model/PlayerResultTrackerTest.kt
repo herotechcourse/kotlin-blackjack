@@ -17,7 +17,7 @@ class PlayerResultTrackerTest {
     @Test
     fun `should return default message when no result is recorded`() {
         val output = tracker.toString()
-        assertThat(output).isEqualTo("No result recorded.")
+        assertThat(output).isEqualTo("Unknown")
     }
 
     @Test

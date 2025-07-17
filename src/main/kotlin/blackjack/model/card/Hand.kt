@@ -1,8 +1,11 @@
 package blackjack.model.card
 
-class Hand(private val dealtCards: MutableList<Card> = mutableListOf()) {
+class Hand(initCards: List<Card> = emptyList()) {
+    private val dealtCards: MutableList<Card> = initCards.toMutableList()
     val cards: List<Card>
         get() = dealtCards.toList()
+    val size: Int
+        get() = dealtCards.size
 
     fun addCard(card: Card) {
         if (!isBusts()) dealtCards.add(card)
@@ -28,8 +31,8 @@ class Hand(private val dealtCards: MutableList<Card> = mutableListOf()) {
         return score
     }
 
-    override fun toString(): String {
-        return dealtCards.joinToString(", ")
+    fun sortCards() {
+        dealtCards.sortedDescending()
     }
 
     companion object {

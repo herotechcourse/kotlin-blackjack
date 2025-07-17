@@ -17,22 +17,31 @@ object BlackJackGame {
     fun start() {
         val participants = Participants(Dealer(), createPlayers())
         participants.dealer.shuffleDeck()
+        placeBets(participants)
         dealFirstCards(participants)
         dealingPlayersCards(participants)
         dealingDealersCards(participants.dealer)
         calculateResults(participants)
     }
 
-    internal fun createPlayers(): List<Player> {
+    private fun createPlayers(): List<Player> {
         return retryUntilSuccess { InputView.getPlayersNames() }.map { Player(it) }
     }
 
-    internal fun dealFirstCards(participants: Participants) {
+    private fun placeBets(participants: Participants) {
+        participants.players.forEach { player ->
+            val bettingAmount = retryUntilSuccess { InputView.getBettingAmount(player.name) }
+            player.placeBet(bettingAmount)
+        }
+    }
+
+    private fun dealFirstCards(participants: Participants) {
         repeat(INITIAL_DEALER_CARDS) { participants.dealOneCardToAll() }
+        participants.sortAllHands()
         OutputView.printParticipantsHands(participants)
     }
 
-    internal fun dealingPlayersCards(participants: Participants) {
+    private fun dealingPlayersCards(participants: Participants) {
         participants.players.forEach { player ->
             dealCardsTo(
                 player,
@@ -42,7 +51,7 @@ object BlackJackGame {
         OutputView.printEmptyLine()
     }
 
-    internal fun dealCardsTo(
+    private fun dealCardsTo(
         player: Player,
         dealer: Dealer,
         shouldHit: () -> Boolean,
@@ -57,7 +66,7 @@ object BlackJackGame {
         }
     }
 
-    internal fun dealingDealersCards(dealer: Dealer) {
+    private fun dealingDealersCards(dealer: Dealer) {
         var drewCard = false
         while (dealer.shouldNotStand()) {
             drewCard = true
@@ -68,7 +77,7 @@ object BlackJackGame {
         dealer.showAllCards()
     }
 
-    internal fun calculateResults(participants: Participants) {
+    private fun calculateResults(participants: Participants) {
         OutputView.printFinalHands(participants)
         GameJudge.evaluateAll(participants)
         OutputView.printResults(participants)

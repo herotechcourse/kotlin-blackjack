@@ -1,6 +1,6 @@
 package blackjack.model.card
 
-data class Card(val suit: Suit, val rank: Rank) {
+data class Card(val suit: Suit, val rank: Rank) : Comparable<Card> {
     enum class Suit(val symbol: String) {
         DIAMONDS("♦"),
         HEARTS("♥"),
@@ -22,6 +22,10 @@ data class Card(val suit: Suit, val rank: Rank) {
         QUEEN("Q", 10),
         KING("K", 10),
         ACE("A", 11),
+    }
+
+    override fun compareTo(other: Card): Int {
+        return this.rank.value.compareTo(other.rank.value)
     }
 
     override fun toString(): String {

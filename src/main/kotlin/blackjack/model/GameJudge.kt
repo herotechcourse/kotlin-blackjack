@@ -10,12 +10,14 @@ object GameJudge {
         participants.players.forEach { evaluate(participants.dealer, it) }
     }
 
-    internal fun evaluate(
+    private fun evaluate(
         dealer: Dealer,
         player: Player,
     ) {
         val result = dealer vs player
         player.recordResult(result)
         dealer.recordResult(result.inverse)
+        player.addProfit()
+        dealer.deductFromProfit(player.profit)
     }
 }
