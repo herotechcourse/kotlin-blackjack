@@ -17,16 +17,18 @@ class FinalResult(val dealer: Player, private val players: List<Player>) {
     ): Double {
         player.updateStatus()
         dealer.updateStatus()
-        return if ((player.status.isBusted || player.status.isBlackjack) && !player.status.isBlackjack) {
+        return if (player.status.isBusted) {
             -1.0
-        } else if ((dealer.status.isBlackjack && player.status.isBlackjack) ||
-            (dealer.status.isBlackjack && player.status.isNeitherBlackjackNorBusted)
-        ) {
-            1.0
+        } else if (dealer.status.isBlackjack && player.status.isBlackjack) {
+            0.0
+        } else if (dealer.status.isBlackjack && !player.status.isBlackjack) {
+            -1.0
+        } else if (player.status.isBlackjack && !dealer.status.isBlackjack) {
+            1.5
         } else if (player.status.isNeitherBlackjackNorBusted && dealer.status.isNeitherBlackjackNorBusted) {
             getRateWithBenchMarkScore(player, dealer)
         } else {
-            1.5
+            1.0
         }
     }
 

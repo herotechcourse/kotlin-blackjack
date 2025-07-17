@@ -35,24 +35,13 @@ object OutputView {
         println(printableString)
     }
 
-    fun displayFinalResultsHeading() {
-        println("## Final Results")
-    }
-
-    fun displayPlayerResult(
-        win: Int,
-        lose: Int,
-        draw: Int,
+    fun displayFinalResult(
+        dealer: Player,
+        players: List<Player>,
     ) {
-        println("Dealer: $win Win $draw Draw $lose Lose")
-    }
-
-    fun displayPlayerResult(
-        name: String,
-        result: Boolean,
-    ) {
-        val printableString = "$name: " + if (result) "Win" else "Lose"
-        println(printableString)
+        println("## Final Earnings")
+        println("Dealer: ${dealer.earning.toInt()}")
+        players.forEach { println("${it.name}: ${it.earning.toInt()}") }
     }
 
     fun printEmptyLine() {

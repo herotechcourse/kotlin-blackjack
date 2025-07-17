@@ -20,20 +20,16 @@
   - [] Method to calculate individual player earnings
     - [x] Blackjack winners: when dealer doesn't have Blackjack (1.5x bet)
     - [x] Normal winners: player/dealer both has Blackjack (1x bet)
-    - [] Losses (-1x bet)
-    - [] Ties: player neither wins nor loses (0x bet: push)
-- [] Calculate dealer earnings (negative sum of all player earnings)
+    - [x] Losses (-1x bet)
+    - [x] Ties: player neither wins nor loses (0x bet: push)
+- [x] Calculate dealer earnings (negative sum of all player earnings)
 
 ### Update Game Results
-- [] Replace `FinalResult` class logic
-  - [] Remove `win`, `draw`, and `lose` lists
-  - [] Add earnings calculation using `Payout` class
-  - [] Add `earnings: Map<Player, Int>` property
-  - [] Add `dealerEarnings: Int` property
-- [] Update `OutputView` to display earnings instead of win/lose
-  - [] Add `displayFinalEarnings()` method
-  - [] Format: "## Final Earnings"
-  - [] Show dealer and player earnings amounts
+- [x] Replace `FinalResult` class logic
+  - [x] Remove `win`, `draw`, and `lose` lists
+  - [x] Add earnings calculation using `Payout` class
+- [x] Update `OutputView` to display earnings instead of win/lose
+  - [x] Show dealer and player earnings amounts
 
 ## Updates : Step1 (after implementing step2)
 - [] implement abstract class and inheritance for players and dealer

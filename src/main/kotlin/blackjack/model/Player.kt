@@ -43,7 +43,6 @@ class Player(
     }
 
     fun updateEarning(newEarning: Double) {
-        require(newEarning > 0) { INPUT_INVALID_INTEGER }
         earning = newEarning
     }
 
