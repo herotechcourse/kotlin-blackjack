@@ -19,11 +19,14 @@ abstract class Participant {
         earning = when {
             isBusted()                                                  -> -bet
             dealer.isBusted()                                           -> +bet
+            
             handCards.isBlackjack() && dealer.handCards.isBlackjack()   -> 0
             handCards.isBlackjack()                                     -> (bet * 1.5).toInt()
             dealer.handCards.isBlackjack()                              -> -bet
+            
             handCards.total > dealer.handCards.total                    -> +bet
             handCards.total < dealer.handCards.total                    -> -bet
+            
             else                                                        -> 0
         }
 
