@@ -15,7 +15,7 @@ class ControllerTest {
         namesInput: String,
         betAmounts: List<Int>,
         expectedCount: Int,
-        expectedNames: List<String>
+        expectedNames: List<String>,
     ) {
         val players = controller.getPlayers()
         assertThat(players).hasSize(0)

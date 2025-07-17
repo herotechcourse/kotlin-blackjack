@@ -98,8 +98,9 @@ class PlayerTest {
         val player = Player("TestPlayer")
         player.addCard(cards)
 
-        assertThat(player.isBlackJack()).isEqualTo(expectedBlackjack)
-        assertThat(player.isBusted()).isEqualTo(expectedBust)
+        player.updateStatus()
+        assertThat(player.status.isBlackjack).isEqualTo(expectedBlackjack)
+        assertThat(player.status.isBusted).isEqualTo(expectedBust)
     }
 
     @Test
@@ -110,6 +111,7 @@ class PlayerTest {
         assertThrows<IllegalArgumentException> { player.updateBetAmount(0) }
     }
 
+    @Test
     fun `should update variable 'betAmount' right away`() {
         val player = Player("TestPlayer")
         player.updateBetAmount(100)
@@ -137,8 +139,8 @@ class PlayerTest {
         val player = Player("TestPlayer")
         assertThat(player.cards).isEmpty()
         assertThat(player.score).isEqualTo(0)
-        assertThat(player.isBlackJack()).isFalse()
-        assertThat(player.isBusted()).isFalse()
+        assertThat(player.status.isBlackjack).isFalse()
+        assertThat(player.status.isBusted).isFalse()
     }
 
     companion object {

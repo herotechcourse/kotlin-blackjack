@@ -25,8 +25,9 @@ class Controller() {
             OutputView.displayCardsOfPlayersWithScore(dealer)
             players.forEach { OutputView.displayCardsOfPlayersWithScore(it) }
             OutputView.printEmptyLine()
-            OutputView.displayFinalResultsHeading()
-            showResults(FinalResult(dealer, players))
+            val finalResult = FinalResult(dealer, players)
+            finalResult.updateEarnings()
+            OutputView.displayFinalResult(dealer, players)
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
         }
@@ -50,10 +51,14 @@ class Controller() {
         repeat(MAX_ATTEMPTS) {
             try {
                 val names = InputView.getNamesOfPlayers()
-                return names
+                val validNames = names
                     .split(",")
                     .map(String::trim)
                     .filter { it.isNotBlank() }
+                if (validNames.isEmpty()) {
+                    throw IllegalArgumentException("Player names cannot be empty")
+                }
+                return validNames
             } catch (err: IllegalArgumentException) {
                 OutputView.displayErrorMessages(err.message)
             }
@@ -93,9 +98,6 @@ class Controller() {
         if (!answer && player.cards.size == 2) {
             OutputView.displayCardsOfPlayers(player)
         }
-    }
-
-    private fun showResults(finalResult: FinalResult) {
     }
 
     fun processHitOrStay(player: Player): Boolean {

@@ -21,9 +21,9 @@ object InputView {
         return getPositiveNumber()
     }
 
-    private fun getPositiveNumber(): Int{
+    private fun getPositiveNumber(): Int {
         val number = getInt()
-        require ( number > 0) { ErrorPrompt.INPUT_INVALID_INTEGER }
+        require(number > 0) { ErrorPrompt.INPUT_INVALID_INTEGER }
         return number
     }
 
