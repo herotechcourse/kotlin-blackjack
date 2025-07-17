@@ -4,7 +4,7 @@ class FinalResult(val dealer: Player, private val players: List<Player>) {
     internal fun updateEarnings() {
         var sumOfPlayerEarning = 0.0
         for (player in players) {
-            var newEarning = player.betAmount * getPayoutRate(player, this.dealer)
+            val newEarning = player.betAmount * getPayoutRate(player, this.dealer)
             player.updateEarning(newEarning)
             sumOfPlayerEarning += newEarning
         }
