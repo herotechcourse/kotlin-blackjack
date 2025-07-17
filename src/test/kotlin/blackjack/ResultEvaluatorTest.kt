@@ -19,7 +19,7 @@ class ResultEvaluatorTest {
     fun `test dealer is not busted, player is not busted, DEALER WINS`() {
         val playersCards = mutableListOf(Card(Rank.ACE, Suit.DIAMONDS), Card(Rank.NINE, Suit.DIAMONDS)) // total 20
         val dealersCards = mutableListOf(Card(Rank.ACE, Suit.DIAMONDS), Card(Rank.KING, Suit.DIAMONDS)) // total 21
-        val player = Player("test", HandCards(playersCards))
+        val player = Player("test", HandCards(playersCards), 1000)
         val players = Players(listOf(player))
         val dealer = Dealer(deck = deck, players = players, handCards = HandCards(dealersCards))
         val evaluator = ResultEvaluator(players, dealer)
@@ -34,7 +34,7 @@ class ResultEvaluatorTest {
     fun `test dealer is not busted, player is not busted, PLAYER WINS`() {
         val playersCards = mutableListOf(Card(Rank.ACE, Suit.DIAMONDS), Card(Rank.KING, Suit.DIAMONDS)) // total 21
         val dealersCards = mutableListOf(Card(Rank.ACE, Suit.DIAMONDS), Card(Rank.NINE, Suit.DIAMONDS)) // total 20
-        val player = Player("test", HandCards(playersCards))
+        val player = Player("test", HandCards(playersCards), 1000)
         val players = Players(listOf(player))
         val dealer = Dealer(deck = deck, players = players, handCards = HandCards(dealersCards))
         val evaluator = ResultEvaluator(players, dealer)
@@ -49,7 +49,7 @@ class ResultEvaluatorTest {
     fun `test dealer is not busted, player is not busted, DRAW`() {
         val playersCards = mutableListOf(Card(Rank.TEN, Suit.DIAMONDS), Card(Rank.NINE, Suit.DIAMONDS)) // total 19
         val dealersCards = mutableListOf(Card(Rank.NINE, Suit.CLUBS), Card(Rank.TEN, Suit.SPADES)) // total 19
-        val player = Player("test", HandCards(playersCards))
+        val player = Player("test", HandCards(playersCards), 1000)
         val players = Players(listOf(player))
         val dealer = Dealer(deck = deck, players = players, handCards = HandCards(dealersCards))
         val evaluator = ResultEvaluator(players, dealer)
@@ -69,7 +69,7 @@ class ResultEvaluatorTest {
                 Card(Rank.FIVE, Suit.SPADES),
             ) // total 24 busted
         val dealersCards = mutableListOf(Card(Rank.TEN, Suit.DIAMONDS), Card(Rank.NINE, Suit.DIAMONDS)) // total 19
-        val player = Player("test", HandCards(playersCards))
+        val player = Player("test", HandCards(playersCards), 1000)
         val players = Players(listOf(player))
         val dealer = Dealer(deck = deck, players = players, handCards = HandCards(dealersCards))
         val evaluator = ResultEvaluator(players, dealer)
@@ -89,7 +89,7 @@ class ResultEvaluatorTest {
                 Card(Rank.NINE, Suit.DIAMONDS),
                 Card(Rank.FIVE, Suit.CLUBS),
             ) // total 24 busted
-        val player = Player("test", HandCards(playersCards))
+        val player = Player("test", HandCards(playersCards), 1000)
         val players = Players(listOf(player))
         val dealer = Dealer(deck = deck, players = players, handCards = HandCards(dealersCards))
         val evaluator = ResultEvaluator(players, dealer)
@@ -114,7 +114,7 @@ class ResultEvaluatorTest {
                 Card(Rank.NINE, Suit.HEARTS),
                 Card(Rank.SIX, Suit.CLUBS),
             ) // 25 busted
-        val player = Player("test", HandCards(playersCards))
+        val player = Player("test", HandCards(playersCards), 1000)
         val players = Players(listOf(player))
         val dealer = Dealer(deck = deck, players = players, handCards = HandCards(dealersCards))
         val evaluator = ResultEvaluator(players, dealer)

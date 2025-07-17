@@ -3,6 +3,8 @@ package blackjack.model
 abstract class Participant {
     abstract val name: String
     abstract val handCards: HandCards
+    abstract val bet: Int
+    var earning: Int = 0
 
     fun drawCard(deck: CardDeck) {
         val card = deck.hit()
@@ -13,11 +15,21 @@ abstract class Participant {
 
     fun isBusted(): Boolean = (handCards.total > Rules.BLACKJACK_TARGET)
 
-    fun cardsToString(): String {
-        return handCards.cards.joinToString()
-    }
+    fun settlePlayerAndDealer(dealer: Dealer) {
+        earning = when {
+            isBusted()                                                  -> -bet
+            dealer.isBusted()                                           -> +bet
+            
+            handCards.isBlackjack() && dealer.handCards.isBlackjack()   -> 0
+            handCards.isBlackjack()                                     -> (bet * 1.5).toInt()
+            dealer.handCards.isBlackjack()                              -> -bet
+            
+            handCards.total > dealer.handCards.total                    -> +bet
+            handCards.total < dealer.handCards.total                    -> -bet
+            
+            else                                                        -> 0
+        }
 
-    fun firstCardToString(): String {
-        return handCards.cards[0].toString()
+        dealer.addEarning(-earning) // subtract Player's earning from Dealer's earnings
     }
 }

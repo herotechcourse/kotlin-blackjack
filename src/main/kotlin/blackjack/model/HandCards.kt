@@ -34,4 +34,8 @@ class HandCards(val cards: MutableList<Card> = mutableListOf()) {
     operator fun compareTo(other: HandCards): Int {
         return this.calculateTotal() - other.calculateTotal()
     }
+
+    fun isBlackjack(): Boolean {
+        return cards.size == 2 && total == Rules.BLACKJACK_TARGET
+    }
 }

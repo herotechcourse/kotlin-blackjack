@@ -30,10 +30,9 @@ class ResultEvaluator(private val players: Players, private val dealer: Dealer) 
         player: Player,
         dealerResult: DealerResult,
     ) {
-        if (player.isBusted())
-            {
-                dealerResult.wins++
-            }
+        if (player.isBusted()) {
+            dealerResult.wins++
+        }
         if (player.isNotBusted()) {
             when {
                 player.handCards < dealer.handCards -> dealerResult.wins++

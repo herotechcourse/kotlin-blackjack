@@ -2,7 +2,7 @@ package study
 
 // Purpose: This Kotlin DSL is designed to create a Person object in a declarative format.
 
-// THe "block" term is common in Kotlin for a code lambda passed to a DSL.
+// The "block" term is common in Kotlin for a code lambda passed to a DSL.
 fun introduce(block: PersonBuilder.() -> Unit): Person {
     return PersonBuilder().apply(block).build()
 }
@@ -11,16 +11,17 @@ data class Person(
     val name: String,
     val company: String?,
     val skills: Skills,
-    val languages: List<Language>
+    val languages: List<Language>,
 )
 
 data class Skills(
     val soft: List<String>,
-    val hard: List<String>
+    val hard: List<String>,
 )
 
 data class Language(val name: String, val level: Int)
 
+@PersonDSL
 class PersonBuilder {
     private lateinit var name: String
     private var company: String? = null
@@ -46,6 +47,7 @@ class PersonBuilder {
     fun build(): Person = Person(name, company, skills, languages)
 }
 
+@PersonDSL
 class LanguageBuilder {
     private val languages = mutableListOf<Language>()
 
@@ -57,16 +59,17 @@ class LanguageBuilder {
     fun build(): List<Language> = languages
 }
 
+@PersonDSL
 class SkillsBuilder {
     private val softSkills = mutableListOf<String>()
     private val hardSkills = mutableListOf<String>()
 
-    fun soft(value: String) {
-        softSkills += value
+    fun soft(vararg values: String) {
+        softSkills += values
     }
 
-    fun hard(value: String) {
-        hardSkills += value
+    fun hard(vararg values: String) {
+        hardSkills += values
     }
 
     fun build(): Skills = Skills(softSkills, hardSkills)

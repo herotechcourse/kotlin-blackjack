@@ -9,6 +9,8 @@ class Dealer(
     private val deck: CardDeck,
     private val players: Players,
 ) : Participant() {
+    override val bet: Int = 0
+
     fun shouldDraw(): Boolean {
         return handCards.total <= Rules.DEALER_DRAW_THRESHOLD
     }
@@ -38,5 +40,13 @@ class Dealer(
 
     override fun toString(): String {
         return name
+    }
+
+    fun addEarning(value: Int) {
+        earning += value
+    }
+
+    fun settleRound() {
+        players.forEach { it.settlePlayerAndDealer(this) }
     }
 }

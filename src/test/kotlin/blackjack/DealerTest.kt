@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test
 class DealerTest {
     private val deck = CardDeck()
     private val playerCards = mutableListOf(Card(Rank.ACE, Suit.DIAMONDS), Card(Rank.KING, Suit.DIAMONDS))
-    private val player = Player("Lisa", handCards = HandCards(playerCards))
+    private val player = Player("Lisa", handCards = HandCards(playerCards), 1000)
 
     @Test
     fun `dealer should draw when 16`() {

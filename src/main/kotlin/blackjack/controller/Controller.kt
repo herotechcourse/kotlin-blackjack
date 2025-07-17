@@ -4,7 +4,6 @@ import blackjack.model.CardDeck
 import blackjack.model.Dealer
 import blackjack.model.Player
 import blackjack.model.Players
-import blackjack.model.ResultEvaluator
 import blackjack.view.InputView
 import blackjack.view.OutputView
 import blackjack.view.OutputView.displayInitialCardsMessage
@@ -30,9 +29,8 @@ class Controller {
     }
 
     private fun printResults() {
-        val evaluator = ResultEvaluator(players, dealer)
-        val results = evaluator.calculateResults()
-        OutputView.displayResults(results)
+        dealer.settleRound()
+        OutputView.displayEarnings(dealer, players)
     }
 
     private fun displayCardsAndTotal() {
@@ -42,7 +40,11 @@ class Controller {
 
     private fun initializePlayers(): Players {
         val playerNames = InputView.readNames()
-        return Players(playerNames.map { Player(it) })
+        val playerBets = InputView.readBets(playerNames)
+
+        val players = playerNames.zip(playerBets) { name, bet -> Player(name = name, bet = bet) }
+
+        return Players(players)
     }
 
     private fun drawInitialCards() {
