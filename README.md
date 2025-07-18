@@ -31,11 +31,6 @@
 - [x] Update `OutputView` to display earnings instead of win/lose
   - [x] Show dealer and player earnings amounts
 
-## Updates : Step1 (after implementing step2)
-- [x] remove abundant `it` from the line `.map { it -> ...}` in `Controller.kt`
-  - [x] of `fun run()` 
-  - [x] of `private fun playerTakesTurn()`
-
 ## Features : Step1 
 ### Data class `Card`
 - [x] has `Rank`
@@ -90,8 +85,12 @@
 ### class `Application`
 - [x] fun main() to and use `run` from controller
 
----
-### for later update
-- [] implement abstract class and inheritance for players and dealer
-- [] refactor `Controller`
-  - [] extract some methods in `Controller` for better readability
+## Updates : Step1
+- [x] remove abundant `it` from the line `.map { it -> ...}` in `Controller.kt`
+  - [x] of `fun run()`
+  - [x] of `private fun playerTakesTurn()`
+
+### Updates : Step2
+- [x] implement abstract class and inheritance for players and dealer
+- [x] refactor `Controller`
+  - [x] extract some methods in `Controller` for better readability
