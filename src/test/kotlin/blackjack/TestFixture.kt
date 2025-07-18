@@ -4,8 +4,6 @@ import blackjack.model.card.Card
 import blackjack.model.card.Rank
 import blackjack.model.card.Suit
 import blackjack.model.holder.CardHolder
-import kotlin.collections.first
-import kotlin.collections.last
 
 object TestFixture {
     object DoesNotHasAce {
