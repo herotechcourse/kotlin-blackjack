@@ -14,8 +14,8 @@ class GameManager(
     private val participants: Participants,
 ) {
     private val deck = Deck()
-    private val dealer = participants.getDealer()
-    private val players = participants.getPlayers()
+    private val dealer = participants.dealer
+    private val players = participants.players
 
     fun play(): GameResult {
         setUp()

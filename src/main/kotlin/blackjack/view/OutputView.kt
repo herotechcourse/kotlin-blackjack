@@ -8,7 +8,7 @@ import blackjack.model.result.Outcome
 
 object OutputView {
     fun showAllPayersCards(participants: Participants) {
-        participants.getPlayers().forEach { showCards(it) }
+        participants.players.forEach { showCards(it) }
         println()
     }
 
@@ -23,17 +23,15 @@ object OutputView {
         println("\nDealer draws ${dealer.cardsCount() - 1} more card due to having 16 or less.\n")
     }
 
+    fun showHowMuchBet(name: String) = println("Enter $name’s betting amount: ")
+
     fun askHit(participant: Participant) {
         println("\nWould ${participant.name} like to draw another card? (y for yes, n for no)")
     }
 
-    fun showEnterNames() {
-        println(Message.ENTER_PLAYERS_NAMES)
-    }
+    fun showEnterNames() = println(Message.ENTER_PLAYERS_NAMES)
 
-    fun showError(msg: String?) {
-        println("Error: $msg")
-    }
+    fun showError(msg: String?) = println("Error: $msg")
 
     fun showGameResult(gameResult: GameResult) {
         val playersResults = gameResult.playersResults
@@ -62,9 +60,7 @@ object OutputView {
 
     object Message {
         const val ENTER_PLAYERS_NAMES = "Enter the names of the players (comma-separated):"
-        const val GENERATE_NEW_CARD = "Card deck is empty..."
         const val FINAL_RESULTS_TITLE = "## Final Results"
         const val INVALID_INPUT = "Invalid Input"
-        const val EMPTY_BUT_TRY_TO_DRAW = "Logic error: can not draw empty or less then tried to draw."
     }
 }

@@ -5,7 +5,7 @@ import blackjack.model.participant.Player
 import blackjack.model.state.State
 
 class GameResult(private val participants: Participants) {
-    val dealer = participants.getDealer()
+    val dealer = participants.dealer
     val playersResults: Map<Player, Outcome> = getAllResults()
 
     private fun getPlayerResult(player: Player): Outcome {
@@ -19,6 +19,6 @@ class GameResult(private val participants: Participants) {
     }
 
     private fun getAllResults(): Map<Player, Outcome> {
-        return participants.getPlayers().associateWith { getPlayerResult(it) }
+        return participants.players.associateWith { getPlayerResult(it) }
     }
 }
