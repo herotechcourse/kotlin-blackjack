@@ -164,7 +164,7 @@ class PlayerTest {
                     listOf(
                         Card(Rank.SEVEN, Suit.SPADE),
                         Card(Rank.SEVEN, Suit.HEART),
-                        Card(Rank.SEVEN, Suit.CLUB)
+                        Card(Rank.SEVEN, Suit.CLUB),
                     ),
                     false,
                     false,
@@ -174,7 +174,7 @@ class PlayerTest {
                     listOf(
                         Card(Rank.KING, Suit.SPADE),
                         Card(Rank.QUEEN, Suit.HEART),
-                        Card(Rank.FIVE, Suit.DIAMOND)
+                        Card(Rank.FIVE, Suit.DIAMOND),
                     ),
                     false,
                     true,

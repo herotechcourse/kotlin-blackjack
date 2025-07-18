@@ -17,12 +17,11 @@ object OutputView {
     }
 
     private fun getCardsOfPlayers(player: Player): String {
-        return "${player.name}'s card: " + player.cards.joinToString(", ")
+        return "${player.name}'s cards: " + player.cards.joinToString(", ")
     }
 
     fun displayCardsOfDealer(player: Player) {
-        print("Dealer: ")
-        println(player.cards[0].toString())
+        println("Dealer: ${player.cards[0]}")
     }
 
     fun displayDealersTurn() {
@@ -30,6 +29,9 @@ object OutputView {
     }
 
     fun displayCardsOfPlayersWithScore(player: Player) {
+        if (player.name == "dealer") {
+            println()
+        }
         val printableString =
             getCardsOfPlayers(player) + " – Total: ${player.score}"
         println(printableString)
@@ -39,12 +41,9 @@ object OutputView {
         dealer: Player,
         players: List<Player>,
     ) {
+        println()
         println("## Final Earnings")
         println("Dealer: ${dealer.earning.toInt()}")
         players.forEach { println("${it.name}: ${it.earning.toInt()}") }
-    }
-
-    fun printEmptyLine() {
-        println()
     }
 }

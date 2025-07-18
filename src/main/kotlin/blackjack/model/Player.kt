@@ -38,7 +38,7 @@ class Player(
     }
 
     fun updateBetAmount(newAmount: Int) {
-        require(newAmount > 0) { INPUT_INVALID_INTEGER }
+        require(newAmount > 0) { "Bet amount must be positive" }
         betAmount = newAmount
     }
 

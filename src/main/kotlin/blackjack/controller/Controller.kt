@@ -3,135 +3,60 @@ package blackjack.controller
 import blackjack.model.Deck
 import blackjack.model.FinalResult
 import blackjack.model.Player
-import blackjack.view.InputView
+import blackjack.service.GameOrchestrator
+import blackjack.service.InputProcessor
 import blackjack.view.OutputView
 
 class Controller() {
-    private var players: List<Player> = mutableListOf()
-    private val dealer: Player = createDummyPlayer("dealer")
-    private val deck = Deck()
+    private val inputProcessor = InputProcessor()
+    private val gameOrchestrator = GameOrchestrator(Deck(), inputProcessor)
 
     fun run() {
         try {
-            createPlayers()
+            val players = createPlayers()
             OutputView.displayNamesOfPlayers(players)
-            roundOne()
-            OutputView.displayCardsOfDealer(dealer)
-            players.forEach(OutputView::displayCardsOfPlayers)
-            OutputView.printEmptyLine()
-            players.forEach(::playerTakesTurn)
-            dealerTakesTurn()
-            OutputView.printEmptyLine()
-            OutputView.displayCardsOfPlayersWithScore(dealer)
-            players.forEach(OutputView::displayCardsOfPlayersWithScore)
-            OutputView.printEmptyLine()
-            val finalResult = FinalResult(dealer, players)
-            finalResult.updateEarnings()
-            OutputView.displayFinalResult(dealer, players)
+            val dealer = createDealer()
+            roundOne(dealer, players)
+            roundTwo(dealer, players)
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
         }
     }
 
-    internal fun createPlayers() {
-        players =
-            processPlayerNames().map { createPlayerWithStatus(it, processBetAmount(it)) }
+    internal fun createPlayers(): List<Player> {
+        return inputProcessor
+            .processPlayerNames()
+            .map { Player(it, inputProcessor.processBetAmount(it)) }
     }
 
-    internal fun getPlayers(): List<Player> = players
-
-    private fun roundOne() {
-        dealer.addCard(deck.drawCard(2))
-        players.forEach { it.addCard(deck.drawCard(2)) }
+    fun createDealer(): Player {
+        return Player("dealer")
     }
 
-    fun processPlayerNames(): List<String> {
-        repeat(MAX_ATTEMPTS) {
-            try {
-                val names = InputView.getNamesOfPlayers()
-                val validNames =
-                    names
-                        .split(",")
-                        .map(String::trim)
-                        .filter { it.isNotBlank() }
-                if (validNames.isEmpty()) {
-                    throw IllegalArgumentException("Player names cannot be empty")
-                }
-                return validNames
-            } catch (err: IllegalArgumentException) {
-                OutputView.displayErrorMessages(err.message)
-            }
-        }
-        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
+    private fun roundOne(
+        dealer: Player,
+        players: List<Player>,
+    ) {
+        gameOrchestrator.dealInitialCards(dealer, players)
     }
 
-    fun processBetAmount(name: String): Int {
-        repeat(MAX_ATTEMPTS) {
-            try {
-                val betAmount = InputView.getBetAmount(name)
-                return betAmount
-            } catch (err: IllegalArgumentException) {
-                OutputView.displayErrorMessages(err.message)
-            }
-        }
-        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
-    }
-
-    private fun dealerTakesTurn() {
-        while (dealer.score <= 16) {
-            dealer.addCard(deck.drawCard())
-            OutputView.displayDealersTurn()
-        }
-    }
-
-    private fun playerTakesTurn(player: Player) {
-        var answer = false
-        while (player.score <= BLACKJACK_SCORE) {
-            answer = processHitOrStay(player)
-            if (!answer) {
-                break
-            }
-            player.addCard(deck.drawCard())
-            OutputView.displayCardsOfPlayers(player)
-        }
-        if (!answer && player.cards.size == 2) {
-            OutputView.displayCardsOfPlayers(player)
-        }
-    }
-
-    fun processHitOrStay(player: Player): Boolean {
-        repeat(MAX_ATTEMPTS) {
-            try {
-                return InputView.getHitOrStand(player.name).isHitOrStand()
-            } catch (err: IllegalArgumentException) {
-                OutputView.displayErrorMessages(err.message)
-            }
-        }
-        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
-    }
-
-    fun String.isHitOrStand(): Boolean {
-        return when (this) {
-            "y" -> true
-            "n" -> false
-            else -> throw IllegalArgumentException("The answer must be y or n.")
-        }
-    }
-
-    private fun createDummyPlayer(name: String): Player {
-        return Player(name)
-    }
-
-    private fun createPlayerWithStatus(
-        name: String,
-        betAmount: Int,
-    ): Player {
-        return Player(name, betAmount)
+    private fun roundTwo(
+        dealer: Player,
+        players: List<Player>,
+    ) {
+        OutputView.displayCardsOfDealer(dealer)
+        players.forEach(OutputView::displayCardsOfPlayers)
+        println()
+        players.forEach(gameOrchestrator::runPlayerTurn)
+        gameOrchestrator.runDealerTurn(dealer)
+        OutputView.displayCardsOfPlayersWithScore(dealer)
+        players.forEach(OutputView::displayCardsOfPlayersWithScore)
+        val finalResult = FinalResult(dealer, players)
+        finalResult.updateEarnings()
+        OutputView.displayFinalResult(dealer, players)
     }
 
     companion object {
-        private const val MAX_ATTEMPTS = 5
         const val BLACKJACK_SCORE = 21
-        private const val MAX_ATTEMPT_MESSAGE = "Too many attempts"
     }
 }
