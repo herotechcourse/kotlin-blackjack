@@ -1,6 +1,7 @@
 package blackjack.controller
 
 import blackjack.TestFixture
+import blackjack.factory.FakePlayerFactory
 import blackjack.model.card.Card
 import blackjack.model.card.Rank
 import blackjack.model.card.Suit
@@ -15,10 +16,10 @@ import org.junit.jupiter.api.Test
 class GameManagerTest {
     @Test
     fun setUp() {
-        val participants = Participants.from(listOf("mina", "guri"))
+        val participants = Participants(FakePlayerFactory(2).players)
         GameManager(participants).setUp()
 
-        OutputView.showCards(participants.getDealer())
+        OutputView.showCards(participants.dealer)
         OutputView.showAllPayersCards(participants)
     }
 
@@ -71,7 +72,7 @@ class GameManagerTest {
 
     @Test
     fun `round works correctly with Player Participant`() {
-        val participants = Participants.from(listOf("test"))
+        val participants = Participants(FakePlayerFactory(2).players)
         val gameManager = GameManager(participants)
 
         val player = gameManager.getPlayers().first()
@@ -89,7 +90,7 @@ class GameManagerTest {
 
     @Test
     fun `round works correctly with Player Participant - not busted, `() {
-        val participants = Participants.from(listOf("test"))
+        val participants = Participants(FakePlayerFactory(1).players)
         val gameManager = GameManager(participants)
 
         val player = gameManager.getPlayers().first()
@@ -103,7 +104,7 @@ class GameManagerTest {
 
     @Test
     fun `round works correctly with Dealer Participant`() {
-        val participants = Participants.from(listOf("test"))
+        val participants = Participants(FakePlayerFactory(3).players)
         val gameManager = GameManager(participants)
 
         val dealer = gameManager.getDealer()
