@@ -2,7 +2,7 @@ package blackjack.view
 
 import blackjack.model.Rank
 
-enum class RankView(val rank: Rank, val symbol: String) {
+enum class RankView(private val rank: Rank, val symbol: String) {
     TWO(Rank.TWO, "2"),
     THREE(Rank.THREE, "3"),
     FOUR(Rank.FOUR, "4"),
@@ -15,7 +15,8 @@ enum class RankView(val rank: Rank, val symbol: String) {
     JACK(Rank.JACK, "J"),
     QUEEN(Rank.QUEEN, "Q"),
     KING(Rank.KING, "K"),
-    ACE(Rank.ACE, "A");
+    ACE(Rank.ACE, "A"),
+    ;
 
     companion object {
         fun from(rank: Rank): RankView {
