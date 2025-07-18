@@ -4,7 +4,7 @@ class Cards(
     private val _cards: MutableList<Card> = mutableListOf(),
 ) {
     val cards: List<Card>
-        get() = _cards
+        get() = _cards.toList()
 
     fun addAll(newCards: List<Card>) = _cards.addAll(newCards)
 
@@ -13,4 +13,7 @@ class Cards(
     fun removeAll(cardsToRemove: List<Card>) = cardsToRemove.forEach { _cards.remove(it) }
 
     fun shuffle() = _cards.shuffle()
+
+    val size: Int
+        get() = _cards.size
 }

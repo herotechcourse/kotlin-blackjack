@@ -1,22 +1,26 @@
 package blackjack.model
 
 import blackjack.controller.Controller.Companion.BLACKJACK_SCORE
+import blackjack.view.ErrorPrompt.INPUT_INVALID_INTEGER
+import blackjack.view.OutputPrompt.INVALID_NAME_EMPTY
 
-class Player(val gamblerInfo: GamblerInfo) {
+class Player(
+    val name: String,
+    var betAmount: Int = 0,
+    var earning: Double = 0.0,
+    var status: Status = Status(),
+) {
+    init {
+        require(name.isNotBlank()) { INVALID_NAME_EMPTY }
+        require(betAmount >= 0) { INPUT_INVALID_INTEGER }
+    }
+
     private val _cards = Cards()
     var score: Int = 0
         private set
 
     val cards: List<Card>
         get() = _cards.cards
-
-    val name: String
-        get() = gamblerInfo.name
-
-    fun addCard(cards: List<Card>) {
-        _cards.addAll(cards)
-        updateScore()
-    }
 
     private fun updateScore() {
         var aceCount = _cards.cards.count { it -> it.rank == Rank.ACE }
@@ -28,12 +32,28 @@ class Player(val gamblerInfo: GamblerInfo) {
         score = totalScore
     }
 
-    fun isBlackJack(): Boolean {
-        return score == BLACKJACK_SCORE
+    fun addCard(cards: List<Card>) {
+        _cards.addAll(cards)
+        updateScore()
     }
 
-    fun isBusted(): Boolean {
-        return score > BLACKJACK_SCORE
+    fun updateBetAmount(newAmount: Int) {
+        require(newAmount > 0) { "Bet amount must be positive" }
+        betAmount = newAmount
+    }
+
+    fun updateEarning(newEarning: Double) {
+        earning = newEarning
+    }
+
+    fun updateStatus() {
+        if (score == BLACKJACK_SCORE && _cards.size == 2) {
+            status.isBlackjack = true
+            status.isNeitherBlackjackNorBusted = false
+        } else if (score > BLACKJACK_SCORE) {
+            status.isBusted = true
+            status.isNeitherBlackjackNorBusted = false
+        }
     }
 
     companion object {
