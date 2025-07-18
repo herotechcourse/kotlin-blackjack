@@ -4,7 +4,7 @@ import blackjack.model.GameResult
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class GameLogicTest {
+class GameRoundManagerTest {
     @Test
     fun `returns WIN when player has higher score and no one is busted`() {
         val result =
