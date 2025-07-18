@@ -3,7 +3,6 @@ package blackjack.model
 import blackjack.utils.Constants
 
 abstract class Playable {
-    abstract val name: String
     protected var handInternal: Hand = Hand()
     open val hand: Hand
         get() = handInternal
