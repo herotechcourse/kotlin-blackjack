@@ -1,7 +1,5 @@
 package blackjack.model
 
-import blackjack.states.FirstTurn
-
-class Player(name: String) : Participant(name, FirstTurn(Hand(emptyList()))) {
+class Player(name: String) : Participant(name) {
     var bettingAmount: Int = 0
 }

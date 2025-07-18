@@ -1,10 +1,11 @@
 package blackjack.model
 
+import blackjack.states.FirstTurn
 import blackjack.states.State
 
 abstract class Participant(
     val name: String,
-    var state: State,
+    var state: State = FirstTurn(),
 ) {
     val points get() = state.hand.calculatePoints()
 
