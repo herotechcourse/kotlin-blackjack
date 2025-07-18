@@ -3,6 +3,7 @@ package blackjack.blackjackgame
 import blackjack.model.Dealer
 import blackjack.model.GameResult
 import blackjack.model.Player
+import blackjack.view.GameResultView
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
@@ -65,7 +66,7 @@ class BlackjackGame {
 
         players.forEach { player ->
             val result = dealer.judge(player)
-
+            val label = GameResultView.from(result).label
             val earnings = result.calculateEarnings(player.bet)
             player.earnings = earnings
 
@@ -76,7 +77,7 @@ class BlackjackGame {
                 GameResult.DRAW -> {}
             }
 
-            OutputView.displayPlayerResult(player.name, result.label)
+            OutputView.displayPlayerResult(player.name, label)
             OutputView.displayPlayerStatus(player)
         }
 
