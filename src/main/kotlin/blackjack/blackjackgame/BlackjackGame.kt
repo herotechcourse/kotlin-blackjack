@@ -49,7 +49,7 @@ class BlackjackGame {
     }
 
     private fun handleDealerTurn(dealer: Dealer) {
-        dealer.playDealerTurn()
+        TurnManager.handleDealerTurn(dealer)
         OutputView.displayLineBreak()
         OutputView.displayDealerStatus(dealer)
     }

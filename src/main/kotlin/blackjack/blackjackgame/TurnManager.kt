@@ -2,6 +2,7 @@ package blackjack.blackjackgame
 
 import blackjack.model.Dealer
 import blackjack.model.Player
+import blackjack.view.InputView
 import blackjack.view.OutputView
 
 object TurnManager {
@@ -13,6 +14,24 @@ object TurnManager {
             OutputView.displayBlackjackMessage(player.name)
             return
         }
-        dealer.askPlayerDraw(player)
+
+        while (true) {
+            val wantsToDraw = InputView.askPlayerWantsToDraw(player.name)
+            if (wantsToDraw) {
+                dealer.giveCardTo(player)
+                OutputView.displayPlayerHand(player)
+                if (player.getScore() >= 21) break
+            } else {
+                break
+            }
+        }
+    }
+
+    fun handleDealerTurn(dealer: Dealer) {
+        while (dealer.shouldDraw()) {
+            OutputView.displayDealerDraw()
+            dealer.giveCardTo(dealer)
+            OutputView.displayDealerStatus(dealer)
+        }
     }
 }
