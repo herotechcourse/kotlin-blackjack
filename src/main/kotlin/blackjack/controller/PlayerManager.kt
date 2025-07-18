@@ -16,27 +16,43 @@ class PlayerManager {
         _players = mutableList.toList()
     }
 
-    // TODO: resolve indent depth
     fun askPlayerHit(
         player: Player,
         receiveCard: () -> PlayingCard,
     ) {
         var isFirst = true
+
         while (!player.isBust()) {
-            val requestMessage =
-                player.requestCard {
-                    InputView.retryable { InputView.readYesOrNo(player.name) }
-                }
-            if (requestMessage) {
-                isFirst = false
-                player.drawCard(receiveCard())
-                OutputView.displayCurrentHand(player)
-                continue
-            } else if (isFirst) {
-                OutputView.displayCurrentHand(player)
-            }
-            break
+            isFirst = drawOrNot(player, receiveCard, isFirst)
+            if (isFirst) break
         }
-        return
+    }
+
+    private fun drawOrNot(
+        player: Player,
+        receiveCard: () -> PlayingCard,
+        isFirst: Boolean,
+    ): Boolean {
+        val wantsCard =
+            player.requestCard {
+                InputView.retryable { InputView.readYesOrNo(player.name) }
+            }
+
+        if (!wantsCard) {
+            if (isFirst) OutputView.displayCurrentHand(player)
+            return true
+        }
+
+        drawAndDisplayAndReturnFalse(player, receiveCard)
+        return false
+    }
+
+    private fun drawAndDisplayAndReturnFalse(
+        player: Player,
+        receiveCard: () -> PlayingCard,
+    ): Boolean {
+        player.drawCard(receiveCard())
+        OutputView.displayCurrentHand(player)
+        return false
     }
 }
