@@ -25,9 +25,11 @@ class CardManagerTest {
     @Test
     fun `updateCardMap() - using giveCard() and checkCardMap(), card manager manage availability of a card`() {
         val manager = CardManager()
-        val beforeState = manager.checkCardMap(manager.cards[0])
+        val sample = manager.cards[0]
+        val beforeState = manager.cards.contains(sample)
         val takenCard = manager.giveCard()
-        val afterState = manager.checkCardMap(takenCard)
+        val afterState = manager.cards.contains(sample)
+        assertEquals(sample, takenCard)
         assertEquals(true, beforeState)
         assertEquals(false, afterState)
     }
