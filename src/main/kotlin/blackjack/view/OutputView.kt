@@ -1,47 +1,55 @@
 package blackjack.view
 
 import blackjack.model.Card
+import blackjack.model.Dealer
 import blackjack.model.Player
-import blackjack.model.Statistics
 
 object OutputView {
-    fun printAllPlayers(players: List<Player>) {
-        players.forEach { printOnePlayer(it) }
+    fun displayTableSetUp(
+        dealer: Dealer,
+        players: List<Player>,
+    ) {
+        displayDealerFirstCard(dealer)
+        displayPlayersSetUp(players)
     }
 
-    fun printOnePlayer(player: Player) {
-        println("${player.name}'s cards: " + player.cards.joinToString(" ") { displayCard(it) })
+    fun displayPlayersSetUp(players: List<Player>) {
+        players.forEach { displayPlayer(it) }
     }
 
-    fun printDealerDrawsCards(player: Player) {
-        println("Dealer draws ${player.numberInHand() - 1} more card due to having 16 or less.")
+    fun displayDealerFirstCard(dealer: Dealer) {
+        println("${dealer.name}'s cards: " + dealer.state.hand.cards[0].rank.face + dealer.state.hand.cards[0].suit.symbol)
     }
 
-    fun printOnePlayerFinalResult(player: Player) {
-        println("${player.name}'s cards: " + "${player.cards.joinToString(" ") { displayCard(it) }} - Total: ${player.calculatePoints()}.")
+    private fun cardsText(cards: List<Card>): String {
+        return cards.joinToString(", ") { it.rank.face + it.suit.symbol }
     }
 
-    fun printFinalResults(players: List<Player>) {
-        players.forEach { printOnePlayerFinalResult(it) }
+    fun displayPlayer(player: Player) {
+        println("${player.name}'s cards: " + cardsText(player.state.hand.cards))
     }
 
-    private fun printWinOrLose(condition: Boolean): String {
-        return when (condition) {
-            true -> "Win"
-            false -> "Lose"
+    fun displayDealerStats(dealer: Dealer) {
+        println(" Dealer draws ${dealer.state.hand.size - 2} more card due to having 16 or less")
+    }
+
+    fun displayFinalResult(
+        dealer: Dealer,
+        players: List<Player>,
+    ) {
+        println("${dealer.name}'s cards: " + "${cardsText(dealer.state.hand.cards)} - Total: ${dealer.points}.")
+        players.forEach {
+            println("${it.name}'s cards: " + "${cardsText(it.state.hand.cards)} - Total: ${it.points}.")
         }
     }
 
-    fun printStatistics(statistics: Statistics) {
-        println("\n## Final Results")
-        println("Dealer: ${statistics.dealerWin} Win ${statistics.dealerLose} Lose")
-        statistics.calculatePlayersWinning().forEach {
-                (player, winnings) ->
-            println("${player.name}: ${printWinOrLose(winnings == 1)}")
-        }
-    }
+    fun printFinalRates(result: Map<Player, Double>) {
+        val header = "\n## Final Earning"
+        val playerLines =
+            result
+                .entries
+                .joinToString("\n") { (player, profit) -> "${player.name}: ${profit.toString().format("%.2f")}" }
 
-    fun displayCard(card: Card): String {
-        return "${card.rank.face}${card.suit.symbol}"
+        println(listOf(header, playerLines).joinToString("\n"))
     }
 }

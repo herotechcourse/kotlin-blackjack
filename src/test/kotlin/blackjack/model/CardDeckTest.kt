@@ -2,19 +2,46 @@ package blackjack.model
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 
 class CardDeckTest {
     @Test
     fun `CardDeck has 52 cards`() {
         val cardDeck = CardDeck()
-        assertThat(cardDeck.numberOfCards()).isEqualTo(52)
+        assertThat(cardDeck.size).isEqualTo(52)
     }
 
     @Test
-    fun `hit a card to a player`() {
+    fun `should contain all unique cards`() {
+        val deck = CardDeck()
+        val cards = deck.cards
+
+        assertThat(cards)
+            .hasSize(52)
+            .doesNotHaveDuplicates()
+    }
+
+    @Test
+    fun `should be shuffled - different order each time`() {
+        val deck1 = CardDeck()
+        val deck2 = CardDeck()
+
+        assertThat(deck1.cards)
+            .containsExactlyInAnyOrderElementsOf(deck2.cards)
+            .isNotEqualTo(deck2.cards)
+    }
+
+    @Test
+    fun `should draw a card`() {
         val cardDeck = CardDeck()
-        val player1 = Player("Mina")
-        cardDeck.hit(player1) // should move card to player
-        assertThat(player1.numberInHand()).isEqualTo(1)
+        cardDeck.drawCard()
+
+        assertThat(cardDeck.cards).hasSize(51)
+    }
+
+    @Test
+    fun `should check if the card are over before draw - create another deck if so`() {
+        val cardDeck = CardDeck()
+        assertDoesNotThrow { repeat(100) { cardDeck.drawCard() } }
     }
 }

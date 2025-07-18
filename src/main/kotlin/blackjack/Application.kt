@@ -3,5 +3,6 @@ package blackjack
 import blackjack.controller.BlackJackController
 
 fun main() {
-    BlackJackController.play()
+    val controller = BlackJackController()
+    controller.startGame()
 }

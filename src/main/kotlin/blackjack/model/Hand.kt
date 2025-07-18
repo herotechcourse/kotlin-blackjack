@@ -1,19 +1,14 @@
 package blackjack.model
 
-class Hand() {
-    private val hold: Cards = Cards(setOf())
+class Hand(val cards: List<Card> = emptyList()) {
+    val size get() = cards.size
 
-    val cards
-        get() = hold.cards
-
-    fun numberOfCards() = hold.cards.size
-
-    fun addCard(card: Card) = this.hold.add(card)
+    operator fun plus(card: Card): Hand = Hand(this.cards + card)
 
     fun calculatePoints(): Int {
-        val countOfAce = hold.cards.filter { it.rank.value == 1 }.size
+        val countOfAce = cards.filter { it.rank == Rank.ACE }.size
         var sum =
-            hold.cards.sumOf {
+            cards.sumOf {
                 it.rank.value
             }
 

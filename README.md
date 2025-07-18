@@ -17,26 +17,58 @@
 
 ### Card
 - [x] implement simple card class
-  - [x] has index
+  - [x] has Rank
   - [x] has symbol : enum class { hearts, spades , clubs, diamonds }
-
-### Hold
-- [x] implement Hold, wrapper class, Set<Card>
-- [x] provide all unique elements
+  - [x] patter object pool
 
 ### CardDeck
-- [x] cardDeck can hit cards to players
-- [x] implement CardDeck, wrapper class, Hold and Set<Card * 52> 
+- [x] implement CardDeck
 - [x] add shuffle logic when initialed
-
-### Player / Person
-- [x] implement class
 
 ### Rank
 - [x] Face cards (King, Queen, Jack) are each worth 10
 - [x] toString(): return symbol character with Rank()
 
-### Questions
-- How can we make testable private functions? What is the good practise?
-  1. internal
-  2. companion object
+## State Pattern Feature Plan
+
+- [x] `interface State` -> interface for all states
+- [x] FirstTurn -> First 2 cards are being drawn
+  - [x] Accepts 0–2 cards
+  - [x] If 2 cards and total is 21 → return Blackjack
+  - [x] If 2 cards and total < 21 → return Hit
+  - [x] Otherwise → stay in FirstTurn
+  - [x]stay() throws → can’t stay before 2 cards
+
+- [x] Hit - Player has drawn 2+ cards
+  - [x]  If new card makes total > 21 → return `Bust`
+  - [x]  Else → remain in `Hit`
+  - [x]  `stay()` returns `Stay`
+- [x] Finished : State -> End state — can be Blackjack, Bust, or Stay
+  - [x]  `profit(money: Int)` returns correct payout
+- [x] Bust
+- [x] Stay
+- [x] BlackJack
+
+## Participant Architecture features
+- [x] interface Participant 
+  - [x] Expose the current State 
+  - [x] Expose the current Hand (from the state)
+  - [x] Handle the transition of turns through playTurn(deck)
+- [x] Player
+  - [x] Starts in FirstTurn state (receives initial 2 cards)
+  - [x] Can draw cards (Hit) or stop (Stay)
+  - [x] Transitions through states: FirstTurn → Hit → Stay | Bust | Blackjack
+  - [x] Calculates profit()
+- Dealer
+  - [x] Starts in FirstTurn state (just like Player)
+  - [x] Automatically draws cards while total < 17
+  - [x] Stops automatically when total ≥ 17 (calls stay())
+  - [x] Transitions through states without external input
+  - [x] Calculates profit() in state
+
+
+## Features for step2
+- [x] Each player must place a bet at the start of the game.
+- [x] If a player hits 21 with the initial two cards (Blackjack), they receive 1.5x their bet.
+- [x] If both the player and dealer have Blackjack, the player’s bet is returned.
+- [x] If the dealer busts (exceeds 21), all remaining players automatically win and receive payouts based on their bets.

@@ -1,27 +1,40 @@
 package blackjack.controller
 
-import blackjack.model.GameManager
-import blackjack.model.PlayerFactory
-import blackjack.model.Statistics
+import blackjack.model.BlackjackGame
+import blackjack.model.GameLogic
+import blackjack.model.ParticipantsFactory
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
-object BlackJackController {
-    fun play() {
+class BlackJackController {
+    fun startGame() {
         try {
-            val names = InputView.getPlayersName()
-            val players = PlayerFactory.with(names)
-            val dealer = PlayerFactory.createDealer()
+            val playersNames = InputView.getPlayersName()
+            val players = ParticipantsFactory.generatePlayers(playersNames)
+            val dealer = ParticipantsFactory.generateDealer()
 
-            val gameManager = GameManager(dealer, players)
-            OutputView.printAllPlayers(listOf(dealer) + players)
-            gameManager.playGame(dealer, players, InputView::askForCard, OutputView::printOnePlayer)
+            players.forEach {
+                val bettingAmount = InputView.bettingAmountInput(it)
+                it.bettingAmount = bettingAmount
+            }
 
-            OutputView.printFinalResults(listOf(dealer) + players)
-            val statistics = Statistics(dealer, players)
-            OutputView.printStatistics(statistics)
+            val blackjackGame =
+                BlackjackGame(
+                    dealer,
+                    players,
+                    InputView::askForCard,
+                    OutputView::displayPlayer,
+                )
+
+            OutputView.displayTableSetUp(dealer, players)
+            blackjackGame.play()
+            OutputView.displayDealerStats(dealer)
+            OutputView.displayFinalResult(dealer, players)
+
+            val result = GameLogic.calculateProfitRates(dealer, players)
+            OutputView.printFinalRates(result)
         } catch (e: Exception) {
-            println(e.message)
+            println("Error starting the game: ${e.message}")
         }
     }
 }

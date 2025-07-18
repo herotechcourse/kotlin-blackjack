@@ -20,4 +20,10 @@ object InputView {
             else -> askForCard(player)
         }
     }
+
+    fun bettingAmountInput(player: Player): Int {
+        println("Enter ${player.name}'s betting amount:")
+        val input = (readlnOrNull() ?: throw IllegalArgumentException(Errors.INVALID_INPUT.message)).trim()
+        return input.toIntOrNull() ?: throw IllegalArgumentException(Errors.INVALID_BETTING_AMOUNT.message)
+    }
 }

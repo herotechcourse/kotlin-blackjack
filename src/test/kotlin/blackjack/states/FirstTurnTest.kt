@@ -1,0 +1,43 @@
+package blackjack.states
+
+import blackjack.TestCards
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
+
+class FirstTurnTest {
+    @Test
+    fun `if hands has less then 2 cards remain in state`() {
+        val state = FirstTurn()
+        assertThat(state).isInstanceOf(FirstTurn::class.java)
+    }
+
+    @Test
+    fun `draw one card keeps state in FirstTurn`() {
+        val state = FirstTurn()
+        state.draw(TestCards.Ace)
+        assertThat(state).isInstanceOf(FirstTurn::class.java)
+    }
+
+    @Test
+    fun `after draw one card, that card is in hand `() {
+        val state = FirstTurn()
+        val next = state.draw(TestCards.Ace)
+        assertThat(state).isInstanceOf(FirstTurn::class.java)
+        assertThat(next.hand.cards).contains(TestCards.Ace)
+    }
+
+    @Test
+    fun `after draw if two cards return Hit `() {
+        val state = FirstTurn()
+        val next = state.draw(TestCards.Ace).draw(TestCards.TWO)
+        assertTrue(next is Hit)
+    }
+
+    @Test
+    fun `if two cards and sum is 21 return BlackJack`() {
+        val state = FirstTurn()
+        val next = state.draw(TestCards.Ace).draw(TestCards.JACK)
+        assertTrue(next is Blackjack)
+    }
+}
