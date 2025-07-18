@@ -2,6 +2,8 @@ package blackjack.controller
 
 import blackjack.model.Dealer
 import blackjack.model.Player
+import blackjack.model.Players
+import blackjack.model.ResultCalculation
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
@@ -10,7 +12,9 @@ class Game(
 ) {
     fun startGame() {
         val playersName = InputView.askPlayerNames()
-        val players = playersName.map { Player(it) }
+        val players = Players(playersName.map { Player(it) })
+
+        collectBets(players)
 
         assignInitialCards(players)
 
@@ -19,49 +23,54 @@ class Game(
         compareFinalCards(players)
     }
 
-    private fun assignInitialCards(players: List<Player>) {
+    private fun collectBets(players: Players) {
+        players.values.forEach { player ->
+            player.placeBet(InputView.askPlayerBet(player.name))
+        }
+    }
+
+    private fun assignInitialCards(players: Players) {
         dealer.selfDrawInitialCards()
         dealer.dealInitialCardsToPlayers(players)
         OutputView.displayInitialCards(dealer, players)
     }
 
-    private fun hitOrStay(players: List<Player>) {
+    private fun hitOrStay(players: Players) {
         askPlayersToHit(players)
         dealerDraws()
-        OutputView.displayCardsWithTotalValue(dealer)
-        players.forEach { player -> OutputView.displayCardsWithTotalValue(player) }
+        OutputView.displayDealersCardsWithTotalValue(dealer)
+        players.values.forEach { player -> OutputView.displayCardsWithTotalValue(player) }
     }
 
-    private fun askPlayersToHit(players: List<Player>) {
-        players.forEach {
+    private fun askPlayersToHit(players: Players) {
+        players.values.forEach {
             do {
                 val answer = InputView.askToHit(it.name)
                 if (answer) {
                     dealer.dealCardToPlayer(it)
-                    it.checkCardsValueLimit()
-                    println(OutputView.showHandCards(it, false))
+                    OutputView.displayCardsAfterHit(it)
                 }
-            } while (answer && !it.isBusted)
+            } while (answer && it.canHit())
         }
     }
 
     private fun dealerDraws() {
         var mustDraw = dealer.mustDraw(dealer.cardsInHand.calculateTotalValueOfCards())
         while (mustDraw) {
-            OutputView.displayDealerDrawMessage(dealer)
+            OutputView.displayDealerDrawMessage()
             dealer.selfDrawCard()
             mustDraw = dealer.mustDraw(dealer.cardsInHand.calculateTotalValueOfCards())
         }
-        dealer.checkCardsValueLimit()
     }
 
-    private fun compareFinalCards(players: List<Player>) {
-        if (!dealer.isBusted) {
-            val dealerPoints = dealer.cardsInHand.calculateTotalValueOfCards()
-            players.forEach {
-                it.comparePointsAgainstDealer(dealerPoints)
-            }
-        }
+    private fun compareFinalCards(players: Players) {
+        calculateEarnings(players)
         OutputView.displayFinalResults(dealer, players)
+    }
+
+    private fun calculateEarnings(players: Players) {
+        players.values
+            .forEach { player -> player.receiveEarningsOrLoses(ResultCalculation.calculatePlayerResult(player, dealer)) }
+        dealer.calculateBalance(players.calculateTotalPlayersEarning())
     }
 }

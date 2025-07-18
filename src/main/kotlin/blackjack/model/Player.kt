@@ -1,12 +1,28 @@
 package blackjack.model
 
 class Player(
-    name: String,
-) : Participant(name) {
+    val name: String,
+) : Participant() {
+    val wallet = PlayerWallet()
+    var state: PlayerState = Playing
 
-    fun comparePointsAgainstDealer(dealerPoints: Int) {
-        if (cardsInHand.calculateTotalValueOfCards() <= dealerPoints) {
-            updateBustedStatus()
+    override fun drawCard(card: Card) {
+        super.drawCard(card)
+
+        state = when {
+            cardsInHand.hasBlackJack() -> Blackjack
+            cardsInHand.isBustHand() -> Busted
+            else -> Playing
         }
+    }
+
+    fun canHit(): Boolean = state.canHit()
+
+    fun placeBet(amount: Int) {
+        wallet.placeBet(amount)
+    }
+
+    fun receiveEarningsOrLoses(amount: Int) {
+        wallet.updateBalance(amount)
     }
 }

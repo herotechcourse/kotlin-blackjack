@@ -1,7 +1,9 @@
 package blackjack.model
 
-class Dealer(name: String = "Dealer") : Participant(name) {
+class Dealer : Participant() {
     private val deck = Deck()
+    var balance: Int = 0
+        private set
 
     fun mustDraw(totalValueOfCards: Int) = totalValueOfCards < BlackJackValues.DEALER_STAND_CONDITION
 
@@ -19,9 +21,13 @@ class Dealer(name: String = "Dealer") : Participant(name) {
         }
     }
 
-    fun dealInitialCardsToPlayers(players: List<Player>) {
+    fun dealInitialCardsToPlayers(players: Players) {
         repeat(BlackJackValues.FIRST_HAND_CARDS) {
-            players.forEach { it -> dealCardToPlayer(it) }
+            players.values.forEach { it -> dealCardToPlayer(it) }
         }
+    }
+
+    fun calculateBalance(playerEarnings: Int) {
+        balance = -playerEarnings
     }
 }

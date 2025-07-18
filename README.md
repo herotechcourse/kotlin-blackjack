@@ -46,3 +46,48 @@ The goal is to get as close to 21 as possible without going over.
 - [x] Display dealer message (if 16 or less)
 - [x] Display all the cards with total value
 - [x] Display Winning Result
+
+## Step 2 new features
+
+- Player bet
+- [x] Get bet from every player
+- [x] If initial hand is equal 21, player wins 1.5 bet
+- [x] If initial hand is equal 21, but dealer has also 21. Bet is returned
+- [x] If player is busted, loses their bet.
+
+## Example output
+```
+Enter the names of the players (comma-separated):
+pobi,jason
+
+Enter pobi’s betting amount:
+10000
+
+Enter jason’s betting amount:
+20000
+
+Dealing two cards to dealer, pobi, jason.
+Dealer: 3♦  
+pobi's cards: 2♥, 8♠  
+jason's cards: 7♣, K♠
+
+Would pobi like to draw another card? (y for yes, n for no)  
+y  
+pobi's cards: 2♥, 8♠, A♣  
+Would pobi like to draw another card? (y for yes, n for no)  
+n  
+Would jason like to draw another card? (y for yes, n for no)  
+n  
+jason's cards: 7♣, K♠
+
+Dealer draws one more card due to having 16 or less.
+
+Dealer’s cards: 3♦, 9♣, 8♦ – Total: 20  
+pobi's cards: 2♥, 8♠, A♣ – Total: 21  
+jason's cards: 7♣, K♠ – Total: 17
+
+\## Final Earnings
+Dealer: 10000  
+pobi: 10000  
+jason: -20000
+```

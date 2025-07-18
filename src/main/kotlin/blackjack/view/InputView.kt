@@ -16,6 +16,18 @@ object InputView {
         }
     }
 
+    fun askPlayerBet(name: String): Int {
+        println("Enter $name’s betting amount: ")
+        try {
+            val bet =
+                readln()
+                    .toInt()
+            return bet
+        } catch (e: IllegalArgumentException) {
+            throw IllegalArgumentException("Bet must be a number.")
+        }
+    }
+
     fun askToHit(name: String): Boolean {
         println("Would $name like to draw another card? (y for yes, n for no)")
         val choice = readln()
