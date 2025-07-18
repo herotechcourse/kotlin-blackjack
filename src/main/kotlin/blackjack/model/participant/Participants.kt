@@ -5,8 +5,10 @@ class Participants(
 ) {
     val dealer: Dealer = Dealer()
 
-    internal fun get(index: Int) = players[index]
+    // TODO: delete if not use
+    internal operator fun get(index: Int) = players[index]
 
+    // TODO: delete if not use
     fun containsAll(vararg names: String): Boolean {
         return players.map { it.name }.containsAll(names.toList())
     }
