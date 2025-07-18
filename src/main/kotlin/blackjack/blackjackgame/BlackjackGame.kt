@@ -78,10 +78,11 @@ class BlackjackGame {
                     isDealerBlackjack = isDealerBlackjack,
                 )
 
-            val earnings = BetEarningsCalculator.calculateEarnings(result, player.isBlackJack(), player.bet)
+            val earnings = result.calculateEarnings(player.bet)
             player.earnings = earnings
 
             when (result) {
+                GameResult.BLACKJACK_WIN -> dealerLosses++
                 GameResult.WIN -> dealerLosses++
                 GameResult.LOSE -> dealerWins++
                 GameResult.DRAW -> {}
