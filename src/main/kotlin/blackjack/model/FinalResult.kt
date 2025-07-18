@@ -1,8 +1,16 @@
 package blackjack.model
 
 class FinalResult(val dealer: Player, private val players: List<Player>) {
+    companion object {
+        private val INITIAL_EARNING = 0.0
+        private val LOSS_RATE = -1.0
+        private val TIE_RATE = 0.0
+        private val WIN_RATE = 1.0
+        private val BLACKJACK_RATE = 1.5
+    }
+
     internal fun updateEarnings() {
-        var sumOfPlayerEarning = 0.0
+        var sumOfPlayerEarning = INITIAL_EARNING
         for (player in players) {
             val newEarning = player.betAmount * getPayoutRate(player, this.dealer)
             player.updateEarning(newEarning)
@@ -17,18 +25,14 @@ class FinalResult(val dealer: Player, private val players: List<Player>) {
     ): Double {
         player.updateStatus()
         dealer.updateStatus()
-        return if (player.status.isBusted) {
-            -1.0
-        } else if (dealer.status.isBlackjack && player.status.isBlackjack) {
-            0.0
-        } else if (dealer.status.isBlackjack && !player.status.isBlackjack) {
-            -1.0
-        } else if (player.status.isBlackjack && !dealer.status.isBlackjack) {
-            1.5
-        } else if (player.status.isNeitherBlackjackNorBusted && dealer.status.isNeitherBlackjackNorBusted) {
-            getRateWithBenchMarkScore(player, dealer)
-        } else {
-            1.0
+        return when {
+            player.status.isBusted -> LOSS_RATE
+            dealer.status.isBlackjack && player.status.isBlackjack -> TIE_RATE
+            dealer.status.isBlackjack && !player.status.isBlackjack -> LOSS_RATE
+            player.status.isBlackjack && !dealer.status.isBlackjack -> BLACKJACK_RATE
+            player.status.isNeitherBlackjackNorBusted && dealer.status.isNeitherBlackjackNorBusted
+                -> getRateWithBenchMarkScore(player, dealer)
+            else -> WIN_RATE
         }
     }
 
@@ -37,12 +41,10 @@ class FinalResult(val dealer: Player, private val players: List<Player>) {
         dealer: Player,
     ): Double {
         val benchMarkScore = dealer.score
-        return if (player.score == benchMarkScore) {
-            0.0
-        } else if (player.score > benchMarkScore) {
-            1.0
-        } else {
-            -1.0
+        return when {
+            player.score == benchMarkScore -> TIE_RATE
+            player.score > benchMarkScore -> WIN_RATE
+            else -> LOSS_RATE
         }
     }
 }
