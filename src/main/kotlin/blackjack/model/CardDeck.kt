@@ -1,8 +1,6 @@
 package blackjack.model
 
-data class CardDeck(private val hold: MutableList<Card>) {
-    constructor() : this(initPokerCards())
-
+data class CardDeck(private val hold: MutableList<Card> = initPokerCards()) {
     val size
         get() = cards.size
 
