@@ -2,11 +2,11 @@ package blackjack.model
 
 class FinalResult(val dealer: Player, private val players: List<Player>) {
     companion object {
-        private val INITIAL_EARNING = 0.0
-        private val LOSS_RATE = -1.0
-        private val TIE_RATE = 0.0
-        private val WIN_RATE = 1.0
-        private val BLACKJACK_RATE = 1.5
+        const val INITIAL_EARNING = 0.0
+        const val LOSS_RATE = -1.0
+        const val TIE_RATE = 0.0
+        const val WIN_RATE = 1.0
+        const val BLACKJACK_RATE = 1.5
     }
 
     internal fun updateEarnings() {
@@ -31,7 +31,7 @@ class FinalResult(val dealer: Player, private val players: List<Player>) {
             dealer.status.isBlackjack && !player.status.isBlackjack -> LOSS_RATE
             player.status.isBlackjack && !dealer.status.isBlackjack -> BLACKJACK_RATE
             player.status.isNeitherBlackjackNorBusted && dealer.status.isNeitherBlackjackNorBusted
-                -> getRateWithBenchMarkScore(player, dealer)
+            -> getRateWithBenchMarkScore(player, dealer)
             else -> WIN_RATE
         }
     }
