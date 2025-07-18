@@ -3,6 +3,7 @@ package blackjack.model
 interface Playable {
     val name: String
     var hand: Hand
+    var result: Result
 
     fun requestCard(condition: () -> Boolean): Boolean {
         return condition()

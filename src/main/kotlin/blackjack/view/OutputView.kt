@@ -40,24 +40,20 @@ object OutputView {
     }
 
     fun displayFinalResults(winStatistics: Stats) {
-        val playersResult = winStatistics.playerBoard
         val dealerResult = winStatistics.dealerStats
         println("\n## Final Results")
         when (dealerResult[Result.TIE]) {
             0 -> println("Dealer: ${dealerResult[Result.WIN]} Win ${dealerResult[Result.LOSE]} Lose")
             else -> println("Dealer: ${dealerResult[Result.WIN]} Win ${dealerResult[Result.LOSE]} Lose ${dealerResult[Result.TIE]} Tie")
         }
-        playersResult.keys.forEach { player ->
-            val result = givePlayerResult(player, playersResult)
+        winStatistics.players.forEach { player ->
+            val result = givePlayerResult(player)
             println("${player.name}: $result")
         }
     }
 
-    private fun givePlayerResult(
-        player: Player,
-        playersResult: Map<Player, Result>,
-    ): String {
-        return when (playersResult[player]) {
+    private fun givePlayerResult(player: Player): String {
+        return when (player.result) {
             Result.LOSE -> "Lose"
             Result.WIN -> "Win"
             Result.TIE -> "Tie"
