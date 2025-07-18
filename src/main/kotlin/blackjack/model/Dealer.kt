@@ -1,18 +1,16 @@
 package blackjack.model
 
 data class Dealer(override val name: String = "Dealer") : Playable {
-    private var _hand = Hand()
-    override val hand: Hand
-        get() = _hand
+    override var hand = Hand()
 
     override fun drawCard(newCard: PlayingCard) {
         val deque = ArrayDeque(hand.cards)
         deque.addLast(newCard)
-        _hand = Hand(deque.toList())
+        hand = Hand(deque.toList())
     }
 
     override fun calculateHand(): Int {
-        return _hand.calculateHand()
+        return hand.calculateHand()
     }
 
     fun shouldDrawCardOrNot(): Boolean {
