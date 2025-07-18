@@ -24,7 +24,7 @@ object GameManager {
 
         statsManager.processStatistics(playerManager.players, dealer)
 
-        OutputView.displayFinalResults(statsManager.winStatistics)
+        OutputView.displayFinalResults(statsManager.winStatistics, statsManager.earnings)
     }
 
     private fun takePlayerNames() {

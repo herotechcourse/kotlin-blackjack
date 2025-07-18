@@ -2,7 +2,6 @@ package blackjack.view
 
 import blackjack.model.Dealer
 import blackjack.model.EarningsResult
-import blackjack.model.Playable
 import blackjack.model.Player
 
 data class StatsView(val players: List<Player>, val dealer: Dealer) {
@@ -12,12 +11,12 @@ data class StatsView(val players: List<Player>, val dealer: Dealer) {
     private var _dealerStats = mapOf("win" to 0, "lose" to 0, "tie" to 0)
     val dealerStats: Map<String, Int> get() = _dealerStats
 
-    private var _earnings: Map<Playable, Int> = emptyMap()
-    val earnings: Map<Playable, Int> get() = _earnings
+//    private var _earnings: Map<Playable, Int> = emptyMap()
+//    val earnings: Map<Playable, Int> get() = _earnings
 
     init {
         updateDealerStats()
-        updateEarnings()
+//        updateEarnings()
     }
 
     private fun initPlayerBoard(): Map<Player, EarningsResult> {
@@ -57,17 +56,17 @@ data class StatsView(val players: List<Player>, val dealer: Dealer) {
         _dealerStats = stats.toMap()
     }
 
-    fun updateEarnings() {
-        val result = mutableMapOf<Playable, Int>()
-        var dealerTotal = 0
-
-        for ((player, resultCode) in playerBoard) {
-            val earning = player.earnings(resultCode)
-            result[player] = earning
-            dealerTotal -= earning
-        }
-
-        result[dealer] = dealerTotal
-        _earnings = result.toMap()
-    }
+//    fun updateEarnings() {
+//        val result = mutableMapOf<Playable, Int>()
+//        var dealerTotal = 0
+//
+//        for ((player, resultCode) in playerBoard) {
+//            val earning = player.earnings(resultCode)
+//            result[player] = earning
+//            dealerTotal -= earning
+//        }
+//
+//        result[dealer] = dealerTotal
+//        _earnings = result.toMap()
+//    }
 }

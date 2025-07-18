@@ -1,6 +1,7 @@
 package blackjack.view
 
 import blackjack.model.Dealer
+import blackjack.model.Playable
 import blackjack.model.Player
 
 object OutputView {
@@ -34,9 +35,11 @@ object OutputView {
         }
     }
 
-    fun displayFinalResults(winStatistics: StatsView) {
+    fun displayFinalResults(
+        winStatistics: StatsView,
+        earnings: Map<Playable, Int>,
+    ) {
         println("\n## Final Earnings")
-        val earnings = winStatistics.earnings
         earnings.forEach { (player, amount) ->
             println("${player.name}: ${formatEarning(amount)}")
         }
