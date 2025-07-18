@@ -4,7 +4,7 @@ import blackjack.model.Dealer
 import blackjack.model.GameResult
 import blackjack.model.Player
 
-object GameLogic {
+object GameRoundManager {
     fun handlePlayerTurn(
         dealer: Dealer,
         player: Player,

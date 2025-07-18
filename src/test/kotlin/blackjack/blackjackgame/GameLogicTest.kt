@@ -8,7 +8,7 @@ class GameLogicTest {
     @Test
     fun `returns WIN when player has higher score and no one is busted`() {
         val result =
-            GameLogic.getGameResult(
+            GameRoundManager.getGameResult(
                 playerScore = 20,
                 dealerScore = 18,
                 isPlayerBusted = false,
@@ -22,7 +22,7 @@ class GameLogicTest {
     @Test
     fun `returns LOSE when player is busted`() {
         val result =
-            GameLogic.getGameResult(
+            GameRoundManager.getGameResult(
                 playerScore = 22,
                 dealerScore = 17,
                 isPlayerBusted = true,
@@ -36,7 +36,7 @@ class GameLogicTest {
     @Test
     fun `returns DRAW when scores are equal and no one is busted`() {
         val result =
-            GameLogic.getGameResult(
+            GameRoundManager.getGameResult(
                 playerScore = 20,
                 dealerScore = 20,
                 isPlayerBusted = false,
@@ -50,7 +50,7 @@ class GameLogicTest {
     @Test
     fun `returns DRAW when both player and dealer have Blackjack`() {
         val result =
-            GameLogic.getGameResult(
+            GameRoundManager.getGameResult(
                 playerScore = 21,
                 dealerScore = 21,
                 isPlayerBusted = false,

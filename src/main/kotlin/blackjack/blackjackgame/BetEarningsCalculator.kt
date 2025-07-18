@@ -2,7 +2,7 @@ package blackjack.blackjackgame
 
 import blackjack.model.GameResult
 
-object BettingLogic {
+object BetEarningsCalculator {
     fun calculateEarnings(
         result: GameResult,
         isBlackjack: Boolean,

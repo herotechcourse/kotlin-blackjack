@@ -42,7 +42,7 @@ class BlackjackGame {
         dealer: Dealer,
     ) {
         players.forEach { player ->
-            GameLogic.handlePlayerTurn(dealer, player)
+            GameRoundManager.handlePlayerTurn(dealer, player)
         }
         OutputView.displayLineBreak()
         OutputView.displayPlayerHands(players)
@@ -69,7 +69,7 @@ class BlackjackGame {
 
         players.forEach { player ->
             val result =
-                GameLogic.getGameResult(
+                GameRoundManager.getGameResult(
                     playerScore = player.getScore(),
                     dealerScore = dealerScore,
                     isPlayerBusted = player.isBusted(),
@@ -78,7 +78,7 @@ class BlackjackGame {
                     isDealerBlackjack = isDealerBlackjack,
                 )
 
-            val earnings = BettingLogic.calculateEarnings(result, player.isBlackJack(), player.bet)
+            val earnings = BetEarningsCalculator.calculateEarnings(result, player.isBlackJack(), player.bet)
             player.earnings = earnings
 
             when (result) {
