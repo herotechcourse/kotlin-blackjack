@@ -2,6 +2,7 @@ package blackjack.model
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 
 class CardDeckTest {
     @Test
@@ -36,5 +37,11 @@ class CardDeckTest {
         cardDeck.drawCard()
 
         assertThat(cardDeck.cards).hasSize(51)
+    }
+
+    @Test
+    fun `should check if the card are over before draw - create another deck if so`() {
+        val cardDeck = CardDeck()
+        assertDoesNotThrow { repeat(100) { cardDeck.drawCard() } }
     }
 }

@@ -8,9 +8,8 @@ data class CardDeck(private val hold: MutableList<Card> = initPokerCards()) {
         get() = hold.toList()
 
     fun drawCard(): Card {
-        val card = hold.first()
-        hold.remove(card)
-        return card
+        hold.ifEmpty { hold.addAll(initPokerCards()) }
+        return hold.removeFirst()
     }
 
     companion object {
