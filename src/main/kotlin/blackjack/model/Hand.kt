@@ -15,11 +15,6 @@ class Hand(val cards: List<PlayingCard> = emptyList()) {
         return score
     }
 
-    fun toText(): String {
-        val forms = cards.map { it.string }
-        return forms.joinToString(", ")
-    }
-
     companion object {
         const val BIG_ACE_VALUE = 11
         const val BLACKJACK_VALUE = 21

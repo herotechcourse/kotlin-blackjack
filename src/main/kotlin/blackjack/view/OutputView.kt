@@ -1,6 +1,7 @@
 package blackjack.view
 
 import blackjack.model.Dealer
+import blackjack.model.Hand
 import blackjack.model.Player
 import blackjack.model.Result
 import blackjack.model.Stats
@@ -20,7 +21,7 @@ object OutputView {
 
     fun displayCurrentHand(player: Player) {
         val hand = player.hand
-        println("${player.name}'s cards: ${hand.toText()}")
+        println("${player.name}'s cards: ${handToText(hand)}")
     }
 
     fun displayDealerDrawsCard() {
@@ -31,9 +32,9 @@ object OutputView {
         players: List<Player>,
         dealer: Dealer,
     ) {
-        println("\nDealer's cards: ${dealer.hand.toText()} – Total: ${dealer.calculateHand()}")
+        println("\nDealer's cards: ${handToText(dealer.hand)} – Total: ${dealer.calculateHand()}")
         players.forEach { player ->
-            println("${player.name}'s cards: ${player.hand.toText()} – Total: ${player.calculateHand()}")
+            println("${player.name}'s cards: ${handToText(player.hand)} – Total: ${player.calculateHand()}")
         }
     }
 
@@ -61,5 +62,9 @@ object OutputView {
             Result.TIE -> "Tie"
             else -> "Error"
         }
+    }
+
+    private fun handToText(hand: Hand): String {
+        return hand.cards.joinToString(", ") { it.string }
     }
 }
