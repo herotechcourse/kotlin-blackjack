@@ -14,7 +14,7 @@ class DealerTest {
         private val score: Int,
         private val busted: Boolean,
         private val blackjack: Boolean,
-    ) : Player(name = "Test", bet = 100) {
+    ) : Player(name = "Test", bet = Bet.from(1000)) {
         override fun getScore() = score
 
         override fun isBusted() = busted
@@ -37,7 +37,7 @@ class DealerTest {
     @BeforeEach
     fun setUp() {
         dealer = Dealer()
-        player = Player("TestPlayer")
+        player = Player("TestPlayer", bet = Bet.from(1000))
     }
 
     @Test

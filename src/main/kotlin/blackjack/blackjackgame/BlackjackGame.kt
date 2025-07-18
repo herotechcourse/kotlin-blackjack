@@ -67,7 +67,7 @@ class BlackjackGame {
         players.forEach { player ->
             val result = dealer.judge(player)
             val label = GameResultView.from(result).label
-            val earnings = result.calculateEarnings(player.bet)
+            val earnings = result.calculateEarnings(player.bet.amount)
             player.earnings = earnings
 
             when (result) {
