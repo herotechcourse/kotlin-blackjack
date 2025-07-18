@@ -10,6 +10,30 @@ class DealerTest {
     private lateinit var dealer: Dealer
     private lateinit var player: Player
 
+    private class TestPlayer(
+        private val score: Int,
+        private val busted: Boolean,
+        private val blackjack: Boolean,
+    ) : Player(name = "Test", bet = 100) {
+        override fun getScore() = score
+
+        override fun isBusted() = busted
+
+        override fun isBlackJack() = blackjack
+    }
+
+    private class TestDealer(
+        private val score: Int,
+        private val busted: Boolean,
+        private val blackjack: Boolean,
+    ) : Dealer() {
+        override fun getScore() = score
+
+        override fun isBusted() = busted
+
+        override fun isBlackJack() = blackjack
+    }
+
     @BeforeEach
     fun setUp() {
         dealer = Dealer()
@@ -42,5 +66,41 @@ class DealerTest {
         val shouldDraw = dealer.shouldDraw()
 
         assertFalse(shouldDraw)
+    }
+
+    @Test
+    fun `returns WIN when player has higher score and no one is busted`() {
+        val dealer = TestDealer(score = 18, busted = false, blackjack = false)
+        val player = TestPlayer(score = 20, busted = false, blackjack = false)
+
+        val result = dealer.judge(player)
+        assertEquals(GameResult.WIN, result)
+    }
+
+    @Test
+    fun `returns LOSE when player is busted`() {
+        val dealer = TestDealer(score = 17, busted = false, blackjack = false)
+        val player = TestPlayer(score = 22, busted = true, blackjack = false)
+
+        val result = dealer.judge(player)
+        assertEquals(GameResult.LOSE, result)
+    }
+
+    @Test
+    fun `returns DRAW when scores are equal and no one is busted`() {
+        val dealer = TestDealer(score = 20, busted = false, blackjack = false)
+        val player = TestPlayer(score = 20, busted = false, blackjack = false)
+
+        val result = dealer.judge(player)
+        assertEquals(GameResult.DRAW, result)
+    }
+
+    @Test
+    fun `returns DRAW when both player and dealer have Blackjack`() {
+        val dealer = TestDealer(score = 21, busted = false, blackjack = true)
+        val player = TestPlayer(score = 21, busted = false, blackjack = true)
+
+        val result = dealer.judge(player)
+        assertEquals(GameResult.DRAW, result)
     }
 }

@@ -37,6 +37,10 @@ object OutputView {
         println("\n## Final Results")
     }
 
+    fun displayBlackjackMessage(playerName: String) {
+        println("$playerName has Blackjack!")
+    }
+
     fun displayDealerResult(
         wins: Int,
         losses: Int,

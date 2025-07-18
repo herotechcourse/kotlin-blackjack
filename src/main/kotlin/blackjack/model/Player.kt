@@ -1,6 +1,6 @@
 package blackjack.model
 
-class Player(
+open class Player(
     name: String,
     val bet: Int = 0,
     var earnings: Int = 0,

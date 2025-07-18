@@ -7,11 +7,11 @@ abstract class Participant(val name: String) {
         hand.add(card)
     }
 
-    fun getScore() = hand.getScore()
+    open fun getScore() = hand.getScore()
 
-    fun isBusted() = hand.isBusted()
+    open fun isBusted() = hand.isBusted()
 
-    fun isBlackJack() = hand.isBlackjack(getScore())
+    open fun isBlackJack() = hand.isBlackjack(getScore())
 
     fun getNumberOfCardsInHand() = hand.getNumberOfCards()
 
