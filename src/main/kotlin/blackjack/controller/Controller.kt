@@ -7,7 +7,7 @@ import blackjack.service.GameOrchestrator
 import blackjack.service.InputProcessor
 import blackjack.view.OutputView
 
-class Controller() {
+class Controller {
     private val inputProcessor = InputProcessor()
     private val gameOrchestrator = GameOrchestrator(Deck(), inputProcessor)
 
@@ -30,7 +30,7 @@ class Controller() {
     }
 
     fun createDealer(): Player {
-        return Player("dealer")
+        return Player(DEALER)
     }
 
     private fun roundOne(
@@ -57,6 +57,7 @@ class Controller() {
     }
 
     companion object {
+        const val DEALER = "dealer"
         const val BLACKJACK_SCORE = 21
     }
 }
