@@ -1,5 +1,6 @@
 package blackjack
 
+import blackjack.controller.StatsManager
 import blackjack.model.Bet
 import blackjack.model.Card
 import blackjack.model.Dealer
@@ -7,7 +8,6 @@ import blackjack.model.EarningsResult
 import blackjack.model.Player
 import blackjack.model.Rank
 import blackjack.model.Suit
-import blackjack.view.StatsView
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -22,11 +22,12 @@ class BlackJackTest {
         player.drawCard(Card(Rank.TEN, Suit.DIAMONDS)) // 10
         player.drawCard(Card(Rank.JACK, Suit.HEARTS)) // 10 → 20
 
-        val stats = StatsView(listOf(player), dealer)
+        val statsManager = StatsManager(listOf(player), dealer)
+        statsManager.processStatistics(listOf(player), dealer)
 
-        assertEquals(EarningsResult.WIN_BET, stats.playerBoard[player])
-        assertEquals(10000, stats.earnings[player])
-        assertEquals(-10000, stats.earnings[dealer])
+        assertEquals(EarningsResult.WIN_BET, statsManager.winStatistics.playerBoard[player])
+        assertEquals(10000, statsManager.earnings[player])
+        assertEquals(-10000, statsManager.earnings[dealer])
     }
 
     @Test
@@ -40,11 +41,12 @@ class BlackJackTest {
         player.drawCard(Card(Rank.JACK, Suit.HEARTS)) // 10
         player.drawCard(Card(Rank.THREE, Suit.CLUBS)) // 3 → 23
 
-        val stats = StatsView(listOf(player), dealer)
+        val statsManager = StatsManager(listOf(player), dealer)
+        statsManager.processStatistics(listOf(player), dealer)
 
-        assertEquals(EarningsResult.LOSE_BET, stats.playerBoard[player])
-        assertEquals(-20000, stats.earnings[player])
-        assertEquals(20000, stats.earnings[dealer])
+        assertEquals(EarningsResult.LOSE_BET, statsManager.winStatistics.playerBoard[player])
+        assertEquals(-20000, statsManager.earnings[player])
+        assertEquals(20000, statsManager.earnings[dealer])
     }
 
     @Test
@@ -57,11 +59,12 @@ class BlackJackTest {
         player.drawCard(Card(Rank.NINE, Suit.DIAMONDS)) // 9
         player.drawCard(Card(Rank.EIGHT, Suit.HEARTS)) // 8 → 17
 
-        val stats = StatsView(listOf(player), dealer)
+        val statsManager = StatsManager(listOf(player), dealer)
+        statsManager.processStatistics(listOf(player), dealer)
 
-        assertEquals(EarningsResult.TIE_BET, stats.playerBoard[player])
-        assertEquals(0, stats.earnings[player])
-        assertEquals(0, stats.earnings[dealer])
+        assertEquals(EarningsResult.TIE_BET, statsManager.winStatistics.playerBoard[player])
+        assertEquals(0, statsManager.earnings[player])
+        assertEquals(0, statsManager.earnings[dealer])
     }
 
     @Test
@@ -74,11 +77,12 @@ class BlackJackTest {
         player.drawCard(Card(Rank.ACE, Suit.HEARTS)) // 11
         player.drawCard(Card(Rank.JACK, Suit.SPADES)) // 10 → 21 (Blackjack)
 
-        val stats = StatsView(listOf(player), dealer)
+        val statsManager = StatsManager(listOf(player), dealer)
+        statsManager.processStatistics(listOf(player), dealer)
 
-        assertEquals(EarningsResult.WIN_BLACK_JACK_BET, stats.playerBoard[player])
-        assertEquals(15000, stats.earnings[player])
-        assertEquals(-15000, stats.earnings[dealer])
+        assertEquals(EarningsResult.WIN_BLACK_JACK_BET, statsManager.winStatistics.playerBoard[player])
+        assertEquals(15000, statsManager.earnings[player])
+        assertEquals(-15000, statsManager.earnings[dealer])
     }
 
     @Test
@@ -92,11 +96,12 @@ class BlackJackTest {
         player.drawCard(Card(Rank.TEN, Suit.DIAMONDS)) // 10
         player.drawCard(Card(Rank.SIX, Suit.SPADES)) // 6 → 16
 
-        val stats = StatsView(listOf(player), dealer)
+        val statsManager = StatsManager(listOf(player), dealer)
+        statsManager.processStatistics(listOf(player), dealer)
 
-        assertEquals(EarningsResult.WIN_BET, stats.playerBoard[player])
-        assertEquals(5000, stats.earnings[player])
-        assertEquals(-5000, stats.earnings[dealer])
+        assertEquals(EarningsResult.WIN_BET, statsManager.winStatistics.playerBoard[player])
+        assertEquals(5000, statsManager.earnings[player])
+        assertEquals(-5000, statsManager.earnings[dealer])
     }
 
     @Test
@@ -109,11 +114,12 @@ class BlackJackTest {
         player.drawCard(Card(Rank.ACE, Suit.CLUBS))
         player.drawCard(Card(Rank.JACK, Suit.DIAMONDS)) // 21 (Blackjack)
 
-        val stats = StatsView(listOf(player), dealer)
+        val statsManager = StatsManager(listOf(player), dealer)
+        statsManager.processStatistics(listOf(player), dealer)
 
-        assertEquals(EarningsResult.TIE_BET, stats.playerBoard[player])
-        assertEquals(0, stats.earnings[player])
-        assertEquals(0, stats.earnings[dealer])
+        assertEquals(EarningsResult.TIE_BET, statsManager.winStatistics.playerBoard[player])
+        assertEquals(0, statsManager.earnings[player])
+        assertEquals(0, statsManager.earnings[dealer])
     }
 
     @Test
@@ -132,12 +138,13 @@ class BlackJackTest {
         player2.drawCard(Card(Rank.QUEEN, Suit.CLUBS))
         player2.drawCard(Card(Rank.TWO, Suit.HEARTS)) // 22 – Bust
 
-        val stats = StatsView(listOf(player1, player2), dealer)
+        val statsManager = StatsManager(listOf(player1, player2), dealer)
+        statsManager.processStatistics(listOf(player1, player2), dealer)
 
-        assertEquals(EarningsResult.LOSE_BET, stats.playerBoard[player1])
-        assertEquals(EarningsResult.LOSE_BET, stats.playerBoard[player2])
-        assertEquals(-10000, stats.earnings[player1])
-        assertEquals(-20000, stats.earnings[player2])
-        assertEquals(30000, stats.earnings[dealer])
+        assertEquals(EarningsResult.LOSE_BET, statsManager.winStatistics.playerBoard[player1])
+        assertEquals(EarningsResult.LOSE_BET, statsManager.winStatistics.playerBoard[player2])
+        assertEquals(-10000, statsManager.earnings[player1])
+        assertEquals(-20000, statsManager.earnings[player2])
+        assertEquals(30000, statsManager.earnings[dealer])
     }
 }
