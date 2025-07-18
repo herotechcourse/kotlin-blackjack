@@ -15,14 +15,14 @@ class BetTest {
     }
 
     @Test
-    fun `bet should be positive`() {
+    fun `bet shouldn't be negative`() {
         assertThrows<IllegalArgumentException> {
             Bet(-100)
         }
     }
 
     @Test
-    fun `bet should be more than 0`() {
+    fun `bet shouldn't be zero`() {
         assertThrows<IllegalArgumentException> {
             Bet(0)
         }
