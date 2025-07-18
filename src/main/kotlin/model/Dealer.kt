@@ -1,11 +1,11 @@
 package model
 
-class Dealer() : BasePlayer("Deal") {
+class Dealer : BasePlayer() {
     private val deck = Deck()
 
-    fun giveInitialCardsToPlayers(players: List<Player>) {
+    fun giveInitialCardsToPlayers(allPlayers: Players) {
         repeat(2) {
-            players.forEach { player -> player.drawCard(dealCard()) }
+            allPlayers.players.forEach { player -> player.drawCard(dealCard()) }
         }
     }
 

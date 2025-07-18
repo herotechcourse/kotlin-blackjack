@@ -1,7 +1,9 @@
 package controller
 
+import model.Bet
 import model.Dealer
 import model.Player
+import model.Players
 import service.ResultCalculator
 import util.isYes
 import view.InputView
@@ -9,21 +11,32 @@ import view.OutputView
 
 object BlackJackController {
     fun playGame() {
-        val players = getPlayerNames().map { Player(it) }
-        val dealer = Dealer()
-        startGame(players, dealer)
-        runTurns(players, dealer)
-        showResults(players, dealer)
+        try {
+            val players = Players(getPlayerNames().map { Player(it) })
+            val dealer = Dealer()
+            startBetting(players)
+            startGame(players, dealer)
+            runTurns(players, dealer)
+            showResults(players, dealer)
+        } catch (e: IllegalArgumentException) {
+            OutputView.displayErrorMessage(e)
+            playGame()
+        }
     }
 
     private fun getPlayerNames(): List<String> {
         val players = InputView.requestPlayerNames()
-        require(players.size <= 6) { "Maximum player names must be 6" }
         return players
     }
 
+    private fun startBetting(allPlayers: Players) {
+        allPlayers.players.forEach { player ->
+            player.bet = Bet(InputView.requestPlayersBet(player.name))
+        }
+    }
+
     private fun startGame(
-        players: List<Player>,
+        players: Players,
         dealer: Dealer,
     ) {
         dealer.giveInitialCardsToPlayers(players)
@@ -32,11 +45,11 @@ object BlackJackController {
     }
 
     private fun runTurns(
-        players: List<Player>,
+        allPlayers: Players,
         dealer: Dealer,
     ) {
-        players.forEach { player ->
-            while (InputView.requestPlayerDecision(player.name).isYes()) {
+        allPlayers.players.forEach { player ->
+            while (player.getScore() <= 21 && InputView.requestPlayerDecision(player.name).isYes()) {
                 player.requestCardFromDealer(dealer)
                 OutputView.displayPlayersTurn(player)
             }
@@ -48,15 +61,18 @@ object BlackJackController {
     }
 
     private fun showResults(
-        players: List<Player>,
+        allPlayers: Players,
         dealer: Dealer,
     ) {
-        OutputView.displayFinalCardsOnHand(players, dealer)
+        OutputView.displayFinalCardsOnHand(allPlayers, dealer)
         val result =
             ResultCalculator.getResult(
-                players.map { it.getScore() },
+                allPlayers.players.map { it.getScore() },
                 dealer.getScore(),
             )
-        OutputView.displayResults(result, players)
+        OutputView.displayResults(result, allPlayers)
+        val earningResult = ResultCalculator.calculateEarning(allPlayers, dealer.getScore(), dealer.isBlackJack())
+        ResultCalculator.applyEarningResult(allPlayers, dealer, earningResult)
+        OutputView.displayFinalEarnings(allPlayers, dealer)
     }
 }

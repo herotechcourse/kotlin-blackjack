@@ -7,7 +7,6 @@ class Deck {
         return cards.toSet()
     }
 
-    // TODO: Catch the IllegalArgumentException
     fun pop(): Card {
         require(cards.isNotEmpty()) { "The deck is empty" }
         return cards.first().also { cards.remove(it) }

@@ -29,4 +29,3 @@ class Hand {
 
     private fun aceCount(cards: Set<Card>) = cards.count { it.rank == Rank.ACE }
 }
-

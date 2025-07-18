@@ -2,16 +2,17 @@ package view
 
 import model.Dealer
 import model.Player
+import model.Players
 import model.ResultStatus
 
 object OutputView {
     fun displayInitialCards(
-        players: List<Player>,
+        allPlayers: Players,
         dealer: Dealer,
     ) {
-        println("Dealing two cards to dealer, ${players.joinToString(", ") { it.name }}.")
+        println("Dealing two cards to dealer, ${allPlayers.players.joinToString(", ") { it.name }}.")
         println("Dealer: ${CardView.renderAll(dealer.showCards(), false)}")
-        players.forEach { println("${it.name}'s cards: ${CardView.renderAll(it.showCards(), true)} ") }
+        allPlayers.players.forEach { println("${it.name}'s cards: ${CardView.renderAll(it.showCards(), true)} ") }
     }
 
     fun displayPlayersTurn(player: Player) {
@@ -23,23 +24,34 @@ object OutputView {
     }
 
     fun displayFinalCardsOnHand(
-        players: List<Player>,
+        allPlayers: Players,
         dealer: Dealer,
     ) {
         println("Dealer's cards: ${CardView.renderAll(dealer.showCards(), true)} - Total: ${dealer.getScore()}")
-        players.forEach {
+        allPlayers.players.forEach {
             println("${it.name}'s cards: ${CardView.renderAll(it.showCards(), true)} - Total: ${it.getScore()}")
         }
     }
 
     fun displayResults(
         results: List<ResultStatus>,
-        players: List<Player>,
+        allPlayers: Players,
     ) {
         println("\n## Final Results")
         println(getDealersResult(results))
-        for (i in players.indices) {
-            println("${players[i].name}: ${ResultStatus.toText(results[i])}")
+        for (i in allPlayers.players.indices) {
+            println("${allPlayers.players[i].name}: ${ResultStatus.toText(results[i])}")
+        }
+    }
+
+    fun displayFinalEarnings(
+        allPlayers: Players,
+        dealer: Dealer,
+    ) {
+        println("\n## Final Earnings")
+        println("Dealer: ${dealer.earnings.toInt()}")
+        for (i in allPlayers.players.indices) {
+            println("${allPlayers.players[i].name}: ${(allPlayers.players[i].earnings).toInt()}")
         }
     }
 
@@ -48,5 +60,9 @@ object OutputView {
         val losses = playersResult.count { it == ResultStatus.WIN }
         val draws = playersResult.count { it == ResultStatus.DRAW }
         return "Dealer: $wins Wins $losses Losses $draws draws"
+    }
+
+    fun displayErrorMessage(e: Exception) {
+        println(e.message)
     }
 }
