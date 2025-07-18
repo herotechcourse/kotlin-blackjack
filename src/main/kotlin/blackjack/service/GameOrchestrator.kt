@@ -1,9 +1,9 @@
 package blackjack.service
 
+import blackjack.controller.Controller.Companion.BLACKJACK_SCORE
 import blackjack.model.Deck
 import blackjack.model.Player
 import blackjack.view.OutputView
-import blackjack.controller.Controller.Companion.BLACKJACK_SCORE
 
 class GameOrchestrator(private val deck: Deck, private val inputProcessor: InputProcessor) {
     companion object {

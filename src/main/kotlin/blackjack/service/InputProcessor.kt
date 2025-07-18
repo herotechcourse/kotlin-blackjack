@@ -79,5 +79,4 @@ class InputProcessor {
             else -> throw IllegalArgumentException("The answer must be y or n.")
         }
     }
-
 }
