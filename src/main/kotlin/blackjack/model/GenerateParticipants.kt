@@ -1,6 +1,6 @@
 package blackjack.model
 
-object ParticipantsFactory {
+object GenerateParticipants {
     fun generatePlayers(names: List<String>): List<Player> {
         return names.map { Player(it) }
     }
