@@ -2,7 +2,7 @@ package blackjack.view
 
 import blackjack.model.Rank
 
-enum class RankView(val rank: Rank, val symbol: String) {
+enum class RankView(private val rank: Rank, val symbol: String) {
     TWO(Rank.TWO, "2"),
     THREE(Rank.THREE, "3"),
     FOUR(Rank.FOUR, "4"),
