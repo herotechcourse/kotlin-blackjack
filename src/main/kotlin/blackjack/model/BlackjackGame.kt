@@ -13,8 +13,8 @@ class BlackjackGame(
     }
 
     fun setUpTable() {
-        players.forEach { it.hitTwoCards(cardDeck) }
-        dealer.hitTwoCards(cardDeck)
+        players.forEach { it.dealInitialCards(cardDeck) }
+        dealer.dealInitialCards(cardDeck)
     }
 
     fun play() {

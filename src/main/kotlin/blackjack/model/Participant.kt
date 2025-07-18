@@ -16,7 +16,9 @@ abstract class Participant(
         state = state.stay()
     }
 
-    fun hitTwoCards(cardDeck: CardDeck) {
-        while (state.isFirstTurn()) draw(cardDeck.drawCard())
+    fun dealInitialCards(cardDeck: CardDeck) {
+        repeat(2) {
+            draw(cardDeck.drawCard())
+        }
     }
 }
