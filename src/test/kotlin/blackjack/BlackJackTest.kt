@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test
 class BlackJackTest {
     @Test
     fun `player wins with higher score than dealer`() {
-        val dealer = Dealer("Dealer")
+        val dealer = Dealer()
         dealer.drawCard(Card(Rank.NINE, Suit.SPADES)) // 9
         dealer.drawCard(Card(Rank.EIGHT, Suit.CLUBS)) // 8 → 17
 
@@ -32,7 +32,7 @@ class BlackJackTest {
 
     @Test
     fun `player loses by busting`() {
-        val dealer = Dealer("Dealer")
+        val dealer = Dealer()
         dealer.drawCard(Card(Rank.NINE, Suit.SPADES)) // 9
         dealer.drawCard(Card(Rank.SIX, Suit.CLUBS)) // 6 → 15
 
@@ -51,7 +51,7 @@ class BlackJackTest {
 
     @Test
     fun `player and dealer tie`() {
-        val dealer = Dealer("Dealer")
+        val dealer = Dealer()
         dealer.drawCard(Card(Rank.TEN, Suit.SPADES)) // 10
         dealer.drawCard(Card(Rank.SEVEN, Suit.CLUBS)) // 7 → 17
 
@@ -69,7 +69,7 @@ class BlackJackTest {
 
     @Test
     fun `player gets Blackjack`() {
-        val dealer = Dealer("Dealer")
+        val dealer = Dealer()
         dealer.drawCard(Card(Rank.EIGHT, Suit.SPADES)) // 8
         dealer.drawCard(Card(Rank.NINE, Suit.CLUBS)) // 9 → 17
 
@@ -87,7 +87,7 @@ class BlackJackTest {
 
     @Test
     fun `dealer busts and player wins`() {
-        val dealer = Dealer("Dealer")
+        val dealer = Dealer()
         dealer.drawCard(Card(Rank.NINE, Suit.SPADES)) // 9
         dealer.drawCard(Card(Rank.SEVEN, Suit.CLUBS)) // 7
         dealer.drawCard(Card(Rank.SIX, Suit.HEARTS)) // 6 → 22 (Bust)
@@ -106,7 +106,7 @@ class BlackJackTest {
 
     @Test
     fun `player and dealer both have Blackjack - player gets bet back`() {
-        val dealer = Dealer("Dealer")
+        val dealer = Dealer()
         dealer.drawCard(Card(Rank.ACE, Suit.SPADES))
         dealer.drawCard(Card(Rank.KING, Suit.HEARTS)) // 21 (Blackjack)
 
@@ -124,7 +124,7 @@ class BlackJackTest {
 
     @Test
     fun `all players bust - dealer wins all bets`() {
-        val dealer = Dealer("Dealer")
+        val dealer = Dealer()
         dealer.drawCard(Card(Rank.SEVEN, Suit.HEARTS)) // 7
         dealer.drawCard(Card(Rank.NINE, Suit.CLUBS)) // 9 → 16
 

@@ -36,11 +36,13 @@ object OutputView {
     }
 
     fun displayFinalResults(
+        winStatistics: StatsView,
         earnings: Map<Playable, Int>,
     ) {
         println("\n## Final Earnings")
-        earnings.forEach { (player, amount) ->
-            println("Dealer: ${formatEarning(amount)}")
+        earnings.forEach { (playable, amount) ->
+            val displayName = if (playable is Player) playable.name else "Dealer"
+            println("$displayName: ${formatEarning(amount)}")
         }
     }
 
