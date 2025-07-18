@@ -1,6 +1,6 @@
 package blackjack.model
 
-class Hand(val cards: List<Card>) {
+class Hand(val cards: List<Card> = emptyList()) {
     val size get() = cards.size
 
     operator fun plus(card: Card): Hand = Hand(this.cards + card)

@@ -3,7 +3,7 @@ import blackjack.model.Card
 import blackjack.model.Hand
 import blackjack.view.Errors
 
-class FirstTurn(override val hand: Hand = Hand(emptyList())) : Running {
+class FirstTurn(override val hand: Hand = Hand()) : Running {
     override fun draw(card: Card): State {
         val hand = this.hand + card
         if (hand.size == TWO_CARDS) {
