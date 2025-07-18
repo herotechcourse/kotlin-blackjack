@@ -1,5 +1,6 @@
 package blackjack.view
 
+import blackjack.model.Card
 import blackjack.model.Dealer
 import blackjack.model.Player
 
@@ -20,15 +21,15 @@ object OutputView {
     }
 
     fun printDealerHand(dealer: Dealer) {
-        val output =
-            if (dealer.isShowingAllCards()) {
-                "${dealer.name}'s cards: ${dealer.getDealtCards()}"
-            } else if (dealer.getDealtCards().isEmpty()) {
-                "${dealer.name} has no cards yet."
-            } else {
-                "${dealer.name}: ${dealer.getDealtCards()[0]}"
-            }
-        println(output)
+        println("${dealer.name}'s cards: " + dealer.handState.hand.cards[0].rank.symbol + dealer.handState.hand.cards[0].suit.symbol)
+    }
+
+    private fun cardsText(cards: List<Card>): String {
+        return cards.joinToString(", ") { it.rank.symbol + it.suit.symbol }
+    }
+
+    fun printPlayerHand(player: Player) {
+        println("${player.name}: ${cardsText(player.handState.hand.cards)}")
     }
 
     private fun getPlayersNames(players: List<Player>): String {
@@ -51,8 +52,8 @@ object OutputView {
         players: List<Player>,
         dealer: Dealer,
     ) {
-        println("$dealer - Total: ${dealer.getScore()}")
-        players.forEach { println("$it - Total: ${it.getScore()}") }
+        println("${dealer.name} - Total: ${dealer.points}")
+        players.forEach { println("$it - Total: ${it.points}") }
     }
 
     fun printPlayersWinnings(players: List<Player>) {
