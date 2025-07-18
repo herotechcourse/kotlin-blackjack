@@ -6,7 +6,12 @@ import blackjack.model.card.Rank
 import blackjack.model.holder.Hand
 import blackjack.model.state.State
 
-abstract class Participant(val name: String) : Hand() {
+abstract class Participant(val name: String, val amount: Int) : Hand() {
+    init {
+        require(amount >= 0) { "Amount must be non-negative, but was $amount" }
+        // TODO: validate amount
+    }
+
     val score get() = getCurrentPoints()
 
     abstract var currentState: State

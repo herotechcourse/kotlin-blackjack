@@ -4,7 +4,7 @@ import blackjack.model.GameConstants.BLACKJACK_SCORE
 import blackjack.model.GameConstants.PLAYER_FIRST_HIT_COUNT
 import blackjack.model.state.State
 
-class Player(name: String) : Participant(name) {
+class Player(name: String, amount: Int = 0) : Participant(name, amount) {
     override var currentState: State = State.HIT
         get() =
             when {
