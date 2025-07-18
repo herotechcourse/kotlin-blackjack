@@ -1,5 +1,5 @@
 package blackjack.model
 
-class Player(name: String, val bettingAmount: Int) : Participant(name) {
-    var finalEarnings: Double = 0.0
+class Player(name: String) : Participant(name) {
+    var bettingAmount: Int = 0
 }

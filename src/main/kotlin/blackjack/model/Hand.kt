@@ -1,24 +1,18 @@
 package blackjack.model
 
-class Hand(val cards: List<Card>) {
+class Hand(val cards: List<Card> = emptyList()) {
     val size get() = cards.size
-
-    constructor(vararg cards: Card) : this(cards.toList())
 
     operator fun plus(card: Card): Hand = Hand(cards + card)
 
-    fun getScore(): Int {
-        val hasAce = cards.any { it.isAce }
-        var totalScore = cards.sumOf { it.score }
+    fun calculateSum(): Int {
+        val countOfAce = cards.count { it.rank == Rank.ACE }
+        var sum = cards.sumOf { it.rank.value }
 
-        if (hasAce && totalScore <= 11) {
-            totalScore += 10
+        repeat(countOfAce) {
+            if (sum + 10 <= BLACK_JACK) sum += 10
         }
-        return totalScore
-    }
-
-    override fun toString(): String {
-        return cards.joinToString(", ")
+        return sum
     }
 
     companion object {
