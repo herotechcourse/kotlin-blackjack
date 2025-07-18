@@ -1,6 +1,7 @@
 package blackjack.model
 
 class Players(private val players: List<Player>) : Iterable<Player> {
+
     override fun iterator(): Iterator<Player> = players.iterator()
 
     fun dealFirstCards(dealer: Dealer) {
