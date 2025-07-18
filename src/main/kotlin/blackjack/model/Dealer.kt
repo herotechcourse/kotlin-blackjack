@@ -1,13 +1,11 @@
 package blackjack.model
 
-import blackjack.states.FirstTurn
-
-class Dealer() : Participant("Dealer", FirstTurn(Hand(emptyList()))) {
+class Dealer : Participant("Dealer") {
     fun playTurn(deck: CardDeck) {
         while (state.isRunning() && state.hand.calculatePoints() < SEVENTEEN) {
             draw(deck.drawCard())
         }
-        stay()
+        if (state.isRunning()) stay()
     }
 
     companion object {
