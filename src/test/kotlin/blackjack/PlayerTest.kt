@@ -147,7 +147,7 @@ class PlayerTest {
         @JvmStatic
         fun provideCardCombinations(): List<Arguments> {
             return listOf(
-                // Blackjack: Ace + 10-value card (exactly 2 cards, total 21)
+                // Blackjack: Ace + King
                 Arguments.of(
                     listOf(Card(Rank.ACE, Suit.SPADE), Card(Rank.KING, Suit.HEART)),
                     true,
@@ -161,17 +161,25 @@ class PlayerTest {
                 ),
                 // Not blackjack: 21 with 3 cards
                 Arguments.of(
-                    listOf(Card(Rank.SEVEN, Suit.SPADE), Card(Rank.SEVEN, Suit.HEART), Card(Rank.SEVEN, Suit.CLUB)),
+                    listOf(
+                        Card(Rank.SEVEN, Suit.SPADE),
+                        Card(Rank.SEVEN, Suit.HEART),
+                        Card(Rank.SEVEN, Suit.CLUB)
+                    ),
                     false,
                     false,
                 ),
                 // Bust: over 21
                 Arguments.of(
-                    listOf(Card(Rank.KING, Suit.SPADE), Card(Rank.QUEEN, Suit.HEART), Card(Rank.FIVE, Suit.DIAMOND)),
+                    listOf(
+                        Card(Rank.KING, Suit.SPADE),
+                        Card(Rank.QUEEN, Suit.HEART),
+                        Card(Rank.FIVE, Suit.DIAMOND)
+                    ),
                     false,
                     true,
                 ),
-                // Normal hand: under 21, not blackjack
+                // Normal hand: under 21
                 Arguments.of(
                     listOf(Card(Rank.NINE, Suit.SPADE), Card(Rank.EIGHT, Suit.HEART)),
                     false,

@@ -16,7 +16,11 @@ class FinalResultTest {
         val p1 = Player("p1", 100)
         val p2 = Player("p2", 200)
 
-        dealer.addCard(listOf(Card(Rank.KING, Suit.SPADE), Card(Rank.QUEEN, Suit.HEART), Card(Rank.FIVE, Suit.DIAMOND)))
+        dealer.addCard(listOf(
+            Card(Rank.KING, Suit.SPADE),
+            Card(Rank.QUEEN, Suit.HEART),
+            Card(Rank.FIVE, Suit.DIAMOND))
+        )
         p1.addCard(listOf(Card(Rank.TEN, Suit.SPADE), Card(Rank.NINE, Suit.HEART)))
         p2.addCard(listOf(Card(Rank.ACE, Suit.DIAMOND), Card(Rank.KING, Suit.HEART)))
 
