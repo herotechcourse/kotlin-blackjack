@@ -1,5 +1,6 @@
 package blackjack.view
 
+import blackjack.controller.Controller
 import blackjack.model.Player
 
 object OutputView {
@@ -29,7 +30,7 @@ object OutputView {
     }
 
     fun displayCardsOfPlayersWithScore(player: Player) {
-        if (player.name == "dealer") {
+        if (player.name == Controller.DEALER) {
             println()
         }
         val printableString =
