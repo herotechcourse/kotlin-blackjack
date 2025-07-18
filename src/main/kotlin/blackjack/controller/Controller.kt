@@ -33,13 +33,11 @@ class Controller() {
         }
     }
 
-    // internal fun: allows testing, while still hiding it from external consumers
     internal fun createPlayers() {
         players =
             processPlayerNames().map { createPlayerWithStatus(it, processBetAmount(it)) }
     }
 
-    // For testing purposes
     internal fun getPlayers(): List<Player> = players
 
     private fun roundOne() {
