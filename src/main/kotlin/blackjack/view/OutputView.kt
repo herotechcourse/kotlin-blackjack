@@ -3,6 +3,7 @@ package blackjack.view
 import blackjack.model.Dealer
 import blackjack.model.Hand
 import blackjack.model.Player
+import blackjack.model.PlayingCard
 import blackjack.model.Result
 import blackjack.model.Stats
 
@@ -15,7 +16,7 @@ object OutputView {
         val names = players.map { it.name }
         sentence += names.joinToString(", ")
         println("\nDealing two cards to $sentence.")
-        println("Dealer: ${dealer.hand.cards[0].string}")
+        println("Dealer: ${cardToText(dealer.hand.cards[0])}")
         players.forEach { displayCurrentHand(it) }
     }
 
@@ -65,6 +66,10 @@ object OutputView {
     }
 
     private fun handToText(hand: Hand): String {
-        return hand.cards.joinToString(", ") { it.string }
+        return hand.cards.joinToString(", ") { cardToText(it) }
+    }
+
+    private fun cardToText(card: PlayingCard): String {
+        return card.rank.digit + card.suit.form
     }
 }

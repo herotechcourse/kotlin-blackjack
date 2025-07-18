@@ -2,7 +2,6 @@ package blackjack.model
 
 class PlayingCard private constructor(val rank: Rank, val suit: Suit) {
     val value: Int get() = rank.value
-    val string: String get() = rank.digit + suit.form
 
     constructor(form: String) : this(Rank.of(form.substring(0, 1)), Suit.with(form.substring(1, 2)))
 
