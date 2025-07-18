@@ -1,19 +1,19 @@
 package blackjack.model
 
 class Deck {
-    private val _cards = Cards()
+    private val deckCards = Cards()
 
     val cards: List<Card>
-        get() = _cards.cards
+        get() = deckCards.cards
 
     init {
         generateFullDeck()
-        _cards.shuffle()
+        deckCards.shuffle()
     }
 
     fun drawCard(count: Int = 1): List<Card> {
-        val drawnCards = _cards.take(count)
-        _cards.removeAll(drawnCards)
+        val drawnCards = deckCards.take(count)
+        deckCards.removeAll(drawnCards)
         return drawnCards
     }
 
@@ -22,6 +22,6 @@ class Deck {
             Suit.entries.flatMap { suit ->
                 Rank.entries.map { rank -> Card(rank, suit) }
             }
-        _cards.addAll(allCards)
+        deckCards.addAll(allCards)
     }
 }
