@@ -1,5 +1,7 @@
 package blackjack.view
 
+import blackjack.validator.Validator
+
 object InputView {
     fun readPlayersNames(): List<String> {
         return Ask.retryable(
@@ -65,17 +67,13 @@ object InputView {
                     .map { it.trim() }
                     .filterNot { it.isBlank() }
 
-            if (names.isEmpty() || names.any { !it.all { char -> char.isLetterOrDigit() } }) {
-                throw IllegalArgumentException("${OutputView.Message.INVALID_INPUT}, $input: try again.")
-            }
+            names.forEach { Validator.name(it) }
             return names
         }
 
         fun bet(input: String): Int {
             val amount = input.toInt()
-
-            // TODO: separate to Validator
-            require(amount > 0) { "${OutputView.Message.INVALID_INPUT}, $input: try again." }
+            Validator.amount(amount)
             return amount
         }
 
