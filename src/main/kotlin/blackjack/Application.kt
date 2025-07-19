@@ -1,8 +1,8 @@
 package blackjack
 
 import blackjack.controller.GameManager
+import blackjack.factory.PlayerFactory
 import blackjack.model.participant.Participants
-import blackjack.model.participant.Player
 import blackjack.model.result.GameResult
 import blackjack.view.InputView
 import blackjack.view.OutputView
@@ -13,10 +13,7 @@ fun main() {
         val names = InputView.readPlayersNames()
         val bets = InputView.readPlayersBet(names)
 
-        val players =
-            names.zip(bets) { name, amount ->
-                Player(name, amount)
-            }
+        val players = PlayerFactory(names, bets).createPlayers()
 
         val participants = Participants(players)
 
