@@ -3,20 +3,13 @@ package blackjack.view
 import blackjack.model.participant.Dealer
 import blackjack.model.participant.Participant
 import blackjack.model.participant.Participants
+import blackjack.model.participant.Player
 import blackjack.model.result.GameResult
-import blackjack.model.result.Outcome
 
 object OutputView {
-    fun showAllPayersCards(participants: Participants) {
-        participants.players.forEach { showCards(it) }
-        println()
-    }
-
-    fun showCards(
-        participant: Participant,
-        extra: String = "",
-    ) {
-        println("${participant.name}'s cards: " + participant.cards.joinToString() + extra)
+    fun showFirstRound(participants: Participants) {
+        showCards(participants.dealer)
+        showAllPayersCards(participants.players)
     }
 
     fun showDealerDraw(dealer: Dealer) {
@@ -34,23 +27,37 @@ object OutputView {
     fun showError(msg: String?) = println("Error: $msg")
 
     fun showGameResult(gameResult: GameResult) {
-        val playersResults = gameResult.playersResults
         showCards(gameResult.dealer, showPoints(gameResult.dealer))
-        playersResults.forEach { (player, _) ->
+        showAllPayersCardsAndPoints(gameResult.participants.players)
+        showGameSummary(gameResult)
+    }
+
+    internal fun showAllPayersCards(players: List<Player>) {
+        players.forEach { player ->
+            showCards(player)
+        }
+        println()
+    }
+
+    private fun showAllPayersCardsAndPoints(players: List<Player>) {
+        players.forEach { player ->
             showCards(player, showPoints(player))
         }
+        println()
+    }
 
+    internal fun showCards(
+        participant: Participant,
+        extra: String = "",
+    ) {
+        println("${participant.name}'s cards: " + participant.cards.joinToString() + extra)
+    }
+
+    internal fun showGameSummary(gameResult: GameResult) {
         println("\n${Message.FINAL_RESULTS_TITLE}")
-
-        val dealerWin = playersResults.filter { it.value == Outcome.LOSE }.size
-        val dealerLose = playersResults.filter { it.value == Outcome.WIN }.size
-        val dealerDraw = playersResults.size - dealerLose - dealerWin
-        val showDraw = if (dealerDraw > 0) ", $dealerDraw Draw" else ""
-
-        println("Dealer: $dealerWin Win $dealerLose Lose$showDraw")
-
-        playersResults.forEach { (player, outcome) ->
-            println("${player.name}: ${outcome.name}")
+        println("Dealer: ${gameResult.dealerEarning.amount}")
+        gameResult.playerResults.forEach {
+            println("${it.player.name}: ${it.finalAmount}")
         }
     }
 

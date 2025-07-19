@@ -20,7 +20,7 @@ class GameManagerTest {
         GameManager(participants).setUp()
 
         OutputView.showCards(participants.dealer)
-        OutputView.showAllPayersCards(participants)
+        OutputView.showAllPayersCards(participants.players)
     }
 
     @Test

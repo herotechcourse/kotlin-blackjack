@@ -19,8 +19,7 @@ class GameManager(
 
     fun play(): GameResult {
         setUp()
-        OutputView.showCards(dealer)
-        OutputView.showAllPayersCards(participants)
+        OutputView.showFirstRound(participants)
         keepPlay(InputView::readUserAnswer)
         return GameResult(participants)
     }
