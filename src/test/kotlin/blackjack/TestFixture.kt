@@ -33,30 +33,10 @@ object TestFixture {
     }
 
     object HasAce {
-        val TOTAL_SUM_17 =
+        val TOTAL_BLACKJACK =
             listOf(
                 Card(Suit.DIAMOND, Rank.ACE),
-                Card(Suit.DIAMOND, Rank.TWO),
                 Card(Suit.DIAMOND, Rank.QUEEN),
-                Card(Suit.DIAMOND, Rank.FOUR),
-            )
-    }
-
-    object HasTripleAce {
-        val TOTAL_SUM_20 =
-            listOf(
-                Card(Suit.DIAMOND, Rank.ACE),
-                Card(Suit.HEART, Rank.ACE),
-                Card(Suit.SPADE, Rank.ACE),
-                Card(Suit.DIAMOND, Rank.SEVEN),
-            )
-
-        val TOTAL_SUM_13 =
-            listOf(
-                Card(Suit.DIAMOND, Rank.ACE),
-                Card(Suit.HEART, Rank.ACE),
-                Card(Suit.SPADE, Rank.ACE),
-                Card(Suit.DIAMOND, Rank.JACK),
             )
     }
 
