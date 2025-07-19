@@ -21,4 +21,20 @@ class ValidatorTest {
             Validator.name(name)
         }
     }
+
+    @ValueSource(ints = [1000, 11000, 21000, 50000])
+    @ParameterizedTest
+    fun `does not throw with correct amount`(amount: Int) {
+        assertDoesNotThrow {
+            Validator.amount(amount)
+        }
+    }
+
+    @ValueSource(ints = [-10, 0, 100, 10001, 21111])
+    @ParameterizedTest
+    fun `throw with incorrect amount`(amount: Int) {
+        assertThrows<IllegalArgumentException> {
+            Validator.amount(amount)
+        }
+    }
 }
