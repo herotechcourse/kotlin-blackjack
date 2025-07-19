@@ -6,8 +6,12 @@ import blackjack.model.GameConstants.FIRST_ROUND_HIT_COUNTS
 import blackjack.model.state.State
 
 class Dealer() : Participant("Dealer", DEALER_NOT_BET_MONEY) {
-    override var currentState: State = State.HIT
+    override var state: State = State.HIT
         get() = calculateState()
+
+    override fun isBust() = state == State.BUST
+
+    override fun isBlackjack() = state == State.BLACKJACK
 
     private fun calculateState(): State {
         if (isFirstRound()) return blackOrHit()

@@ -5,13 +5,17 @@ import blackjack.model.GameConstants.FIRST_ROUND_HIT_COUNTS
 import blackjack.model.state.State
 
 class Player(name: String, amount: Int = 0) : Participant(name, amount) {
-    override var currentState: State = State.HIT
+    override var state: State = State.HIT
         get() =
             when {
                 score > BLACKJACK_SCORE -> State.BUST
                 isFirstRound() -> blackjackOrHit()
                 else -> field
             }
+
+    override fun isBust() = state == State.BUST
+
+    override fun isBlackjack() = state == State.BLACKJACK
 
     private fun isFirstRound(): Boolean {
         return cardsCount() == FIRST_ROUND_HIT_COUNTS

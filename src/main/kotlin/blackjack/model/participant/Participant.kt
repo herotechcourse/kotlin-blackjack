@@ -7,16 +7,13 @@ import blackjack.model.holder.Hand
 import blackjack.model.state.State
 
 abstract class Participant(val name: String, val amount: Int) : Hand() {
-    init {
-        require(amount >= 0) { "Amount must be non-negative, but was $amount" }
-        // TODO: validate amount
-    }
-
     val score get() = getCurrentPoints()
 
-    abstract var currentState: State
+    abstract var state: State
 
-    val state get() = currentState
+    abstract fun isBust(): Boolean
+
+    abstract fun isBlackjack(): Boolean
 
     private fun getCurrentPoints(): Int {
         return when (cards.isEmpty()) {
@@ -33,10 +30,10 @@ abstract class Participant(val name: String, val amount: Int) : Hand() {
     }
 
     override fun receive(cards: List<Card>): Boolean {
-        if (currentState != State.HIT) return false
+        if (state != State.HIT) return false
         currentCards.addAll(cards)
         if (score == BLACKJACK_SCORE) {
-            currentState = State.STAY
+            state = State.STAY
         }
         return true
     }

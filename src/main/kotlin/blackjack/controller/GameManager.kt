@@ -58,7 +58,7 @@ class GameManager(
                 deck.hit(participant)
                 OutputView.showCards(participant)
             } else {
-                participant.currentState = State.STAY
+                participant.state = State.STAY
                 break
             }
         }
