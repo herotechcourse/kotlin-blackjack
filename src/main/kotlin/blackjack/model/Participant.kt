@@ -25,9 +25,10 @@ abstract class Participant(val name: String, var handState: State = FirstTurn())
     }
 
     override fun toString(): String {
-        val cardsString = handState.hand.cards.joinToString(", ") {
-            it.rank.symbol + it.suit.symbol
-        }
+        val cardsString =
+            handState.hand.cards.joinToString(", ") {
+                it.rank.symbol + it.suit.symbol
+            }
         return "$name: $cardsString"
     }
 }
