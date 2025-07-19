@@ -1,25 +1,34 @@
 package blackjack.model
 
-abstract class Participant(val name: String) {
-    protected val hand = Hand()
-    val gameResults: GameResults = GameResults()
+import blackjack.state.FirstTurn
+import blackjack.state.State
+
+abstract class Participant(val name: String, var handState: State = FirstTurn()) {
+    val points get() = handState.hand.calculateSum()
 
     init {
         require(name.isNotBlank()) { "Wrong name: $name. Participant name should not be blank." }
     }
 
-    fun hasBlackJack(): Boolean = hand.hasBlackJack()
+    fun draw(card: Card) {
+        handState = handState.draw(card)
+    }
 
-    fun isBusts(): Boolean = hand.isBusts()
+    fun stay() {
+        handState = handState.stay()
+    }
 
-    fun addCard(newCard: Card) = hand.addCard(newCard)
+    fun dealInitialCards(deck: Deck) {
+        repeat(2) {
+            draw(deck.drawCard())
+        }
+    }
 
-    fun getScore(): Int = hand.getScore()
-
-    fun setWin() = gameResults.wins++
-
-    fun setLose() = gameResults.loses++
-
-    fun setTie() = gameResults.ties++
-
+    override fun toString(): String {
+        val cardsString =
+            handState.hand.cards.joinToString(", ") {
+                it.rank.symbol + it.suit.symbol
+            }
+        return "$name: $cardsString"
+    }
 }

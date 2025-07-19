@@ -1,8 +1,8 @@
 package blackjack
 
-import blackjack.controller.BlackJackGame
+import blackjack.controller.BlackJackController
 
 fun main() {
-    val game = BlackJackGame()
-    game.start()
+    val controller = BlackJackController()
+    controller.startGame()
 }
