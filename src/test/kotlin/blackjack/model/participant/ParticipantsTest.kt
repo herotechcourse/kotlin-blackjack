@@ -1,13 +1,13 @@
 package blackjack.model.participant
 
-import blackjack.factory.FakePlayerFactory
+import blackjack.factory.DummyPlayerFactory
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
 class ParticipantsTest {
     @Test
     fun `Participants init with player and dealer, and recognize by name`() {
-        val factory = FakePlayerFactory(4)
+        val factory = DummyPlayerFactory(4)
         val participants = Participants(factory.players)
 
         Assertions.assertThat(factory.names.all { participants.contains(it) }).isTrue
@@ -15,7 +15,7 @@ class ParticipantsTest {
 
     @Test
     fun `Participants init with player and dealer, and recognize by type of Participant`() {
-        val factory = FakePlayerFactory(4)
+        val factory = DummyPlayerFactory(4)
         val participants = Participants(factory.players)
         val dealer = participants.dealer
 
@@ -24,7 +24,7 @@ class ParticipantsTest {
 
     @Test
     fun `Participants init with players`() {
-        val factory = FakePlayerFactory(2)
+        val factory = DummyPlayerFactory(2)
         val participants = Participants(factory.players)
 
         Assertions.assertThat(participants.containsAll(factory.names[0], factory.names[1])).isTrue()
@@ -34,7 +34,7 @@ class ParticipantsTest {
 
     @Test
     fun `can recognize number of players`() {
-        val factory = FakePlayerFactory(2)
+        val factory = DummyPlayerFactory(2)
         val participants = Participants(factory.players)
 
         Assertions.assertThat(participants.players.size).isEqualTo(2)

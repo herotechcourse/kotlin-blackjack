@@ -1,7 +1,7 @@
 package blackjack.controller
 
 import blackjack.TestFixture
-import blackjack.factory.FakePlayerFactory
+import blackjack.factory.DummyPlayerFactory
 import blackjack.model.card.Card
 import blackjack.model.card.Rank
 import blackjack.model.card.Suit
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test
 class GameManagerTest {
     @Test
     fun setUp() {
-        val participants = Participants(FakePlayerFactory(2).players)
+        val participants = Participants(DummyPlayerFactory(2).players)
         GameManager(participants).setUp()
 
         OutputView.showCards(participants.dealer)
@@ -26,8 +26,8 @@ class GameManagerTest {
     @Test
     fun `player state is bust if score over 21`() {
         val player = Player("test")
-
         val cards = TestFixture.DoesNotHasAce.TOTAL_SUM_25
+
         player.receive(cards)
 
         assertThat(player.state).isEqualTo(State.BUST)
@@ -36,8 +36,8 @@ class GameManagerTest {
     @Test
     fun `player state is hit if score is under 21`() {
         val player = Player("test")
-
         val cards = TestFixture.DoesNotHasAce.TOTAL_SUM_16
+
         player.receive(cards)
 
         assertThat(player.state).isEqualTo(State.HIT)
@@ -72,7 +72,7 @@ class GameManagerTest {
 
     @Test
     fun `round works correctly with Player Participant`() {
-        val participants = Participants(FakePlayerFactory(2).players)
+        val participants = Participants(DummyPlayerFactory(2).players)
         val gameManager = GameManager(participants)
 
         val player = gameManager.getPlayers().first()
@@ -90,7 +90,7 @@ class GameManagerTest {
 
     @Test
     fun `round works correctly with Player Participant - not busted, `() {
-        val participants = Participants(FakePlayerFactory(1).players)
+        val participants = Participants(DummyPlayerFactory(1).players)
         val gameManager = GameManager(participants)
 
         val player = gameManager.getPlayers().first()
@@ -104,7 +104,7 @@ class GameManagerTest {
 
     @Test
     fun `round works correctly with Dealer Participant`() {
-        val participants = Participants(FakePlayerFactory(3).players)
+        val participants = Participants(DummyPlayerFactory(3).players)
         val gameManager = GameManager(participants)
 
         val dealer = gameManager.getDealer()
