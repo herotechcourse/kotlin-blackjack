@@ -51,10 +51,23 @@ object TestFixture {
                 Card(Suit.DIAMOND, Rank.ACE),
                 Card(Suit.DIAMOND, Rank.NINE),
             )
+
+        val TWO_CARDS_SUM_18 =
+            listOf(
+                Card(Suit.DIAMOND, Rank.ACE),
+                Card(Suit.DIAMOND, Rank.SEVEN),
+            )
+
         val TWO_CARDS_SUM_17 =
             listOf(
                 Card(Suit.DIAMOND, Rank.ACE),
                 Card(Suit.DIAMOND, Rank.SIX),
+            )
+
+        val TWO_CARDS_SUM_16 =
+            listOf(
+                Card(Suit.DIAMOND, Rank.ACE),
+                Card(Suit.DIAMOND, Rank.FIVE),
             )
     }
 
