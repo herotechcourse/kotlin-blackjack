@@ -8,6 +8,7 @@ object BlackjackController {
         val input = InputView()
         val output = OutputView()
 
+        output.printNameQuestion()
         val playersNames = input.readPlayersName()
         val players = game.namesToPlayers(playersNames)
         output.printPlayersIntroToTheirCards(players)
