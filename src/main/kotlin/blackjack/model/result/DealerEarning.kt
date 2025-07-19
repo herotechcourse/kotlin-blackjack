@@ -5,8 +5,8 @@ class DealerEarning(playerResults: List<PlayerResult>) {
 
     internal fun calculateEarningAmount(playerResults: List<PlayerResult>): Int {
         val totalPlayerWinnings =
-            playerResults.filter { (player, outcome) ->
-                outcome != Outcome.LOSE
+            playerResults.filter {
+                it.outcome != Outcome.LOSE
             }.sumOf { playerResult ->
                 playerResult.finalAmount
             }
