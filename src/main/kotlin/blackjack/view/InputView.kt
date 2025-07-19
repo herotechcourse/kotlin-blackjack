@@ -10,9 +10,20 @@ object InputView {
 
     fun readUserAnswer(): Boolean {
         return Ask.retryable(
-            Ask::forCard,
+            Ask::nextCard,
             Parser::cardChoice,
         )
+    }
+
+    fun readPlayerBet(name: String): Int {
+        return Ask.retryable(
+            { Ask.bet(name) },
+            Parser::bet,
+        )
+    }
+
+    fun readPlayersBet(names: List<String>): List<Int> {
+        return names.map { name -> readPlayerBet(name) }
     }
 
     internal object Ask {
@@ -21,10 +32,15 @@ object InputView {
             return readlnOrNull() ?: throw IllegalArgumentException(OutputView.Message.INVALID_INPUT)
         }
 
-        fun forCard(): String {
+        fun nextCard(): String {
             while (true) {
                 return readlnOrNull() ?: throw IllegalArgumentException(OutputView.Message.INVALID_INPUT)
             }
+        }
+
+        fun bet(name: String): String {
+            OutputView.showHowMuchBet(name)
+            return readlnOrNull() ?: throw IllegalArgumentException(OutputView.Message.INVALID_INPUT)
         }
 
         fun <T> retryable(
@@ -50,17 +66,24 @@ object InputView {
                     .filterNot { it.isBlank() }
 
             if (names.isEmpty() || names.any { !it.all { char -> char.isLetterOrDigit() } }) {
-                throw IllegalArgumentException(OutputView.Message.INVALID_INPUT + ": $input")
+                throw IllegalArgumentException("${OutputView.Message.INVALID_INPUT}, $input: try again.")
             }
-
             return names
+        }
+
+        fun bet(input: String): Int {
+            val amount = input.toInt()
+
+            // TODO: separate to Validator
+            require(amount > 0) { "${OutputView.Message.INVALID_INPUT}, $input: try again." }
+            return amount
         }
 
         fun cardChoice(input: String): Boolean {
             return when (input) {
                 "y" -> true
                 "n" -> false
-                else -> throw IllegalArgumentException("${OutputView.Message.INVALID_INPUT}, try again.")
+                else -> throw IllegalArgumentException("${OutputView.Message.INVALID_INPUT}, $input: try again.")
             }
         }
     }
