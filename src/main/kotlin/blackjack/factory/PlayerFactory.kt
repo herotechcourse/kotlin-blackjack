@@ -1,6 +1,7 @@
 package blackjack.factory
 
 import blackjack.model.participant.Player
+import blackjack.validator.Validator
 
 interface BasePlayerFactory {
     fun createPlayers(): List<Player>
@@ -8,8 +9,7 @@ interface BasePlayerFactory {
 
 class PlayerFactory(private val names: List<String>, private val amounts: List<Int> = emptyList()) : BasePlayerFactory {
     init {
-        require(names.isNotEmpty() && amounts.isNotEmpty()) { /* TODO: implement here */ }
-        require(names.size == amounts.size) { /* TODO: implement here */ }
+        Validator.createPlayers(names, amounts)
     }
 
     override fun createPlayers(): List<Player> {

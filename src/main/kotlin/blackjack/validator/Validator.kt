@@ -16,6 +16,14 @@ object Validator {
         require(divisibleByAnte(amount)) { "${OutputView.Message.INVALID_INPUT}, $amount: try again." }
     }
 
+    fun createPlayers(
+        names: List<String>,
+        amounts: List<Int>,
+    ) {
+        require(names.isNotEmpty() && amounts.isNotEmpty()) { "Names and amounts lists cannot be empty" }
+        require(names.size == amounts.size) { "Names count (${names.size}) must match amounts count (${amounts.size})" }
+    }
+
     private fun isValidNameLength(name: String): Boolean = name.isNotEmpty() && name.length in 1..MAX_NAME_LENGTH
 
     private fun isAlphanumeric(name: String): Boolean = name.all { it.isLetterOrDigit() }
