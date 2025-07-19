@@ -1,18 +1,18 @@
 package blackjack.view
 
 import blackjack.model.Dealer
+import blackjack.model.Playable
 import blackjack.model.Player
-import blackjack.utils.Constants
 
 object OutputView {
     fun displayInitialState(
         players: List<Player>,
         dealer: Dealer,
     ) {
-        val names = listOf(dealer.name) + players.map { it.name.trim() }
+        val names = listOf("Dealer") + players.map { it.name.trim() }
         val sentence = names.joinToString(", ")
         println("\nDealing two cards to $sentence.")
-        println("${dealer.name}: ${dealer.hand.cards[0]}")
+        println("Dealer: ${dealer.hand.cards[0]}")
         players.forEach { displayCurrentHand(it) }
     }
 
@@ -21,15 +21,15 @@ object OutputView {
         println("${player.name}'s cards: ${hand.toText()}")
     }
 
-    fun displayDealerDrawsCard(dealer: Dealer) {
-        println("\n${dealer.name} draws one more card due to having 16 or less.")
+    fun displayDealerDrawsCard() {
+        println("\nDealer draws one more card due to having 16 or less.")
     }
 
     fun displayFinalState(
         players: List<Player>,
         dealer: Dealer,
     ) {
-        println("\n${dealer.name}'s cards: ${dealer.hand.toText()} – Total: ${dealer.calculateHand()}")
+        println("\nDealer's cards: ${dealer.hand.toText()} – Total: ${dealer.calculateHand()}")
         players.forEach { player ->
             println("${player.name}'s cards: ${player.hand.toText()} – Total: ${player.calculateHand()}")
         }
@@ -37,30 +37,16 @@ object OutputView {
 
     fun displayFinalResults(
         winStatistics: StatsView,
-        dealer: Dealer,
+        earnings: Map<Playable, Int>,
     ) {
-        val playersResult = winStatistics.playerBoard
-        val dealerResult = winStatistics.dealerStats
-        println("\n## Final Results")
-        when (dealerResult["tie"]) {
-            0 -> println("${dealer.name}: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose")
-            else -> println("${dealer.name}: ${dealerResult["win"]} Win ${dealerResult["lose"]} Lose ${dealerResult["tie"]} Tie")
-        }
-        playersResult.keys.forEach { player ->
-            val result = givePlayerResult(player, playersResult)
-            println("${player.name}: $result")
+        println("\n## Final Earnings")
+        earnings.forEach { (playable, amount) ->
+            val displayName = if (playable is Player) playable.name else "Dealer"
+            println("$displayName: ${formatEarning(amount)}")
         }
     }
 
-    private fun givePlayerResult(
-        player: Player,
-        playersResult: Map<Player, Int>,
-    ): String {
-        return when (playersResult[player]) {
-            Constants.LOSE -> "Lose"
-            Constants.WIN -> "Win"
-            Constants.TIE -> "Tie"
-            else -> "Error"
-        }
+    private fun formatEarning(amount: Int): String {
+        return amount.toString()
     }
 }

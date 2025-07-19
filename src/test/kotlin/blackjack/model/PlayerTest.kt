@@ -10,27 +10,32 @@ class PlayerTest {
     @ParameterizedTest(name = "Player - has name {0}")
     @ValueSource(strings = ["Player", "A♥", "san", "ann"])
     fun `Player has a name in string`(candidate: String) {
-        assertEquals(candidate, Player(candidate).name)
+        val bet = Bet(1000)
+        val player = Player(candidate, bet)
+        assertEquals(candidate, player.name)
     }
 
     @Test
     fun `requestCard() - request true`() {
-        val player = Player("player")
+        val bet = Bet(10000)
+        val player = Player("player", bet)
         val request = player.requestCard { true }
         assertEquals(true, request)
     }
 
     @Test
     fun `requestCard() - request false`() {
-        val player = Player("player")
+        val bet = Bet(10000)
+        val player = Player("player", bet)
         val request = player.requestCard { false }
         assertEquals(false, request)
     }
 
     @Test
     fun `drawCard()`() {
+        val bet = Bet(10000)
         val cards = CardGenerator.generateCards()
-        val player = Player("player")
+        val player = Player("player", bet)
 
         // initial state of player's hand
         assertEquals(0, player.hand.cards.size)
@@ -48,8 +53,9 @@ class PlayerTest {
 
     @Test
     fun `Player has hand which is a list of card`() {
+        val bet = Bet(10000)
         val cards = CardGenerator.generateCards()
-        val player = Player("player")
+        val player = Player("player", bet)
 
         // initial state of player's hand
         assertEquals(emptyList<Card>(), player.hand.cards)
@@ -65,7 +71,8 @@ class PlayerTest {
 
     @Test
     fun `calculateHand() - player has TWO and TEN`() {
-        val player = Player("player")
+        val bet = Bet(10000)
+        val player = Player("player", bet)
 
         player.drawCard(Card(Rank.TWO, Suit.DIAMONDS))
         player.drawCard(Card(Rank.TEN, Suit.DIAMONDS))
@@ -75,7 +82,8 @@ class PlayerTest {
 
     @Test
     fun `calculateHand() - player has Two ACE`() {
-        val player = Player("player")
+        val bet = Bet(10000)
+        val player = Player("player", bet)
 
         player.drawCard(Card(Rank.ACE, Suit.DIAMONDS))
         player.drawCard(Card(Rank.ACE, Suit.SPADES))
@@ -85,7 +93,8 @@ class PlayerTest {
 
     @Test
     fun `calculateHand() - player has Three ACE and TWO`() {
-        val player = Player("player")
+        val bet = Bet(10000)
+        val player = Player("player", bet)
 
         player.drawCard(Card(Rank.ACE, Suit.DIAMONDS))
         player.drawCard(Card(Rank.ACE, Suit.SPADES))
@@ -97,7 +106,8 @@ class PlayerTest {
 
     @Test
     fun `calculateHand() - player has Three ACE and TEN`() {
-        val player = Player("player")
+        val bet = Bet(10000)
+        val player = Player("player", bet)
 
         player.drawCard(Card(Rank.ACE, Suit.DIAMONDS))
         player.drawCard(Card(Rank.ACE, Suit.SPADES))
@@ -109,7 +119,8 @@ class PlayerTest {
 
     @Test
     fun `isBust() - player is busted`() {
-        val player = Player("player")
+        val bet = Bet(10000)
+        val player = Player("player", bet)
 
         player.drawCard(Card(Rank.TEN, Suit.DIAMONDS))
         player.drawCard(Card(Rank.KING, Suit.DIAMONDS))
@@ -119,7 +130,8 @@ class PlayerTest {
 
     @Test
     fun `isBust() - player is not busted`() {
-        val player = Player("player")
+        val bet = Bet(10000)
+        val player = Player("player", bet)
 
         player.drawCard(Card(Rank.TEN, Suit.DIAMONDS))
         player.drawCard(Card(Rank.TEN, Suit.SPADES))

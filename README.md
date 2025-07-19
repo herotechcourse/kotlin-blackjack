@@ -2,6 +2,8 @@
 
 ## Features List
 
+## Step1
+
 ### Model
 
 Card
@@ -113,3 +115,46 @@ CardGenerator
 - [x] generateCard method create card with combination of 'A 1 2 ... 10 J Q K' * ♥, ♣, ♠, ♦
     - ex. A♥, 4♣, 9♠, 6♦
 - [x] generateCards method create 52 unique cards
+
+## Step2
+
+### Model
+
+Player
+
+- [x] players place a bet at the start of each game
+- [x] updated the Player class to require a Bet during construction
+- [x] earnings(result: Int): Int
+  - [x] WIN → Player wins: returns +bet
+  - [x] BLACKJACK → Player has blackjack: returns +1.5 × bet
+  - [x] TIE → Player ties with dealer: returns 0 (no gain or loss)
+  - [x] LOSE → Player loses: returns -bet
+
+Bet
+
+- [x] Introduced a new Bet data class:
+    - [x] validates that the bet amount is greater than zero
+    - [x] throws IllegalArgumentException if the amount is invalid
+
+Playable
+- add `hasBlackJack(): Boolean` for calculate blackjack
+    
+
+### View
+
+InputView
+
+- [x] "Enter $name’s betting amount:"
+
+StatsView
+
+- [x] Updated `recordPlayerBoard()` logic
+  - [x] player with a natural BlackJack wins (WIN_BLACK_JACK) if the dealer does not have BlackJack
+  - [x] dealer with BlackJack wins if the player does not have it
+- [x] updated recordPlayerBoard() logic
+  - [x] Count WIN_BLACK_JACK as a dealer loss
+- [x] Added updateEarnings() method to calculate player and dealer earnings after each game round
+
+OutputView
+- [x] Updated OutputView to print final earnings for all participants
+- [x] Added basic formatting for earnings display

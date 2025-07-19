@@ -1,12 +1,12 @@
 package blackjack.view
 
 import blackjack.model.Dealer
+import blackjack.model.EarningsResult
 import blackjack.model.Player
-import blackjack.utils.Constants
 
 data class StatsView(val players: List<Player>, val dealer: Dealer) {
     private var _playerBoard = initPlayerBoard()
-    val playerBoard: Map<Player, Int> get() = _playerBoard
+    val playerBoard: Map<Player, EarningsResult> get() = _playerBoard
 
     private var _dealerStats = mapOf("win" to 0, "lose" to 0, "tie" to 0)
     val dealerStats: Map<String, Int> get() = _dealerStats
@@ -15,32 +15,37 @@ data class StatsView(val players: List<Player>, val dealer: Dealer) {
         updateDealerStats()
     }
 
-    private fun initPlayerBoard(): Map<Player, Int> {
-        val board = mutableMapOf<Player, Int>()
+    private fun initPlayerBoard(): Map<Player, EarningsResult> {
+        val board = mutableMapOf<Player, EarningsResult>()
         players.forEach { recordPlayerBoard(it, board) }
         return board.toMap()
     }
 
     private fun recordPlayerBoard(
         player: Player,
-        board: MutableMap<Player, Int>,
+        board: MutableMap<Player, EarningsResult>,
     ) {
         val playerScore = player.calculateHand()
         val dealerScore = dealer.calculateHand()
+        val playerHasBlackJack = player.hasBlackJack()
+        val dealerHasBlackJack = dealer.hasBlackJack()
         when {
-            player.isBust() -> board[player] = Constants.LOSE
-            dealer.isBust() -> board[player] = Constants.WIN
-            playerScore == dealerScore -> board[player] = Constants.TIE
-            playerScore > dealerScore -> board[player] = Constants.WIN
-            else -> board[player] = Constants.LOSE
+            playerHasBlackJack && !dealerHasBlackJack -> board[player] = EarningsResult.WIN_BLACK_JACK_BET
+            dealerHasBlackJack && !playerHasBlackJack -> board[player] = EarningsResult.LOSE_BET
+            player.isBust() -> board[player] = EarningsResult.LOSE_BET
+            dealer.isBust() -> board[player] = EarningsResult.WIN_BET
+            playerScore == dealerScore -> board[player] = EarningsResult.TIE_BET
+            playerScore > dealerScore -> board[player] = EarningsResult.WIN_BET
+            else -> board[player] = EarningsResult.LOSE_BET
         }
     }
 
     fun updateDealerStats() {
         val stats = _dealerStats.toMutableMap()
-        val winCount = playerBoard.values.count { it == Constants.LOSE }
-        val loseCount = playerBoard.values.count { it == Constants.WIN }
-        val tieCount = playerBoard.values.count { it == Constants.TIE }
+        val winCount = playerBoard.values.count { it == EarningsResult.LOSE_BET }
+        val loseCount =
+            playerBoard.values.count { it == EarningsResult.WIN_BET || it == EarningsResult.WIN_BLACK_JACK_BET }
+        val tieCount = playerBoard.values.count { it == EarningsResult.TIE_BET }
         stats["win"] = winCount
         stats["lose"] = loseCount
         stats["tie"] = tieCount

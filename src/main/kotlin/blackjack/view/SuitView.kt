@@ -11,13 +11,4 @@ object SuitView {
             Suit.SPADES -> "♠"
             Suit.NONE -> "?"
         }
-
-    fun fromSymbol(symbol: Char): Suit =
-        when (symbol) {
-            '♥' -> Suit.HEARTS
-            '♦' -> Suit.DIAMONDS
-            '♣' -> Suit.CLUBS
-            '♠' -> Suit.SPADES
-            else -> Suit.NONE
-        }
 }

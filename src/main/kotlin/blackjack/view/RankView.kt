@@ -20,22 +20,4 @@ object RankView {
             Rank.KING -> "K"
             Rank.NONE -> "?"
         }
-
-    fun fromSymbol(symbol: String): Rank =
-        when (symbol) {
-            "A" -> Rank.ACE
-            "2" -> Rank.TWO
-            "3" -> Rank.THREE
-            "4" -> Rank.FOUR
-            "5" -> Rank.FIVE
-            "6" -> Rank.SIX
-            "7" -> Rank.SEVEN
-            "8" -> Rank.EIGHT
-            "9" -> Rank.NINE
-            "10" -> Rank.TEN
-            "J" -> Rank.JACK
-            "Q" -> Rank.QUEEN
-            "K" -> Rank.KING
-            else -> Rank.NONE
-        }
 }

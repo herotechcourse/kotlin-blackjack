@@ -2,7 +2,7 @@ package blackjack.model
 
 import blackjack.controller.Deck
 
-data class Dealer(override val name: String = "Dealer") : Playable() {
+class Dealer() : Playable() {
     fun shouldDrawCardOrNot(): Boolean {
         val score = calculateHand()
         return score <= 16

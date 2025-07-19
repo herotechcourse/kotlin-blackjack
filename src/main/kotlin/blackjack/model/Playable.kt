@@ -3,7 +3,6 @@ package blackjack.model
 import blackjack.utils.Constants
 
 abstract class Playable {
-    abstract val name: String
     protected var handInternal: Hand = Hand()
     open val hand: Hand
         get() = handInternal
@@ -28,5 +27,9 @@ abstract class Playable {
 
     fun canContinue(): Boolean {
         return calculateHand() <= Constants.BLACK_JACK
+    }
+
+    fun hasBlackJack(): Boolean {
+        return hand.cards.size == 2 && calculateHand() == Constants.BLACK_JACK
     }
 }

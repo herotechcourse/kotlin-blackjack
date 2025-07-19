@@ -12,6 +12,27 @@ object InputView {
         return trimmedInput
     }
 
+    fun readBetAmount(name: String): Int {
+        println("Enter $name’s betting amount:")
+        while (true) {
+            val input = readln().trim()
+            if (input.isEmpty()) {
+                println("Please enter a valid betting amount.")
+                continue
+            }
+            val amount = input.toIntOrNull()
+            if (amount == null) {
+                println("Please enter a valid integer for the betting amount.")
+                continue
+            }
+            if (amount <= 0) {
+                println("Bet must be positive. Please enter a valid betting amount.")
+                continue
+            }
+            return amount
+        }
+    }
+
     fun readYesOrNo(name: String): Boolean {
         println("\nWould $name like to draw another card? (y for yes, n for no)")
         while (true) {
@@ -19,8 +40,7 @@ object InputView {
             when (input) {
                 "y" -> return true
                 "n" -> return false
-                else ->
-                    println("Please write 'y' for 'yes' or 'n' for 'no'.")
+                else -> println("Please write 'y' for 'yes' or 'n' for 'no'.")
             }
         }
     }
