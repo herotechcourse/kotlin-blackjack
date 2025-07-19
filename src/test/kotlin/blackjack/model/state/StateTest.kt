@@ -1,8 +1,8 @@
 package blackjack.model.state
 
 import blackjack.DummyPlayerFactory
-import blackjack.TestFixture.DoesNotHasAce.TOTAL_SUM_16
-import blackjack.TestFixture.HasAce.TOTAL_BLACKJACK
+import blackjack.TestFixture.DoesNotHasAce.THREE_CARDS_SUM_16
+import blackjack.TestFixture.TwoCards.TWO_CARDS_BLACKJACK
 import blackjack.model.participant.Participants
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -17,9 +17,9 @@ class StateTest {
         val player1 = participants.players[0]
         val player2 = participants.players[1]
 
-        dealer.receive(TOTAL_BLACKJACK)
-        player1.receive(TOTAL_BLACKJACK)
-        player2.receive(TOTAL_SUM_16)
+        dealer.receive(TWO_CARDS_BLACKJACK)
+        player1.receive(TWO_CARDS_BLACKJACK)
+        player2.receive(THREE_CARDS_SUM_16)
 
         assertThat(dealer.state).isEqualTo(State.BLACKJACK)
         assertThat(player1.state).isEqualTo(State.BLACKJACK)

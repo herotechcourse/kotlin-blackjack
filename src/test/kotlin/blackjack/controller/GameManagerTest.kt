@@ -26,7 +26,7 @@ class GameManagerTest {
     @Test
     fun `player state is bust if score over 21`() {
         val player = Player("test")
-        val cards = TestFixture.DoesNotHasAce.TOTAL_SUM_25
+        val cards = TestFixture.DoesNotHasAce.FOUR_CARDS_SUM_25
 
         player.receive(cards)
 
@@ -36,7 +36,7 @@ class GameManagerTest {
     @Test
     fun `player state is hit if score is under 21`() {
         val player = Player("test")
-        val cards = TestFixture.DoesNotHasAce.TOTAL_SUM_16
+        val cards = TestFixture.DoesNotHasAce.THREE_CARDS_SUM_16
 
         player.receive(cards)
 
@@ -76,7 +76,7 @@ class GameManagerTest {
         val gameManager = GameManager(participants)
 
         val player = gameManager.getPlayers().first()
-        val cards = TestFixture.BustedWithLastCard.TOTAL_SUM_WAS_20.toMutableList()
+        val cards = TestFixture.BustedWithLastCard.THREE_CARDS_SUM_24.toMutableList()
 
         gameManager.injectTestDeck(cards)
 
@@ -94,7 +94,7 @@ class GameManagerTest {
         val gameManager = GameManager(participants)
 
         val player = gameManager.getPlayers().first()
-        val cards = TestFixture.DoesNotHasAce.EXACTLY_21_FIVE_CARDS.toMutableList()
+        val cards = TestFixture.DoesNotHasAce.FIVE_CARDS_SUM_21.toMutableList()
 
         gameManager.injectTestDeck(cards)
 
@@ -108,7 +108,7 @@ class GameManagerTest {
         val gameManager = GameManager(participants)
 
         val dealer = gameManager.getDealer()
-        val cards = TestFixture.BustedWithLastCard.TOTAL_SUM_WAS_20.toMutableList()
+        val cards = TestFixture.BustedWithLastCard.THREE_CARDS_SUM_24.toMutableList()
         gameManager.injectTestDeck(cards)
 
         dealer.receive(cards.draw(2))
