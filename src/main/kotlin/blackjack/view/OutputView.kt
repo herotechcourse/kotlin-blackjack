@@ -1,5 +1,7 @@
 package blackjack.view
 
+import blackjack.model.card.Card
+import blackjack.model.card.Suit
 import blackjack.model.participant.Dealer
 import blackjack.model.participant.Participant
 import blackjack.model.participant.Participants
@@ -48,10 +50,23 @@ object OutputView {
 
     internal fun showCards(
         participant: Participant,
-        extra: String = "",
+        extraText: String = "",
     ) {
-        println("${participant.name}'s cards: " + participant.cards.joinToString() + extra)
+        val display =
+            participant.cards
+                .joinToString(", ") { it.printable() }
+        println("${participant.name}'s cards: " + display + extraText)
     }
+
+    private fun Card.printable(): String = "${rank.face}${suit.symbol()}"
+
+    private fun Suit.symbol(): String =
+        when (this) {
+            Suit.HEART -> "♥"
+            Suit.DIAMOND -> "♦"
+            Suit.CLUB -> "♣"
+            Suit.SPADE -> "♠"
+        }
 
     internal fun showGameSummary(gameResult: GameResult) {
         println("\n${Message.FINAL_RESULTS_TITLE}")
