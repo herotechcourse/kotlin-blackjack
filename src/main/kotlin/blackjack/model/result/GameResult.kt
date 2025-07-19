@@ -1,9 +1,7 @@
 package blackjack.model.result
 
-import blackjack.model.participant.Dealer
 import blackjack.model.participant.Participants
 import blackjack.model.participant.Player
-import blackjack.model.state.State
 
 class GameResult(val participants: Participants) {
     val dealer = participants.dealer
@@ -18,47 +16,28 @@ class GameResult(val participants: Participants) {
 
     private fun getPlayerResult(player: Player): Outcome {
         return when {
-            isPlayerBust(player) -> Outcome.LOSE
-            isPlayerBlackjack(player, dealer) -> Outcome.BLACKJACK
-            isDealerBust() -> Outcome.WIN
-            else -> compareScores(player)
+            player.isBust() -> Outcome.LOSE
+            dealer.isBust() -> Outcome.WIN
+            else -> compareWithDealer(player)
         }
     }
 
-    private fun isPlayerBust(player: Player): Boolean {
-        return player.state == State.BUST
-    }
-
-    private fun isPlayerBlackjack(
-        player: Player,
-        dealer: Dealer,
-    ): Boolean {
-        val playerHasBlackjack = player.state == State.BLACKJACK
-        val dealerHasBlackjack = dealer.state == State.BLACKJACK
-
-        return playerHasBlackjack && !dealerHasBlackjack
-    }
-
-    private fun isDealerBust(): Boolean {
-        return dealer.state == State.BUST
-    }
-
-    private fun compareScores(player: Player): Outcome {
+    private fun compareWithDealer(player: Player): Outcome {
         return when {
             player.score > dealer.score -> Outcome.WIN
-            player.score == dealer.score -> handleTie(player)
-            else -> Outcome.LOSE
+            player.score < dealer.score -> Outcome.LOSE
+            else -> resolveEqualScore(player)
         }
     }
 
-    private fun handleTie(player: Player): Outcome {
-        val playerHasBlackjack = player.state == State.BLACKJACK
-        val dealerHasBlackjack = dealer.state == State.BLACKJACK
+    private fun resolveEqualScore(player: Player): Outcome {
+        val playerBlackjack = player.isBlackjack()
+        val dealerBlackjack = dealer.isBlackjack()
 
         return when {
-            playerHasBlackjack && dealerHasBlackjack -> Outcome.DRAW
-            playerHasBlackjack && !dealerHasBlackjack -> Outcome.BLACKJACK
-            !playerHasBlackjack && dealerHasBlackjack -> Outcome.LOSE
+            playerBlackjack && dealerBlackjack -> Outcome.DRAW
+            dealerBlackjack -> Outcome.LOSE
+            playerBlackjack -> Outcome.WIN
             else -> Outcome.DRAW
         }
     }
