@@ -5,7 +5,7 @@ import blackjack.model.GameConstants.BLACKJACK_SCORE
 import blackjack.model.GameConstants.PLAYER_FIRST_HIT_COUNT
 import blackjack.model.state.State
 
-class Dealer() : Participant("Dealer", NO_BET_MONEY) {
+class Dealer() : Participant("Dealer", DEALER_NOT_BET_MONEY) {
     override var currentState: State = State.HIT
         get() = calculateState()
 
@@ -32,6 +32,6 @@ class Dealer() : Participant("Dealer", NO_BET_MONEY) {
     }
 
     companion object {
-        const val NO_BET_MONEY = 0
+        const val DEALER_NOT_BET_MONEY = 0
     }
 }
