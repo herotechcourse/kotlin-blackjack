@@ -3,6 +3,7 @@ package blackjack.controller
 import blackjack.game.BlackJackGame
 import blackjack.game.GameLogic
 import blackjack.model.GenerateParticipants
+import blackjack.model.Players
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
@@ -10,10 +11,12 @@ class BlackJackController {
     fun startGame() {
         try {
             val playersNames = InputView.getPlayersNames()
-            val players = GenerateParticipants.generatePlayers(playersNames)
+            val playersList = GenerateParticipants.generatePlayers(playersNames)
+            val allPlayers = Players(playersList)
+
             val dealer = GenerateParticipants.generateDealer()
 
-            players.forEach {
+            playersList.forEach {
                 val bettingAmount = InputView.getBettingAmount(it)
                 it.bettingAmount = bettingAmount
             }
@@ -21,19 +24,19 @@ class BlackJackController {
             val blackjackGame =
                 BlackJackGame(
                     dealer,
-                    players,
+                    allPlayers,
                     InputView::getAnswer,
                     OutputView::printPlayerHand,
                 )
 
-            OutputView.printParticipantsHands(players, dealer)
+            OutputView.printParticipantsHands(allPlayers.toList(), dealer)
 
             blackjackGame.start()
 
-            OutputView.printFinalHands(players, dealer)
+            OutputView.printFinalHands(allPlayers.toList(), dealer)
 
-            GameLogic.calculateProfitRates(dealer, players)
-            OutputView.printWinnings(players, dealer)
+            GameLogic.calculateProfitRates(dealer, allPlayers.toList())
+            OutputView.printWinnings(allPlayers.toList(), dealer)
         } catch (e: Exception) {
             println("An error occurred during the game: ${e.message}")
         }

@@ -3,21 +3,18 @@ package blackjack.game
 import blackjack.model.Dealer
 import blackjack.model.Deck
 import blackjack.model.Player
+import blackjack.model.Players
 
 class BlackJackGame(
     private val dealer: Dealer,
-    private val players: List<Player>,
+    private val players: Players,
     private val getAnswer: (Player) -> Boolean,
     private val displayPlayerHand: (Player) -> Unit,
 ) {
     private val deck = Deck()
 
     init {
-        dealInitialCards()
-    }
-
-    private fun dealInitialCards() {
-        players.forEach { it.dealInitialCards(deck) }
+        players.dealInitialCardsToAll(deck)
         dealer.dealInitialCards(deck)
     }
 
