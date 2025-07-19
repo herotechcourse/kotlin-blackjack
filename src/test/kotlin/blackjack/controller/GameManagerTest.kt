@@ -1,7 +1,7 @@
 package blackjack.controller
 
+import blackjack.DummyPlayerFactory
 import blackjack.TestFixture
-import blackjack.factory.DummyPlayerFactory
 import blackjack.model.card.Card
 import blackjack.model.card.Rank
 import blackjack.model.card.Suit

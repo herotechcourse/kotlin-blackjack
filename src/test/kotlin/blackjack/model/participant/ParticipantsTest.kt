@@ -1,6 +1,6 @@
 package blackjack.model.participant
 
-import blackjack.factory.DummyPlayerFactory
+import blackjack.DummyPlayerFactory
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
