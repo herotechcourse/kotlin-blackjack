@@ -14,7 +14,6 @@ fun main() {
         val bets = InputView.readPlayersBet(names)
 
         val players = PlayerFactory(names, bets).createPlayers()
-
         val participants = Participants(players)
 
         GameManager(participants).play()
