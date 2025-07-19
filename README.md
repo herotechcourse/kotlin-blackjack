@@ -20,6 +20,6 @@
 
 ### approach, from review
 - [x] empty deck() handling, avoid: `validating it's own size before a hit`
-- [ ] modify Suit enum so that it doesn't interfere with symbol printing
+- [x] modify Suit enum so that it doesn't interfere with symbol printing
 - [x] CardHolder draw multi cards
 - [x] CardHolder receive multi cards
