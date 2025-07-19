@@ -2,7 +2,7 @@ package blackjack.model.participant
 
 import blackjack.model.GameConstants
 import blackjack.model.GameConstants.BLACKJACK_SCORE
-import blackjack.model.GameConstants.PLAYER_FIRST_HIT_COUNT
+import blackjack.model.GameConstants.FIRST_ROUND_HIT_COUNTS
 import blackjack.model.state.State
 
 class Dealer() : Participant("Dealer", DEALER_NOT_BET_MONEY) {
@@ -21,7 +21,7 @@ class Dealer() : Participant("Dealer", DEALER_NOT_BET_MONEY) {
     }
 
     private fun isFirstRound(): Boolean {
-        return cardsCount() == PLAYER_FIRST_HIT_COUNT
+        return cardsCount() == FIRST_ROUND_HIT_COUNTS
     }
 
     private fun blackOrHit(): State {
