@@ -17,7 +17,7 @@ class GameResult(val participants: Participants) {
     private fun getPlayerResult(player: Player): Outcome {
         return when {
             player.isBust() -> Outcome.LOSE
-            player.isBlackjack() && !dealer.isBust() -> Outcome.BLACKJACK
+            player.isBlackjack() && !dealer.isBlackjack() -> Outcome.BLACKJACK
             dealer.isBust() -> Outcome.WIN
             else -> compareWithDealer(player)
         }
