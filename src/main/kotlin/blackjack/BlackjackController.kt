@@ -12,20 +12,15 @@ object BlackjackController {
         val players = game.namesToPlayers(playersNames)
         output.printPlayersIntroToTheirCards(players)
         game.firstTurnCards(players, dealer)
-        output.printFirstTurnCards(dealer)
-        players.forEach { player ->
-            output.printFirstTurnCards(player)
-        }
+        output.printDealerFirstTurnCards(dealer)
+        output.printPlayersFirstTurnCards(players)
 
         game.otherTurnCards(players, dealer)
+        output.printDealerFinalScore(dealer)
+        output.printPlayersFinalScore(players)
 
-        output.printFinalScores(dealer)
-        players.forEach { player -> output.printFinalScores(player) }
-
-        println("## Final Results ##")
         output.printFinalDealerResults(dealer,players)
-        players.forEach { player ->
-            output.printFinalPlayerResult(player)
-        }
+        output.printFinalPlayerResult(players)
+
     }
 }
