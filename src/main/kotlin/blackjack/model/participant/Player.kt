@@ -1,7 +1,7 @@
 package blackjack.model.participant
 
 import blackjack.model.GameConstants.BLACKJACK_SCORE
-import blackjack.model.GameConstants.PLAYER_FIRST_HIT_COUNT
+import blackjack.model.GameConstants.FIRST_ROUND_HIT_COUNTS
 import blackjack.model.state.State
 
 class Player(name: String, amount: Int = 0) : Participant(name, amount) {
@@ -14,7 +14,7 @@ class Player(name: String, amount: Int = 0) : Participant(name, amount) {
             }
 
     private fun isFirstRound(): Boolean {
-        return cardsCount() == PLAYER_FIRST_HIT_COUNT
+        return cardsCount() == FIRST_ROUND_HIT_COUNTS
     }
 
     private fun blackjackOrHit(): State {
