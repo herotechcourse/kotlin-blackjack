@@ -17,10 +17,10 @@
 - [x] If the dealer busts (exceeds 21), all remaining players automatically win and receive payouts based on their bets.
 
 ---
-
-### approach, from review
-- [x] empty deck() handling, avoid: `validating it's own size before a hit`
-- [x] modify Suit enum so that it doesn't interfere with symbol printing
-- [x] CardHolder draw multi cards
-- [x] CardHolder receive multi cards
-- [x] add more tests
+## step 2-1
+### Approach (from review)
+- [x] Empty deck() handling, avoid: `validating it's own size before a hit`
+- [x] Modify Suit enum so that it doesn't interfere with symbol printing
+- [x] Enable CardHolder to draw multiple cards
+- [x] Enable CardHolder to receive multiple cards
+- [x] Add more tests
