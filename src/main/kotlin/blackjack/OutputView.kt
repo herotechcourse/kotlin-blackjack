@@ -53,22 +53,33 @@ class OutputView {
         }
     }
 
-    fun printFinalPlayerResult (players: List<Player>) {
+    fun printFinalPlayerResult(players: List<Player>, dealer: Dealer) {
+        val dealerScore = dealer.sumCards()
+
         players.forEach { player ->
-            val result = player.hand.checkWinOrLose()
+            val playerScore = player.sumCards()
+            val result = player.hand.determineResult(playerScore, dealerScore)
             println(DISPLAY_FINAL_PLAYER_RESULTS.format(player.name, result))
         }
     }
 
-    fun printFinalDealerResults (dealer: Dealer, players: List<Player>) {
-        var countWins = 0
-        var countLosses = 0
-        players.forEach { player -> if(player.hand.checkWinOrLose() == "Lose") {
-            countWins++
-        } else { countLosses++ }}
+    fun printFinalDealerResults(dealer: Dealer, players: List<Player>) {
+        val dealerScore = dealer.sumCards()
+        var wins = 0
+        var losses = 0
+
+        players.forEach { player ->
+            val result = dealer.hand.determineResult(player.sumCards(), dealerScore)
+            when (result) {
+                "Win" -> losses++
+                "Lose" -> wins++
+                else -> "Push"
+            }
+        }
+
         println()
         println(DISPLAY_TITLE_FINAL_RESULTS)
-        println(DISPLAY_FINAL_DEALER_RESULTS.format(dealer.name, countWins, countLosses))
+        println(DISPLAY_FINAL_DEALER_RESULTS.format(dealer.name, wins, losses))
     }
 
     companion object Messages {

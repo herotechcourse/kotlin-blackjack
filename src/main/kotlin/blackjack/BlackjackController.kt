@@ -25,7 +25,7 @@ class BlackjackController {
         output.printPlayersFinalScore(players)
 
         output.printFinalDealerResults(dealer, players)
-        output.printFinalPlayerResult(players)
+        output.printFinalPlayerResult(players, dealer)
     }
 
     fun playerTurn(player: Player) {

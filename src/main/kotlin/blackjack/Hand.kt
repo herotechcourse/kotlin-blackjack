@@ -20,13 +20,13 @@ class Hand() {
         return cardValues.sum()
     }
 
-    fun checkWinOrLose(): String {
-        val cardValues = cards.map { card -> card.number }
-        val score = cardValues.sum()
+    fun determineResult(playerScore: Int, dealerScore: Int): String {
         return when {
-            score == 21 -> "Win"
-            score > 21 -> "Lose"
-            else -> "Stay"
+            playerScore > BLACKJACK_LIMIT -> "Lose"
+            dealerScore > BLACKJACK_LIMIT -> "Win"
+            playerScore > dealerScore -> "Win"
+            playerScore < dealerScore -> "Lose"
+            else -> "Push"
         }
     }
 
