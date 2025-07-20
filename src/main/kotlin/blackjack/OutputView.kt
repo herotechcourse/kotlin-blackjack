@@ -73,7 +73,7 @@ class OutputView {
             when (result) {
                 "Win" -> losses++
                 "Lose" -> wins++
-                else -> "Push"
+                else -> {}
             }
         }
 
