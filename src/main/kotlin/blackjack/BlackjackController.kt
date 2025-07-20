@@ -2,7 +2,7 @@ package blackjack
 
 class BlackjackController {
     val game = GameLogic()
-    val deck = Deck.generate()
+    val deck = Deck.generate(true)
     val dealer = Dealer(deck)
     val input = InputView()
     val output = OutputView()
