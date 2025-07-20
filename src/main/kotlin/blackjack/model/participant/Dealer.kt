@@ -2,6 +2,7 @@ package blackjack.model.participant
 
 import blackjack.model.GameConstants.BLACKJACK_SCORE
 import blackjack.model.GameConstants.DEALER_MUST_HIT_LIMIT
+import blackjack.model.GameConstants.DEALER_NOT_BET_MONEY
 import blackjack.model.GameConstants.FIRST_ROUND_HIT_COUNTS
 import blackjack.model.state.State
 
@@ -38,8 +39,4 @@ class Dealer() : Participant("Dealer", DEALER_NOT_BET_MONEY) {
     private fun isFirstRound(): Boolean = cardsCount() == FIRST_ROUND_HIT_COUNTS
 
     private fun isAbleToDraw(): Boolean = score <= DEALER_MUST_HIT_LIMIT
-
-    companion object {
-        const val DEALER_NOT_BET_MONEY = 0
-    }
 }

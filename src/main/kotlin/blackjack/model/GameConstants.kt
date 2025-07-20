@@ -5,4 +5,5 @@ object GameConstants {
     const val BLACKJACK_SCORE = 21
     const val DEALER_FIRST_HIT_COUNT = 1
     const val FIRST_ROUND_HIT_COUNTS = 2
+    const val DEALER_NOT_BET_MONEY = 0
 }
