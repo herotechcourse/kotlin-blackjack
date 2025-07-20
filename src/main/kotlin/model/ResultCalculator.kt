@@ -2,23 +2,22 @@ package model
 
 class ResultCalculator {
     companion object {
-        fun getResult(
-            playersScores: List<Int>,
+        fun ratio(
+            playerScore: Int,
             dealerScore: Int,
-        ): List<ResultStatus> {
-            return playersScores.map { playerScore ->
-                playerResult(playerScore, dealerScore)
+        ): Double {
+            return when {
+                isBusted(playerScore) -> -1.0
+                isBusted(dealerScore) && playerScore < 21 -> 1.0
+                isBlackJack(playerScore) && dealerScore < 21 -> 1.5
+                playerScore > dealerScore -> 1.0
+                playerScore == dealerScore -> 0.0
+                else -> -1.0
             }
         }
 
-        private fun playerResult(
-            playerScore: Int,
-            dealerScore: Int,
-        ): ResultStatus {
-            if (dealerScore > 21) return ResultStatus.WIN
-            if (playerScore in (dealerScore + 1)..21) return ResultStatus.WIN
-            if (playerScore == dealerScore) return ResultStatus.DRAW
-            return ResultStatus.LOSS
-        }
+        private fun isBlackJack(score: Int): Boolean = score == 21
+
+        private fun isBusted(score: Int): Boolean = score > 21
     }
 }

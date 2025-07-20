@@ -10,17 +10,6 @@ class BlackJack(names: List<String>) {
         initGame()
     }
 
-    private fun initGame() {
-        players.forEach { player ->
-            repeat(2) {
-                player.drawCard(deck.pop())
-            }
-        }
-        repeat(2) {
-            dealer.drawCard(deck.pop())
-        }
-    }
-
     fun dealerTurn(
         deck: Deck,
         doAfter: (BasePlayer) -> Unit,
@@ -42,10 +31,30 @@ class BlackJack(names: List<String>) {
         }
     }
 
-    fun result(): List<ResultStatus> {
-        return ResultCalculator.getResult(
-            players.map { it.getScore() },
-            dealer.getScore(),
-        )
+    fun calcEarning() {
+        val dealerScore = dealer.getScore()
+        players.forEach { player ->
+            val ratio = ResultCalculator.ratio(player.getScore(), dealerScore)
+            player.earning =
+                (player.bet * ratio).toInt()
+            dealer.earning += (player.bet * ratio * -1).toInt()
+        }
+    }
+
+    fun setPlayersBet(doRequest: (BasePlayer) -> Int) {
+        players.forEach { player ->
+            player.bet = doRequest(player)
+        }
+    }
+
+    private fun initGame() {
+        players.forEach { player ->
+            repeat(2) {
+                player.drawCard(deck.pop())
+            }
+        }
+        repeat(2) {
+            dealer.drawCard(deck.pop())
+        }
     }
 }

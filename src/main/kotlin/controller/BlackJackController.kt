@@ -10,24 +10,16 @@ class BlackJackController(
 ) {
     fun run() {
         val blackjack = BlackJack(input.requestPlayerNames())
+        blackjack.setPlayersBet(input::requestPlayersBet)
         displayInitializedGame(blackjack)
-        playersTurn(blackjack)
+        blackjack.playersTurn(output::displayPlayerTurn, input::requestPlayerDecision)
         dealerTurn(blackjack)
+        blackjack.calcEarning()
         displayResults(blackjack)
     }
 
     private fun displayInitializedGame(blackJack: BlackJack) {
         output.displayInitialCards(blackJack.players, blackJack.dealer)
-    }
-
-    private fun playersTurn(blackJack: BlackJack) {
-        blackJack.players.forEach { player ->
-            blackJack.playerTurn(
-                player = player,
-                doAfter = { output.displayPlayerTurn(player) },
-                { input.requestPlayerDecision(player.name) == "y" },
-            )
-        }
     }
 
     private fun dealerTurn(blackJack: BlackJack) {
@@ -39,6 +31,6 @@ class BlackJackController(
 
     private fun displayResults(blackjack: BlackJack) {
         output.displayFinalCardsOnHand(blackjack.players, blackjack.dealer)
-        output.displayResults(blackjack.result(), blackjack.players)
+        output.displayResults(blackjack.dealer, blackjack.players)
     }
 }

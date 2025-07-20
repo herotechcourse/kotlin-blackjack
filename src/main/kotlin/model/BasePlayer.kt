@@ -1,6 +1,7 @@
 package model
 
 abstract class BasePlayer(val name: String) {
+    var earning = 0
     protected val hand = Hand()
 
     init {

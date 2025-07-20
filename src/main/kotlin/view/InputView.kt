@@ -13,6 +13,11 @@ class InputView {
             parsePlayerDecision(readln())
         }
 
+    fun requestPlayersBet(player: BasePlayer): Int =
+        retry("Enter ${player.name}’s betting amount:") {
+            parsePlayerBet(readln())
+        }
+
     private fun parsePlayerNames(input: String): List<String> {
         require(input.isNotEmpty() && input.isNotBlank()) {
             "Input cannot be empty"
@@ -24,6 +29,11 @@ class InputView {
         require(input.isNotEmpty() && input.isNotBlank()) { "Decision cannot be empty" }
         require(input == "y" || input == "n") { "Decision has to be 'y' or 'n'" }
         return input.trim() == "y"
+    }
+
+    private fun parsePlayerBet(input: String): Int {
+        require(input.isNotEmpty() && input.isNotBlank()) { "Decision cannot be empty" }
+        return input.toInt()
     }
 
     private fun <T> retry(
