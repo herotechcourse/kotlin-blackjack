@@ -30,11 +30,6 @@ class Hand() {
         }
     }
 
-    override fun toString(): String {
-        val cards = cards.joinToString(",")
-        return cards
-    }
-
     companion object {
         private const val ACE_LOW = 1
         private const val ACE_HIGH = 11

@@ -14,13 +14,13 @@ class OutputView {
     }
 
     fun printDealerFirstTurnCards (dealer: Dealer) {
-        val cards = dealer.hand.toString()
+        val cards = formatHand(dealer.hand)
         println(DISPLAY_HANDS.format(dealer.name, cards))
     }
 
     fun printPlayersFirstTurnCards (players: List<Player>) {
         players.forEach { player ->
-            val cards = player.hand.toString()
+            val cards = formatHand(player.hand)
             println(DISPLAY_HANDS.format(player.name, cards))
         }
     }
@@ -31,23 +31,23 @@ class OutputView {
     }
 
     fun printCurrentCardsOfOnePlayer (player: Player) {
-        val cards = player.hand.toString()
+        val cards = formatHand(player.hand)
         println(DISPLAY_HANDS.format(player.name, cards))
     }
     fun printCurrentDealerCards (dealer: Dealer) {
-        val cards = dealer.hand.toString()
+        val cards = formatHand(dealer.hand)
         println(DISPLAY_HANDS.format(dealer.name, cards))
     }
 
     fun printDealerFinalScore (dealer: Dealer) {
-        val cards = dealer.hand.toString()
+        val cards = formatHand(dealer.hand)
         val score = dealer.sumCards()
         println(DISPLAY_FINAL_HAND.format(dealer.name, cards, score))
     }
 
     fun printPlayersFinalScore (players: List<Player>) {
         players.forEach { player ->
-            val cards = player.hand.toString()
+            val cards = formatHand(player.hand)
             val score = player.sumCards()
             println(DISPLAY_FINAL_HAND.format(player.name, cards, score))
         }
@@ -80,6 +80,10 @@ class OutputView {
         println()
         println(DISPLAY_TITLE_FINAL_RESULTS)
         println(DISPLAY_FINAL_DEALER_RESULTS.format(dealer.name, wins, losses))
+    }
+
+    fun formatHand(hand: Hand): String {
+        return hand.cards.joinToString(", ")
     }
 
     companion object Messages {
