@@ -34,13 +34,13 @@ class GameManager(
         round(dealer)
     }
 
-    internal fun round(
+    private fun round(
         participant: Participant,
         getPlayerChoice: () -> Boolean = { true },
     ) {
         when (participant) {
-            is Dealer -> playDealerRound(participant)
-            else -> playPlayerRound(participant, getPlayerChoice)
+            is Dealer -> playDealerRound(participant, OutputView::showDealerDraw)
+            else -> playPlayerRoundWithView(participant, getPlayerChoice)
         }
     }
 
@@ -48,26 +48,43 @@ class GameManager(
         return participant.state == State.HIT
     }
 
-    internal fun playPlayerRound(
+    private fun playPlayerRoundWithView(
         participant: Participant,
         getPlayerChoice: () -> Boolean,
     ) {
+        playPlayerRound(
+            participant,
+            getPlayerChoice,
+            ask = OutputView::askHit,
+            show = OutputView::showCards,
+        )
+    }
+
+    internal fun playPlayerRound(
+        participant: Participant,
+        getPlayerChoice: () -> Boolean,
+        ask: (Participant) -> Unit = {},
+        show: (Participant) -> Unit = {},
+    ) {
         while (canReceiveCard(participant) && deck.cards.isNotEmpty()) {
-            OutputView.askHit(participant)
+            ask(participant)
             if (getPlayerChoice()) {
                 deck.hit(participant)
-                OutputView.showCards(participant)
+                show(participant)
             } else {
                 break
             }
         }
     }
 
-    private fun playDealerRound(dealer: Dealer) {
+    internal fun playDealerRound(
+        dealer: Dealer,
+        show: (Dealer) -> Unit = {},
+    ) {
         while (canReceiveCard(dealer) && deck.cards.isNotEmpty()) {
             deck.hit(dealer)
         }
-        OutputView.showDealerDraw(dealer)
+        show(dealer)
     }
 
     internal fun getPlayers(): List<Player> = players

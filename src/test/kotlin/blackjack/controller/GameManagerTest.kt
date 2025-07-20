@@ -10,20 +10,10 @@ import blackjack.model.holder.Deck
 import blackjack.model.participant.Participants
 import blackjack.model.participant.Player
 import blackjack.model.state.State
-import blackjack.view.OutputView
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class GameManagerTest {
-    @Test
-    fun setUp() {
-        val participants = Participants(DummyPlayerFactory(2).players)
-        GameManager(participants).setUp()
-
-        OutputView.showCards(participants.dealer)
-        OutputView.showAllPayersCards(participants.players)
-    }
-
     @Test
     fun `player state is bust if score over 21`() {
         val player = Player("test")
@@ -85,7 +75,7 @@ class GameManagerTest {
 
         val prevScore = player.score
 
-        gameManager.round(player) { true }
+        gameManager.playPlayerRound(player, getPlayerChoice = { true })
         assertThat(prevScore).isNotEqualTo(player.score)
     }
 
@@ -100,7 +90,7 @@ class GameManagerTest {
         gameManager.injectTestDeck(cards)
         assertThat(gameManager.getDeck().cards).hasSize(cards.size)
 
-        gameManager.playPlayerRound(player) { true }
+        gameManager.playPlayerRound(player, getPlayerChoice = { true })
         assertThat(player.score).isEqualTo(21)
     }
 
@@ -117,7 +107,7 @@ class GameManagerTest {
 
         val prevScore = dealer.score
 
-        gameManager.round(dealer) { true }
+        gameManager.playDealerRound(dealer)
         assertThat(prevScore).isNotEqualTo(dealer.score)
     }
 

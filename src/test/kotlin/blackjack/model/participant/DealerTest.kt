@@ -14,6 +14,7 @@ class DealerTest {
     fun `dealer hits when score is 16 or less`() {
         val dealer = Dealer()
         dealer.receive(TWO_CARDS_SUM_16)
+
         assertThat(dealer.state).isEqualTo(State.HIT)
     }
 
@@ -21,6 +22,7 @@ class DealerTest {
     fun `dealer stays when score is exactly 17`() {
         val dealer = Dealer()
         dealer.receive(TWO_CARDS_SUM_17)
+
         assertThat(dealer.state).isEqualTo(State.STAY)
     }
 
@@ -28,6 +30,7 @@ class DealerTest {
     fun `dealer stays when score is above 17 but less than blackjack`() {
         val dealer = Dealer()
         dealer.receive(TWO_CARDS_SUM_18)
+
         assertThat(dealer.state).isEqualTo(State.STAY)
     }
 
@@ -37,10 +40,6 @@ class DealerTest {
         dealer.receive(TWO_CARDS_SUM_16)
         dealer.receive(listOf(TestFixture.Card.DIAMOND_JACK))
 
-        println("cards: ${dealer.cards}")
-        println("score: ${dealer.score}")
-        println("state: ${dealer.state}")
-
         assertThat(dealer.state).isEqualTo(State.BUST)
         assertThat(dealer.isBust()).isTrue()
     }
@@ -49,6 +48,7 @@ class DealerTest {
     fun `dealer blackjack on first round`() {
         val dealer = Dealer()
         dealer.receive(TWO_CARDS_BLACKJACK)
+
         assertThat(dealer.state).isEqualTo(State.BLACKJACK)
         assertThat(dealer.isBlackjack()).isTrue()
     }
