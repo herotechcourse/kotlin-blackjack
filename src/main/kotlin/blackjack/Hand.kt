@@ -7,13 +7,16 @@ class Hand() {
         cards.add(card)
     }
 
-   fun sumCards(): Int {
-        val cardValues = cards.map { card -> card.number }.toMutableList()
-        val elevenSumCheck = cardValues.sum() + 10
-        cardValues.replaceAll { if (it == 1 && elevenSumCheck <= 21) 11 else it }
-        cardValues.replaceAll { if (it == 11) 10 else it }
-        cardValues.replaceAll { if (it == 12) 10 else it }
-       
+    fun sumCards(): Int {
+        val cardValues = cards.map { card ->
+            when (card.number) {
+                in FACE_CARD_NUMBERS -> FACE_CARD_VALUE
+                else -> card.number
+            }
+        }.toMutableList()
+
+        cardValues.replaceAll { if (it == ACE_LOW && cardValues.sum() + ACE_HIGH <= BLACKJACK_LIMIT) ACE_HIGH else it }
+
         return cardValues.sum()
     }
 
@@ -30,5 +33,13 @@ class Hand() {
     override fun toString(): String {
         val cards = cards.joinToString(",")
         return cards
+    }
+
+    companion object {
+        private const val ACE_LOW = 1
+        private const val ACE_HIGH = 11
+        private const val BLACKJACK_LIMIT = 21
+        private const val FACE_CARD_VALUE = 10
+        private val FACE_CARD_NUMBERS = setOf(11, 12, 13)
     }
 }
