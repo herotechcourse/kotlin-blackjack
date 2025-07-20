@@ -6,7 +6,6 @@ import blackjack.model.participant.Player
 class GameResult(val participants: Participants) {
     val dealer = participants.dealer
     val playerResults: List<PlayerResult> = getAllPlayerResults()
-    val dealerEarning = DealerEarning(playerResults)
 
     private fun getAllPlayerResults(): List<PlayerResult> {
         return participants.players.map {

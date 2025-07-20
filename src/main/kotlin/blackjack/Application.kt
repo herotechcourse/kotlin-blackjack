@@ -3,6 +3,7 @@ package blackjack
 import blackjack.controller.GameManager
 import blackjack.factory.PlayerFactory
 import blackjack.model.participant.Participants
+import blackjack.model.result.DealerEarning
 import blackjack.model.result.GameResult
 import blackjack.view.InputView
 import blackjack.view.OutputView
@@ -19,7 +20,9 @@ fun main() {
         GameManager(participants).play()
 
         val gameResult = GameResult(participants)
-        OutputView.showGameResult(gameResult)
+        val dealerEarning = DealerEarning(gameResult.playerResults)
+
+        OutputView.showGameResult(gameResult, dealerEarning)
     }.onFailure { exception ->
         OutputView.showError(exception.message)
         exitProcess(1)

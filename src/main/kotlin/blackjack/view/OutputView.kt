@@ -6,7 +6,9 @@ import blackjack.model.participant.Dealer
 import blackjack.model.participant.Participant
 import blackjack.model.participant.Participants
 import blackjack.model.participant.Player
+import blackjack.model.result.DealerEarning
 import blackjack.model.result.GameResult
+import blackjack.model.result.PlayerResult
 
 object OutputView {
     fun showFirstRound(participants: Participants) {
@@ -44,7 +46,7 @@ object OutputView {
     ) {
         showCards(gameResult.dealer, showPoints(gameResult.dealer))
         showAllPayersCardsAndPoints(gameResult.participants.players)
-        showGameSummary(gameResult)
+        showGameSummary(gameResult.playerResults, dealerEarning)
     }
 
     private fun showAllPayersCards(players: List<Player>) {
@@ -71,10 +73,15 @@ object OutputView {
             Suit.SPADE -> "♠"
         }
 
-    private fun showGameSummary(gameResult: GameResult) {
-        println("\n${Message.FINAL_RESULTS_TITLE}")
-        println("Dealer: ${gameResult.dealerEarning.amount}")
-        gameResult.playerResults.forEach {
+    private fun showGameSummary(
+        playerResults: List<PlayerResult>,
+        dealerEarning: DealerEarning,
+    ) {
+        println(
+            "\n${Message.FINAL_RESULTS_TITLE}\n" +
+                "Dealer: ${dealerEarning.amount}",
+        )
+        playerResults.forEach {
             println("${it.player.name}: ${it.finalAmount}")
         }
     }
