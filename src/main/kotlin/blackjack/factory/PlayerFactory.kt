@@ -3,7 +3,7 @@ package blackjack.factory
 import blackjack.model.participant.Player
 import blackjack.validator.Validator
 
-interface BasePlayerFactory {
+fun interface BasePlayerFactory {
     fun createPlayers(): List<Player>
 }
 
