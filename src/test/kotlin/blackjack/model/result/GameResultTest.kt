@@ -134,4 +134,51 @@ class GameResultTest {
         assertThat(player3Result.outcome).isEqualTo(Outcome.LOSE)
         assertThat(player3Result.finalAmount).isEqualTo(-10000)
     }
+
+    @Test
+    fun `player bust results in LOSE even if dealer also busts`() {
+        val participants = Participants(DummyPlayerFactory(1).players)
+        val dealer = participants.dealer
+        val player = participants.players[0]
+
+        player.receive(THREE_CARDS_SUM_24)
+        dealer.receive(THREE_CARDS_SUM_24)
+
+        val result = GameResult(participants).playerResults[0]
+
+        assertThat(player.isBust()).isTrue()
+        assertThat(dealer.isBust()).isTrue()
+        assertThat(result.outcome).isEqualTo(Outcome.LOSE)
+        assertThat(result.finalAmount).isEqualTo(-10000)
+    }
+
+    @Test
+    fun `equal score without blackjack results in DRAW`() {
+        val participants = Participants(DummyPlayerFactory(1).players)
+        val dealer = participants.dealer
+        val player = participants.players[0]
+
+        player.receive(TWO_CARDS_SUM_20)
+        dealer.receive(TWO_CARDS_SUM_20)
+
+        val result = GameResult(participants).playerResults[0]
+
+        assertThat(result.outcome).isEqualTo(Outcome.DRAW)
+        assertThat(result.finalAmount).isEqualTo(10000)
+    }
+
+    @Test
+    fun `dealer higher score than player results in LOSE`() {
+        val participants = Participants(DummyPlayerFactory(1).players)
+        val dealer = participants.dealer
+        val player = participants.players[0]
+
+        player.receive(TWO_CARDS_SUM_17)
+        dealer.receive(TWO_CARDS_SUM_20)
+
+        val result = GameResult(participants).playerResults[0]
+
+        assertThat(result.outcome).isEqualTo(Outcome.LOSE)
+        assertThat(result.finalAmount).isEqualTo(-10000)
+    }
 }
