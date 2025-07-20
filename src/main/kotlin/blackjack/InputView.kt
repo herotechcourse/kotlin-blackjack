@@ -14,4 +14,11 @@ class InputView {
             }
         }
     }
+
+    fun askPlayerIfShouldHit(participant: Participant): Boolean {
+        println()
+        println("Would ${participant.name} like to draw another card? (y for yes, n for no)")
+        val wantHit = readln().trim()
+        return wantHit == "y"
+    }
 }

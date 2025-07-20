@@ -18,17 +18,15 @@ class GameLogic {
         })
     }
 
-    fun otherTurnCards(players: List<Player>, dealer: Dealer) {
-        val output = OutputView()
-        players.forEach { player ->
-            while (player.shouldHit()) {
-                player.addCard(dealer.drawCard())
-                output.printCurrentCardsOfOnePlayer(player)
-            }
-        }
-        while (dealer.shouldHit()) {
-            dealer.addCard(dealer.drawCard())
-            output.printCurrentDealerCards(dealer)
-        }
+    fun playerShouldHit(player: Player): Boolean {
+        return player.shouldHit()
+    }
+
+    fun dealerShouldHit(dealer: Dealer): Boolean {
+        return dealer.shouldHit()
+    }
+
+    fun drawCardForParticipant(participant: Participant, dealer: Dealer) {
+        participant.addCard(dealer.drawCard())
     }
 }

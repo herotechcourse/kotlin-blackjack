@@ -25,6 +25,11 @@ class OutputView {
         }
     }
 
+    fun printDealerDrawsOneMoreCardMessage() {
+        println()
+        println(DEALER_DRAW_MESSAGE)
+    }
+
     fun printCurrentCardsOfOnePlayer (player: Player) {
         val cards = player.hand.toString()
         println(DISPLAY_HANDS.format(player.name, cards))
@@ -68,6 +73,7 @@ class OutputView {
 
     companion object Messages {
         const val ASK_NAMES = "Enter the names of the players (comma-separated):"
+        const val DEALER_DRAW_MESSAGE = "Dealer draws one more card due to having 16 or less."
         const val FIRST_TURN_CARDS = "Dealing two cards to dealer, %s."
         const val DISPLAY_HANDS = "%s`s cards: %s"
         const val DISPLAY_FINAL_HAND = "%s`s cards: %s - Total: %s"

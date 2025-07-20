@@ -1,5 +1,6 @@
 package blackjack
 
 fun main() {
-    BlackjackController.run()
+    val controller = BlackjackController()
+    controller.run()
 }
