@@ -1,32 +1,13 @@
 package blackjack.model
 
-class Deck() {
-    private val _cards: MutableList<Card> = mutableListOf()
-
-    val cards: List<Card>
-        get() = _cards.toList()
-
-    init {
-        create()
-        shuffle()
-    }
-
-    private fun create() {
-        val symbols = Card.Suit.entries
-        val cardValues = Card.Rank.entries
-
-        symbols.forEach { symbol ->
-            cardValues.forEach { value ->
-                _cards.add(Card(symbol, value))
-            }
-        }
-    }
-
-    private fun shuffle() = _cards.shuffle()
+data class Deck(private val cards: MutableList<Card> = Card.ALL_CARDS.shuffled().toMutableList()) {
+    val size: Int
+        get() = cards.size
 
     fun drawCard(): Card {
-        check(_cards.isNotEmpty()) { "[FATAL]: Deck cards should not be empty." }
-
-        return _cards.removeLast()
+        if (cards.isEmpty()) {
+            cards.addAll(Card.ALL_CARDS.shuffled())
+        }
+        return cards.removeFirst()
     }
 }

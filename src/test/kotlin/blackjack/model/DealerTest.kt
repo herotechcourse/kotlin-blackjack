@@ -1,125 +1,68 @@
 package blackjack.model
 
+import blackjack.state.Blackjack
+import blackjack.state.Hit
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class DealerTest {
-    private lateinit var dealer: Dealer
-
-    @BeforeEach
-    fun setUp() {
-        dealer = Dealer()
-    }
-
     @Test
     fun `should initialize a Dealer with a default name Dealer`() {
-        assertThat(Dealer("Dealer")).isInstanceOf(Dealer::class.java)
-    }
-
-    @Test
-    fun `should deal a card from the deck`() {
-        val card = dealer.dealCard()
-        assertThat(card).isInstanceOf(Card::class.java)
+        assertThat(Dealer()).isInstanceOf(Dealer::class.java)
     }
 
     @Test
     fun `should return false when dealer has more than 16`() {
-        dealer.addCard(Card(Card.Suit.HEARTS, Card.Rank.NINE))
-        dealer.addCard(Card(Card.Suit.SPADES, Card.Rank.NINE))
+        val dealer = Dealer()
+        dealer.handState.draw(Card(Suit.HEARTS, Rank.NINE))
+        dealer.handState.draw(Card(Suit.SPADES, Rank.NINE))
 
-        assertThat(dealer.shouldNotStand()).isFalse()
+        val dealerSum = dealer.handState.hand.calculateSum()
+        val shouldDealerContinue = dealer.handState.isRunning() && dealerSum >= Dealer.DEALER_STAND
+        assertThat(shouldDealerContinue).isFalse()
     }
 
     @Test
     fun `should return true when dealer has 16 or less`() {
-        dealer.addCard(Card(Card.Suit.HEARTS, Card.Rank.EIGHT))
-        dealer.addCard(Card(Card.Suit.SPADES, Card.Rank.EIGHT))
+        val dealer = Dealer()
+        dealer.handState.draw(Card(Suit.HEARTS, Rank.NINE))
+        dealer.handState.draw(Card(Suit.SPADES, Rank.TWO))
 
-        assertThat(dealer.shouldNotStand()).isTrue()
+        val dealerSum = dealer.handState.hand.calculateSum()
+        val shouldDealerContinue = dealer.handState.isRunning() && dealerSum <= Dealer.DEALER_STAND
+        assertThat(shouldDealerContinue).isTrue()
     }
 
     @Test
-    fun `should reveal all cards when showAllCards is called`() {
-        assertThat(dealer.isShowingAllCards()).isFalse()
+    fun `dealInitialCards should give the dealer two cards`() {
+        val dealer = Dealer()
+        val deck = Deck(mutableListOf(Card(Suit.HEARTS, Rank.SEVEN), Card(Suit.SPADES, Rank.FIVE)))
 
-        dealer.showAllCards()
+        dealer.dealInitialCards(deck)
 
-        assertThat(dealer.isShowingAllCards()).isTrue()
+        assertThat(dealer.handState.hand.size).isEqualTo(2)
+        assertThat(dealer.points).isEqualTo(12)
+        assertThat(dealer.handState).isInstanceOf(Hit::class.java)
     }
 
     @Test
-    fun `should return dealt cards`() {
-        val card = Card(Card.Suit.CLUBS, Card.Rank.SIX)
-        dealer.addCard(card)
+    fun `playTurn should not enter hit state if has blackjack initially `() {
+        val dealer = Dealer()
+        val deck1 = Deck(mutableListOf(Card(Suit.HEARTS, Rank.TEN), Card(Suit.SPADES, Rank.ACE)))
+        dealer.dealInitialCards(deck1)
 
-        val dealt = dealer.getDealtCards()
+        assertThat(dealer.points).isEqualTo(21)
+        assertThat(dealer.handState).isInstanceOf(Blackjack::class.java)
 
-        assertThat(dealt).containsExactly(card)
+        val deck2 = Deck(mutableListOf(Card(Suit.HEARTS, Rank.TEN)))
+
+        val deckTwoSize = deck2.size
+
+        dealer.playTurn(deck2)
+
+        assertThat(dealer.points).isEqualTo(21)
+        assertThat(dealer.handState).isInstanceOf(Blackjack::class.java)
+        assertThat(dealer.handState.hand.cards).hasSize(2)
+        assertThat(deck2.size).isEqualTo(deckTwoSize)
     }
-
-    @Test
-    fun `should handle setResultFor when player busts`() {
-        val player = Player("bo").apply {
-            addCard(Card(Card.Suit.SPADES, Card.Rank.KING))
-            addCard(Card(Card.Suit.HEARTS, Card.Rank.QUEEN))
-            addCard(Card(Card.Suit.CLUBS, Card.Rank.TWO))
-        }
-
-        dealer.setResultFor(player)
-
-        assertThat(player.gameResults.loses).isEqualTo(1)
-        assertThat(dealer.gameResults.wins).isEqualTo(1)
-    }
-
-    @Test
-    fun `should handle setResultFor when dealer busts`() {
-        val player = Player("bo").apply {
-            addCard(Card(Card.Suit.DIAMONDS, Card.Rank.EIGHT))
-            addCard(Card(Card.Suit.CLUBS, Card.Rank.EIGHT))
-        }
-        dealer.apply {
-            addCard(Card(Card.Suit.HEARTS, Card.Rank.KING))
-            addCard(Card(Card.Suit.SPADES, Card.Rank.QUEEN))
-            addCard(Card(Card.Suit.DIAMONDS, Card.Rank.TWO))
-        }
-
-        dealer.setResultFor(player)
-
-        assertThat(player.gameResults.wins).isEqualTo(1)
-        assertThat(dealer.gameResults.loses).isEqualTo(1)
-    }
-
-    @Test
-    fun `should handle setResultFor when it is a tie`() {
-        val player = Player("bo").apply {
-            addCard(Card(Card.Suit.CLUBS, Card.Rank.NINE))
-            addCard(Card(Card.Suit.HEARTS, Card.Rank.NINE))
-        }
-        dealer.apply {
-            addCard(Card(Card.Suit.SPADES, Card.Rank.NINE))
-            addCard(Card(Card.Suit.DIAMONDS, Card.Rank.NINE))
-        }
-
-        dealer.setResultFor(player)
-
-        assertThat(player.gameResults.ties).isEqualTo(1)
-        assertThat(dealer.gameResults.ties).isEqualTo(1)
-    }
-
-    @Test
-    fun `should handle setResultFor when player has blackjack and dealer doesn't`() {
-        val player = Player("bo").apply {
-            addCard(Card(Card.Suit.CLUBS, Card.Rank.ACE))
-            addCard(Card(Card.Suit.HEARTS, Card.Rank.KING))
-        }
-        dealer.addCard(Card(Card.Suit.SPADES, Card.Rank.EIGHT))
-        dealer.addCard(Card(Card.Suit.DIAMONDS, Card.Rank.NINE))
-
-        dealer.setResultFor(player)
-
-        assertThat(player.gameResults.wins).isEqualTo(1)
-        assertThat(dealer.gameResults.loses).isEqualTo(1)
-    }
-
 }
