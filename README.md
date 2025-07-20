@@ -24,3 +24,13 @@
 - [x] Enable CardHolder to draw multiple cards
 - [x] Enable CardHolder to receive multiple cards
 - [x] Add more tests
+
+## step 2-2
+### Approach (from review)
+- [x] keep under 5 commits
+- [x] restrict visibility of untested methods from internal to private
+- [x] extract DealerEarning from GameResult
+- [x] remove println()/OutputView in tests
+- [x] remove unnecessary tests setup()
+- [x] remove unnecessary comment to CardHolder
+- [x] apply fun interface to BasePayerFactory in PlayerFactory
