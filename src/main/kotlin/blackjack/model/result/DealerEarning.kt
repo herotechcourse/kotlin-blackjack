@@ -3,7 +3,7 @@ package blackjack.model.result
 class DealerEarning(playerResults: List<PlayerResult>) {
     val amount: Int = calculateEarningAmount(playerResults)
 
-    internal fun calculateEarningAmount(playerResults: List<PlayerResult>): Int {
+    private fun calculateEarningAmount(playerResults: List<PlayerResult>): Int {
         val totalPlayerWinnings =
             playerResults.filter {
                 it.outcome != Outcome.LOSE

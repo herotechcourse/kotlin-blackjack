@@ -28,13 +28,26 @@ object OutputView {
 
     fun showError(msg: String?) = println("Error: $msg")
 
-    fun showGameResult(gameResult: GameResult) {
+    fun showCards(
+        participant: Participant,
+        extraText: String = "",
+    ) {
+        val display =
+            participant.cards
+                .joinToString(", ") { it.printable() }
+        println("${participant.name}'s cards: " + display + extraText)
+    }
+
+    fun showGameResult(
+        gameResult: GameResult,
+        dealerEarning: DealerEarning,
+    ) {
         showCards(gameResult.dealer, showPoints(gameResult.dealer))
         showAllPayersCardsAndPoints(gameResult.participants.players)
         showGameSummary(gameResult)
     }
 
-    internal fun showAllPayersCards(players: List<Player>) {
+    private fun showAllPayersCards(players: List<Player>) {
         players.forEach { player ->
             showCards(player)
         }
@@ -48,16 +61,6 @@ object OutputView {
         println()
     }
 
-    internal fun showCards(
-        participant: Participant,
-        extraText: String = "",
-    ) {
-        val display =
-            participant.cards
-                .joinToString(", ") { it.printable() }
-        println("${participant.name}'s cards: " + display + extraText)
-    }
-
     private fun Card.printable(): String = "${rank.face}${suit.symbol()}"
 
     private fun Suit.symbol(): String =
@@ -68,7 +71,7 @@ object OutputView {
             Suit.SPADE -> "♠"
         }
 
-    internal fun showGameSummary(gameResult: GameResult) {
+    private fun showGameSummary(gameResult: GameResult) {
         println("\n${Message.FINAL_RESULTS_TITLE}")
         println("Dealer: ${gameResult.dealerEarning.amount}")
         gameResult.playerResults.forEach {

@@ -8,5 +8,5 @@ data class PlayerResult(
 ) {
     val finalAmount: Int = calculateTotal()
 
-    internal fun calculateTotal(): Int = (player.amount * outcome.payoutMultiplier).toInt()
+    private fun calculateTotal(): Int = (player.amount * outcome.payoutMultiplier).toInt()
 }

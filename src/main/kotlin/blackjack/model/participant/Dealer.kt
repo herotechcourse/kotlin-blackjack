@@ -18,7 +18,7 @@ class Dealer() : Participant("Dealer", DEALER_NOT_BET_MONEY) {
 
     override fun isBlackjack() = state == State.BLACKJACK && score == BLACKJACK_SCORE
 
-    internal fun calculateState(): State {
+    private fun calculateState(): State {
         if (isFirstRound()) return initialStateOrBlackjack()
         return evaluateState()
     }

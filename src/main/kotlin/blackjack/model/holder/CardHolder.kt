@@ -14,10 +14,6 @@ abstract class CardHolder {
         return true
     }
 
-    /**
-     * @throws IllegalStateException if try failed and should throw error
-     *
-     */
     fun draw(count: Int): List<Card> {
         if (currentCards.isEmpty() || currentCards.size < count) {
             onDrawFailed()

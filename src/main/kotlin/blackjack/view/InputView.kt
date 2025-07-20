@@ -28,7 +28,7 @@ object InputView {
         return names.map { name -> readPlayerBet(name) }
     }
 
-    internal object Ask {
+    private object Ask {
         fun playersName(): String {
             OutputView.showEnterNames()
             return readlnOrNull() ?: throw IllegalArgumentException(OutputView.Message.INVALID_INPUT)

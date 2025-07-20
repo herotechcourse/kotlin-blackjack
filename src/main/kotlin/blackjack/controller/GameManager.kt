@@ -24,7 +24,7 @@ class GameManager(
         return GameResult(participants)
     }
 
-    internal fun setUp() {
+    private fun setUp() {
         players.forEach { deck.hit(it, 2) }
         deck.hit(dealer)
     }
@@ -44,7 +44,7 @@ class GameManager(
         }
     }
 
-    internal fun canReceiveCard(participant: Participant): Boolean {
+    private fun canReceiveCard(participant: Participant): Boolean {
         return participant.state == State.HIT
     }
 
