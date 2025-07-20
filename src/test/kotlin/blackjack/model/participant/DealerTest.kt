@@ -1,6 +1,6 @@
 package blackjack.model.participant
 
-import blackjack.TestFixture.BustedWithLastCard.THREE_CARDS_SUM_24
+import blackjack.TestFixture
 import blackjack.TestFixture.TwoCards.TWO_CARDS_BLACKJACK
 import blackjack.TestFixture.TwoCards.TWO_CARDS_SUM_16
 import blackjack.TestFixture.TwoCards.TWO_CARDS_SUM_17
@@ -34,7 +34,13 @@ class DealerTest {
     @Test
     fun `dealer busts when score exceeds 21`() {
         val dealer = Dealer()
-        dealer.receive(THREE_CARDS_SUM_24) // 합 = 24
+        dealer.receive(TWO_CARDS_SUM_16)
+        dealer.receive(listOf(TestFixture.Card.DIAMOND_JACK))
+
+        println("cards: ${dealer.cards}")
+        println("score: ${dealer.score}")
+        println("state: ${dealer.state}")
+
         assertThat(dealer.state).isEqualTo(State.BUST)
         assertThat(dealer.isBust()).isTrue()
     }

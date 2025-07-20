@@ -2,6 +2,7 @@ package blackjack.controller
 
 import blackjack.DummyPlayerFactory
 import blackjack.TestFixture
+import blackjack.TestFixture.DoesNotHasAce.FIVE_CARDS_SUM_21
 import blackjack.model.card.Card
 import blackjack.model.card.Rank
 import blackjack.model.card.Suit
@@ -94,9 +95,10 @@ class GameManagerTest {
         val gameManager = GameManager(participants)
 
         val player = gameManager.getPlayers().first()
-        val cards = TestFixture.DoesNotHasAce.FIVE_CARDS_SUM_21.toMutableList()
+        val cards = FIVE_CARDS_SUM_21.toMutableList()
 
         gameManager.injectTestDeck(cards)
+        assertThat(gameManager.getDeck().cards).hasSize(cards.size)
 
         gameManager.playPlayerRound(player) { true }
         assertThat(player.score).isEqualTo(21)
