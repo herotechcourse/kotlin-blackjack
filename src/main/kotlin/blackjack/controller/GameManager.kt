@@ -52,20 +52,19 @@ class GameManager(
         participant: Participant,
         getPlayerChoice: () -> Boolean,
     ) {
-        while (canReceiveCard(participant)) {
+        while (canReceiveCard(participant) && deck.cards.isNotEmpty()) {
             OutputView.askHit(participant)
             if (getPlayerChoice()) {
                 deck.hit(participant)
                 OutputView.showCards(participant)
             } else {
-                participant.state = State.STAY
                 break
             }
         }
     }
 
     private fun playDealerRound(dealer: Dealer) {
-        while (canReceiveCard(dealer)) {
+        while (canReceiveCard(dealer) && deck.cards.isNotEmpty()) {
             deck.hit(dealer)
         }
         OutputView.showDealerDraw(dealer)
