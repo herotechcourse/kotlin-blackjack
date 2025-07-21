@@ -1,6 +1,7 @@
 package blackjack.controller
 
 import blackjack.model.Dealer
+import blackjack.model.Hand
 import blackjack.model.Player
 import blackjack.model.PlayingCard
 import blackjack.model.Stats
@@ -8,43 +9,83 @@ import blackjack.view.InputView
 import blackjack.view.OutputView
 
 object GameMaster {
-    val deck = PlayingCard.deck
-    val playerManager = PlayerManager()
-    val dealer = Dealer()
-
     fun run() {
         PlayingCard.deck.shuffle()
-        takePlayerNames()
-        initHands()
-        OutputView.displayInitialState(playerManager.players, dealer)
-        askPlayersToHit()
-        drawDealerCards()
-        OutputView.displayFinalState(playerManager.players, dealer)
-        val winStatistics = calculateStatistics(playerManager.players, dealer)
+        val dealer = initDealer()
+        val players = initPlayers()
+        OutputView.displayInitialState(players, dealer)
+        askPlayersToHit(players)
+        drawDealerCards(dealer)
+        OutputView.displayFinalState(players, dealer)
+        val winStatistics = calculateStatistics(players, dealer)
         OutputView.displayFinalResults(winStatistics)
     }
 
-    private fun takePlayerNames() {
+    private fun initDealer(): Dealer {
+        val dealer = Dealer()
+        dealer.hand.initCards()
+        return dealer
+    }
+
+    private fun initPlayers(): List<Player> {
+        val players = mutableListOf<Player>()
         val names = InputView.retryable { InputView.readPlayerNames() }
-        names.forEach { name -> playerManager.addPlayer(name) }
+        names.forEach { name ->
+            val player = Player(name, Hand().initCards())
+            players.add(player)
+        }
+        return players.toList()
     }
 
-    private fun initHands() {
-        repeat(2) {
-            playerManager.players.forEach { player ->
-                player.drawCard(deck.giveCard())
+    private fun askPlayersToHit(players: List<Player>) {
+        val deck = PlayingCard.deck
+        players.forEach { player ->
+            askPlayerHit(player) { deck.giveCard() }
+        }
+    }
+
+    private fun askPlayerHit(
+        player: Player,
+        receiveCard: () -> PlayingCard,
+    ) {
+        var isFirst = true
+
+        while (!player.isBust()) {
+            isFirst = drawOrNot(player, receiveCard, isFirst)
+            if (isFirst) break
+        }
+    }
+
+    private fun drawOrNot(
+        player: Player,
+        receiveCard: () -> PlayingCard,
+        isFirst: Boolean,
+    ): Boolean {
+        val wantsCard =
+            player.requestCard {
+                InputView.retryable { InputView.readYesOrNo(player.name) }
             }
-            dealer.drawCard(deck.giveCard())
+
+        if (!wantsCard) {
+            if (isFirst) OutputView.displayCurrentHand(player)
+            return true
         }
+
+        drawAndDisplayAndReturnFalse(player, receiveCard)
+        return false
     }
 
-    private fun askPlayersToHit() {
-        playerManager.players.forEach { player ->
-            playerManager.askPlayerHit(player) { deck.giveCard() }
-        }
+    private fun drawAndDisplayAndReturnFalse(
+        player: Player,
+        receiveCard: () -> PlayingCard,
+    ): Boolean {
+        player.drawCard(receiveCard())
+        OutputView.displayCurrentHand(player)
+        return false
     }
 
-    private fun drawDealerCards() {
+    private fun drawDealerCards(dealer: Dealer) {
+        val deck = PlayingCard.deck
         while (dealer.shouldDrawCardOrNot()) {
             dealer.drawCard(deck.giveCard())
             OutputView.displayDealerDrawsCard()

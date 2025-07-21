@@ -1,6 +1,15 @@
 package blackjack.model
 
-class Hand(val cards: List<PlayingCard> = emptyList()) {
+class Hand(var cards: List<PlayingCard> = emptyList()) {
+    fun initCards(): Hand {
+        val deque = ArrayDeque(cards)
+        repeat(2) {
+            deque.addLast(PlayingCard.deck.giveCard())
+        }
+        cards = deque.toList()
+        return this
+    }
+
     fun calculateHand(): Int {
         val values = cards.map { it.value }
         var aceCounts = values.count { it == BIG_ACE_VALUE }
