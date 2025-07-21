@@ -20,7 +20,7 @@ object TurnManager {
             if (wantsToDraw) {
                 dealer.giveCardTo(player)
                 OutputView.displayPlayerHand(player)
-                if (player.getScore() >= 21) break
+                if (player.isBusted()) break
             } else {
                 break
             }
