@@ -47,19 +47,21 @@ class PlayerTest {
 
     @Test
     fun `Player has hand which is a list of card`() {
-        val cards = PlayingCard.Deck
+        val deck = PlayingCard.deck
         val player = Player("player")
 
         // initial state of player's hand
         assertEquals(emptyList<PlayingCard>(), player.hand.cards)
 
         // draw first card
-        player.drawCard(cards[0])
-        assertEquals(cards.subList(0, 1), player.hand.cards)
+        val firstCard = deck.giveCard()
+        player.drawCard(firstCard)
+        assertEquals(firstCard, player.hand.cards.last())
 
         // draw second card
-        player.drawCard(cards[1])
-        assertEquals(cards.subList(0, 2), player.hand.cards)
+        val secondCard = deck.giveCard()
+        player.drawCard(secondCard)
+        assertEquals(secondCard, player.hand.cards.last())
     }
 
     @Test

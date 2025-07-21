@@ -2,16 +2,18 @@ package blackjack.controller
 
 import blackjack.model.Dealer
 import blackjack.model.Player
+import blackjack.model.PlayingCard
 import blackjack.model.Stats
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
 object GameMaster {
-    val cardManager = CardManager()
+    val deck = PlayingCard.deck
     val playerManager = PlayerManager()
     val dealer = Dealer()
 
     fun run() {
+        PlayingCard.deck.shuffle()
         takePlayerNames()
         initHands()
         OutputView.displayInitialState(playerManager.players, dealer)
@@ -30,21 +32,21 @@ object GameMaster {
     private fun initHands() {
         repeat(2) {
             playerManager.players.forEach { player ->
-                player.drawCard(cardManager.giveCard())
+                player.drawCard(deck.giveCard())
             }
-            dealer.drawCard(cardManager.giveCard())
+            dealer.drawCard(deck.giveCard())
         }
     }
 
     private fun askPlayersToHit() {
         playerManager.players.forEach { player ->
-            playerManager.askPlayerHit(player) { cardManager.giveCard() }
+            playerManager.askPlayerHit(player) { deck.giveCard() }
         }
     }
 
     private fun drawDealerCards() {
         while (dealer.shouldDrawCardOrNot()) {
-            dealer.drawCard(cardManager.giveCard())
+            dealer.drawCard(deck.giveCard())
             OutputView.displayDealerDrawsCard()
         }
     }

@@ -1,12 +1,9 @@
-package blackjack.controller
+package blackjack.model
 
-import blackjack.model.PlayingCard
-
-class CardManager() {
-    var cards: List<PlayingCard> = emptyList()
-
-    init {
-        cards = PlayingCard.Deck.toList().shuffled()
+class Deck(var cards: List<PlayingCard>) {
+    fun shuffle(): Deck {
+        cards = cards.shuffled()
+        return this
     }
 
     private fun getCard(): PlayingCard {
