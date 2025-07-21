@@ -1,6 +1,6 @@
 package blackjack.model
 
-open class Dealer : Participant(name = "Dealer") {
+open class Dealer : Participant() {
     private val deck = Deck()
 
     fun giveTwoCardsTo(participants: List<Participant>) {

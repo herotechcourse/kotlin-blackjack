@@ -1,6 +1,6 @@
 package blackjack.model
 
-abstract class Participant(open val name: String) {
+abstract class Participant {
     private val hand = Hand()
 
     fun addCard(card: Card) {
