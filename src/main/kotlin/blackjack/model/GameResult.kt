@@ -1,15 +1,13 @@
 package blackjack.model
 
-enum class GameResult(
-    private val multiplier: Double,
-) {
-    BLACKJACK_WIN(1.5),
-    WIN(1.0),
-    DRAW(0.0),
-    LOSE(-1.0),
+enum class GameResult(val calculateEarnings: (Bet) -> Int) {
+    BLACKJACK_WIN({ bet -> (bet.amount * 1.5).toInt() }),
+    WIN({ bet -> bet.amount }),
+    DRAW({ _ -> 0 }),
+    LOSE({ bet -> -bet.amount }),
     ;
 
-    fun calculateEarnings(bet: Int): Int {
-        return (bet * multiplier).toInt()
+    fun earningsFrom(bet: Bet): Int {
+        return calculateEarnings(bet)
     }
 }
