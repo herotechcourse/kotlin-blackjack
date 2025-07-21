@@ -14,18 +14,17 @@ class GameManager(
     private val participants: Participants,
 ) {
     private val deck = Deck()
-    private val dealer = participants.getDealer()
-    private val players = participants.getPlayers()
+    private val dealer = participants.dealer
+    private val players = participants.players
 
     fun play(): GameResult {
         setUp()
-        OutputView.showCards(dealer)
-        OutputView.showAllPayersCards(participants)
+        OutputView.showFirstRound(participants)
         keepPlay(InputView::readUserAnswer)
         return GameResult(participants)
     }
 
-    internal fun setUp() {
+    private fun setUp() {
         players.forEach { deck.hit(it, 2) }
         deck.hit(dealer)
     }
@@ -35,41 +34,57 @@ class GameManager(
         round(dealer)
     }
 
-    internal fun round(
+    private fun round(
         participant: Participant,
         getPlayerChoice: () -> Boolean = { true },
     ) {
         when (participant) {
-            is Dealer -> playDealerRound(participant)
-            else -> playPlayerRound(participant, getPlayerChoice)
+            is Dealer -> playDealerRound(participant, OutputView::showDealerDraw)
+            else -> playPlayerRoundWithView(participant, getPlayerChoice)
         }
     }
 
-    internal fun canReceiveCard(participant: Participant): Boolean {
+    private fun canReceiveCard(participant: Participant): Boolean {
         return participant.state == State.HIT
+    }
+
+    private fun playPlayerRoundWithView(
+        participant: Participant,
+        getPlayerChoice: () -> Boolean,
+    ) {
+        playPlayerRound(
+            participant,
+            getPlayerChoice,
+            ask = OutputView::askHit,
+            show = OutputView::showCards,
+        )
     }
 
     internal fun playPlayerRound(
         participant: Participant,
         getPlayerChoice: () -> Boolean,
+        ask: (Participant) -> Unit = {},
+        show: (Participant) -> Unit = {},
     ) {
-        while (canReceiveCard(participant)) {
-            OutputView.askHit(participant)
+        while (canReceiveCard(participant) && deck.cards.isNotEmpty()) {
+            ask(participant)
             if (getPlayerChoice()) {
                 deck.hit(participant)
-                OutputView.showCards(participant)
+                show(participant)
             } else {
-                participant.currentState = State.STAY
                 break
             }
         }
     }
 
-    private fun playDealerRound(dealer: Dealer) {
-        while (canReceiveCard(dealer)) {
+    internal fun playDealerRound(
+        dealer: Dealer,
+        show: (Dealer) -> Unit = {},
+    ) {
+        while (canReceiveCard(dealer) && deck.cards.isNotEmpty()) {
             deck.hit(dealer)
         }
-        OutputView.showDealerDraw(dealer)
+        show(dealer)
     }
 
     internal fun getPlayers(): List<Player> = players

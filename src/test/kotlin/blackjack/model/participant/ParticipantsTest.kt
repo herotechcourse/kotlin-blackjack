@@ -1,41 +1,42 @@
 package blackjack.model.participant
 
+import blackjack.DummyPlayerFactory
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
 class ParticipantsTest {
     @Test
     fun `Participants init with player and dealer, and recognize by name`() {
-        val names = listOf("mina", "guri", "life", "hard")
-        val participants = Participants.from(names)
+        val factory = DummyPlayerFactory(4)
+        val participants = Participants(factory.players)
 
-        Assertions.assertThat(names.all { participants.contain(it) }).isTrue
+        Assertions.assertThat(factory.names.all { participants.contains(it) }).isTrue
     }
 
     @Test
     fun `Participants init with player and dealer, and recognize by type of Participant`() {
-        val names = listOf("mina", "guri", "life", "hard")
-        val participants = Participants.from(names)
-        val dealer = participants.getDealer()
+        val factory = DummyPlayerFactory(4)
+        val participants = Participants(factory.players)
+        val dealer = participants.dealer
 
-        Assertions.assertThat(participants.contain(dealer)).isTrue()
+        Assertions.assertThat(participants.contains(dealer)).isTrue()
     }
 
     @Test
     fun `Participants init with players`() {
-        val names = listOf("mina", "guri")
-        val participants = Participants.from(names)
+        val factory = DummyPlayerFactory(2)
+        val participants = Participants(factory.players)
 
-        Assertions.assertThat(participants.containsAll("mina", "guri")).isTrue()
-        Assertions.assertThat(participants.containsAll("guri", "I am not Guri")).isFalse()
-        Assertions.assertThat(participants.getPlayer(0).name).isEqualTo("mina")
+        Assertions.assertThat(participants.containsAll(factory.names[0], factory.names[1])).isTrue()
+        Assertions.assertThat(participants.containsAll(factory.names[0], "I am not Guri")).isFalse()
+        Assertions.assertThat(participants.players[0].name).isEqualTo(factory.names[0])
     }
 
     @Test
     fun `can recognize number of players`() {
-        val names = listOf("mina", "guri")
-        val participants = Participants.from(names)
+        val factory = DummyPlayerFactory(2)
+        val participants = Participants(factory.players)
 
-        Assertions.assertThat(participants.getPlayers().size).isEqualTo(2)
+        Assertions.assertThat(participants.players.size).isEqualTo(2)
     }
 }

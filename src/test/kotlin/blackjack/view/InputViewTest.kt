@@ -11,7 +11,7 @@ class InputViewTest {
     @Test
     fun `name should be parsed correctly`() {
         val input = "mina, guri, ella"
-        val parsed = InputView.Parser.playerNames(input)
+        val parsed = Parser.playerNames(input)
         val expected = listOf("mina", "guri", "ella")
 
         assertEquals(parsed, expected)

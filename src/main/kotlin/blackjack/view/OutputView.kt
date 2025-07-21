@@ -1,62 +1,88 @@
 package blackjack.view
 
+import blackjack.model.card.Card
+import blackjack.model.card.Suit
 import blackjack.model.participant.Dealer
 import blackjack.model.participant.Participant
 import blackjack.model.participant.Participants
+import blackjack.model.participant.Player
+import blackjack.model.result.DealerEarning
 import blackjack.model.result.GameResult
-import blackjack.model.result.Outcome
+import blackjack.model.result.PlayerResult
 
 object OutputView {
-    fun showAllPayersCards(participants: Participants) {
-        participants.getPlayers().forEach { showCards(it) }
-        println()
-    }
-
-    fun showCards(
-        participant: Participant,
-        extra: String = "",
-    ) {
-        println("${participant.name}'s cards: " + participant.cards.joinToString() + extra)
+    fun showFirstRound(participants: Participants) {
+        showCards(participants.dealer)
+        showAllPayersCards(participants.players)
     }
 
     fun showDealerDraw(dealer: Dealer) {
         println("\nDealer draws ${dealer.cardsCount() - 1} more card due to having 16 or less.\n")
     }
 
+    fun showHowMuchBet(name: String) = println("Enter $name’s betting amount: ")
+
     fun askHit(participant: Participant) {
         println("\nWould ${participant.name} like to draw another card? (y for yes, n for no)")
     }
 
-    fun showEnterNames() {
-        println(Message.ENTER_PLAYERS_NAMES)
+    fun showEnterNames() = println(Message.ENTER_PLAYERS_NAMES)
+
+    fun showError(msg: String?) = println("Error: $msg")
+
+    fun showCards(
+        participant: Participant,
+        extraText: String = "",
+    ) {
+        val display =
+            participant.cards
+                .joinToString(", ") { it.printable() }
+        println("${participant.name}'s cards: " + display + extraText)
     }
 
-    fun showNewCard() {
-        println(Message.GENERATE_NEW_CARD)
-    }
-
-    fun showError(msg: String?) {
-        println("Error: $msg")
-    }
-
-    fun showGameResult(gameResult: GameResult) {
-        val playersResults = gameResult.playersResults
+    fun showGameResult(
+        gameResult: GameResult,
+        dealerEarning: DealerEarning,
+    ) {
         showCards(gameResult.dealer, showPoints(gameResult.dealer))
-        playersResults.forEach { (player, _) ->
+        showAllPayersCardsAndPoints(gameResult.participants.players)
+        showGameSummary(gameResult.playerResults, dealerEarning)
+    }
+
+    private fun showAllPayersCards(players: List<Player>) {
+        players.forEach { player ->
+            showCards(player)
+        }
+        println()
+    }
+
+    private fun showAllPayersCardsAndPoints(players: List<Player>) {
+        players.forEach { player ->
             showCards(player, showPoints(player))
         }
+        println()
+    }
 
-        println("\n${Message.FINAL_RESULTS_TITLE}")
+    private fun Card.printable(): String = "${rank.face}${suit.symbol()}"
 
-        val dealerWin = playersResults.filter { it.value == Outcome.LOSE }.size
-        val dealerLose = playersResults.filter { it.value == Outcome.WIN }.size
-        val dealerDraw = playersResults.size - dealerLose - dealerWin
-        val showDraw = if (dealerDraw > 0) ", $dealerDraw Draw" else ""
+    private fun Suit.symbol(): String =
+        when (this) {
+            Suit.HEART -> "♥"
+            Suit.DIAMOND -> "♦"
+            Suit.CLUB -> "♣"
+            Suit.SPADE -> "♠"
+        }
 
-        println("Dealer: $dealerWin Win $dealerLose Lose$showDraw")
-
-        playersResults.forEach { (player, outcome) ->
-            println("${player.name}: ${outcome.name}")
+    private fun showGameSummary(
+        playerResults: List<PlayerResult>,
+        dealerEarning: DealerEarning,
+    ) {
+        println(
+            "\n${Message.FINAL_RESULTS_TITLE}\n" +
+                "Dealer: ${dealerEarning.amount}",
+        )
+        playerResults.forEach {
+            println("${it.player.name}: ${it.finalAmount}")
         }
     }
 
@@ -66,7 +92,6 @@ object OutputView {
 
     object Message {
         const val ENTER_PLAYERS_NAMES = "Enter the names of the players (comma-separated):"
-        const val GENERATE_NEW_CARD = " Card deck is empty... prepare for a new card deck."
         const val FINAL_RESULTS_TITLE = "## Final Results"
         const val INVALID_INPUT = "Invalid Input"
     }

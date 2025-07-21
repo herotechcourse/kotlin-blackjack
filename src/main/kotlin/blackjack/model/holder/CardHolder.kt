@@ -9,27 +9,22 @@ abstract class CardHolder {
 
     fun cardsCount(): Int = cards.size
 
-    /** fallback when cannot draw */
-    abstract fun onDrawFailed(): Card
-
-    open fun receive(card: Card): Boolean {
-        currentCards.add(card)
+    open fun receive(cards: List<Card>): Boolean {
+        currentCards.addAll(cards)
         return true
     }
 
-    fun first(): Card = cards.first()
-
-    fun last(): Card = cards.last()
-
-    /**
-     * @throws IllegalStateException if try failed and should throw error
-     *
-     */
-    fun draw(): Card {
-        return if (currentCards.isNotEmpty()) {
-            currentCards.removeFirst()
-        } else {
+    fun draw(count: Int): List<Card> {
+        if (currentCards.isEmpty() || currentCards.size < count) {
             onDrawFailed()
         }
+        val cards = currentCards.take(count)
+        repeat(count) { currentCards.removeFirst() }
+        return cards
+    }
+
+    /** fallback when cannot draw */
+    fun onDrawFailed(): List<Card> {
+        throw IllegalStateException("EMPTY_BUT_TRY_TO_DRAW")
     }
 }

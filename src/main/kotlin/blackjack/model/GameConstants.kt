@@ -1,8 +1,9 @@
 package blackjack.model
 
 object GameConstants {
-    const val ABLE_TO_RECEIVE = 16
+    const val DEALER_MUST_HIT_LIMIT = 16
     const val BLACKJACK_SCORE = 21
     const val DEALER_FIRST_HIT_COUNT = 1
-    const val PLAYER_FIRST_HIT_COUNT = 2
+    const val FIRST_ROUND_HIT_COUNTS = 2
+    const val DEALER_NOT_BET_MONEY = 0
 }

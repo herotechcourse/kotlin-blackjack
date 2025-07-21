@@ -1,5 +1,7 @@
 package blackjack.view
 
+import blackjack.validator.Validator
+
 object InputView {
     fun readPlayersNames(): List<String> {
         return Ask.retryable(
@@ -10,21 +12,37 @@ object InputView {
 
     fun readUserAnswer(): Boolean {
         return Ask.retryable(
-            Ask::forCard,
+            Ask::nextCard,
             Parser::cardChoice,
         )
     }
 
-    internal object Ask {
+    fun readPlayerBet(name: String): Int {
+        return Ask.retryable(
+            { Ask.bet(name) },
+            Parser::bet,
+        )
+    }
+
+    fun readPlayersBet(names: List<String>): List<Int> {
+        return names.map { name -> readPlayerBet(name) }
+    }
+
+    private object Ask {
         fun playersName(): String {
             OutputView.showEnterNames()
             return readlnOrNull() ?: throw IllegalArgumentException(OutputView.Message.INVALID_INPUT)
         }
 
-        fun forCard(): String {
+        fun nextCard(): String {
             while (true) {
                 return readlnOrNull() ?: throw IllegalArgumentException(OutputView.Message.INVALID_INPUT)
             }
+        }
+
+        fun bet(name: String): String {
+            OutputView.showHowMuchBet(name)
+            return readlnOrNull() ?: throw IllegalArgumentException(OutputView.Message.INVALID_INPUT)
         }
 
         fun <T> retryable(
@@ -49,18 +67,21 @@ object InputView {
                     .map { it.trim() }
                     .filterNot { it.isBlank() }
 
-            if (names.isEmpty() || names.any { !it.all { char -> char.isLetterOrDigit() } }) {
-                throw IllegalArgumentException(OutputView.Message.INVALID_INPUT + ": $input")
-            }
-
+            names.forEach { Validator.name(it) }
             return names
+        }
+
+        fun bet(input: String): Int {
+            val amount = input.toInt()
+            Validator.amount(amount)
+            return amount
         }
 
         fun cardChoice(input: String): Boolean {
             return when (input) {
                 "y" -> true
                 "n" -> false
-                else -> throw IllegalArgumentException("${OutputView.Message.INVALID_INPUT}, try again.")
+                else -> throw IllegalArgumentException("${OutputView.Message.INVALID_INPUT}, $input: try again.")
             }
         }
     }

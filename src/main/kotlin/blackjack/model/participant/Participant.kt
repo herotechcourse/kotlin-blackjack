@@ -1,16 +1,19 @@
 package blackjack.model.participant
 
-import blackjack.model.GameConstants.BLACKJACK_SCORE
 import blackjack.model.card.Card
 import blackjack.model.card.Rank
 import blackjack.model.holder.Hand
 import blackjack.model.state.State
 
-abstract class Participant(val name: String) : Hand() {
+abstract class Participant(val name: String, val amount: Int) : Hand() {
     val score get() = getCurrentPoints()
 
-    abstract var currentState: State
-    val state get() = currentState
+    protected abstract var mutableState: State
+    abstract val state: State
+
+    abstract fun isBust(): Boolean
+
+    abstract fun isBlackjack(): Boolean
 
     private fun getCurrentPoints(): Int {
         return when (cards.isEmpty()) {
@@ -26,11 +29,11 @@ abstract class Participant(val name: String) : Hand() {
         return sum
     }
 
-    override fun receive(card: Card): Boolean {
-        if (currentState != State.HIT) return false
-        currentCards.add(card)
-        if (score == BLACKJACK_SCORE) {
-            currentState = State.STAY
+    override fun receive(cards: List<Card>): Boolean {
+        if (state != State.HIT) return false
+        for (card in cards) {
+            currentCards.add(card)
+            if (state != State.HIT) return false
         }
         return true
     }
