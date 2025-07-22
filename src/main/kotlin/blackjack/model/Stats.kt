@@ -9,6 +9,7 @@ class Stats(val players: List<Player>, val dealer: Dealer) {
         val playerScore = player.calculateHand()
         val dealerScore = dealer.calculateHand()
         when {
+            player.isBlackjack() -> player.result = Result.BLACKJACK
             player.isBust() -> player.result = Result.LOSE
             dealer.isBust() -> player.result = Result.WIN
             playerScore > dealerScore -> player.result = Result.WIN
