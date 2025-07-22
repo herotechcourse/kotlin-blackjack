@@ -126,4 +126,12 @@ class PlayerTest {
         player.drawCard(Fixture.DIAMONDS_JACK)
         assertEquals(false, player.isBust())
     }
+
+    @Test
+    fun `placeBets() - player place bet`() {
+        val player = Player("player")
+
+        player.placeBets(100)
+        assertEquals(100, player.bet)
+    }
 }

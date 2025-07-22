@@ -13,4 +13,10 @@ data class Player(override val name: String, override var hand: Hand = Hand()) :
     override fun calculateHand(): Int {
         return hand.calculateHand()
     }
+
+    fun placeBets(bettingPrompt: () -> Int): Player {
+        val amount = bettingPrompt()
+        bet += amount
+        return this
+    }
 }

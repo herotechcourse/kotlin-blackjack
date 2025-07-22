@@ -28,12 +28,13 @@ object GameMaster {
     }
 
     private fun initPlayers(): List<Player> {
-        val players = mutableListOf<Player>()
-        val names = InputView.retryable { InputView.readPlayerNames() }
-        names.forEach { name ->
-            val player = Player(name, Hand().initCards())
-            players.add(player)
-        }
+        val players = InputView.retryable { InputView.readPlayerNames() }
+            .map { Player(it, Hand().initCards()) }
+            .map { player ->
+                player.placeBets {
+                    InputView.retryable { InputView.readPlayerBettingAmount(player.name) }
+                }
+            }
         return players.toList()
     }
 
