@@ -33,7 +33,7 @@ Rank
 
 Result
 
-- [ ] has enum for `LOSE`, `WIN`, `TIE` to represent the results of `Playable`
+- [x] has enum for `LOSE`, `WIN`, `TIE` to represent the results of `Playable`
 
 Playable (interface)
 
@@ -59,10 +59,8 @@ Dealer: Playable
 Stats
 
 - [x] has `players: List<Player>`, `dealer: Dealer` having instance of players and dealer
-- [x] has `playerBoard: Map<Player, Int>` having key as player and value as result of player
 - [x] has `dealerStats: Map<String, Int>` having key as "win", "lose", "tie" and value as count
-- [x] has method `initPlayerBoard()` to initiate `playerBoard` based on the result of each player against dealer
-- [x] has method `updateDealerStats()` to update `dealerStats` calculation based on `playerBoard`
+- [ ] has method `payOutPotToEarnings()` to calculate and pay out the earnings for `Playable`s
 
 ### View
 
@@ -71,7 +69,7 @@ InputView
 - [x] "Enter the names of the players (comma-separated):"
 - [x] "Would {name} like to draw another card? (y for yes, n for no)"
 - [x] add validation for duplicated names in `readPlayerNames()`
-- [ ] "Enter {name}’s betting amount:" - to read user betting amount
+- [x] "Enter {name}’s betting amount:" - to read user betting amount
 
 OutputView
 
@@ -85,10 +83,10 @@ OutputView
 - [x] "Dealer draws one more card due to having 16 or less."
   - [x] display the message everytime when dealer get new card
 - [x] "{name}'s cards: {hand} – Total: {score}"
-- [x] "## Final Results"
-  - "Dealer: 1 Win 1 Lose"
-  - "{player.name}: Win"
-  - "{player.name}: Lose"
+- [ ] "## Final Earnings"
+  - "Dealer: 10000"
+  - "{player.name}: 10000"
+  - "{player.name}: -20000"
 
 ### Controller
 
