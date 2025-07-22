@@ -33,17 +33,18 @@ Rank
 
 Result
 
-- [x] has enum for `LOSE`, `WIN`, `TIE` to represent the results of `Playable`
+- [x] has enum for `LOSE`, `WIN`, `TIE`, and `BLACKJACK` to represent the results of `Playable`
 
 Playable (interface)
 
 - [x] has value `name` in string
 - [x] has list of card called `hand`
-- [ ] has value `bet` in integer
+- [x] has value `bet` in integer
 - [x] has method `requestCard()` to request a card by condition then, ask the card manager with boolean
 - [x] has method `drawCard()` to take card given by a card manager
 - [x] has method `calculateHand()` to calculate score of hand
 - [x] has method `isBust()` to figure out the player of the dealer is bust or not
+- [x] has method `isBlackjack()` to figure out the `Playable` is blackjack or not
 
 Player: Playable
 
