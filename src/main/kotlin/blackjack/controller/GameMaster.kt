@@ -16,8 +16,8 @@ object GameMaster {
         askPlayersToHit(players)
         drawDealerCards(dealer)
         OutputView.displayFinalState(players, dealer)
-        val winStatistics = calculateStatistics(players, dealer)
-        OutputView.displayFinalResults(winStatistics)
+        val winStatistics = Stats(players, dealer)
+        OutputView.displayEarnings(winStatistics)
     }
 
     private fun initPlayers(): List<Player> {
@@ -30,27 +30,22 @@ object GameMaster {
     }
 
     private fun askPlayersToHit(players: List<Player>) {
-        val deck = PlayingCard.deck
         players.forEach { player ->
-            askPlayerHit(player) { deck.giveCard() }
+            askPlayerHit(player)
         }
     }
 
-    private fun askPlayerHit(
-        player: Player,
-        receiveCard: () -> PlayingCard,
-    ) {
+    private fun askPlayerHit(player: Player) {
         var isFirst = true
 
         while (!player.isBust()) {
-            isFirst = drawOrNot(player, receiveCard, isFirst)
+            isFirst = drawOrNot(player, isFirst)
             if (isFirst) break
         }
     }
 
     private fun drawOrNot(
         player: Player,
-        receiveCard: () -> PlayingCard,
         isFirst: Boolean,
     ): Boolean {
         val wantsCard =
@@ -63,15 +58,13 @@ object GameMaster {
             return true
         }
 
-        drawAndDisplayAndReturnFalse(player, receiveCard)
+        drawAndDisplayAndReturnFalse(player)
         return false
     }
 
-    private fun drawAndDisplayAndReturnFalse(
-        player: Player,
-        receiveCard: () -> PlayingCard,
-    ): Boolean {
-        player.drawCard(receiveCard())
+    private fun drawAndDisplayAndReturnFalse(player: Player): Boolean {
+        val deck = PlayingCard.deck
+        player.drawCard(deck.giveCard())
         OutputView.displayCurrentHand(player)
         return false
     }
@@ -82,14 +75,5 @@ object GameMaster {
             dealer.drawCard(deck.giveCard())
             OutputView.displayDealerDrawsCard()
         }
-    }
-
-    private fun calculateStatistics(
-        players: List<Player>,
-        dealer: Dealer,
-    ): Stats {
-        val winStatistics = Stats(players, dealer)
-        winStatistics.updateDealerStats()
-        return winStatistics
     }
 }

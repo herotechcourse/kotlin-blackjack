@@ -83,7 +83,7 @@ OutputView
 - [x] "Dealer draws one more card due to having 16 or less."
   - [x] display the message everytime when dealer get new card
 - [x] "{name}'s cards: {hand} – Total: {score}"
-- [ ] "## Final Earnings"
+- [x] "## Final Earnings"
   - "Dealer: 10000"
   - "{player.name}: 10000"
   - "{player.name}: -20000"
