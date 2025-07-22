@@ -1,7 +1,7 @@
 package blackjack.model
 
 data class Dealer(override val name: String = "Dealer") : Playable {
-    override var hand = Hand().initCards()
+    override var hand = Hand()
     override var result: Result = Result.NONE
     override var bet = Playable.INITIAL_BETTING_AMOUNT
 
@@ -13,6 +13,11 @@ data class Dealer(override val name: String = "Dealer") : Playable {
 
     override fun calculateHand(): Int {
         return hand.calculateHand()
+    }
+
+    fun initHand(): Dealer {
+        hand = Hand().initCards()
+        return this
     }
 
     fun shouldDrawCardOrNot(): Boolean {

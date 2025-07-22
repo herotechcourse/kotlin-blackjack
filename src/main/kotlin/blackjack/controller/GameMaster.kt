@@ -10,7 +10,7 @@ import blackjack.view.OutputView
 object GameMaster {
     fun run() {
         PlayingCard.deck.shuffle()
-        val dealer = Dealer()
+        val dealer = Dealer().initHand()
         val players = initPlayers()
         OutputView.displayInitialState(players, dealer)
         askPlayersToHit(players)
@@ -25,7 +25,7 @@ object GameMaster {
         val bets = names.map { InputView.retryable { InputView.readPlayerBettingAmount(it) } }
         val players =
             names.zip(bets)
-                .map { (name, amount) -> Player(name).placeBets { amount } }
+                .map { (name, amount) -> Player(name).placeBets(amount).initHand() }
         return players.toList()
     }
 
