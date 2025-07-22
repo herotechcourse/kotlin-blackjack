@@ -6,20 +6,20 @@ import org.junit.jupiter.api.Test
 
 class StatsTest {
     @Test
-    fun `updateDealerStats() - method update dealer's stats`() {
+    fun `payOutPotToEarnings() - method calculate pay-out for players and dealer`() {
         // player1 -> bust
-        val player1 = Player("player1")
+        val player1 = Player("player1").placeBets(100)
         player1.drawCard(Fixture.DIAMONDS_TEN)
         player1.drawCard(Fixture.DIAMONDS_JACK)
         player1.drawCard(Fixture.DIAMONDS_QUEEN)
 
         // player2 -> win
-        val player2 = Player("player2")
+        val player2 = Player("player2").placeBets(200)
         player2.drawCard(Fixture.DIAMONDS_TEN)
         player2.drawCard(Fixture.DIAMONDS_ACE)
 
         // player3 -> tie
-        val player3 = Player("player3")
+        val player3 = Player("player3").placeBets(300)
         player3.drawCard(Fixture.DIAMONDS_NINE)
         player3.drawCard(Fixture.DIAMONDS_JACK)
 
@@ -28,10 +28,10 @@ class StatsTest {
         dealer.drawCard(Fixture.DIAMONDS_JACK)
 
         val stats = Stats(listOf(player1, player2, player3), dealer)
-        stats.updateDealerStats()
-        val dealerStats = stats.dealerStats
-        assertEquals(1, dealerStats[Result.WIN])
-        assertEquals(1, dealerStats[Result.LOSE])
-        assertEquals(1, dealerStats[Result.TIE])
+        val earningMap = stats.payOutPotToEarnings()
+        assertEquals(-100, earningMap[player1])
+        assertEquals(200, earningMap[player2])
+        assertEquals(0, earningMap[player3])
+        assertEquals(-100, earningMap[dealer])
     }
 }

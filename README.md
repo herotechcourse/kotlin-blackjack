@@ -60,7 +60,7 @@ Stats
 
 - [x] has `players: List<Player>`, `dealer: Dealer` having instance of players and dealer
 - [x] has `dealerStats: Map<String, Int>` having key as "win", "lose", "tie" and value as count
-- [ ] has method `payOutPotToEarnings()` to calculate and pay out the earnings for `Playable`s
+- [x] has method `payOutPotToEarnings()` to calculate and pay out the earnings for `Playable`s
 
 ### View
 
