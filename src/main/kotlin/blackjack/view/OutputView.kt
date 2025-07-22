@@ -5,7 +5,6 @@ import blackjack.model.Dealer
 import blackjack.model.Player
 
 object OutputView {
-
     fun displayDealing(players: List<String>) {
         println("\nDealing two cards to dealer, ${players.joinToString(", ")}.")
     }
@@ -38,15 +37,34 @@ object OutputView {
         println("\n## Final Results")
     }
 
-    fun displayDealerResult(wins: Int, losses: Int) {
+    fun displayBlackjackMessage(playerName: String) {
+        println("$playerName has Blackjack!")
+    }
+
+    fun displayDealerResult(
+        wins: Int,
+        losses: Int,
+    ) {
         println("Dealer: $wins Win $losses Lose")
     }
 
-    fun displayPlayerResult(name: String, result: String) {
+    fun displayPlayerResult(
+        name: String,
+        result: String,
+    ) {
         println("$name: $result")
     }
 
     fun displayLineBreak() {
         println()
+    }
+
+    fun displayFinalEarnings(
+        players: List<Player>,
+        dealerEarnings: Int,
+    ) {
+        println("\n## Final Earnings")
+        println("Dealer: $dealerEarnings")
+        players.forEach { println("${it.name}: ${it.earnings}") }
     }
 }

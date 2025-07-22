@@ -1,10 +1,9 @@
 package blackjack.model
 
-import blackjack.view.SuitView
 import blackjack.view.RankView
+import blackjack.view.SuitView
 
 data class Card(val suit: Suit, val rank: Rank) {
-
     fun getScore(): Int = rank.value
 
     fun isAce(): Boolean = rank == Rank.ACE
@@ -17,7 +16,10 @@ data class Card(val suit: Suit, val rank: Rank) {
 }
 
 enum class Suit {
-    HEART, DIAMOND, CLUB, SPADE
+    HEART,
+    DIAMOND,
+    CLUB,
+    SPADE,
 }
 
 enum class Rank(val value: Int) {
@@ -33,6 +35,5 @@ enum class Rank(val value: Int) {
     JACK(10),
     QUEEN(10),
     KING(10),
-    ACE(11);
+    ACE(11),
 }
-

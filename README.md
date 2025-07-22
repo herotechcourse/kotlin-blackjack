@@ -26,3 +26,13 @@ Includes card dealing, drawing logic, and win/loss/draw result handling.
 - [x] Handle dealer turn
 - [x] Display final hands and scores
 - [x] Determine and print winners using `GameLogic.getGameResult()`
+
+### Betting System
+- [x] Prompt each player to enter a betting amount at the start of the game
+- [x] Store and associate each player's bet with their name
+- [x] Calculate 1.5x payout for Blackjack (21 with initial two cards)
+- [x] Handle full loss of bet if player busts
+- [x] Handle dealer bust: remaining players win their bets
+- [x] Compare scores between dealer and players to calculate win/loss
+- [x] Display final earnings for each player and the dealer
+

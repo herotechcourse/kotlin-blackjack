@@ -1,7 +1,6 @@
 package blackjack.model
 
 class Deck {
-
     private val cards: MutableList<Card> = mutableListOf()
 
     init {
@@ -12,6 +11,7 @@ class Deck {
         }
         cards.shuffle()
     }
+
     fun drawCard(): Card {
         if (cards.isEmpty()) throw IllegalStateException("Deck is empty")
         return cards.removeFirst()
