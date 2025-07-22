@@ -1,7 +1,6 @@
 package blackjack.controller
 
 import blackjack.model.Dealer
-import blackjack.model.Hand
 import blackjack.model.Player
 import blackjack.model.PlayingCard
 import blackjack.model.Stats
@@ -11,7 +10,7 @@ import blackjack.view.OutputView
 object GameMaster {
     fun run() {
         PlayingCard.deck.shuffle()
-        val dealer = initDealer()
+        val dealer = Dealer()
         val players = initPlayers()
         OutputView.displayInitialState(players, dealer)
         askPlayersToHit(players)
@@ -21,20 +20,12 @@ object GameMaster {
         OutputView.displayFinalResults(winStatistics)
     }
 
-    private fun initDealer(): Dealer {
-        val dealer = Dealer()
-        dealer.hand.initCards()
-        return dealer
-    }
-
     private fun initPlayers(): List<Player> {
-        val players = InputView.retryable { InputView.readPlayerNames() }
-            .map { Player(it, Hand().initCards()) }
-            .map { player ->
-                player.placeBets {
-                    InputView.retryable { InputView.readPlayerBettingAmount(player.name) }
-                }
-            }
+        val names = InputView.retryable { InputView.readPlayerNames() }
+        val bets = names.map { InputView.retryable { InputView.readPlayerBettingAmount(it) } }
+        val players =
+            names.zip(bets)
+                .map { (name, amount) -> Player(name).placeBets { amount } }
         return players.toList()
     }
 

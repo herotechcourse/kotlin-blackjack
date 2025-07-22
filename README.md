@@ -49,8 +49,7 @@ Playable (interface)
 Player: Playable
 
 - [x] follows interface `Playable`
-- [ ] has method `placeBets()` to place `bet`
-- [ ] has method `resetBetting()` to reset `bet` to initial value
+- [x] has method `placeBets()` to place `bet`
 
 Dealer: Playable
 

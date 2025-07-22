@@ -1,6 +1,7 @@
 package blackjack.model
 
-data class Player(override val name: String, override var hand: Hand = Hand()) : Playable {
+data class Player(override val name: String) : Playable {
+    override var hand = Hand().initCards()
     override var result = Result.NONE
     override var bet = Playable.INITIAL_BETTING_AMOUNT
 
