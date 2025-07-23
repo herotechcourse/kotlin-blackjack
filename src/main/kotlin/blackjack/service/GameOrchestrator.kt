@@ -44,11 +44,12 @@ class GameOrchestrator(private val deck: Deck, private val inputProcessor: Input
     }
 
     fun runDealerTurn(dealer: Player) {
-        if (dealer.score <= DEALER_THRESHOLD) {
-            OutputView.displayDealersTurn()
-            while (dealer.score <= DEALER_THRESHOLD) {
-                dealer.addCard(deck.drawCard())
-            }
+        if (dealer.score > DEALER_THRESHOLD) {
+            return
+        }
+        OutputView.displayDealersTurn()
+        while (dealer.score <= DEALER_THRESHOLD) {
+            dealer.addCard(deck.drawCard())
         }
     }
 }
