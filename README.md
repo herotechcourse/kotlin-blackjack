@@ -1,10 +1,10 @@
 # Kotlin Blackjack
 
-## Features : Step2 (Updates from Step1)
+## Feature-list: Step2 (Updates from Step1)
 
 ### Enhanced Blackjack Rules
 - [x] Update `Player.isBlackJack()` to check exactly 2 cards with total score 21
-- [] Player loses entire bet when busting (total > 21)
+- [x] Player loses the entire bet when busting (total > 21)
 
 ### Betting System Infrastructure
 - [x] Add `betAmount` property to `Player` class
@@ -31,7 +31,7 @@
 - [x] Update `OutputView` to display earnings instead of win/lose
   - [x] Show dealer and player earnings amounts
 
-## Features : Step1 
+## Features: Step1 
 ### Data class `Card`
 - [x] has `Rank`
 - [x] has `Suit`
@@ -45,8 +45,8 @@
 - [x] includes names: "SPADE", "HEART", "CLUB", "DIAMOND"
 
 ### class `PlayerCard`
-- [x] contains fun `addCard` : updates total score, add element `card`
-- [x] Considers Ace as the value of 1 if the total score is going above 21
+- [x] contain fun `addCard` : updates total score, add element `card`
+- [x] Consider Ace as the value of 1 if the total score is going above 21
 
 ### value class `GamblerInfo`
 - [x] contains value `name`
