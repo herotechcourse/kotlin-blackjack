@@ -23,18 +23,23 @@ class GameOrchestrator(private val deck: Deck, private val inputProcessor: Input
         var wantsToHit = false
         while (player.score <= BLACKJACK_SCORE) {
             wantsToHit = inputProcessor.processHitOrStay(player.name)
-            when {
-                !wantsToHit -> break
-                else -> {
-                    player.addCard(deck.drawCard())
-                    OutputView.displayCardsOfPlayers(player)
-                }
-            }
+            if (!wantsToHit) break
+            processPlayerHit(player)
         }
-        when {
-            !wantsToHit && player.cards.size == INITIAL_CARDS_COUNT -> {
-                OutputView.displayCardsOfPlayers(player)
-            }
+        displayCardsIfNeeded(player, wantsToHit)
+    }
+
+    private fun processPlayerHit(player: Player) {
+        player.addCard(deck.drawCard())
+        OutputView.displayCardsOfPlayers(player)
+    }
+
+    private fun displayCardsIfNeeded(
+        player: Player,
+        wantsToHit: Boolean,
+    ) {
+        if (!wantsToHit && player.cards.size == INITIAL_CARDS_COUNT) {
+            OutputView.displayCardsOfPlayers(player)
         }
     }
 
