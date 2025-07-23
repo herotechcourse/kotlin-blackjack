@@ -85,12 +85,15 @@
 ### class `Application`
 - [x] fun main() to and use `run` from controller
 
-## Updates : Step1
+## Updates: Step1
 - [x] remove abundant `it` from the line `.map { it -> ...}` in `Controller.kt`
   - [x] of `fun run()`
   - [x] of `private fun playerTakesTurn()`
 
-### Updates : Step2
+### Updates: Step2
 - [x] implement abstract class and inheritance for players and dealer
 - [x] refactor `Controller`
   - [x] extract some methods in `Controller` for better readability
+- [] improve `data class Status` by introducing 'State Pattern'
+- [] add unit tests for `GameOrchestrator`
+- [] add more `ParameterizedTest` in `GamblerInforTest`
