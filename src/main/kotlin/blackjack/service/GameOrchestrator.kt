@@ -1,6 +1,6 @@
 package blackjack.service
 
-import blackjack.controller.Controller.Companion.BLACKJACK_SCORE
+import blackjack.Constants.BLACKJACK_SCORE
 import blackjack.model.Deck
 import blackjack.model.Player
 import blackjack.view.OutputView

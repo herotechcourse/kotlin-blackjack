@@ -1,6 +1,6 @@
 package blackjack.view
 
-import blackjack.controller.Controller
+import blackjack.Constants.DEALER
 import blackjack.model.Player
 
 object OutputView {
@@ -29,8 +29,16 @@ object OutputView {
         println("\nDealer draws one more card due to having 16 or less.")
     }
 
-    fun displayCardsOfPlayersWithScore(player: Player) {
-        if (player.name == Controller.DEALER) {
+    fun displayCards(
+        dealer: Player,
+        players: List<Player>,
+    ) {
+        displayCardsOfPlayersWithScore(dealer)
+        players.forEach(OutputView::displayCardsOfPlayersWithScore)
+    }
+
+    private fun displayCardsOfPlayersWithScore(player: Player) {
+        if (player.name == DEALER) {
             println()
         }
         val printableString =

@@ -1,6 +1,6 @@
 package blackjack.model
 
-import blackjack.controller.Controller.Companion.BLACKJACK_SCORE
+import blackjack.Constants.BLACKJACK_SCORE
 import blackjack.view.ErrorPrompt.INPUT_INVALID_INTEGER
 import blackjack.view.OutputPrompt.INVALID_NAME_EMPTY
 
