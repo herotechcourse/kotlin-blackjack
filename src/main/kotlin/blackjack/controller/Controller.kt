@@ -18,8 +18,7 @@ class Controller {
             val players = createPlayers()
             val dealer = createDealer()
             setup(players)
-            roundOne(dealer, players)
-            roundTwo(dealer, players)
+            executeGameRounds(dealer, players)
         } catch (err: IllegalArgumentException) {
             OutputView.displayErrorMessages(err.message)
         }
@@ -39,7 +38,19 @@ class Controller {
         OutputView.displayNamesOfPlayers(players)
     }
 
-    private fun roundOne(
+    private fun executeGameRounds(
+        dealer: Player,
+        players: List<Player>,
+    ) {
+        val gameRounds =
+            listOf(
+                ::initialDealRound,
+                ::playerActionsRound,
+            )
+        gameRounds.forEach { round -> round(dealer, players) }
+    }
+
+    private fun initialDealRound(
         dealer: Player,
         players: List<Player>,
     ) {
@@ -48,7 +59,7 @@ class Controller {
         players.forEach(OutputView::displayCardsOfPlayers)
     }
 
-    private fun roundTwo(
+    private fun playerActionsRound(
         dealer: Player,
         players: List<Player>,
     ) {
