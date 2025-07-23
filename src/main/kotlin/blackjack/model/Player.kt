@@ -48,12 +48,12 @@ class Player(
 
     fun updateStatus() {
         if (score == BLACKJACK_SCORE && _cards.size == 2) {
-            status.apply { 
+            status.apply {
                 isBlackjack = true
                 isNeitherBlackjackNorBusted = false
             }
         } else if (score > BLACKJACK_SCORE) {
-            status.apply { 
+            status.apply {
                 isBusted = true
                 isNeitherBlackjackNorBusted = false
             }
