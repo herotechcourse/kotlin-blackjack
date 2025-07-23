@@ -3,6 +3,7 @@ package blackjack
 import blackjack.model.Card
 import blackjack.model.FinalResult
 import blackjack.model.Player
+import blackjack.model.Players
 import blackjack.model.Rank
 import blackjack.model.Suit
 import org.assertj.core.api.Assertions.assertThat
@@ -26,7 +27,7 @@ class FinalResultTest {
         p1.addCard(listOf(Card(Rank.TEN, Suit.SPADE), Card(Rank.NINE, Suit.HEART)))
         p2.addCard(listOf(Card(Rank.ACE, Suit.DIAMOND), Card(Rank.KING, Suit.HEART)))
 
-        val finalResult = FinalResult(dealer, listOf(p1, p2))
+        val finalResult = FinalResult(dealer, Players(listOf(p1, p2)))
         finalResult.updateEarnings()
 
         assertThat(p1.earning.toInt()).isEqualTo(100) // Normal win
@@ -45,7 +46,7 @@ class FinalResultTest {
         p1.addCard(listOf(Card(Rank.TEN, Suit.DIAMOND), Card(Rank.NINE, Suit.SPADE)))
         p2.addCard(listOf(Card(Rank.TEN, Suit.HEART), Card(Rank.SEVEN, Suit.CLUB)))
 
-        val finalResult = FinalResult(dealer, listOf(p1, p2))
+        val finalResult = FinalResult(dealer, Players(listOf(p1, p2)))
         finalResult.updateEarnings()
 
         assertThat(p1.earning.toInt()).isEqualTo(100)
@@ -66,7 +67,7 @@ class FinalResultTest {
         p2.addCard(listOf(Card(Rank.TEN, Suit.HEART), Card(Rank.SEVEN, Suit.CLUB)))
         p3.addCard(listOf(Card(Rank.KING, Suit.SPADE), Card(Rank.QUEEN, Suit.HEART)))
 
-        val finalResult = FinalResult(dealer, listOf(p1, p2, p3))
+        val finalResult = FinalResult(dealer, Players(listOf(p1, p2, p3)))
         finalResult.updateEarnings()
 
         assertThat(p1.earning.toInt()).isEqualTo(0) // Tie

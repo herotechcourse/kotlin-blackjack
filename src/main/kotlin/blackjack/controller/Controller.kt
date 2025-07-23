@@ -4,6 +4,7 @@ import blackjack.Constants.DEALER
 import blackjack.model.Deck
 import blackjack.model.FinalResult
 import blackjack.model.Player
+import blackjack.model.Players
 import blackjack.service.GameOrchestrator
 import blackjack.service.InputProcessor
 import blackjack.view.OutputView
@@ -54,7 +55,7 @@ class Controller {
         players.forEach(gameOrchestrator::runPlayerTurn)
         gameOrchestrator.runDealerTurn(dealer)
         OutputView.displayCards(dealer, players)
-        FinalResult(dealer, players).updateEarnings()
+        FinalResult(dealer, Players(players)).updateEarnings()
         OutputView.displayFinalResult(dealer, players)
     }
 }

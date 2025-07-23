@@ -1,6 +1,6 @@
 package blackjack.model
 
-class FinalResult(val dealer: Player, private val players: List<Player>) {
+class FinalResult(val dealer: Player, private val players: Players) {
     companion object {
         const val INITIAL_EARNING = 0.0
         const val LOSS_RATE = -1.0
@@ -11,7 +11,7 @@ class FinalResult(val dealer: Player, private val players: List<Player>) {
 
     fun updateEarnings() {
         var sumOfPlayerEarning = INITIAL_EARNING
-        for (player in players) {
+        players.forEach { player ->
             val newEarning = player.betAmount * getPayoutRate(player, this.dealer)
             player.updateEarning(newEarning)
             sumOfPlayerEarning += newEarning
