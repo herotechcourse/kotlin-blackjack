@@ -9,7 +9,7 @@ class FinalResult(val dealer: Player, private val players: List<Player>) {
         const val BLACKJACK_RATE = 1.5
     }
 
-    internal fun updateEarnings() {
+    fun updateEarnings() {
         var sumOfPlayerEarning = INITIAL_EARNING
         for (player in players) {
             val newEarning = player.betAmount * getPayoutRate(player, this.dealer)
