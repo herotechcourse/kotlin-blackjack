@@ -1,27 +1,31 @@
 package blackjack
 
 import blackjack.model.GamblerInfo
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 
 class GamblerInfoTest {
-    @Test
-    fun `should throw exception - empty input`() {
+    @ParameterizedTest
+    @MethodSource("invalidNames")
+    fun `should throw exception - invalid names`(name: String) {
         assertThrows<IllegalArgumentException> {
-            GamblerInfo("")
+            GamblerInfo(name)
         }
     }
 
-    @Test
-    fun `should throw exception - blank input`() {
-        assertThrows<IllegalArgumentException> {
-            GamblerInfo("    ")
-        }
+    @ParameterizedTest
+    @MethodSource("validNames")
+    fun `should not throw exception - valid names`(name: String) {
+        assertDoesNotThrow { GamblerInfo(name) }
     }
 
-    @Test
-    fun `should accept - normal name`() {
-        assertEquals(GamblerInfo("Name").name, "Name")
+    companion object {
+        @JvmStatic
+        fun invalidNames() = listOf("", "     ")
+
+        @JvmStatic
+        fun validNames() = listOf("Jin", "Jenny", "Jay", "J", "jjj", "jjjjjjjjjjjjjjjj")
     }
 }
