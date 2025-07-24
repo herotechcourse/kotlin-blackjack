@@ -1,8 +1,7 @@
 package blackjack.model
 
-// TODO: 'State Pattern' -> sealed class? abstract class? what to use
-data class Status(
-    var isBlackjack: Boolean = false,
-    var isBusted: Boolean = false,
-    var isNeitherBlackjackNorBusted: Boolean = true,
-)
+sealed class Status {
+    object Normal : Status()
+    object Blackjack : Status()
+    object Busted : Status()
+}

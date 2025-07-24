@@ -4,6 +4,7 @@ import blackjack.model.Card
 import blackjack.model.Deck
 import blackjack.model.Player
 import blackjack.model.Rank
+import blackjack.model.Status
 import blackjack.model.Suit
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -99,8 +100,11 @@ class PlayerTest {
         player.addCard(cards)
 
         player.updateStatus()
-        assertThat(player.status.isBlackjack).isEqualTo(expectedBlackjack)
-        assertThat(player.status.isBusted).isEqualTo(expectedBust)
+        when {
+            expectedBlackjack -> assertThat(player.status).isEqualTo(Status.Blackjack)
+            expectedBust -> assertThat(player.status).isEqualTo(Status.Busted)
+            else -> assertThat(player.status).isEqualTo(Status.Normal)
+        }
     }
 
     @Test
@@ -139,8 +143,7 @@ class PlayerTest {
         val player = Player("TestPlayer")
         assertThat(player.cards).isEmpty()
         assertThat(player.score).isEqualTo(0)
-        assertThat(player.status.isBlackjack).isFalse()
-        assertThat(player.status.isBusted).isFalse()
+        assertThat(player.status).isEqualTo(Status.Normal)
     }
 
     companion object {

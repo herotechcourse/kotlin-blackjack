@@ -8,7 +8,7 @@ class Player(
     val name: String,
     var betAmount: Int = 0,
     var earning: Double = 0.0,
-    var status: Status = Status(),
+    var status: Status = Status.Normal,
 ) {
     init {
         require(name.isNotBlank()) { INVALID_NAME_EMPTY }
@@ -47,17 +47,12 @@ class Player(
     }
 
     fun updateStatus() {
-        if (score == BLACKJACK_SCORE && _cards.size == 2) {
-            status.apply {
-                isBlackjack = true
-                isNeitherBlackjackNorBusted = false
+        status =
+            when {
+                score == BLACKJACK_SCORE && _cards.size == 2 -> Status.Blackjack
+                score > BLACKJACK_SCORE -> Status.Busted
+                else -> Status.Normal
             }
-        } else if (score > BLACKJACK_SCORE) {
-            status.apply {
-                isBusted = true
-                isNeitherBlackjackNorBusted = false
-            }
-        }
     }
 
     companion object {

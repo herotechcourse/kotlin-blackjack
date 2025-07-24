@@ -26,11 +26,11 @@ class FinalResult(val dealer: Player, private val players: Players) {
         player.updateStatus()
         dealer.updateStatus()
         return when {
-            player.status.isBusted -> LOSS_RATE
-            dealer.status.isBlackjack && player.status.isBlackjack -> TIE_RATE
-            dealer.status.isBlackjack && !player.status.isBlackjack -> LOSS_RATE
-            player.status.isBlackjack && !dealer.status.isBlackjack -> BLACKJACK_RATE
-            player.status.isNeitherBlackjackNorBusted && dealer.status.isNeitherBlackjackNorBusted
+            player.status is Status.Busted -> LOSS_RATE
+            dealer.status is Status.Blackjack && player.status is Status.Blackjack -> TIE_RATE
+            dealer.status is Status.Blackjack && player.status !is Status.Blackjack -> LOSS_RATE
+            player.status is Status.Blackjack && dealer.status !is Status.Blackjack -> BLACKJACK_RATE
+            player.status is Status.Normal && dealer.status is Status.Normal
             -> getRateWithBenchMarkScore(player, dealer)
             else -> WIN_RATE
         }
