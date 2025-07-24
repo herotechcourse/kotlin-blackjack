@@ -1,36 +1,5 @@
 # Kotlin Blackjack
 
-## Feature-list: Step2 (Updates from Step1)
-
-### Enhanced Blackjack Rules
-- [x] Update `Player.isBlackJack()` to check exactly 2 cards with total score 21
-- [x] Player loses the entire bet when busting (total > 21)
-
-### Betting System Infrastructure
-- [x] Add `betAmount` property to `Player` class
-- [x] Update `InputView` to get betting amounts from users
-  - [x] Validate: not empty, greater than 0, numeric input
-  - [x] Add `getBetAmount(playerName: String): Int` method
-- [x] Update `Controller` to handle betting phase after player creation
-  - [x] Add `getBetAmounts()` method to collect bets from all players
-  - [x] Call betting phase in main game flow
-
-### Payout System
-- [x] Update `FinalResult` class for earnings calculations 
-  - [] Method to calculate individual player earnings
-    - [x] Blackjack winners: when dealer doesn't have Blackjack (1.5x bet)
-    - [x] Normal winners: player/dealer both has Blackjack (1x bet)
-    - [x] Losses (-1x bet)
-    - [x] Ties: player neither wins nor loses (0x bet: push)
-- [x] Calculate dealer earnings (negative sum of all player earnings)
-
-### Update Game Results
-- [x] Replace `FinalResult` class logic
-  - [x] Remove `win`, `draw`, and `lose` lists
-  - [x] Add earnings calculation using `Payout` class
-- [x] Update `OutputView` to display earnings instead of win/lose
-  - [x] Show dealer and player earnings amounts
-
 ## Features: Step1 
 ### Data class `Card`
 - [x] has `Rank`
@@ -90,10 +59,56 @@
   - [x] of `fun run()`
   - [x] of `private fun playerTakesTurn()`
 
-### Updates: Step2
+## Feature-list: Step2 (Updates from Step1)
+
+### Enhanced Blackjack Rules
+- [x] Update `Player.isBlackJack()` to check exactly 2 cards with total score 21
+- [x] Player loses the entire bet when busting (total > 21)
+
+### Betting System Infrastructure
+- [x] Add `betAmount` property to `Player` class
+- [x] Update `InputView` to get betting amounts from users
+  - [x] Validate: not empty, greater than 0, numeric input
+  - [x] Add `getBetAmount(playerName: String): Int` method
+- [x] Update `Controller` to handle betting phase after player creation
+  - [x] Add `getBetAmounts()` method to collect bets from all players
+  - [x] Call betting phase in main game flow
+
+### Payout System
+- [x] Update `FinalResult` class for earnings calculations 
+  - [] Method to calculate individual player earnings
+    - [x] Blackjack winners: when dealer doesn't have Blackjack (1.5x bet)
+    - [x] Normal winners: player/dealer both has Blackjack (1x bet)
+    - [x] Losses (-1x bet)
+    - [x] Ties: player neither wins nor loses (0x bet: push)
+- [x] Calculate dealer earnings (negative sum of all player earnings)
+
+### Update Game Results
+- [x] Replace `FinalResult` class logic
+  - [x] Remove `win`, `draw`, and `lose` lists
+  - [x] Add earnings calculation using `Payout` class
+- [x] Update `OutputView` to display earnings instead of win/lose
+  - [x] Show dealer and player earnings amounts
+
+### Updates: from Code Review
 - [x] implement abstract class and inheritance for players and dealer
 - [x] refactor `Controller`
   - [x] extract some methods in `Controller` for better readability
+- [x] add more `ParameterizedTest` in `GamblerInforTest`
+
+### Implement Next Time
 - [] improve `data class Status` by introducing 'State Pattern'
-- [] add unit tests for `GameOrchestrator`
-- [] add more `ParameterizedTest` in `GamblerInforTest`
+```aiignore
+interface State {
+    val hand: Hand
+    fun draw(card: PlayingCard): State
+    fun stay(): State
+    fun profit(money: Int): Double
+}
+```
+- [] TDD first and don't forget to add unit tests for `GameOrchestrator`
+
+
+
+
+
