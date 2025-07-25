@@ -15,6 +15,7 @@ object OutputView {
 
     fun displayCardsOfPlayers(player: Player) {
         println(getCardsOfPlayers(player))
+        println()
     }
 
     private fun getCardsOfPlayers(player: Player): String {
