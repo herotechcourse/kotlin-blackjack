@@ -10,8 +10,9 @@ import blackjack.service.InputProcessor
 import blackjack.view.OutputView
 
 class Controller {
+    private val deck = Deck()
     private val inputProcessor = InputProcessor()
-    private val gameOrchestrator = GameOrchestrator(Deck(), inputProcessor)
+    private val gameOrchestrator = GameOrchestrator(deck, inputProcessor)
 
     fun run() {
         try {
