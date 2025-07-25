@@ -23,10 +23,10 @@ class Player(
         get() = _cards.cardList
 
     private fun updateScore() {
-        var aceCount = _cards.cardList.count { it -> it.rank == Rank.ACE }
-        var totalScore = _cards.cardList.sumOf { it -> it.rank.value }
+        var aceCount = _cards.cardList.count { it.rank == Rank.ACE }
+        var totalScore = _cards.cardList.sumOf { it.rank.value }
         while (totalScore > WINNING_SCORE && aceCount > 0) {
-            totalScore -= 10
+            totalScore -= ACE_VALUE_ADJUSTMENT
             aceCount--
         }
         score = totalScore
@@ -57,5 +57,6 @@ class Player(
 
     companion object {
         private const val WINNING_SCORE = 21
+        private const val ACE_VALUE_ADJUSTMENT = 10
     }
 }
