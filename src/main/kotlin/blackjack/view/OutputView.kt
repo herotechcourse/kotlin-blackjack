@@ -1,6 +1,5 @@
 package blackjack.view
 
-import blackjack.Constants.DEALER
 import blackjack.model.Player
 
 object OutputView {
@@ -15,7 +14,6 @@ object OutputView {
 
     fun displayCardsOfPlayers(player: Player) {
         println(getCardsOfPlayers(player))
-        println()
     }
 
     private fun getCardsOfPlayers(player: Player): String {
@@ -27,7 +25,7 @@ object OutputView {
     }
 
     fun displayDealersTurn() {
-        println("\nDealer draws one more card due to having 16 or less.")
+        println("Dealer draws one more card due to having 16 or less.")
     }
 
     fun displayCards(
@@ -39,9 +37,6 @@ object OutputView {
     }
 
     private fun displayCardsOfPlayersWithScore(player: Player) {
-        if (player.name == DEALER) {
-            println()
-        }
         val printableString =
             getCardsOfPlayers(player) + " – Total: ${player.score}"
         println(printableString)
@@ -51,7 +46,6 @@ object OutputView {
         dealer: Player,
         players: List<Player>,
     ) {
-        println()
         println("## Final Earnings")
         println("Dealer: ${dealer.earning.toInt()}")
         players.forEach { println("${it.name}: ${it.earning.toInt()}") }

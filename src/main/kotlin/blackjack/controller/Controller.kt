@@ -64,9 +64,12 @@ class Controller {
         dealer: Player,
         players: List<Player>,
     ) {
+        println()
         players.forEach(gameOrchestrator::runPlayerTurn)
         gameOrchestrator.runDealerTurn(dealer)
+        println()
         OutputView.displayCards(dealer, players)
+        println()
         FinalResult(dealer, Players(players)).updateEarnings()
         OutputView.displayFinalResult(dealer, players)
     }
