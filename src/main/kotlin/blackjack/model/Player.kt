@@ -20,11 +20,11 @@ class Player(
         private set
 
     val cards: List<Card>
-        get() = _cards.cards
+        get() = _cards.cardList
 
     private fun updateScore() {
-        var aceCount = _cards.cards.count { it -> it.rank == Rank.ACE }
-        var totalScore = _cards.cards.sumOf { it -> it.rank.value }
+        var aceCount = _cards.cardList.count { it -> it.rank == Rank.ACE }
+        var totalScore = _cards.cardList.sumOf { it -> it.rank.value }
         while (totalScore > WINNING_SCORE && aceCount > 0) {
             totalScore -= 10
             aceCount--

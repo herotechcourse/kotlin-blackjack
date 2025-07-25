@@ -4,7 +4,7 @@ class Deck {
     private val deckCards = Cards()
 
     val cards: List<Card>
-        get() = deckCards.cards
+        get() = deckCards.cardList
 
     init {
         generateFullDeck()
