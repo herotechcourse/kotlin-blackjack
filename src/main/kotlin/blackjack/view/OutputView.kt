@@ -8,7 +8,7 @@ object OutputView {
     }
 
     fun displayNamesOfPlayers(players: List<Player>) {
-        val nameList = players.joinToString(", ") { it.gamblerInfo.name }
+        val nameList = players.joinToString(", ") { it.name }
         println("\nDealing two cards to dealer, $nameList.")
     }
 
@@ -17,45 +17,37 @@ object OutputView {
     }
 
     private fun getCardsOfPlayers(player: Player): String {
-        return "${player.name}'s card: " + player.cards.joinToString(", ")
+        return "${player.name}'s cards: " + player.cards.joinToString(", ")
     }
 
     fun displayCardsOfDealer(player: Player) {
-        print("Dealer: ")
-        println(player.cards[0].toString())
+        println("Dealer: ${player.cards[0]}")
     }
 
     fun displayDealersTurn() {
-        println("\nDealer draws one more card due to having 16 or less.")
+        println("Dealer draws one more card due to having 16 or less.")
     }
 
-    fun displayCardsOfPlayersWithScore(player: Player) {
+    fun displayCards(
+        dealer: Player,
+        players: List<Player>,
+    ) {
+        displayCardsOfPlayersWithScore(dealer)
+        players.forEach(OutputView::displayCardsOfPlayersWithScore)
+    }
+
+    private fun displayCardsOfPlayersWithScore(player: Player) {
         val printableString =
             getCardsOfPlayers(player) + " – Total: ${player.score}"
         println(printableString)
     }
 
-    fun displayFinalResultsHeading() {
-        println("## Final Results")
-    }
-
-    fun displayPlayerResult(
-        win: Int,
-        lose: Int,
-        draw: Int,
+    fun displayFinalResult(
+        dealer: Player,
+        players: List<Player>,
     ) {
-        println("Dealer: $win Win $draw Draw $lose Lose")
-    }
-
-    fun displayPlayerResult(
-        name: String,
-        result: Boolean,
-    ) {
-        val printableString = "$name: " + if (result) "Win" else "Lose"
-        println(printableString)
-    }
-
-    fun printEmptyLine() {
-        println()
+        println("## Final Earnings")
+        println("Dealer: ${dealer.earning.toInt()}")
+        players.forEach { println("${it.name}: ${it.earning.toInt()}") }
     }
 }

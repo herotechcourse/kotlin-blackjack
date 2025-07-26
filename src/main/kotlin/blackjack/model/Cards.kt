@@ -1,16 +1,19 @@
 package blackjack.model
 
 class Cards(
-    private val _cards: MutableList<Card> = mutableListOf(),
+    private val cards: MutableList<Card> = mutableListOf(),
 ) {
-    val cards: List<Card>
-        get() = _cards
+    val cardList: List<Card>
+        get() = cards.toList()
 
-    fun addAll(newCards: List<Card>) = _cards.addAll(newCards)
+    fun addAll(newCards: List<Card>) = cards.addAll(newCards)
 
-    fun take(count: Int): List<Card> = _cards.take(count)
+    fun take(count: Int): List<Card> = cards.take(count)
 
-    fun removeAll(cardsToRemove: List<Card>) = cardsToRemove.forEach { _cards.remove(it) }
+    fun removeAll(cardsToRemove: List<Card>) = cardsToRemove.forEach { cards.remove(it) }
 
-    fun shuffle() = _cards.shuffle()
+    fun shuffle() = cards.shuffle()
+
+    val size: Int
+        get() = cards.size
 }

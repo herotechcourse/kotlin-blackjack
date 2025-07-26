@@ -15,4 +15,22 @@ object InputView {
         println(InputPrompt.askHitOrStand(name))
         return readString()
     }
+
+    fun getBetAmount(name: String): Int {
+        println(InputPrompt.askBetAmount(name))
+        return getPositiveNumber()
+    }
+
+    private fun getPositiveNumber(): Int {
+        val number = getInt()
+        require(number > 0) { ErrorPrompt.INPUT_INVALID_INTEGER }
+        return number
+    }
+
+    private fun getInt(): Int {
+        val int =
+            readString().toIntOrNull()
+                ?: throw IllegalArgumentException(ErrorPrompt.INPUT_INVALID_INTEGER)
+        return int
+    }
 }
