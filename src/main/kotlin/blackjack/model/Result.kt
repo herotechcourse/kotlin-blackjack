@@ -9,6 +9,6 @@ enum class Result() {
     ;
 
     companion object {
-        const val BLACKJACK_BONUS = 1.5
+        const val BLACKJACK_BONUS_RATE: Double = 1.5
     }
 }
