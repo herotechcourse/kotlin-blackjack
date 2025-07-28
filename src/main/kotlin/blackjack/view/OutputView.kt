@@ -14,8 +14,7 @@ object OutputView {
         var sentence = "dealer, "
         val names = players.map { it.name }
         sentence += names.joinToString(", ")
-        println("\nDealing two cards to $sentence.")
-        println("Dealer: ${cardToText(dealer.hand.cards[0])}")
+        println("\nDealing two cards to $sentence.\nDealer: ${cardToText(dealer.hand.cards[0])}")
         players.forEach { displayCurrentHand(it) }
     }
 
@@ -42,8 +41,7 @@ object OutputView {
         val players = winStatistics.players
         val dealer = winStatistics.dealer
         val earningsMap = winStatistics.payOutPotToEarnings()
-        println("\n## Final Earnings")
-        println("Dealer: ${earningsMap[dealer]}")
+        println("\n## Final Earnings\nDealer: ${earningsMap[dealer]}")
         players.forEach { player ->
             println("${player.name}: ${earningsMap[player]}")
         }
