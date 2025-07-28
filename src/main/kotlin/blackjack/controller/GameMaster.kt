@@ -25,7 +25,7 @@ object GameMaster {
         val bets = names.map { InputView.retryable { InputView.readPlayerBettingAmount(it) } }
         val players =
             names.zip(bets)
-                .map { (name, amount) -> Player(name).placeBets(amount).initHand() }
+                .map { (name, bet) -> Player(name).placeBets(bet).initDraw() }
         return players.toList()
     }
 
