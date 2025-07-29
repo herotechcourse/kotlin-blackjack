@@ -43,7 +43,9 @@ class BlackJack(names: List<String>) {
 
     fun setPlayersBet(doRequest: (BasePlayer) -> Int) {
         players.forEach { player ->
-            player.bet = doRequest(player)
+            apply {
+                player.bet = doRequest(player)
+            }
         }
     }
 
