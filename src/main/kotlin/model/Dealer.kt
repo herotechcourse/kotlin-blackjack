@@ -1,6 +1,6 @@
 package model
 
-class Dealer() : BasePlayer("Dealer") {
+class Dealer : BasePlayer("Dealer") {
     override fun toString(): String {
         return "$name's cards: $hand"
     }
