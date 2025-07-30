@@ -1,7 +1,7 @@
 package model
 
 class BlackJack(names: List<String>) {
-    val players: List<Player> = names.map { Player(it) }
+    val players = Players(names.map { Player(it) })
     val dealer = Dealer()
     val deck = Deck()
 
@@ -26,37 +26,24 @@ class BlackJack(names: List<String>) {
         doAfter: (BasePlayer) -> Unit,
         decision: (BasePlayer) -> Boolean = { true },
     ) {
-        players.forEach { player ->
-            player.turn(deck, doAfter, decision)
-        }
+        players.turn(deck, doAfter, decision)
     }
 
     fun calcEarning() {
         val dealerScore = dealer.getScore()
-        players.forEach { player ->
+        players.value.forEach { player ->
             val ratio = ResultCalculator.ratio(player.getScore(), dealerScore)
-            player.earning =
-                (player.bet * ratio).toInt()
-            dealer.earning += (player.bet * ratio * -1).toInt()
+            player.earning = player.earning.calc(player.bet, ratio)
+            dealer.earning += Earning(0).calc(player.bet, (ratio * -1))
         }
     }
 
     fun setPlayersBet(doRequest: (BasePlayer) -> Int) {
-        players.forEach { player ->
-            apply {
-                player.bet = doRequest(player)
-            }
-        }
+        players.setBet(doRequest)
     }
 
     private fun initGame() {
-        players.forEach { player ->
-            repeat(2) {
-                player.drawCard(deck.pop())
-            }
-        }
-        repeat(2) {
-            dealer.drawCard(deck.pop())
-        }
+        players.init(deck)
+        dealer.init(deck)
     }
 }

@@ -19,7 +19,7 @@ class BlackJackController(
     }
 
     private fun displayInitializedGame(blackJack: BlackJack) {
-        output.displayInitialCards(blackJack.players, blackJack.dealer)
+        output.displayInitialCards(blackJack.players.value, blackJack.dealer)
     }
 
     private fun dealerTurn(blackJack: BlackJack) {
@@ -30,7 +30,7 @@ class BlackJackController(
     }
 
     private fun displayResults(blackjack: BlackJack) {
-        output.displayFinalCardsOnHand(blackjack.players, blackjack.dealer)
-        output.displayResults(blackjack.dealer, blackjack.players)
+        output.displayFinalCardsOnHand(blackjack.players.value, blackjack.dealer)
+        output.displayResults(blackjack.dealer, blackjack.players.value)
     }
 }
