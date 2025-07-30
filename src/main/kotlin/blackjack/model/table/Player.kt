@@ -1,8 +1,14 @@
-package blackjack.model
+package blackjack.model.table
+
+import blackjack.model.Bet
+import blackjack.model.states.Init
+import blackjack.model.states.State
+import blackjack.view.ErrorMessage
 
 class Player(
     override val name: String,
-    override var handCards: HandCards = HandCards(),
+    override var state: State = Init(),
+    var bet: Bet = Bet.Companion.UNPLACED,
 ) : Participant() {
     init {
         require(name.isNotBlank()) { ErrorMessage.NAME_BLANK.toString() }

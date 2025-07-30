@@ -22,59 +22,64 @@ import org.junit.jupiter.params.provider.ValueSource
 class DslTest {
     @Test
     fun `test name fun`() {
-        val person: Person = introduce {
-            name("Jason")
-        }
+        val person: Person =
+            introduce {
+                name("Jason")
+            }
         assertThat(person.name).isEqualTo("Jason")
     }
 
     @ParameterizedTest
     @ValueSource(strings = ["DH", "JetBrains", "Google"])
     fun `test company fun`(args: String) {
-        val person: Person = introduce {
-            company(args)
-        }
+        val person: Person =
+            introduce {
+                company(args)
+            }
         assertThat(person.company).isEqualTo(args)
     }
 
     @Test
     fun `test skills fun`() {
-        val person: Person = introduce {
-            skills {
-                soft("communication")
-                hard("java")
+        val person: Person =
+            introduce {
+                skills {
+                    soft("communication")
+                    hard("java")
+                }
             }
-        }
         assertThat(person.skills.soft).isEqualTo("communication")
         assertThat(person.skills.hard).isEqualTo("java")
     }
 
     @Test
     fun `test languages fun`() {
-        val person: Person = introduce {
-            languages {
-                "Korean" level 5
-                "English" level 3
+        val person: Person =
+            introduce {
+                languages {
+                    "Korean" level 5
+                    "English" level 3
+                }
             }
-        }
         assertThat(person.languages.table).containsEntry("Korean", 5)
         assertThat(person.languages.table).containsEntry("English", 3)
     }
 
     @Test
-    fun everything(){
-        val person: Person = introduce {
-            name("Jason")
-            company("Google")
-            skills {
-                soft("communication")
-                hard("java")
+    fun everything()  {
+        val person: Person =
+            introduce {
+                name("Jason")
+                company("Google")
+                skills {
+                    soft("communication")
+                    hard("java")
+                }
+                languages {
+                    "Korean" level 5
+                    "English" level 3
+                }
             }
-            languages {
-                "Korean" level 5
-                "English" level 3
-            }
-        }
         assertThat(person.name).isNotEmpty()
         assertThat(person.company).isNotEmpty()
         assertThat(person.skills.soft).isEqualTo("communication")
@@ -85,7 +90,7 @@ fun introduce(function: PersonBuilder.() -> Unit): Person {
     return PersonBuilder().apply(function).build()
 }
 
-class PersonBuilder(){
+class PersonBuilder() {
     var name: String = ""
     var company: String = ""
     var skills: Skills = Skills("", "")
@@ -94,6 +99,7 @@ class PersonBuilder(){
     fun name(name: String) {
         this.name = name
     }
+
     fun company(company: String) {
         this.company = company
     }
@@ -105,7 +111,7 @@ class PersonBuilder(){
     }
 
     fun languages(init: LanguageBuilder.() -> Unit) {
-       this.languages = LanguageBuilder().apply(init).build()
+        this.languages = LanguageBuilder().apply(init).build()
     }
 
     fun build(): Person {

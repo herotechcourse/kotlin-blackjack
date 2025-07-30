@@ -1,4 +1,4 @@
-package blackjack.model
+package blackjack.model.cards
 
 enum class Rank(val value: Int, val title: String) {
     TWO(2, "2"),

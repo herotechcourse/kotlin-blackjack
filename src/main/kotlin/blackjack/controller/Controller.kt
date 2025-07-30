@@ -1,74 +1,29 @@
 package blackjack.controller
 
-import blackjack.model.CardDeck
-import blackjack.model.Dealer
-import blackjack.model.ErrorMessage
-import blackjack.model.Player
-import blackjack.model.Players
-import blackjack.model.ResultEvaluator
+import blackjack.model.Bet
+import blackjack.model.Game
+import blackjack.model.Results
+import blackjack.model.cards.CardDeck
+import blackjack.model.table.Dealer
+import blackjack.model.table.Player
+import blackjack.model.table.Players
+import blackjack.view.ErrorMessage
 import blackjack.view.InputView
 import blackjack.view.OutputView
-import blackjack.view.OutputView.displayInitialCardsMessage
 
 class Controller {
-    private val deck = CardDeck()
-    private var _players: Players? = null
-    private val dealer = Dealer()
-
-    private val players: Players
-            get() = _players!!
-
     fun runGame() {
-        _players = initializePlayers()
-        OutputView.displayPlayerNames(players)
-        drawInitialCards()
-        OutputView.displayFirstCardMessage(dealer)
-        players.forEach { OutputView.displayAllCardsMessage(it) }
-        players.dealCards()
-        dealer.dealCards()
-        displayCardsAndTotal()
-        printResults()
-    }
+        val players = initializePlayers()
+        val dealer = Dealer()
+        val deck = CardDeck()
 
-    private fun printResults() {
-        val evaluator = ResultEvaluator(players, dealer)
-        val results = evaluator.calculateResults()
-        OutputView.displayResults(results)
-    }
+        players.forEach { setBettingAmount(it) }
 
-    private fun displayCardsAndTotal() {
-        OutputView.displayParticipantStatus(dealer)
-        players.forEach { OutputView.displayParticipantStatus(it) }
-    }
+        val game = Game(players, dealer, deck)
+        game.play()
 
-    private fun Dealer.dealCards() {
-        while (this.shouldDraw()) {
-            OutputView.displayDealerDrawMessage()
-            this.drawCard(deck)
-        }
-    }
-
-    private fun Players.dealCards() {
-        players.forEach { dealCards(it) }
-    }
-
-    fun dealCards(player: Player) {
-        while (player.isNotBusted() && wantsToDraw(player)) {
-            player.drawCard(deck)
-            OutputView.displayAllCardsMessage(player)
-        }
-    }
-
-    private fun wantsToDraw(player: Player): Boolean {
-        repeat(MAX_TRIES){
-            try {
-                return InputView.promptForDraw(player)
-            } catch (e: IllegalArgumentException) {
-                println(e.message)
-                return@repeat
-            }
-        }
-        throw RuntimeException(ErrorMessage.MAX_TRIES.message)
+        displayCardsAndTotal(dealer, players)
+        calculateAndPrintResults(dealer, players)
     }
 
     private fun initializePlayers(): Players {
@@ -84,12 +39,35 @@ class Controller {
         throw RuntimeException(ErrorMessage.MAX_TRIES.message)
     }
 
-    private fun drawInitialCards() {
-        displayInitialCardsMessage(players)
-        repeat(2) {
-            dealer.drawCard(deck)
-            players.forEach { it.drawCard(deck) }
+    private fun setBettingAmount(player: Player) {
+        repeat(MAX_TRIES) {
+            try {
+                player.bet = Bet.of(InputView.readBettingAmount(player))
+                return
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
         }
+        throw RuntimeException(ErrorMessage.MAX_TRIES.message)
+    }
+
+    private fun calculateAndPrintResults(
+        dealer: Dealer,
+        players: Players,
+    ) {
+        val (dealerResult, playersResult) = Results(dealer, players).calculate()
+
+        OutputView.displayFinalResultString()
+        OutputView.displayResult(dealerResult, dealer)
+        playersResult.forEach { OutputView.displayResult(it.value, it.key) }
+    }
+
+    private fun displayCardsAndTotal(
+        dealer: Dealer,
+        players: Players,
+    ) {
+        OutputView.displayParticipantStatus(dealer)
+        players.forEach { OutputView.displayParticipantStatus(it) }
     }
 
     companion object {

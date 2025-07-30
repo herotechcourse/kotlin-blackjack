@@ -1,6 +1,6 @@
-package blackjack.model
+package blackjack.model.cards
 
-enum class Suit(val suit: String) {
+enum class Suit(val symbol: String) {
     HEARTS("♥"),
     DIAMONDS("♦"),
     CLUBS("♣"),

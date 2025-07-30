@@ -1,14 +1,9 @@
-package blackjack.model
+package blackjack.model.cards
 
-class HandCards(val cards: MutableList<Card> = mutableListOf()) {
-    val total: Int
-        get() = calculateTotal()
+class HandCards(val cards: List<Card> = listOf()) {
+    operator fun plus(card: Card): HandCards = HandCards(cards + card)
 
-    fun add(card: Card) {
-        cards.add(card)
-    }
-
-    private fun calculateTotal(): Int {
+    fun total(): Int {
         var total = 0
         for (card in cards) {
             total += card.rank.value
@@ -16,6 +11,8 @@ class HandCards(val cards: MutableList<Card> = mutableListOf()) {
         total -= discount(total)
         return total
     }
+
+    fun size() = cards.size
 
     private fun discount(total: Int): Int {
         var numberOfAces = 0
@@ -32,6 +29,12 @@ class HandCards(val cards: MutableList<Card> = mutableListOf()) {
     }
 
     operator fun compareTo(other: HandCards): Int {
-        return this.calculateTotal() - other.calculateTotal()
+        return this.total() - other.total()
+    }
+
+    companion object {
+        fun from(vararg cards: Card): HandCards {
+            return HandCards(cards.toList())
+        }
     }
 }

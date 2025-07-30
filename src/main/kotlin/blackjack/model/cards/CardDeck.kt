@@ -1,4 +1,4 @@
-package blackjack.model
+package blackjack.model.cards
 
 class CardDeck(
     val deck: ArrayDeque<Card> = ArrayDeque(),
