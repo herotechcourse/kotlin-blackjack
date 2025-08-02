@@ -1,9 +1,6 @@
-package service
+package model
 
-import model.Card
-import model.Rank
-import model.Suite
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -12,7 +9,7 @@ class ScoreCalculatorTest {
     @ParameterizedTest
     @MethodSource("cardProvider")
     fun `score for one card should return card value`(card: Card) {
-        assertThat(ScoreCalculator.getScore(setOf(card))).isEqualTo(Rank.score(card.rank))
+        Assertions.assertThat(ScoreCalculator.getScore(setOf(card))).isEqualTo(Rank.score(card.rank))
     }
 
     @ParameterizedTest
@@ -21,7 +18,7 @@ class ScoreCalculatorTest {
         cards: Set<Card>,
         expectedTotal: Int,
     ) {
-        assertThat(ScoreCalculator.getScore(cards)).isEqualTo(expectedTotal)
+        Assertions.assertThat(ScoreCalculator.getScore(cards)).isEqualTo(expectedTotal)
     }
 
     companion object {

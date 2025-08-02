@@ -1,22 +1,48 @@
 package model
 
 class BlackJack(names: List<String>) {
-    val players = names.map { Player(it) }
+    val players = Players(names.map { Player(it) })
     val dealer = Dealer()
+    val deck = Deck()
 
     init {
-        require(players.size <= 6) { "Maximum player names must be 6" }
-        initGame()
+        require(names.size <= 6) { "Maximum player names must be 6" }
     }
 
-    private fun initGame() {
-        players.forEach { player ->
-            repeat(2) {
-                player.drawCard(dealer.dealCard())
-            }
+    fun dealerTurn(
+        deck: Deck,
+        doAfter: (BasePlayer) -> Unit,
+        decision: (BasePlayer) -> Boolean = { dealer.getScore() <= 16 },
+    ) {
+        dealer.turn(
+            deck,
+            doAfter,
+            decision,
+        )
+    }
+
+    fun playersTurn(
+        doAfter: (BasePlayer) -> Unit,
+        decision: (BasePlayer) -> Boolean = { true },
+    ) {
+        players.turn(deck, doAfter, decision)
+    }
+
+    fun calcEarning() {
+        val dealerScore = dealer.getScore()
+        players.value.forEach { player ->
+            val ratio = ResultCalculator.ratio(player.getScore(), dealerScore)
+            player.earning = player.earning.calc(player.bet, ratio)
+            dealer.earning += Earning(0).calc(player.bet, (ratio * -1))
         }
-        repeat(2) {
-            dealer.drawCard(dealer.dealCard())
-        }
+    }
+
+    fun setPlayersBet(doRequest: (BasePlayer) -> Int) {
+        players.setBet(doRequest)
+    }
+
+    fun initGame() {
+        players.init(deck)
+        dealer.init(deck)
     }
 }

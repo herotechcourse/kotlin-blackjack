@@ -1,11 +1,20 @@
 package model
 
 class Player(name: String) : BasePlayer(name) {
-    override fun makeDecision(value: Int): Boolean {
-        return value.toChar().toString() == "y"
-    }
+    var bet = 0
 
     override fun toString(): String {
         return "$name's cards: $hand"
+    }
+
+    override fun turn(
+        deck: Deck,
+        doAfter: (BasePlayer) -> Unit,
+        decision: (BasePlayer) -> Boolean,
+    ) {
+        while (decision(this)) {
+            drawCard(deck.pop())
+            doAfter(this)
+        }
     }
 }

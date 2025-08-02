@@ -1,7 +1,5 @@
 package model
 
-import service.ScoreCalculator
-
 class Hand {
     private val cards: MutableSet<Card> = mutableSetOf()
 

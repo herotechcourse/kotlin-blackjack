@@ -4,8 +4,10 @@
 
 - [x] prompt user for players names
 - [x] players name parsing
-- [x] Prompt for user decision (y/n)
+- [x] prompt for user decision (y/n)
 - [x] decision parsing 
+- [x] prompt players bet
+- [x] players bet parsing
 
 ## Player
 
@@ -38,10 +40,13 @@
 - [x] run game
 - [x] Calculate Results
 
-## output
+## Output
 
 - [x] display initial cards in hand
 - [x] display dealers draw action
 - [x] display players done action
 - [x] display all players hands with total score
-- [x] display final result 
+- [x] display final earnings amount
+
+## Bet
+- [x] calculate players earning amount
