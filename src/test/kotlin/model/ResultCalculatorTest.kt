@@ -20,7 +20,7 @@ class ResultCalculatorTest {
         @JvmStatic
         fun scoreProvider(): List<Arguments> {
             return listOf(
-                Arguments.of(21, 21, 0.0),
+                Arguments.of(20, 20, 0.0),
                 Arguments.of(23, 20, -1),
                 Arguments.of(20, 23, 1),
                 Arguments.of(21, 15, 1.5),
