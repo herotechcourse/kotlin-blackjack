@@ -18,7 +18,7 @@ class DealerTest {
 
         fun dummyDecision(): (BasePlayer) -> Boolean {
             var counter = N
-            return { player: BasePlayer ->
+            return { _: BasePlayer ->
                 if (counter > 0) {
                     counter--
                     true
