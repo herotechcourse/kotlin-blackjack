@@ -11,8 +11,8 @@ class ResultCalculator {
                 isBusted(dealerScore) && playerScore < 21 -> 1.0
                 isBlackJack(playerScore) && dealerScore < 21 -> 1.5
                 playerScore > dealerScore -> 1.0
-                playerScore == dealerScore -> 0.0
-                else -> -1.0
+                playerScore < dealerScore -> -1.0
+                else -> 0.0
             }
         }
 
