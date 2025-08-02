@@ -10,6 +10,7 @@ class BlackJackController(
 ) {
     fun run() {
         val blackjack = BlackJack(input.requestPlayerNames())
+        blackjack.initGame()
         blackjack.setPlayersBet(input::requestPlayersBet)
         displayInitializedGame(blackjack)
         blackjack.playersTurn(output::displayPlayerTurn, input::requestPlayerDecision)

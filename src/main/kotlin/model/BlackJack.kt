@@ -7,7 +7,6 @@ class BlackJack(names: List<String>) {
 
     init {
         require(names.size <= 6) { "Maximum player names must be 6" }
-        initGame()
     }
 
     fun dealerTurn(
@@ -42,7 +41,7 @@ class BlackJack(names: List<String>) {
         players.setBet(doRequest)
     }
 
-    private fun initGame() {
+    fun initGame() {
         players.init(deck)
         dealer.init(deck)
     }
