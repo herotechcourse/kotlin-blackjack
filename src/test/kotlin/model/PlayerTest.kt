@@ -3,14 +3,14 @@ package model
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class DealerTest {
+class PlayerTest {
     @Test
-    fun `dealer should draw two cards`() {
+    fun `player should draw two cards`() {
         val deck = Deck()
-        val dealer = Dealer()
-        val prevHandSize = dealer.getCardsNumber()
-        dealer.turn(deck, { }, dummyDecision())
-        assertThat(dealer.getCardsNumber() - prevHandSize).isEqualTo(N)
+        val player = Player("pobi")
+        val prevHandSize = player.getCardsNumber()
+        player.turn(deck, { }, dummyDecision())
+        assertThat(player.getCardsNumber() - prevHandSize).isEqualTo(N)
     }
 
     companion object {

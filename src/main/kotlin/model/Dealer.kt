@@ -1,15 +1,18 @@
 package model
 
-class Dealer() : BasePlayer("Dealer") {
-    private val deck = Deck()
-
-    fun dealCard(): Card = deck.pop()
-
+class Dealer : BasePlayer("Dealer") {
     override fun toString(): String {
         return "$name's cards: $hand"
     }
 
-    override fun makeDecision(value: Int): Boolean {
-        return value <= 16
+    override fun turn(
+        deck: Deck,
+        doAfter: (BasePlayer) -> Unit,
+        decision: (BasePlayer) -> Boolean,
+    ) {
+        while (decision(this)) {
+            drawCard(deck.pop())
+            doAfter(this)
+        }
     }
 }

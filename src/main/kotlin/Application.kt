@@ -1,6 +1,7 @@
 import controller.BlackJackController
+import view.InputView
+import view.OutputView
 
 fun main() {
-    val controller = BlackJackController()
-    controller.runGame()
+    BlackJackController(InputView(), OutputView()).run()
 }

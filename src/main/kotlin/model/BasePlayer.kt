@@ -1,10 +1,17 @@
 package model
 
 abstract class BasePlayer(val name: String) {
+    var earning = Earning(0)
     protected val hand = Hand()
 
     init {
         require(name.isNotEmpty() && name.isNotBlank()) { "Name must not be empty" }
+    }
+
+    fun init(deck: Deck) {
+        repeat(2) {
+            drawCard(deck.pop())
+        }
     }
 
     fun getScore(): Int {
@@ -23,5 +30,9 @@ abstract class BasePlayer(val name: String) {
         hand.addCard(card)
     }
 
-    abstract fun makeDecision(value: Int): Boolean
+    abstract fun turn(
+        deck: Deck,
+        doAfter: (BasePlayer) -> Unit,
+        decision: (BasePlayer) -> Boolean,
+    )
 }

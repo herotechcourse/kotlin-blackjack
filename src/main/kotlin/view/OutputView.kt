@@ -1,11 +1,11 @@
 package view
 
+import model.BasePlayer
 import model.Card
 import model.Dealer
 import model.Player
-import model.ResultStatus
 
-object OutputView {
+class OutputView {
     fun displayInitialCards(
         players: List<Player>,
         dealer: Dealer,
@@ -15,11 +15,11 @@ object OutputView {
         players.forEach { println("${it.name}'s cards: ${displayCards(it.showCards(), true)} ") }
     }
 
-    fun displayPlayersTurn(player: Player) {
+    fun displayPlayerTurn(player: BasePlayer) {
         println(player)
     }
 
-    fun displayDealersGame() {
+    fun displayDealerGame() {
         println("Dealer draws one more card due to having 16 or less.")
     }
 
@@ -34,21 +34,12 @@ object OutputView {
     }
 
     fun displayResults(
-        results: List<ResultStatus>,
+        dealer: Dealer,
         players: List<Player>,
     ) {
         println("\n## Final Results")
-        println(getDealersResult(results))
-        for (i in players.indices) {
-            println("${players[i].name}: ${ResultStatus.toText(results[i])}")
-        }
-    }
-
-    private fun getDealersResult(playersResult: List<ResultStatus>): String {
-        val wins = playersResult.count { it == ResultStatus.LOSS }
-        val losses = playersResult.count { it == ResultStatus.WIN }
-        val draws = playersResult.count { it == ResultStatus.DRAW }
-        return "Dealer: $wins Wins $losses Losses $draws draws"
+        println("Dealer: ${dealer.earning}")
+        players.forEach { println("${it.name}: ${it.earning}") }
     }
 
     private fun displayCards(
