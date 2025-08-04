@@ -17,15 +17,18 @@
 
 ### Model
 
-Card
+PlayingCard
 
-- [x] Card class hold string value of name(e.g. "A♥") and string value of digit(e.g. "A", "5", "K")
+- [x] PlayingCard class hold Enum `Rank` and Enum `Suit`
 
 Hand
 
-- [x] has `List<Card>` for player and dealer
-- [x] extract logic for calculation of hand's score from `Player` and `Dealer` into `calculateCards()`
+- [x] has `cards` which is `List<Card>` for player and dealer
+- [x] init `cards` with drawing two cards from `PlayingCard.deck`, if `cards` is empty
+- [x] extract logic for calculation of hand's score from `Player` and `Dealer` into `calculateHand()`
 - [x] has method `calculateHand()` to calculate score of hand with `Rank` of `Card`
+- [x] has method `isBust()` to figure out the hand is bust or not
+- [x] has method `isBlackjack()` to figure out the hand is blackjack or not
 
 Rank
 
@@ -40,27 +43,27 @@ Playable (interface)
 - [x] has value `name` in string
 - [x] has list of card called `hand`
 - [x] has value `bet` in integer
+- [x] has value of `result` in Enum class `Result` 
 - [x] has method `requestCard()` to request a card by condition then, ask the card manager with boolean
 - [x] has method `drawCard()` to take card given by a card manager
-- [x] has method `calculateHand()` to calculate score of hand
-- [x] has method `isBust()` to figure out the player of the dealer is bust or not
-- [x] has method `isBlackjack()` to figure out the `Playable` is blackjack or not
 
 Player: Playable
 
 - [x] follows interface `Playable`
-- [x] has method `placeBets()` to place `bet`
+- [x] initialize `name`, `bet`, `hand` through constructor
 
 Dealer: Playable
 
 - [x] follows interface `Playable`
+- [x] initialize `name`, `hand` through constructor
 - [x] has a method `shouldDrawCardOrNot()` return true or false to 'requestCard()' or not
 
 Stats
 
 - [x] has `players: List<Player>`, `dealer: Dealer` having instance of players and dealer
-- [x] has `dealerStats: Map<String, Int>` having key as "win", "lose", "tie" and value as count
-- [x] has method `payOutPotToEarnings()` to calculate and pay out the earnings for `Playable`s
+- [x] has private method `calculatePlayerResults()` to calculate result of Players
+- [x] has private method `updatePlayerResult()` to update players' result
+- [x] has method `calculateEarningMapForPlayable()` to calculate and pay out the earnings for `Playable`s
 
 ### View
 
@@ -92,10 +95,4 @@ OutputView
 
 GameManager
 
-- [x] has 'players: List<player>' to store all players -> extract to 'PlayerManager'
-- [x] has 'dealer: Dealer' -> extract to 'DealerManager'
-- [x] has 'winStatistics: Stats' to store data related with result of the game
-- [x] has link with 'InputView' to take user inputs
-- [x] has link with 'OutputView' to output game result
-- [x] separate responsibilities of GameManager into several new manager(controller) classes
 - [x] refactor `run()` method (It is too big!!!)

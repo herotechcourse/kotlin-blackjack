@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 
 class StatsTest {
     @Test
-    fun `payOutPotToEarnings() - method calculate pay-out for players and dealer`() {
+    fun `calculateEarningMapForPlayable() - method calculate pay-out for players and dealer`() {
         // player1 -> bust
         val hand1 = Hand(listOf(Fixture.DIAMONDS_TEN, Fixture.DIAMONDS_JACK, Fixture.DIAMONDS_QUEEN))
         val player1 = Player("player1", 100, hand = hand1)
@@ -23,7 +23,7 @@ class StatsTest {
         val dealer = Dealer(hand = handOfDealer)
 
         val stats = Stats(listOf(player1, player2, player3), dealer)
-        val earningMap = stats.payOutPotToEarnings()
+        val earningMap = stats.calculateEarningMapForPlayable()
         assertEquals(-100, earningMap[player1])
         assertEquals(200, earningMap[player2])
         assertEquals(0, earningMap[player3])
@@ -31,7 +31,7 @@ class StatsTest {
     }
 
     @Test
-    fun `payOutPotToEarnings() - a player win with blackjack`() {
+    fun `calculateEarningMapForPlayable() - a player win with blackjack`() {
         // player1 -> bust
         val hand1 = Hand(listOf(Fixture.DIAMONDS_TEN, Fixture.DIAMONDS_JACK, Fixture.DIAMONDS_QUEEN))
         val player1 = Player("player1", 100, hand = hand1)
@@ -48,7 +48,7 @@ class StatsTest {
         val dealer = Dealer(hand = handOfDealer)
 
         val stats = Stats(listOf(player1, player2, player3), dealer)
-        val earningMap = stats.payOutPotToEarnings()
+        val earningMap = stats.calculateEarningMapForPlayable()
         assertEquals(-100, earningMap[player1])
         assertEquals(300, earningMap[player2])
         assertEquals(0, earningMap[player3])
@@ -56,7 +56,7 @@ class StatsTest {
     }
 
     @Test
-    fun `payOutPotToEarnings() - dealer win with blackjack`() {
+    fun `calculateEarningMapForPlayable() - dealer win with blackjack`() {
         // player1 -> bust
         val hand1 = Hand(listOf(Fixture.DIAMONDS_TEN, Fixture.DIAMONDS_JACK, Fixture.DIAMONDS_QUEEN))
         val player1 = Player("player1", 100, hand = hand1)
@@ -73,7 +73,7 @@ class StatsTest {
         val dealer = Dealer(hand = handOfDealer)
 
         val stats = Stats(listOf(player1, player2, player3), dealer)
-        val earningMap = stats.payOutPotToEarnings()
+        val earningMap = stats.calculateEarningMapForPlayable()
         assertEquals(-100, earningMap[player1])
         assertEquals(-200, earningMap[player2])
         assertEquals(-300, earningMap[player3])
@@ -81,7 +81,7 @@ class StatsTest {
     }
 
     @Test
-    fun `payOutPotToEarnings() - a player and the dealer are blackjack`() {
+    fun `calculateEarningMapForPlayable() - a player and the dealer are blackjack`() {
         // player1 -> bust
         val hand1 = Hand(listOf(Fixture.DIAMONDS_TEN, Fixture.DIAMONDS_JACK, Fixture.DIAMONDS_QUEEN))
         val player1 = Player("player1", 100, hand = hand1)
@@ -98,7 +98,7 @@ class StatsTest {
         val dealer = Dealer(hand = handOfDealer)
 
         val stats = Stats(listOf(player1, player2, player3), dealer)
-        val earningMap = stats.payOutPotToEarnings()
+        val earningMap = stats.calculateEarningMapForPlayable()
         assertEquals(-100, earningMap[player1])
         assertEquals(0, earningMap[player2])
         assertEquals(-300, earningMap[player3])

@@ -40,7 +40,7 @@ object OutputView {
     fun displayEarnings(winStatistics: Stats) {
         val players = winStatistics.players
         val dealer = winStatistics.dealer
-        val earningsMap = winStatistics.payOutPotToEarnings()
+        val earningsMap = winStatistics.calculateEarningMapForPlayable()
         println("\n## Final Earnings\nDealer: ${earningsMap[dealer]}")
         players.forEach { player ->
             println("${player.name}: ${earningsMap[player]}")
