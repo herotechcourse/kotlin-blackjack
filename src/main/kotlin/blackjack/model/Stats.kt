@@ -6,12 +6,12 @@ class Stats(val players: List<Player>, val dealer: Dealer) {
     }
 
     private fun updatePlayerResult(player: Player) {
-        val playerScore = player.calculateHand()
-        val dealerScore = dealer.calculateHand()
+        val playerScore = player.hand.calculateHand()
+        val dealerScore = dealer.hand.calculateHand()
         when {
-            player.isBlackjack() -> player.result = Result.BLACKJACK
-            player.isBust() -> player.result = Result.LOSE
-            dealer.isBust() -> player.result = Result.WIN
+            player.hand.isBlackjack -> player.result = Result.BLACKJACK
+            player.hand.isBust -> player.result = Result.LOSE
+            dealer.hand.isBust -> player.result = Result.WIN
             playerScore > dealerScore -> player.result = Result.WIN
             playerScore < dealerScore -> player.result = Result.LOSE
             else -> player.result = Result.TIE
@@ -20,7 +20,7 @@ class Stats(val players: List<Player>, val dealer: Dealer) {
 
     fun payOutPotToEarnings(): Map<Playable, Int> {
         calculatePlayerResults()
-        val isDealerBlackjack = dealer.isBlackjack()
+        val isDealerBlackjack = dealer.hand.isBlackjack
         var pot = players.sumOf { it.bet }
         val earningsMap = mutableMapOf<Playable, Int>()
 
@@ -63,7 +63,7 @@ class Stats(val players: List<Player>, val dealer: Dealer) {
         bet: Int,
     ): Int {
         return when (result) {
-            Result.BLACKJACK -> (bet * Result.BLACKJACK_BONUS).toInt()
+            Result.BLACKJACK -> (bet * Result.BLACKJACK_BONUS_RATE).toInt()
             Result.WIN -> bet
             Result.TIE -> 0
             Result.LOSE -> -bet
@@ -98,7 +98,7 @@ class Stats(val players: List<Player>, val dealer: Dealer) {
         bet: Int,
     ): Int {
         return when (result) {
-            Result.BLACKJACK -> bet + (bet * Result.BLACKJACK_BONUS).toInt()
+            Result.BLACKJACK -> bet + (bet * Result.BLACKJACK_BONUS_RATE).toInt()
             Result.WIN -> bet * 2
             Result.TIE -> bet
             else -> 0

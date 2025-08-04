@@ -1,13 +1,18 @@
 package blackjack.model
 
 class Hand(var cards: List<PlayingCard> = emptyList()) {
-    fun initCards(): Hand {
-        val deque = ArrayDeque(cards)
-        repeat(2) {
-            deque.addLast(PlayingCard.deck.giveCard())
+    val isBust: Boolean get() = calculateHand() > BUST_LIMIT
+    val isBlackjack: Boolean get() =
+        (cards.size == INIT_CARDS_SIZE) && (calculateHand() == BUST_LIMIT)
+
+    init {
+        if (cards.isEmpty()) {
+            val deque = ArrayDeque(cards)
+            repeat(INIT_CARDS_SIZE) {
+                deque.addLast(PlayingCard.deck.giveCard())
+            }
+            cards = deque.toList()
         }
-        cards = deque.toList()
-        return this
     }
 
     fun calculateHand(): Int {
@@ -25,6 +30,8 @@ class Hand(var cards: List<PlayingCard> = emptyList()) {
     }
 
     companion object {
+        const val INIT_CARDS_SIZE = 2
+        const val BUST_LIMIT = 21
         const val BIG_ACE_VALUE = 11
         const val BLACKJACK_VALUE = 21
         const val ACE_REDUCE_VALUE = 10

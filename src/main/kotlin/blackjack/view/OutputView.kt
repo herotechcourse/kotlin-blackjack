@@ -31,9 +31,9 @@ object OutputView {
         players: List<Player>,
         dealer: Dealer,
     ) {
-        println("\nDealer's cards: ${handToText(dealer.hand)} – Total: ${dealer.calculateHand()}")
+        println("\nDealer's cards: ${handToText(dealer.hand)} – Total: ${dealer.hand.calculateHand()}")
         players.forEach { player ->
-            println("${player.name}'s cards: ${handToText(player.hand)} – Total: ${player.calculateHand()}")
+            println("${player.name}'s cards: ${handToText(player.hand)} – Total: ${player.hand.calculateHand()}")
         }
     }
 

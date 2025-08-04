@@ -14,6 +14,37 @@ class PlayerTest {
     }
 
     @Test
+    fun `Player init with hand of two cards`() {
+        val player = Player("player")
+
+        assertEquals(Hand.INIT_CARDS_SIZE, player.hand.cards.size)
+    }
+
+    @Test
+    fun `Player has hand which is a list of card`() {
+        val deck = PlayingCard.deck
+
+        // init new player with first card
+        val firstCard = deck.giveCard()
+        val hand = Hand(listOf(firstCard))
+        val player = Player("new player", hand = hand)
+        assertEquals(firstCard, player.hand.cards.last())
+
+        // draw second card
+        val secondCard = deck.giveCard()
+        player.drawCard(secondCard)
+        assertEquals(secondCard, player.hand.cards.last())
+    }
+
+    @Test
+    fun `Player can init with hand having a card`() {
+        val hand = Hand(listOf(Fixture.DIAMONDS_SEVEN))
+        val player = Player("player", hand = hand)
+
+        assertEquals(1, player.hand.cards.size)
+    }
+
+    @Test
     fun `requestCard() - request true`() {
         val player = Player("player")
         val request = player.requestCard { true }
@@ -29,13 +60,10 @@ class PlayerTest {
 
     @Test
     fun `drawCard()`() {
-        val player = Player("player")
-
-        // initial state of player's hand
-        assertEquals(0, player.hand.cards.size)
+        val hand = Hand(listOf(Fixture.SPADES_ACE))
+        val player = Player("player", hand = hand)
 
         // draw first card
-        player.drawCard(Fixture.SPADES_ACE)
         assertEquals(1, player.hand.cards.size)
         assertEquals(Fixture.SPADES_ACE, player.hand.cards.last())
 
@@ -46,92 +74,56 @@ class PlayerTest {
     }
 
     @Test
-    fun `Player has hand which is a list of card`() {
-        val deck = PlayingCard.deck
-        val player = Player("player")
-
-        // initial state of player's hand
-        assertEquals(emptyList<PlayingCard>(), player.hand.cards)
-
-        // draw first card
-        val firstCard = deck.giveCard()
-        player.drawCard(firstCard)
-        assertEquals(firstCard, player.hand.cards.last())
-
-        // draw second card
-        val secondCard = deck.giveCard()
-        player.drawCard(secondCard)
-        assertEquals(secondCard, player.hand.cards.last())
-    }
-
-    @Test
     fun `calculateHand() - player has TWO and TEN`() {
-        val player = Player("player")
+        val hand = Hand(listOf(Fixture.DIAMONDS_TWO, Fixture.DIAMONDS_TEN))
+        val player = Player("player", hand = hand)
 
-        player.drawCard(Fixture.DIAMONDS_TWO)
-        player.drawCard(Fixture.DIAMONDS_TEN)
-
-        assertEquals(12, player.calculateHand())
+        assertEquals(12, player.hand.calculateHand())
     }
 
     @Test
     fun `calculateHand() - player has Two ACE`() {
-        val player = Player("player")
+        val hand = Hand(listOf(Fixture.DIAMONDS_ACE, Fixture.SPADES_ACE))
+        val player = Player("player", hand = hand)
 
-        player.drawCard(Fixture.DIAMONDS_ACE)
-        player.drawCard(Fixture.SPADES_ACE)
-
-        assertEquals(12, player.calculateHand())
+        assertEquals(12, player.hand.calculateHand())
     }
 
     @Test
     fun `calculateHand() - player has Three ACE and TWO`() {
-        val player = Player("player")
+        val hand = Hand(listOf(Fixture.DIAMONDS_ACE, Fixture.SPADES_ACE, Fixture.DIAMONDS_TWO, Fixture.HEARTS_ACE))
+        val player = Player("player", hand = hand)
 
-        player.drawCard(Fixture.DIAMONDS_ACE)
-        player.drawCard(Fixture.SPADES_ACE)
-        player.drawCard(Fixture.HEARTS_ACE)
-        player.drawCard(Fixture.DIAMONDS_TWO)
-
-        assertEquals(15, player.calculateHand())
+        assertEquals(15, player.hand.calculateHand())
     }
 
     @Test
     fun `calculateHand() - player has Three ACE and TEN`() {
-        val player = Player("player")
+        val hand = Hand(listOf(Fixture.DIAMONDS_ACE, Fixture.SPADES_ACE, Fixture.DIAMONDS_TEN, Fixture.HEARTS_ACE))
+        val player = Player("player", hand = hand)
 
-        player.drawCard(Fixture.DIAMONDS_ACE)
-        player.drawCard(Fixture.SPADES_ACE)
-        player.drawCard(Fixture.HEARTS_ACE)
-        player.drawCard(Fixture.DIAMONDS_TEN)
-
-        assertEquals(13, player.calculateHand())
+        assertEquals(13, player.hand.calculateHand())
     }
 
     @Test
     fun `isBust() - player is busted`() {
-        val player = Player("player")
+        val hand = Hand(listOf(Fixture.DIAMONDS_TEN, Fixture.DIAMONDS_JACK, Fixture.DIAMONDS_QUEEN))
+        val player = Player("player", hand = hand)
 
-        player.drawCard(Fixture.DIAMONDS_TEN)
-        player.drawCard(Fixture.DIAMONDS_JACK)
-        player.drawCard(Fixture.DIAMONDS_QUEEN)
-        assertEquals(true, player.isBust())
+        assertEquals(true, player.hand.isBust)
     }
 
     @Test
     fun `isBust() - player is not busted`() {
-        val player = Player("player")
+        val hand = Hand(listOf(Fixture.DIAMONDS_TEN, Fixture.DIAMONDS_JACK))
+        val player = Player("player", hand = hand)
 
-        player.drawCard(Fixture.DIAMONDS_TEN)
-        player.drawCard(Fixture.DIAMONDS_JACK)
-        assertEquals(false, player.isBust())
+        assertEquals(false, player.hand.isBust)
     }
 
     @Test
     fun `placeBets() - player place bet`() {
-        val player = Player("player")
-
-        player.placeBets(100)
+        val player = Player("player", 100)
         assertEquals(100, player.bet)
     }
 }

@@ -8,24 +8,19 @@ class StatsTest {
     @Test
     fun `payOutPotToEarnings() - method calculate pay-out for players and dealer`() {
         // player1 -> bust
-        val player1 = Player("player1").placeBets(100)
-        player1.drawCard(Fixture.DIAMONDS_TEN)
-        player1.drawCard(Fixture.DIAMONDS_JACK)
-        player1.drawCard(Fixture.DIAMONDS_QUEEN)
+        val hand1 = Hand(listOf(Fixture.DIAMONDS_TEN, Fixture.DIAMONDS_JACK, Fixture.DIAMONDS_QUEEN))
+        val player1 = Player("player1", 100, hand = hand1)
 
         // player2 -> win
-        val player2 = Player("player2").placeBets(200)
-        player2.drawCard(Fixture.DIAMONDS_TEN)
-        player2.drawCard(Fixture.DIAMONDS_QUEEN)
+        val hand2 = Hand(listOf(Fixture.DIAMONDS_TEN, Fixture.DIAMONDS_QUEEN))
+        val player2 = Player("player2", 200, hand = hand2)
 
         // player3 -> tie
-        val player3 = Player("player3").placeBets(300)
-        player3.drawCard(Fixture.DIAMONDS_NINE)
-        player3.drawCard(Fixture.DIAMONDS_JACK)
+        val hand3 = Hand(listOf(Fixture.DIAMONDS_NINE, Fixture.DIAMONDS_JACK))
+        val player3 = Player("player3", 300, hand = hand3)
 
-        val dealer = Dealer()
-        dealer.drawCard(Fixture.DIAMONDS_NINE)
-        dealer.drawCard(Fixture.DIAMONDS_JACK)
+        val handOfDealer = Hand(listOf(Fixture.DIAMONDS_NINE, Fixture.DIAMONDS_JACK))
+        val dealer = Dealer(hand = handOfDealer)
 
         val stats = Stats(listOf(player1, player2, player3), dealer)
         val earningMap = stats.payOutPotToEarnings()
@@ -38,24 +33,19 @@ class StatsTest {
     @Test
     fun `payOutPotToEarnings() - a player win with blackjack`() {
         // player1 -> bust
-        val player1 = Player("player1").placeBets(100)
-        player1.drawCard(Fixture.DIAMONDS_TEN)
-        player1.drawCard(Fixture.DIAMONDS_JACK)
-        player1.drawCard(Fixture.DIAMONDS_QUEEN)
+        val hand1 = Hand(listOf(Fixture.DIAMONDS_TEN, Fixture.DIAMONDS_JACK, Fixture.DIAMONDS_QUEEN))
+        val player1 = Player("player1", 100, hand = hand1)
 
         // player2 -> win
-        val player2 = Player("player2").placeBets(200)
-        player2.drawCard(Fixture.DIAMONDS_TEN)
-        player2.drawCard(Fixture.DIAMONDS_ACE)
+        val hand2 = Hand(listOf(Fixture.DIAMONDS_TEN, Fixture.DIAMONDS_ACE))
+        val player2 = Player("player2", 200, hand = hand2)
 
         // player3 -> tie
-        val player3 = Player("player3").placeBets(300)
-        player3.drawCard(Fixture.DIAMONDS_NINE)
-        player3.drawCard(Fixture.DIAMONDS_JACK)
+        val hand3 = Hand(listOf(Fixture.DIAMONDS_NINE, Fixture.DIAMONDS_JACK))
+        val player3 = Player("player3", 300, hand = hand3)
 
-        val dealer = Dealer()
-        dealer.drawCard(Fixture.DIAMONDS_NINE)
-        dealer.drawCard(Fixture.DIAMONDS_JACK)
+        val handOfDealer = Hand(listOf(Fixture.DIAMONDS_NINE, Fixture.DIAMONDS_JACK))
+        val dealer = Dealer(hand = handOfDealer)
 
         val stats = Stats(listOf(player1, player2, player3), dealer)
         val earningMap = stats.payOutPotToEarnings()
@@ -68,24 +58,19 @@ class StatsTest {
     @Test
     fun `payOutPotToEarnings() - dealer win with blackjack`() {
         // player1 -> bust
-        val player1 = Player("player1").placeBets(100)
-        player1.drawCard(Fixture.DIAMONDS_TEN)
-        player1.drawCard(Fixture.DIAMONDS_JACK)
-        player1.drawCard(Fixture.DIAMONDS_QUEEN)
+        val hand1 = Hand(listOf(Fixture.DIAMONDS_TEN, Fixture.DIAMONDS_JACK, Fixture.DIAMONDS_QUEEN))
+        val player1 = Player("player1", 100, hand = hand1)
 
         // player2 -> lost
-        val player2 = Player("player2").placeBets(200)
-        player2.drawCard(Fixture.DIAMONDS_TEN)
-        player2.drawCard(Fixture.DIAMONDS_QUEEN)
+        val hand2 = Hand(listOf(Fixture.DIAMONDS_TEN, Fixture.DIAMONDS_QUEEN))
+        val player2 = Player("player2", 200, hand = hand2)
 
-        // player3 -> lost
-        val player3 = Player("player3").placeBets(300)
-        player3.drawCard(Fixture.DIAMONDS_NINE)
-        player3.drawCard(Fixture.DIAMONDS_JACK)
+        // player3 -> tie
+        val hand3 = Hand(listOf(Fixture.DIAMONDS_NINE, Fixture.DIAMONDS_JACK))
+        val player3 = Player("player3", 300, hand = hand3)
 
-        val dealer = Dealer()
-        dealer.drawCard(Fixture.DIAMONDS_JACK)
-        dealer.drawCard(Fixture.DIAMONDS_ACE)
+        val handOfDealer = Hand(listOf(Fixture.DIAMONDS_ACE, Fixture.DIAMONDS_JACK))
+        val dealer = Dealer(hand = handOfDealer)
 
         val stats = Stats(listOf(player1, player2, player3), dealer)
         val earningMap = stats.payOutPotToEarnings()
@@ -98,24 +83,19 @@ class StatsTest {
     @Test
     fun `payOutPotToEarnings() - a player and the dealer are blackjack`() {
         // player1 -> bust
-        val player1 = Player("player1").placeBets(100)
-        player1.drawCard(Fixture.DIAMONDS_TEN)
-        player1.drawCard(Fixture.DIAMONDS_JACK)
-        player1.drawCard(Fixture.DIAMONDS_QUEEN)
+        val hand1 = Hand(listOf(Fixture.DIAMONDS_TEN, Fixture.DIAMONDS_JACK, Fixture.DIAMONDS_QUEEN))
+        val player1 = Player("player1", 100, hand = hand1)
 
         // player2 -> blackjack
-        val player2 = Player("player2").placeBets(200)
-        player2.drawCard(Fixture.DIAMONDS_TEN)
-        player2.drawCard(Fixture.DIAMONDS_ACE)
+        val hand2 = Hand(listOf(Fixture.DIAMONDS_TEN, Fixture.DIAMONDS_ACE))
+        val player2 = Player("player2", 200, hand = hand2)
 
         // player3 -> lost
-        val player3 = Player("player3").placeBets(300)
-        player3.drawCard(Fixture.DIAMONDS_NINE)
-        player3.drawCard(Fixture.DIAMONDS_JACK)
+        val hand3 = Hand(listOf(Fixture.DIAMONDS_NINE, Fixture.DIAMONDS_JACK))
+        val player3 = Player("player3", 300, hand = hand3)
 
-        val dealer = Dealer()
-        dealer.drawCard(Fixture.DIAMONDS_JACK)
-        dealer.drawCard(Fixture.DIAMONDS_ACE)
+        val handOfDealer = Hand(listOf(Fixture.DIAMONDS_JACK, Fixture.DIAMONDS_ACE))
+        val dealer = Dealer(hand = handOfDealer)
 
         val stats = Stats(listOf(player1, player2, player3), dealer)
         val earningMap = stats.payOutPotToEarnings()
