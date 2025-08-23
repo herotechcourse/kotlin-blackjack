@@ -22,13 +22,13 @@ Includes card dealing, drawing logic, and win/loss/draw result handling.
 ### Hand
 - [x] Calculate participant score with Ace logic
 - [x] Calculate participant score with J, Q and K logic
-- [ ] provide information for game results announce
+- [x] provide information for game results announce
 
 ### Game
 - [ ] Accept player names
 - [x] Deal two initial cards to all participants
 - [x] Handle player turns
 - [x] Handle dealer turn
-- [ ] Check if a participant is busted
-- [ ] Display final hands and scores
-- [ ] Determine and print winners using GameLogic.getGameResult()
+- [x] Check if a participant is busted
+- [x] Display final hands and scores
+- [x] Determine and print winners using GameLogic.getGameResult()
