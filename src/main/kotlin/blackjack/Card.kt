@@ -10,10 +10,4 @@ class Card(val suit: CardSuit, val number: Int) {
             else -> number.toString()
         }
     }
-
-    override fun toString(): String {
-        val cardValue = numberToCardDeckElements(number)
-        return "%s%s".format(cardValue, suit.value)
-    }
-
 }

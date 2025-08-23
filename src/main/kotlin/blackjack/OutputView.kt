@@ -3,25 +3,35 @@ package blackjack
 import kotlin.collections.map
 
 class OutputView {
-    fun printNameQuestion () {
+    fun printNameQuestion() {
         println(ASK_NAMES)
     }
 
-    fun printPlayersIntroToTheirCards (players: List<Player>) {
+    fun printPlayersIntroToTheirCards(players: List<Player>) {
         val playersNames = players.map { it.name }
         println()
         println(FIRST_TURN_CARDS.format(playersNames.joinToString(",")))
     }
 
-    fun printDealerFirstTurnCards (dealer: Dealer) {
-        val cards = formatHand(dealer.hand)
-        println(DISPLAY_HANDS.format(dealer.name, cards))
+    fun formatCard(card: Card): String {
+        val cardValue = card.numberToCardDeckElements(card.number)
+        return "%s%s".format(cardValue, card.suit.value)
     }
 
-    fun printPlayersFirstTurnCards (players: List<Player>) {
+    fun formatHand(hand: Hand): String {
+        val formattedHand = hand.cards.map{ card -> formatCard(card) }
+        return formattedHand.joinToString(", ")
+    }
+
+    fun printDealerFirstTurnCards(dealer: Dealer) {
+        val finalHand = formatHand(dealer.hand)
+        println(DISPLAY_HANDS.format(dealer.name, finalHand))
+    }
+
+    fun printPlayersFirstTurnCards(players: List<Player>) {
         players.forEach { player ->
-            val cards = formatHand(player.hand)
-            println(DISPLAY_HANDS.format(player.name, cards))
+            val finalHand = formatHand(player.hand)
+            println(DISPLAY_HANDS.format(player.name, finalHand))
         }
     }
 
@@ -30,22 +40,23 @@ class OutputView {
         println(DEALER_DRAW_MESSAGE)
     }
 
-    fun printCurrentCardsOfOnePlayer (player: Player) {
+    fun printCurrentCardsOfOnePlayer(player: Player) {
         val cards = formatHand(player.hand)
         println(DISPLAY_HANDS.format(player.name, cards))
     }
-    fun printCurrentDealerCards (dealer: Dealer) {
+
+    fun printCurrentDealerCards(dealer: Dealer) {
         val cards = formatHand(dealer.hand)
         println(DISPLAY_HANDS.format(dealer.name, cards))
     }
 
-    fun printDealerFinalScore (dealer: Dealer) {
+    fun printDealerFinalScore(dealer: Dealer) {
         val cards = formatHand(dealer.hand)
         val score = dealer.sumCards()
         println(DISPLAY_FINAL_HAND.format(dealer.name, cards, score))
     }
 
-    fun printPlayersFinalScore (players: List<Player>) {
+    fun printPlayersFinalScore(players: List<Player>) {
         players.forEach { player ->
             val cards = formatHand(player.hand)
             val score = player.sumCards()
@@ -53,7 +64,10 @@ class OutputView {
         }
     }
 
-    fun printFinalPlayerResult(players: List<Player>, dealer: Dealer) {
+    fun printFinalPlayerResult(
+        players: List<Player>,
+        dealer: Dealer,
+    ) {
         val dealerScore = dealer.sumCards()
 
         players.forEach { player ->
@@ -63,7 +77,10 @@ class OutputView {
         }
     }
 
-    fun printFinalDealerResults(dealer: Dealer, players: List<Player>) {
+    fun printFinalDealerResults(
+        dealer: Dealer,
+        players: List<Player>,
+    ) {
         val dealerScore = dealer.sumCards()
         var wins = 0
         var losses = 0
