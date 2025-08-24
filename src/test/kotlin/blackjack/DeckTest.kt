@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class DeckTest {
     @Test
     fun `generate cards with suit`() {
-        val deck = Deck.generate()
+        val deck = Deck.generate(true)
         val cardsAmount = deck.cards.size
         assertEquals(48, cardsAmount, "Cards amount aren't 48")
     }
