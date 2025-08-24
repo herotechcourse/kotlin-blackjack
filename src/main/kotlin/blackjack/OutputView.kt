@@ -53,6 +53,7 @@ class OutputView {
     fun printDealerFinalScore(dealer: Dealer) {
         val cards = formatHand(dealer.hand)
         val score = dealer.sumCards()
+        println()
         println(DISPLAY_FINAL_HAND.format(dealer.name, cards, score))
     }
 
@@ -97,10 +98,6 @@ class OutputView {
         println()
         println(DISPLAY_TITLE_FINAL_RESULTS)
         println(DISPLAY_FINAL_DEALER_RESULTS.format(dealer.name, wins, losses))
-    }
-
-    fun formatHand(hand: Hand): String {
-        return hand.cards.joinToString(", ")
     }
 
     companion object Messages {
