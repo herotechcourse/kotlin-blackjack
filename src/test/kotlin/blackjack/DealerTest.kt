@@ -1,17 +1,17 @@
 package blackjack
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class DealerTest {
-
     @Test
-    fun `draws the correct card` () {
-        val cards = listOf(
-            Card( CardSuit.SPADE, 10),
-            Card(CardSuit.CLUB, 5),
-            Card(CardSuit.HEART, 2)
-        )
+    fun `draws the correct card`() {
+        val cards =
+            listOf(
+                Card(CardSuit.SPADE, 10),
+                Card(CardSuit.CLUB, 5),
+                Card(CardSuit.HEART, 2),
+            )
         val deck = Deck(cards.toMutableList())
         val dealer = Dealer(deck)
 

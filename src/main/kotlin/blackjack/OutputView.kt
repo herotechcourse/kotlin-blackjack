@@ -19,7 +19,7 @@ class OutputView {
     }
 
     fun formatHand(hand: Hand): String {
-        val formattedHand = hand.cards.map{ card -> formatCard(card) }
+        val formattedHand = hand.cards.map { card -> formatCard(card) }
         return formattedHand.joinToString(", ")
     }
 

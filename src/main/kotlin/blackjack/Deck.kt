@@ -8,10 +8,10 @@ class Deck(val cards: MutableList<Card>) {
     companion object {
         val cardPositionValues = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
 
-        fun generate(shuffled: Boolean): Deck{
+        fun generate(shuffled: Boolean): Deck {
             val cardSuits = listOf(CardSuit.HEART, CardSuit.DIAMOND, CardSuit.CLUB, CardSuit.SPADE)
             var cards = cardSuits.flatMap { suit -> generateCardsWithSuit(suit) }
-            if (shuffled){
+            if (shuffled) {
                 cards = cards.shuffled().toMutableList()
             }
             return Deck(cards.toMutableList())
