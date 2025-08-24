@@ -25,10 +25,17 @@ Includes card dealing, drawing logic, and win/loss/draw result handling.
 - [x] provide information for game results announce
 
 ### Game
-- [ ] Accept player names
+- [x] Accept player names
 - [x] Deal two initial cards to all participants
 - [x] Handle player turns
 - [x] Handle dealer turn
 - [x] Check if a participant is busted
 - [x] Display final hands and scores
 - [x] Determine and print winners using GameLogic.getGameResult()
+
+### Betting System
+- [ ] Each player must bet at the start of the game
+  - [ ] If a player draws a card and the total exceeds 21, they lose their entire bet
+  - [ ] If a player hits 21 with the initial two cards (Blackjack), they receive 1.5x their bet
+  - [ ] If both the player and dealer have Blackjack, the player's bet is returned
+  - [ ] If the dealer busts (exceeds 21), all remaining players automatically win and receive payouts based on their bets
