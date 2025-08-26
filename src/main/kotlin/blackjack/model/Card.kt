@@ -1,0 +1,15 @@
+package blackjack.model
+
+import blackjack.enum.CardSuit
+
+class Card(val suit: CardSuit, val number: Int) {
+    fun numberToCardDeckElements(number: Int): String {
+        return when (number) {
+            1 -> "A"
+            10 -> "J"
+            11 -> "Q"
+            12 -> "K"
+            else -> number.toString()
+        }
+    }
+}
