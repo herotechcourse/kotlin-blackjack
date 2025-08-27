@@ -11,9 +11,7 @@ interface State {
 
     fun stay(): State
 
-    fun isBlackjack(): Boolean {
-        return hand.sumCards() == 21
-    }
+    fun canTransitionToBlackjack(): Boolean
 
     fun shouldDraw(goalNumber: Int): Boolean {
         return false

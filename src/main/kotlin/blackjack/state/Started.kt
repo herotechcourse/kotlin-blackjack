@@ -8,7 +8,7 @@ open class Started(override val hand: Hand, override val deck: Deck) : State {
         hand.addCard(deck.drawCard())
         hand.addCard(deck.drawCard())
 
-        return if (isBlackjack()) {
+        return if (canTransitionToBlackjack()) {
             Blackjack(hand, deck)
         } else {
             Running(hand, deck)
@@ -17,5 +17,9 @@ open class Started(override val hand: Hand, override val deck: Deck) : State {
 
     override fun stay(): State {
         return Stay(hand, deck)
+    }
+
+    override fun canTransitionToBlackjack(): Boolean {
+        return hand.sumCards() == 21
     }
 }

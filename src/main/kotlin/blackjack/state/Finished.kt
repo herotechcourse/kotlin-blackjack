@@ -11,4 +11,8 @@ open class Finished(override val hand: Hand, override val deck: Deck) : State {
     override fun stay(): State {
         return this
     }
+
+    override fun canTransitionToBlackjack(): Boolean {
+        return false
+    }
 }
