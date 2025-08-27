@@ -40,10 +40,4 @@ class StartedTest {
         val started = Started(hand, deck)
         assertTrue(started.stay() is Stay)
     }
-
-    @Test
-    fun `finish returns Finished`() {
-        val started = Started(hand, deck)
-        assertTrue(started.finish() is Finished)
-    }
 }

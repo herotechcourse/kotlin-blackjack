@@ -24,6 +24,5 @@ class FinishedTest {
         val finished = Finished(hand, deck)
         assertTrue(finished.run() === finished)
         assertTrue(finished.stay() === finished)
-        assertTrue(finished.finish() === finished)
     }
 }

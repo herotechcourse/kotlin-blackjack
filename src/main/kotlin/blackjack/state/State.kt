@@ -11,8 +11,6 @@ interface State {
 
     fun stay(): State
 
-    fun finish(): State
-
     fun isBlackjack(): Boolean {
         return hand.sumCards() == 21
     }
