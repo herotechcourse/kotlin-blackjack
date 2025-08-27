@@ -13,7 +13,7 @@ class Running(hand: Hand, deck: Deck) : Started(hand, deck) {
         val sum = hand.sumCards()
 
         return when {
-            sum == 21 -> this.finish()
+            sum == 21 -> Blackjack(hand, deck)
             sum > 21 -> Busted(hand, deck)
             else -> this
         }
