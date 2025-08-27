@@ -18,4 +18,8 @@ class Running(hand: Hand, deck: Deck) : Started(hand, deck) {
             else -> this
         }
     }
+
+    override fun shouldDraw(dealerGoalNumber: Int): Boolean {
+        return hand.sumCards() < dealerGoalNumber
+    }
 }
