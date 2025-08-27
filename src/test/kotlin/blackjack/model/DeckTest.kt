@@ -8,6 +8,6 @@ class DeckTest {
     fun `generate cards with suit`() {
         val deck = Deck.generate(true)
         val cardsAmount = deck.cards.size
-        Assertions.assertEquals(48, cardsAmount, "Cards amount aren't 48")
+        Assertions.assertEquals(52, cardsAmount, "Cards amount aren't 52")
     }
 }

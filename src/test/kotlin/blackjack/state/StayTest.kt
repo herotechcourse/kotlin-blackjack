@@ -1,5 +1,6 @@
 package blackjack.state
 
+import blackjack.enum.CardNumber
 import blackjack.enum.CardSuit
 import blackjack.model.Card
 import blackjack.model.Deck
@@ -14,8 +15,8 @@ class StayTest {
 
     @BeforeEach
     fun setUp() {
-        hand = Hand(mutableListOf(Card(CardSuit.HEART, 7)))
-        deck = Deck(mutableListOf(Card(CardSuit.CLUB, 3)))
+        hand = Hand(mutableListOf(Card(CardSuit.HEART, CardNumber.SEVEN)))
+        deck = Deck(mutableListOf(Card(CardSuit.CLUB, CardNumber.THREE)))
     }
 
     @Test

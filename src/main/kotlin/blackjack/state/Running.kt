@@ -19,7 +19,7 @@ class Running(hand: Hand, deck: Deck) : Started(hand, deck) {
         }
     }
 
-    override fun shouldDraw(dealerGoalNumber: Int): Boolean {
-        return hand.sumCards() < dealerGoalNumber
+    override fun shouldDraw(goalNumber: Int): Boolean {
+        return hand.sumCards() < goalNumber
     }
 }

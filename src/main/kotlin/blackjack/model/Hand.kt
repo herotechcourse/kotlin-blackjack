@@ -8,9 +8,9 @@ class Hand(val cards: MutableList<Card> = mutableListOf()) {
     fun sumCards(): Int {
         val cardValues =
             cards.map { card ->
-                when (card.number) {
+                when (card.number.value) {
                     in FACE_CARD_NUMBERS -> FACE_CARD_VALUE
-                    else -> card.number
+                    else -> card.number.value
                 }
             }.toMutableList()
 

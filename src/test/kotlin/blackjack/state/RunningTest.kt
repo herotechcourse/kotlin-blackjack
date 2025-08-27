@@ -1,5 +1,6 @@
 package blackjack.state
 
+import blackjack.enum.CardNumber
 import blackjack.enum.CardSuit
 import blackjack.model.Card
 import blackjack.model.Deck
@@ -14,14 +15,14 @@ class RunningTest {
 
     @BeforeEach
     fun setUp() {
-        hand = Hand(mutableListOf(Card(CardSuit.HEART, 5), Card(CardSuit.SPADE, 10)))
-        deck = Deck(mutableListOf(Card(CardSuit.CLUB, 6)))
+        hand = Hand(mutableListOf(Card(CardSuit.HEART, CardNumber.FIVE), Card(CardSuit.SPADE, CardNumber.TEN)))
+        deck = Deck(mutableListOf(Card(CardSuit.CLUB, CardNumber.SIX)))
     }
 
     @Test
     fun `run adds a card and returns Busted if sum is 21`() {
-        hand = Hand(mutableListOf(Card(CardSuit.HEART, 10), Card(CardSuit.SPADE, 10)))
-        deck = Deck(mutableListOf(Card(CardSuit.CLUB, 5)))
+        hand = Hand(mutableListOf(Card(CardSuit.HEART, CardNumber.TEN), Card(CardSuit.SPADE, CardNumber.TEN)))
+        deck = Deck(mutableListOf(Card(CardSuit.CLUB, CardNumber.FIVE)))
         val running = Running(hand, deck)
         val result = running.run()
         assertTrue(result is Busted)
@@ -29,8 +30,8 @@ class RunningTest {
 
     @Test
     fun `run adds a card and returns Finished if sum is equal to 21`() {
-        hand = Hand(mutableListOf(Card(CardSuit.HEART, 10), Card(CardSuit.SPADE, 5)))
-        deck = Deck(mutableListOf(Card(CardSuit.CLUB, 6)))
+        hand = Hand(mutableListOf(Card(CardSuit.HEART, CardNumber.TEN), Card(CardSuit.SPADE, CardNumber.FIVE)))
+        deck = Deck(mutableListOf(Card(CardSuit.CLUB, CardNumber.SIX)))
         val running = Running(hand, deck)
         val result = running.run()
         assertTrue(result is Finished)
@@ -38,8 +39,8 @@ class RunningTest {
 
     @Test
     fun `run adds a card and returns Running if sum is less than 21`() {
-        hand = Hand(mutableListOf(Card(CardSuit.HEART, 5), Card(CardSuit.SPADE, 10)))
-        deck = Deck(mutableListOf(Card(CardSuit.CLUB, 2)))
+        hand = Hand(mutableListOf(Card(CardSuit.HEART, CardNumber.FIVE), Card(CardSuit.SPADE, CardNumber.TEN)))
+        deck = Deck(mutableListOf(Card(CardSuit.CLUB, CardNumber.TWO)))
         val running = Running(hand, deck)
         val result = running.run()
         assertTrue(result is Running)

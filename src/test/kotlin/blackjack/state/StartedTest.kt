@@ -1,5 +1,6 @@
 package blackjack.state
 
+import blackjack.enum.CardNumber
 import blackjack.enum.CardSuit
 import blackjack.model.Card
 import blackjack.model.Deck
@@ -15,7 +16,7 @@ class StartedTest {
     @BeforeEach
     fun setUp() {
         hand = Hand()
-        deck = Deck(mutableListOf(Card(CardSuit.HEART, 10), Card(CardSuit.SPADE, 1)))
+        deck = Deck(mutableListOf(Card(CardSuit.HEART, CardNumber.TEN), Card(CardSuit.SPADE, CardNumber.ACE)))
     }
 
     @Test
@@ -28,7 +29,7 @@ class StartedTest {
 
     @Test
     fun `run returns Running if hand is not blackjack`() {
-        hand = Hand(mutableListOf(Card(CardSuit.HEART, 2), Card(CardSuit.SPADE, 10)))
+        hand = Hand(mutableListOf(Card(CardSuit.HEART, CardNumber.TWO), Card(CardSuit.SPADE, CardNumber.TEN)))
         val started = Started(hand, deck)
         val result = started.run()
         assertTrue(result is Running)

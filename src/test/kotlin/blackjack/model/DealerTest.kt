@@ -1,5 +1,6 @@
 package blackjack.model
 
+import blackjack.enum.CardNumber
 import blackjack.enum.CardSuit
 import blackjack.state.Running
 import blackjack.state.Started
@@ -20,9 +21,9 @@ class DealerTest {
         deck =
             Deck(
                 mutableListOf(
-                    Card(CardSuit.HEART, 2),
-                    Card(CardSuit.SPADE, 10),
-                    Card(CardSuit.CLUB, 5),
+                    Card(CardSuit.HEART, CardNumber.TWO),
+                    Card(CardSuit.SPADE, CardNumber.TEN),
+                    Card(CardSuit.CLUB, CardNumber.FIVE),
                 ),
             )
         dealer = Dealer(deck)
@@ -39,7 +40,7 @@ class DealerTest {
 
     @Test
     fun `playTurn with Running state and sum is less than 17 draws a card`() {
-        val hand = Hand(mutableListOf(Card(CardSuit.HEART, 2), Card(CardSuit.CLUB, 3)))
+        val hand = Hand(mutableListOf(Card(CardSuit.HEART, CardNumber.TWO), Card(CardSuit.CLUB, CardNumber.THREE)))
         dealer.state = Running(hand, deck)
         dealer.playTurn()
         assertEquals(3, dealer.state.hand.cards.size)
@@ -47,7 +48,7 @@ class DealerTest {
 
     @Test
     fun `playTurn with Running state and sum is greater than or equal to 17 does not draw a card`() {
-        val hand = Hand(mutableListOf(Card(CardSuit.HEART, 10), Card(CardSuit.CLUB, 7)))
+        val hand = Hand(mutableListOf(Card(CardSuit.HEART, CardNumber.TEN), Card(CardSuit.CLUB, CardNumber.SEVEN)))
         dealer.state = Running(hand, deck)
         dealer.playTurn()
         assertEquals(2, dealer.state.hand.cards.size)
@@ -55,21 +56,21 @@ class DealerTest {
 
     @Test
     fun `shouldDraw returns true if Running and sum is less than 17`() {
-        val hand = Hand(mutableListOf(Card(CardSuit.HEART, 2), Card(CardSuit.CLUB, 3)))
+        val hand = Hand(mutableListOf(Card(CardSuit.HEART, CardNumber.TWO), Card(CardSuit.CLUB, CardNumber.THREE)))
         dealer.state = Running(hand, deck)
-        assertTrue(state.shouldDraw(17))
+        assertTrue(dealer.state.shouldDraw(17))
     }
 
     @Test
     fun `shouldDraw returns false if Running and sum is greater than or equal to 17`() {
-        val hand = Hand(mutableListOf(Card(CardSuit.HEART, 10), Card(CardSuit.CLUB, 7)))
+        val hand = Hand(mutableListOf(Card(CardSuit.HEART, CardNumber.TEN), Card(CardSuit.CLUB, CardNumber.SEVEN)))
         dealer.state = Running(hand, deck)
-        assertFalse(state.shouldDraw(17))
+        assertFalse(dealer.state.shouldDraw(17))
     }
 
     @Test
     fun `shouldDraw returns false if not Running`() {
         dealer.state = Started(Hand(), deck)
-        assertFalse(state.shouldDraw(17))
+        assertFalse(dealer.state.shouldDraw(17))
     }
 }

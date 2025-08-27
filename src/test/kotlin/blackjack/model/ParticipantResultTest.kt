@@ -1,5 +1,6 @@
 package blackjack.model
 
+import blackjack.enum.CardNumber
 import blackjack.enum.CardSuit
 import blackjack.state.Blackjack
 import blackjack.state.Busted
@@ -27,9 +28,9 @@ class ParticipantResultTest {
             Busted(
                 Hand(
                     mutableListOf(
-                        Card(CardSuit.HEART, 10),
-                        Card(CardSuit.SPADE, 10),
-                        Card(CardSuit.CLUB, 5),
+                        Card(CardSuit.HEART, CardNumber.TEN),
+                        Card(CardSuit.SPADE, CardNumber.TEN),
+                        Card(CardSuit.CLUB, CardNumber.FIVE),
                     ),
                 ),
                 Deck(mutableListOf()),
@@ -38,8 +39,8 @@ class ParticipantResultTest {
             Running(
                 Hand(
                     mutableListOf(
-                        Card(CardSuit.HEART, 10),
-                        Card(CardSuit.SPADE, 7),
+                        Card(CardSuit.HEART, CardNumber.TEN),
+                        Card(CardSuit.SPADE, CardNumber.SEVEN),
                     ),
                 ),
                 Deck(mutableListOf()),
@@ -53,8 +54,8 @@ class ParticipantResultTest {
             Blackjack(
                 Hand(
                     mutableListOf(
-                        Card(CardSuit.HEART, 1),
-                        Card(CardSuit.SPADE, 10),
+                        Card(CardSuit.HEART, CardNumber.ACE),
+                        Card(CardSuit.SPADE, CardNumber.TEN),
                     ),
                 ),
                 Deck(mutableListOf()),
@@ -63,9 +64,9 @@ class ParticipantResultTest {
             Busted(
                 Hand(
                     mutableListOf(
-                        Card(CardSuit.HEART, 10),
-                        Card(CardSuit.SPADE, 10),
-                        Card(CardSuit.CLUB, 5),
+                        Card(CardSuit.HEART, CardNumber.TEN),
+                        Card(CardSuit.SPADE, CardNumber.TEN),
+                        Card(CardSuit.CLUB, CardNumber.FIVE),
                     ),
                 ),
                 Deck(mutableListOf()),
@@ -79,8 +80,8 @@ class ParticipantResultTest {
             Finished(
                 Hand(
                     mutableListOf(
-                        Card(CardSuit.HEART, 10),
-                        Card(CardSuit.SPADE, 7),
+                        Card(CardSuit.HEART, CardNumber.TEN),
+                        Card(CardSuit.SPADE, CardNumber.SEVEN),
                     ),
                 ),
                 Deck(mutableListOf()),
@@ -89,9 +90,9 @@ class ParticipantResultTest {
             Busted(
                 Hand(
                     mutableListOf(
-                        Card(CardSuit.HEART, 10),
-                        Card(CardSuit.SPADE, 10),
-                        Card(CardSuit.CLUB, 5),
+                        Card(CardSuit.HEART, CardNumber.TEN),
+                        Card(CardSuit.SPADE, CardNumber.TEN),
+                        Card(CardSuit.CLUB, CardNumber.FIVE),
                     ),
                 ),
                 Deck(mutableListOf()),
@@ -105,8 +106,8 @@ class ParticipantResultTest {
             Blackjack(
                 Hand(
                     mutableListOf(
-                        Card(CardSuit.HEART, 1),
-                        Card(CardSuit.SPADE, 10),
+                        Card(CardSuit.HEART, CardNumber.ACE),
+                        Card(CardSuit.SPADE, CardNumber.TEN),
                     ),
                 ),
                 Deck(mutableListOf()),
@@ -115,8 +116,8 @@ class ParticipantResultTest {
             Finished(
                 Hand(
                     mutableListOf(
-                        Card(CardSuit.HEART, 10),
-                        Card(CardSuit.SPADE, 7),
+                        Card(CardSuit.HEART, CardNumber.TEN),
+                        Card(CardSuit.SPADE, CardNumber.SEVEN),
                     ),
                 ),
                 Deck(mutableListOf()),
@@ -130,8 +131,8 @@ class ParticipantResultTest {
             Finished(
                 Hand(
                     mutableListOf(
-                        Card(CardSuit.HEART, 10),
-                        Card(CardSuit.SPADE, 8),
+                        Card(CardSuit.HEART, CardNumber.TEN),
+                        Card(CardSuit.SPADE, CardNumber.EIGHT),
                     ),
                 ),
                 Deck(mutableListOf()),
@@ -140,8 +141,8 @@ class ParticipantResultTest {
             Finished(
                 Hand(
                     mutableListOf(
-                        Card(CardSuit.HEART, 10),
-                        Card(CardSuit.SPADE, 7),
+                        Card(CardSuit.HEART, CardNumber.TEN),
+                        Card(CardSuit.SPADE, CardNumber.SEVEN),
                     ),
                 ),
                 Deck(mutableListOf()),
@@ -155,8 +156,8 @@ class ParticipantResultTest {
             Finished(
                 Hand(
                     mutableListOf(
-                        Card(CardSuit.HEART, 10),
-                        Card(CardSuit.SPADE, 7),
+                        Card(CardSuit.HEART, CardNumber.TEN),
+                        Card(CardSuit.SPADE, CardNumber.SEVEN),
                     ),
                 ),
                 Deck(mutableListOf()),
@@ -165,8 +166,8 @@ class ParticipantResultTest {
             Finished(
                 Hand(
                     mutableListOf(
-                        Card(CardSuit.HEART, 10),
-                        Card(CardSuit.SPADE, 7),
+                        Card(CardSuit.HEART, CardNumber.TEN),
+                        Card(CardSuit.SPADE, CardNumber.SEVEN),
                     ),
                 ),
                 Deck(mutableListOf()),
@@ -180,8 +181,8 @@ class ParticipantResultTest {
             Finished(
                 Hand(
                     mutableListOf(
-                        Card(CardSuit.HEART, 10),
-                        Card(CardSuit.SPADE, 7),
+                        Card(CardSuit.HEART, CardNumber.TEN),
+                        Card(CardSuit.SPADE, CardNumber.SEVEN),
                     ),
                 ),
                 Deck(mutableListOf()),
@@ -190,8 +191,8 @@ class ParticipantResultTest {
             Finished(
                 Hand(
                     mutableListOf(
-                        Card(CardSuit.HEART, 10),
-                        Card(CardSuit.SPADE, 8),
+                        Card(CardSuit.HEART, CardNumber.TEN),
+                        Card(CardSuit.SPADE, CardNumber.EIGHT),
                     ),
                 ),
                 Deck(mutableListOf()),

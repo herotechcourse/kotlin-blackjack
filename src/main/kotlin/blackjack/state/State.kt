@@ -17,5 +17,7 @@ interface State {
         return hand.sumCards() == 21
     }
 
-    fun shouldDraw(dealerGoalNumber: Int): Boolean
+    fun shouldDraw(goalNumber: Int): Boolean {
+        return false
+    }
 }
