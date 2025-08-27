@@ -23,7 +23,7 @@ abstract class Participant(val name: String, val deck: Deck) {
         wallet.updateWithEarningsRate(earningsRate)
     }
 
-    fun calculateEarningsRate(p2: Participant): Double {
-        return ParticipantResult().calculateEarningsRate(this, p2)
+    fun calculateEarningsRate(secondParticipant: Participant): Double {
+        return ParticipantResult().calculateEarningsRate(this, secondParticipant)
     }
 }
