@@ -3,16 +3,12 @@ package blackjack.state
 import blackjack.model.Deck
 import blackjack.model.Hand
 
-abstract class Finished(override val hand: Hand, override val deck: Deck) : State {
-    override fun run(): State {
-        return this
-    }
-
+abstract class Active(override val hand: Hand, override val deck: Deck) : State {
     override fun stay(): State {
-        return this
+        return Stay(hand, deck)
     }
 
     override fun canTransitionToBlackjack(): Boolean {
-        return false
+        return hand.sumCards() == 21
     }
 }

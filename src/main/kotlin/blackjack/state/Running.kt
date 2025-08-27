@@ -3,7 +3,7 @@ package blackjack.state
 import blackjack.model.Deck
 import blackjack.model.Hand
 
-class Running(hand: Hand, deck: Deck) : Started(hand, deck) {
+class Running(hand: Hand, deck: Deck) : Active(hand, deck) {
     override fun run(): State {
         hand.addCard(deck.drawCard())
         return evaluateNextState()

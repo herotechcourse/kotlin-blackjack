@@ -3,7 +3,7 @@ package blackjack.state
 import blackjack.model.Deck
 import blackjack.model.Hand
 
-open class Started(override val hand: Hand, override val deck: Deck) : State {
+class Initial(hand: Hand, deck: Deck) : Active(hand, deck) {
     override fun run(): State {
         hand.addCard(deck.drawCard())
         hand.addCard(deck.drawCard())
@@ -17,9 +17,5 @@ open class Started(override val hand: Hand, override val deck: Deck) : State {
 
     override fun stay(): State {
         return Stay(hand, deck)
-    }
-
-    override fun canTransitionToBlackjack(): Boolean {
-        return hand.sumCards() == 21
     }
 }
