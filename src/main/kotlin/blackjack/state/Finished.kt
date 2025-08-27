@@ -3,16 +3,15 @@ package blackjack.state
 import blackjack.model.Deck
 import blackjack.model.Hand
 
-abstract class Finished(override val hand: Hand, override val deck: Deck) : State {
-    override fun run(): State {
-        return this
-    }
+abstract class Finished(
+    override val hand: Hand,
+    override val deck: Deck,
+) : State {
+    abstract fun earningsAgainst(other: Finished): Double
 
-    override fun stay(): State {
-        return this
-    }
+    override fun run() = this
 
-    override fun canTransitionToBlackjack(): Boolean {
-        return false
-    }
+    override fun stay() = this
+
+    override fun canTransitionToBlackjack() = false
 }

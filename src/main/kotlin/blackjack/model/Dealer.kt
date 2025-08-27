@@ -1,6 +1,6 @@
 package blackjack.model
 
-import blackjack.state.Active
+import blackjack.state.Initial
 import blackjack.state.Running
 
 class Dealer(deck: Deck) : Participant("Dealer", deck) {
@@ -13,7 +13,7 @@ class Dealer(deck: Deck) : Participant("Dealer", deck) {
                     } else {
                         state.stay()
                     }
-                is Active -> {
+                is Initial -> {
                     state.run()
                 }
                 else -> state

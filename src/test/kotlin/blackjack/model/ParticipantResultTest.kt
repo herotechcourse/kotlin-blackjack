@@ -4,7 +4,6 @@ import blackjack.enum.CardNumber
 import blackjack.enum.CardSuit
 import blackjack.state.Blackjack
 import blackjack.state.Busted
-import blackjack.state.Running
 import blackjack.state.Stay
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
@@ -36,7 +35,7 @@ class ParticipantResultTest {
                 Deck(mutableListOf()),
             )
         dealer.state =
-            Running(
+            Stay(
                 Hand(
                     mutableListOf(
                         Card(CardSuit.HEART, CardNumber.TEN),

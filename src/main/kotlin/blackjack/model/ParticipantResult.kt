@@ -1,24 +1,15 @@
 package blackjack.model
 
-import blackjack.state.Blackjack
-import blackjack.state.Busted
+import blackjack.state.Finished
 
 class ParticipantResult {
     fun calculateEarningsRate(
-        p1: Participant,
-        p2: Participant,
+        firstParticipant: Participant,
+        secondParticipant: Participant,
     ): Double {
-        val p1Points = p1.state.hand.sumCards()
-        val p2Points = p2.state.hand.sumCards()
-
-        return when {
-            p1.state is Busted -> -1.0
-            p2.state is Busted && p1.state is Blackjack -> 1.5
-            p2.state is Busted -> 1.0
-            p1Points > p2Points && p1.state is Blackjack -> 1.5
-            p1Points > p2Points -> 1.0
-            p1Points == p2Points -> 0.0
-            else -> -1.0
+        if (firstParticipant.state !is Finished || secondParticipant.state !is Finished) {
+            throw IllegalArgumentException("The participants must be finished!")
         }
+        return (firstParticipant.state as Finished).earningsAgainst(secondParticipant.state as Finished)
     }
 }
