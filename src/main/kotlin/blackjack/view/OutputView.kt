@@ -16,9 +16,8 @@ class OutputView {
     }
 
     fun printPlayersIntroToTheirCards(players: List<Player>) {
-        val playersNames = players.map { it.name }
-        println()
-        println(FIRST_TURN_CARDS.format(playersNames.joinToString(",")))
+        val playersNames = players.map { it.name }        
+        println("\n${FIRST_TURN_CARDS.format(playersNames.joinToString(","))}")
     }
 
     fun formatCard(card: Card): String {
@@ -44,8 +43,7 @@ class OutputView {
     }
 
     fun printDealerDrawsOneMoreCardMessage() {
-        println()
-        println(DEALER_DRAW_MESSAGE)
+        println("\n${DEALER_DRAW_MESSAGE}")
     }
 
     fun printCurrentCardsOfOnePlayer(player: Player) {
@@ -61,8 +59,7 @@ class OutputView {
     fun printDealerFinalScore(dealer: Dealer) {
         val cards = formatHand(dealer.state.hand)
         val score = dealer.state.hand.sumCards()
-        println()
-        println(DISPLAY_FINAL_HAND.format(dealer.name, cards, score))
+        println("\n${DISPLAY_FINAL_HAND.format(dealer.name, cards, score)}")
     }
 
     fun printPlayersFinalScore(players: List<Player>) {
@@ -74,8 +71,7 @@ class OutputView {
     }
 
     fun printFinalParticipantResult(participants: MutableMap<String, ParticipantWallet>) {
-        println()
-        println(DISPLAY_TITLE_FINAL_EARNINGS)
+        println("\n${DISPLAY_TITLE_FINAL_EARNINGS}")
         participants.forEach { participant ->
             println(DISPLAY_FINAL_PLAYER_EARNINGS.format(participant.key, participant.value.earnings.toLong()))
         }
