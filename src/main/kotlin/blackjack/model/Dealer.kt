@@ -1,7 +1,7 @@
 package blackjack.model
 
+import blackjack.state.Active
 import blackjack.state.Running
-import blackjack.state.Started
 
 class Dealer(deck: Deck) : Participant("Dealer", deck) {
     override fun playTurn() {
@@ -13,7 +13,7 @@ class Dealer(deck: Deck) : Participant("Dealer", deck) {
                     } else {
                         state.stay()
                     }
-                is Started -> {
+                is Active -> {
                     state.run()
                 }
                 else -> state

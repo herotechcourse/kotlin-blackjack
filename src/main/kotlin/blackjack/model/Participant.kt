@@ -1,11 +1,11 @@
 package blackjack.model
 
-import blackjack.state.Started
+import blackjack.state.Initial
 import blackjack.state.State
 
 abstract class Participant(val name: String, val deck: Deck) {
     var wallet = ParticipantWallet()
-    var state: State = Started(Hand(), deck)
+    var state: State = Initial(Hand(), deck)
 
     open fun playTurn() {
         state = state.run()
