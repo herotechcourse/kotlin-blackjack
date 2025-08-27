@@ -22,7 +22,7 @@ class OutputView {
 
     fun formatCard(card: Card): String {
         val cardValue = card.numberToCardDeckElements(card.number)
-        return "%s%s".format(cardValue, card.suit.value)
+        return "${cardValue}${card.suit.value}"
     }
 
     fun formatHand(hand: Hand): String {
