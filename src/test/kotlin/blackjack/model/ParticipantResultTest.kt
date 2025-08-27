@@ -4,8 +4,8 @@ import blackjack.enum.CardNumber
 import blackjack.enum.CardSuit
 import blackjack.state.Blackjack
 import blackjack.state.Busted
-import blackjack.state.Finished
 import blackjack.state.Running
+import blackjack.state.Stay
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -77,7 +77,7 @@ class ParticipantResultTest {
     @Test
     fun `returns 1_0 if dealer is busted and player is not blackjack`() {
         participant.state =
-            Finished(
+            Stay(
                 Hand(
                     mutableListOf(
                         Card(CardSuit.HEART, CardNumber.TEN),
@@ -113,7 +113,7 @@ class ParticipantResultTest {
                 Deck(mutableListOf()),
             )
         dealer.state =
-            Finished(
+            Stay(
                 Hand(
                     mutableListOf(
                         Card(CardSuit.HEART, CardNumber.TEN),
@@ -128,7 +128,7 @@ class ParticipantResultTest {
     @Test
     fun `returns 1_0 if player has more points and is not blackjack`() {
         participant.state =
-            Finished(
+            Stay(
                 Hand(
                     mutableListOf(
                         Card(CardSuit.HEART, CardNumber.TEN),
@@ -138,7 +138,7 @@ class ParticipantResultTest {
                 Deck(mutableListOf()),
             )
         dealer.state =
-            Finished(
+            Stay(
                 Hand(
                     mutableListOf(
                         Card(CardSuit.HEART, CardNumber.TEN),
@@ -153,7 +153,7 @@ class ParticipantResultTest {
     @Test
     fun `returns 0_0 if player and dealer have same points`() {
         participant.state =
-            Finished(
+            Stay(
                 Hand(
                     mutableListOf(
                         Card(CardSuit.HEART, CardNumber.TEN),
@@ -163,7 +163,7 @@ class ParticipantResultTest {
                 Deck(mutableListOf()),
             )
         dealer.state =
-            Finished(
+            Stay(
                 Hand(
                     mutableListOf(
                         Card(CardSuit.HEART, CardNumber.TEN),
@@ -178,7 +178,7 @@ class ParticipantResultTest {
     @Test
     fun `returns -1_0 if player has fewer points`() {
         participant.state =
-            Finished(
+            Stay(
                 Hand(
                     mutableListOf(
                         Card(CardSuit.HEART, CardNumber.TEN),
@@ -188,7 +188,7 @@ class ParticipantResultTest {
                 Deck(mutableListOf()),
             )
         dealer.state =
-            Finished(
+            Stay(
                 Hand(
                     mutableListOf(
                         Card(CardSuit.HEART, CardNumber.TEN),

@@ -24,4 +24,11 @@ class StayTest {
         val stay = Stay(hand, deck)
         assertTrue(stay is Finished)
     }
+
+    @Test
+    fun `run, stay, and finish all return same instance`() {
+        val finished = Blackjack(hand, deck)
+        assertTrue(finished.run() === finished)
+        assertTrue(finished.stay() === finished)
+    }
 }

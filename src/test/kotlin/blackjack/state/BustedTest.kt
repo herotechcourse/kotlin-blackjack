@@ -31,4 +31,11 @@ class BustedTest {
         val busted = Busted(hand, deck)
         assertTrue(busted is Finished)
     }
+
+    @Test
+    fun `run, stay, and finish all return same instance`() {
+        val finished = Blackjack(hand, deck)
+        assertTrue(finished.run() === finished)
+        assertTrue(finished.stay() === finished)
+    }
 }

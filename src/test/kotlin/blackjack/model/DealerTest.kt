@@ -2,8 +2,8 @@ package blackjack.model
 
 import blackjack.enum.CardNumber
 import blackjack.enum.CardSuit
+import blackjack.state.Initial
 import blackjack.state.Running
-import blackjack.state.Started
 import blackjack.state.State
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -30,8 +30,8 @@ class DealerTest {
     }
 
     @Test
-    fun `playTurn with Started state deals two cards and transitions to Running or Blackjack`() {
-        dealer.state = Started(Hand(), deck)
+    fun `playTurn with Initial state deals two cards and transitions to Running or Blackjack`() {
+        dealer.state = Initial(Hand(), deck)
         dealer.playTurn()
         val handSize = dealer.state.hand.cards.size
         assertTrue(handSize == 2, "Dealer should have two cards after first playTurn")
@@ -70,7 +70,7 @@ class DealerTest {
 
     @Test
     fun `shouldDraw returns false if not Running`() {
-        dealer.state = Started(Hand(), deck)
+        dealer.state = Initial(Hand(), deck)
         assertFalse(dealer.state.shouldDraw(17))
     }
 }
