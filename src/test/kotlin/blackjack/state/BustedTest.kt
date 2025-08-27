@@ -15,7 +15,14 @@ class BustedTest {
 
     @BeforeEach
     fun setUp() {
-        hand = Hand(mutableListOf(Card(CardSuit.DIAMOND, CardNumber.TEN), Card(CardSuit.HEART, CardNumber.TEN), Card(CardSuit.CLUB, CardNumber.FIVE)))
+        hand =
+            Hand(
+                mutableListOf(
+                    Card(CardSuit.DIAMOND, CardNumber.TEN),
+                    Card(CardSuit.HEART, CardNumber.TEN),
+                    Card(CardSuit.CLUB, CardNumber.FIVE),
+                ),
+            )
         deck = Deck(mutableListOf(Card(CardSuit.SPADE, CardNumber.TWO)))
     }
 
