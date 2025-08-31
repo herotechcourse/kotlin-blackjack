@@ -16,7 +16,7 @@ class OutputView {
     }
 
     fun printPlayersIntroToTheirCards(players: List<Player>) {
-        val playersNames = players.map { it.name }        
+        val playersNames = players.map { it.name }
         println("\n${FIRST_TURN_CARDS.format(playersNames.joinToString(","))}")
     }
 
