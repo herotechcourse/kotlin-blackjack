@@ -12,6 +12,4 @@ abstract class Finished(
     override fun run() = this
 
     override fun stay() = this
-
-    override fun canTransitionToBlackjack() = false
 }

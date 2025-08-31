@@ -4,6 +4,10 @@ import blackjack.model.Deck
 import blackjack.model.Hand
 
 class Initial(hand: Hand, deck: Deck) : Active(hand, deck) {
+    fun canTransitionToBlackjack(): Boolean {
+        return hand.sumCards() == 21
+    }
+
     override fun run(): State {
         hand.addCard(deck.drawCard())
         hand.addCard(deck.drawCard())

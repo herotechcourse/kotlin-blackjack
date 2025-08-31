@@ -11,8 +11,6 @@ interface State {
 
     fun stay(): State
 
-    fun canTransitionToBlackjack(): Boolean
-
     fun shouldDraw(goalNumber: Int): Boolean {
         return false
     }
