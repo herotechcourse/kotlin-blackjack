@@ -8,7 +8,7 @@ class Blackjack(hand: Hand, deck: Deck) : Finished(hand, deck) {
         return when (other) {
             is Busted -> 1.5
             is Blackjack -> 0.0
-            else -> 1.5 // wins against Stay
+            is Stay -> 1.5
         }
     }
 }

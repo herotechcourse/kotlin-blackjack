@@ -3,7 +3,7 @@ package blackjack.state
 import blackjack.model.Deck
 import blackjack.model.Hand
 
-abstract class Finished(
+sealed class Finished(
     override val hand: Hand,
     override val deck: Deck,
 ) : State {
