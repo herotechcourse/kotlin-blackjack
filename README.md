@@ -5,7 +5,7 @@ A simplified terminal-based Blackjack game written in Kotlin.
 The player or dealer with a total closest to 21—without going over—wins.
 Includes card dealing, drawing logic, and win/loss/draw result handling.
 
-## Features: 
+## Step1 Features: 
 ### Blackjack as Controller:
 - [x] Implement a Blackjack class as a controller
 
@@ -22,13 +22,35 @@ Includes card dealing, drawing logic, and win/loss/draw result handling.
 ### Hand
 - [x] Calculate participant score with Ace logic
 - [x] Calculate participant score with J, Q and K logic
-- [ ] provide information for game results announce
+- [x] provide information for game results announce
 
 ### Game
-- [ ] Accept player names
+- [x] Accept player names
 - [x] Deal two initial cards to all participants
 - [x] Handle player turns
 - [x] Handle dealer turn
-- [ ] Check if a participant is busted
-- [ ] Display final hands and scores
-- [ ] Determine and print winners using GameLogic.getGameResult()
+- [x] Check if a participant is busted
+- [x] Display final hands and scores
+- [x] Determine and print winners using GameLogic.getGameResult()
+
+## Step2 Features
+### Betting System
+- [x] Each player must bet at the start of the game
+  - [x] If a player draws a card and the total exceeds 21, they lose their entire bet
+  - [x] If a player hits 21 with the initial two cards (Blackjack), they receive 1.5x their bet
+  - [x] If both the player and dealer have Blackjack, the player's bet is returned
+  - [x] If the dealer busts (exceeds 21), all remaining players automatically win and receive payouts based on their bets
+- [x] Provide information for game results announce
+
+- [x] Check if a participant is busted
+- [x] Display final hands and scores
+- [x] Determine and print winners using GameLogic.getGameResult()
+
+### Game
+- [x] Accept player names
+- [x] Deal two initial cards to all participants
+- [x] Handle player turns
+- [x] Handle dealer turn
+- [x] Check if a participant is busted
+- [x] Display final hands and scores
+- [x] Determine and print players earns from their bets

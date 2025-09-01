@@ -2,10 +2,13 @@ package blackjack
 
 class GameLogic {
     fun namesToPlayers(names: List<String>): List<Player> {
-         return names.map { name -> Player(name) }
+        return names.map { name -> Player(name) }
     }
 
-    fun firstTurnCards(players: List<Player>, dealer: Dealer) {
+    fun firstTurnCards(
+        players: List<Player>,
+        dealer: Dealer,
+    ) {
         repeat(2, {
             players.forEach { player ->
                 val card = dealer.drawCard()
@@ -26,7 +29,10 @@ class GameLogic {
         return dealer.shouldHit()
     }
 
-    fun drawCardForParticipant(participant: Participant, dealer: Dealer) {
+    fun drawCardForParticipant(
+        participant: Participant,
+        dealer: Dealer,
+    ) {
         participant.addCard(dealer.drawCard())
     }
 }

@@ -1,4 +1,4 @@
-package blackjack
+package blackjack.model
 
 import blackjack.enum.CardNumber
 import blackjack.enum.CardSuit
@@ -12,10 +12,5 @@ class Card(val suit: CardSuit, val number: CardNumber) {
             CardNumber.KING -> "K"
             else -> number.toString()
         }
-    }
-
-    override fun toString(): String {
-        val cardValue = numberToCardDeckElements(number)
-        return "%s%s".format(cardValue, suit.value)
     }
 }
